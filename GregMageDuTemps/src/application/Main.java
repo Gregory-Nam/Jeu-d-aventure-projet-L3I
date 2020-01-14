@@ -1,5 +1,8 @@
 package application;
 	
+import java.io.File;
+
+import Modele.PersonnageJoueur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -17,8 +20,18 @@ public class Main extends Application {
 			//On assoscie à la scene le panneau cree precedemment
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			// ****** a decomposer *****//
+			File f = new File("Images/wizardDroite.png");
+			PersonnageJoueur greg = new PersonnageJoueur(f);
+			root.getChildren().add(greg.getSpriteCourant());
+			
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			
+			
+			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
