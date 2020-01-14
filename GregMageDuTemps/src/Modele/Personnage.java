@@ -11,7 +11,7 @@ public abstract class Personnage {
 	// la vue de l'image courante du personnage
 	protected ImageView spriteCourant;
 	
-	public Personnage(File ... sprites) {
+	public Personnage(File ... sprites /* haut, droite, bas, gauche*/) {
 		spritesPersonnage = new ArrayList<ImageView>();
 		for(File f : sprites) {
 			Image img = new Image(f.toURI().toString());
@@ -23,11 +23,11 @@ public abstract class Personnage {
 	}
 	
 	public void seDirigerADroite() {
-		
+		spriteCourant.setX(spriteCourant.getX() + 10);
 	}
 	
 	public void seDirigerAGauche() {
-		
+		spriteCourant.setX(spriteCourant.getX() - 10);
 	}
 	
 	public void seDirigerVersLeNord() {
