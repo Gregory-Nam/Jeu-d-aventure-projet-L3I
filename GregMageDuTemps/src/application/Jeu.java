@@ -7,6 +7,7 @@ import Modele.PersonnageJoueur;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -35,7 +36,7 @@ public class Jeu {
 	public void initStage() throws IOException {
 		//Panneau qui correspond a la vue "UneFenetre.fxml"
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
-		//On assoscie à la scene le panneau cree precedemment
+		//On assoscie ï¿½ la scene le panneau cree precedemment
 		scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		root.getChildren().add(greg.getSpriteCourant());
@@ -48,7 +49,7 @@ public class Jeu {
 
 			@Override
 			public void handle(KeyEvent event) {
-				if(event.getCode().toString() == "D")
+				if(event.getCode() == KeyCode.D)
 					greg.seDirigerADroite();
 				else
 					greg.seDirigerAGauche();
