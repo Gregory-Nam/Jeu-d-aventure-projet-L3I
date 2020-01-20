@@ -20,8 +20,8 @@ public abstract class Personnage {
 			ImageView iv = new ImageView();
 			iv.setImage(img);
 			spritesPersonnage.add(iv);
-			spriteCourant = iv;
 		}
+		spriteCourant = new ImageView(spritesPersonnage.get(3).getImage());
 	}
 	
 	public void seDirigerADroite() {
