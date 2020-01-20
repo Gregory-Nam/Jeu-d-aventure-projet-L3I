@@ -3,6 +3,8 @@ package Modele;
 
 import java.util.ArrayList;
 import javafx.scene.image.*;
+import javafx.scene.input.KeyCode;
+
 import java.io.File;
 
 public abstract class Personnage {
@@ -40,6 +42,15 @@ public abstract class Personnage {
 	
 	public ImageView getSpriteCourant() {
 		return spriteCourant;
+	}
+
+	public void setSprite(KeyCode code) {
+		if(code == KeyCode.RIGHT){
+			spriteCourant = spritesPersonnage.get(1);
+		}
+		else if(code == KeyCode.LEFT) {
+			spriteCourant = spritesPersonnage.get(2);
+		}
 	}
 	
 	

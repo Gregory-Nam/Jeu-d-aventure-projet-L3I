@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.io.IOException;
 
+import Modele.Personnage;
 import Modele.PersonnageJoueur;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -23,14 +24,14 @@ public class Jeu {
 		initPersonnageJoueur();
 		initStage();
 		creationEvenementDeplacement();
-		
-		
-		
 	}
 	
 	public void initPersonnageJoueur() {
-		File f = new File("Images/wizardDroite.png");
-		greg = new PersonnageJoueur(f);
+		File haut = new File("Images/wizardDroite.png");
+		File droite = new File("Images/wizardDroite_transparent.png");
+		File bas = new File("Images/wizardDroite.png");
+		File gauche = new File("Images/wizardGauche_ransparent.png");
+		greg = new PersonnageJoueur(haut, droite, bas, gauche);
 	}
 	
 	public void initStage() throws IOException {
@@ -49,11 +50,14 @@ public class Jeu {
 
 			@Override
 			public void handle(KeyEvent event) {
-				if(event.getCode() == KeyCode.D)
+				if(event.getCode() == KeyCode.RIGHT) {
+					greg.setSprite(event.getCode());
 					greg.seDirigerADroite();
-				else
+					}
+				else if(event.getCode() == KeyCode.LEFT) {
+					greg.setSprite(event.getCode());
 					greg.seDirigerAGauche();
-				
+					}
 			}
 			
 		});
