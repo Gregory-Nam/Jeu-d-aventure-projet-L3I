@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.image.*;
 
 public class Jeu {
 	PersonnageJoueur greg;
@@ -30,8 +31,8 @@ public class Jeu {
 		File haut = new File("Images/wizardDroite.png");
 		File droite = new File("Images/wizardDroite_transparent.png");
 		File bas = new File("Images/wizardDroite.png");
-		File gauche = new File("Images/wizardGauche_ransparent.png");
-		greg = new PersonnageJoueur(haut, droite, bas, gauche);
+		File gauche = new File("Images/wizardGauche_transparent.png");
+		greg = new PersonnageJoueur(haut, gauche, bas, droite);
 	}
 	
 	public void initStage() throws IOException {
@@ -50,14 +51,15 @@ public class Jeu {
 
 			@Override
 			public void handle(KeyEvent event) {
-				if(event.getCode() == KeyCode.RIGHT) {
-					greg.setSprite(event.getCode());
+				KeyCode kc = event.getCode();
+				System.out.println(kc);
+				greg.setSprite(kc);
+				if(kc == KeyCode.RIGHT) {
 					greg.seDirigerADroite();
-					}
-				else if(event.getCode() == KeyCode.LEFT) {
-					greg.setSprite(event.getCode());
+				}
+				else if(kc == KeyCode.LEFT) {
 					greg.seDirigerAGauche();
-					}
+				}
 			}
 			
 		});

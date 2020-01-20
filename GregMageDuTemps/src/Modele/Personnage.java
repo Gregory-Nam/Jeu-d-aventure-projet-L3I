@@ -46,10 +46,10 @@ public abstract class Personnage {
 
 	public void setSprite(KeyCode code) {
 		if(code == KeyCode.RIGHT){
-			spriteCourant = spritesPersonnage.get(1);
+			spriteCourant.setImage(spritesPersonnage.get(3).getImage());
 		}
 		else if(code == KeyCode.LEFT) {
-			spriteCourant = spritesPersonnage.get(2);
+			spriteCourant.setImage(spritesPersonnage.get(1).getImage());
 		}
 	}
 	
