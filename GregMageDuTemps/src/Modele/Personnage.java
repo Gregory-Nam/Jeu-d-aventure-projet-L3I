@@ -2,6 +2,8 @@ package Modele;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import javafx.scene.image.*;
 import javafx.scene.input.KeyCode;
 
@@ -10,6 +12,8 @@ import java.io.File;
 public abstract class Personnage {
 	//ensemble des sprites pour le personnage
 	private ArrayList<ImageView> spritesPersonnage;
+	private HashMap<Deplacement, ImageView> spritesPersonnageHM;
+	
 	// la vue de l'image courante du personnage
 	protected ImageView spriteCourant;
 	
@@ -24,21 +28,10 @@ public abstract class Personnage {
 		spriteCourant = new ImageView(spritesPersonnage.get(3).getImage());
 	}
 	
-	public void seDirigerADroite() {
-		spriteCourant.setX(spriteCourant.getX() + 10);
-	}
+	public abstract void seDirigerADroite();
 	
-	public void seDirigerAGauche() {
-		spriteCourant.setX(spriteCourant.getX() - 10);
-	}
+	public abstract void seDirigerAGauche();
 	
-	public void seDirigerVersLeNord() {
-		
-	}
-	
-	public void seDirigerVersLeSud() {
-		
-	}
 	
 	public ImageView getSpriteCourant() {
 		return spriteCourant;
