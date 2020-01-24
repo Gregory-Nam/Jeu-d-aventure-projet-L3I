@@ -4,22 +4,29 @@ import java.io.File;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 
 public class PersonnageJoueur extends Personnage{
 	
 	public PersonnageJoueur(File ... sprites) {
 		super(sprites);
 		initPersonnage(sprites);
+		largeurPersonnage = spriteCourant.getImage().getWidth();
+		xPosition = spriteCourant.getX();
 	}
 	
 	@Override
 	public void seDirigerAGauche()  {
-		spriteCourant.setX(spriteCourant.getX() - 10);
+		double nouvellePosition = spriteCourant.getX() - 10;
+		spriteCourant.setX(nouvellePosition);
+		super.xPosition = nouvellePosition;
 	}
 	
 	@Override
 	public void seDirigerADroite() {
-		spriteCourant.setX(spriteCourant.getX() + 10);
+		double nouvellePosition = spriteCourant.getX() + 10;
+		spriteCourant.setX(nouvellePosition);
+		super.xPosition = nouvellePosition;
 	}
 	
 	public void initPersonnage(File sprites[]) {
@@ -31,14 +38,32 @@ public class PersonnageJoueur extends Personnage{
 			spritesPersonnageHM.put(deplacements[i], iv);
 		}
 		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacement.DROITE).getImage());
-	}
-	
-	public void seDirigerVersLeNord() {
+		spriteCourant.setY(340);
+		
 		
 	}
 	
-	public void seDirigerVersLeSud() {
+	public void changerSprite(KeyCode code) {
+		switch(code) {
+			case RIGHT:
+				spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.DROITE).getImage());
+				break;
+			case LEFT:
+				spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.GAUCHE).getImage());
+				break;
+			case UP:
+				//traitement pour les interactions a faire
+				spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.HAUT).getImage());
+				break;
+			case DOWN:
+				//traitement pour les interactions a faire
+				spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.BAS).getImage());
+				break;
+		}		
 		
 	}
 	
+	public boolean rencontreMur(KeyCode code) {
+		return (code == KeyCode.LEFT) ? (xPosition <= 0) : (xPosition > 1000 - largeurPersonnage);
+	}
 }

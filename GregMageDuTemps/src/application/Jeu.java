@@ -22,15 +22,16 @@ public class Jeu {
 	
 	public Jeu(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
-		initPersonnageJoueur();
+		primaryStage.setResizable(false);
+		initPersonnageJoueurScene();
 		initStage();
 		creationEvenementDeplacement();
 	}
 	
-	public void initPersonnageJoueur() {
-		File haut = new File("Images/wizardDroite.png");
+	public void initPersonnageJoueurScene() {
+		File haut = new File("Images/wizardNord_transparent.png");
 		File droite = new File("Images/wizardDroite_transparent.png");
-		File bas = new File("Images/wizardDroite.png");
+		File bas = new File("Images/wizardSud_transparent.png");
 		File gauche = new File("Images/wizardGauche_transparent.png");
 		greg = new PersonnageJoueur(haut, droite, bas, gauche);
 	}
@@ -52,14 +53,18 @@ public class Jeu {
 			@Override
 			public void handle(KeyEvent event) {
 				KeyCode kc = event.getCode();
-				System.out.println(kc);
-				greg.setSprite(kc);
-				if(kc == KeyCode.RIGHT) {
-					greg.seDirigerADroite();
+				if(greg.rencontreMur(kc)) return;
+				switch(kc) {
+					case RIGHT:
+						greg.seDirigerADroite();
+						break;
+					case LEFT :
+						greg.seDirigerAGauche();
+						break;
+					default:
+						System.out.println("lol");
 				}
-				else if(kc == KeyCode.LEFT) {
-					greg.seDirigerAGauche();
-				}
+				greg.changerSprite(kc);
 			}
 			
 		});

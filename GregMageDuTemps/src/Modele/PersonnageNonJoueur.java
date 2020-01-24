@@ -10,13 +10,13 @@ public class PersonnageNonJoueur extends Personnage {
 
 	@Override
 	public void seDirigerADroite() {
-		// TODO Auto-generated method stub
+		spriteCourant.setX(spriteCourant.getX() - 20);
 		
 	}
 
 	@Override
 	public void seDirigerAGauche() {
-		// TODO Auto-generated method stub
+		spriteCourant.setX(spriteCourant.getX() + 20);
 		
 	}
 }

@@ -15,6 +15,8 @@ public abstract class Personnage {
 	// la vue de l'image courante du personnage
 	// faire une paire <imageview, Deplacement> ?
 	protected ImageView spriteCourant;
+	protected double xPosition;
+	protected double largeurPersonnage;
 	
 	public Personnage(File ... sprites /* haut, droite, bas, gauche*/) {
 		spritesPersonnageHM = new HashMap<Deplacement,ImageView>();
@@ -30,14 +32,7 @@ public abstract class Personnage {
 	}
 
 
-	public void setSprite(KeyCode code) {
-		if(code == KeyCode.RIGHT){
-			spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.DROITE).getImage());
-		}
-		else if(code == KeyCode.LEFT) {
-			spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.GAUCHE).getImage());
-		}
-	}
+
 	
 	
 }
