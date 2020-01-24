@@ -11,14 +11,12 @@ import java.io.File;
 
 public abstract class Personnage {
 	//ensemble des sprites pour le personnage
-	private ArrayList<ImageView> spritesPersonnage;
 	protected HashMap<Deplacement, ImageView> spritesPersonnageHM;
 	// la vue de l'image courante du personnage
 	// faire une paire <imageview, Deplacement> ?
 	protected ImageView spriteCourant;
 	
 	public Personnage(File ... sprites /* haut, droite, bas, gauche*/) {
-		spritesPersonnage = new ArrayList<ImageView>();
 		spritesPersonnageHM = new HashMap<Deplacement,ImageView>();
 	}
 	
