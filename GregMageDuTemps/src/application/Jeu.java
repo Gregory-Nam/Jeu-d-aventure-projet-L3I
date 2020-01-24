@@ -32,7 +32,7 @@ public class Jeu {
 		File droite = new File("Images/wizardDroite_transparent.png");
 		File bas = new File("Images/wizardDroite.png");
 		File gauche = new File("Images/wizardGauche_transparent.png");
-		greg = new PersonnageJoueur(haut, gauche, bas, droite);
+		greg = new PersonnageJoueur(haut, droite, bas, gauche);
 	}
 	
 	public void initStage() throws IOException {
