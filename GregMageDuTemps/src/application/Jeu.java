@@ -29,10 +29,10 @@ public class Jeu {
 	}
 	
 	public void initPersonnageJoueurScene() {
-		File haut = new File("Images/wizardNord_transparent.png");
-		File droite = new File("Images/wizardDroite_transparent.png");
-		File bas = new File("Images/wizardSud_transparent.png");
-		File gauche = new File("Images/wizardGauche_transparent.png");
+		File haut = new File("Images/Personnages/wizardNord_transparent.png");
+		File droite = new File("Images/Personnages/wizardDroite_transparent.png");
+		File bas = new File("Images/Personnages/wizardSud_transparent.png");
+		File gauche = new File("Images/Personnages/wizardGauche_transparent.png");
 		greg = new PersonnageJoueur(haut, droite, bas, gauche);
 	}
 	
@@ -62,7 +62,7 @@ public class Jeu {
 						greg.seDirigerAGauche();
 						break;
 					default:
-						System.out.println("lol");
+						System.out.println("A TRAITER");
 				}
 				greg.changerSprite(kc);
 			}
