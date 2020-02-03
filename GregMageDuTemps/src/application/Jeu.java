@@ -22,6 +22,7 @@ import Modele.Salle;
 
 public class Jeu {
 	private PersonnageJoueur greg;
+	private Salle salleCourante;
 	private Stage primaryStage;
 	private Scene scene;
 	private Pane root;
@@ -49,11 +50,11 @@ public class Jeu {
 	}
 	
 	public void initSallesScene() {
-		//initilisation de l'ensemble des salles dans la HashMap
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
 		
 		salles.put(salleDepart.getNomSalle(), salleDepart);
 		
+		salleCourante = new Salle(salleDepart);
 	}
 	
 	public void initStage() throws IOException {
@@ -61,7 +62,7 @@ public class Jeu {
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
 		//On assoscie la scene le panneau cree precedemment
 		scene = new Scene(root);
-		root.getChildren().addAll(salles.get(NomSalle.SALLE_DEPART).getSprite(),greg.getSpriteCourant());
+		root.getChildren().addAll(salleCourante.getSprite(),greg.getSpriteCourant());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

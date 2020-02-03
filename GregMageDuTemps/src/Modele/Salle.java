@@ -9,6 +9,11 @@ public class Salle {
 	private ImageView spriteSalle;
 	private final NomSalle nomDeLaSalle;
 	
+	//constructeur par recopie
+	public Salle(Salle s) {
+		this.spriteSalle = s.spriteSalle;
+		this.nomDeLaSalle = s.nomDeLaSalle;
+	}
 	public Salle(File cheminImage, NomSalle nomDeLaSalle) {
 		this.nomDeLaSalle = nomDeLaSalle;
 		initSalle(cheminImage);
