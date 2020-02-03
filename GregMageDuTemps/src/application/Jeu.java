@@ -2,28 +2,40 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import Modele.NomSalle;
 import Modele.Personnage;
 import Modele.PersonnageJoueur;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.scene.layout.Border;
 import javafx.scene.image.*;
+import Modele.Salle;
 
 public class Jeu {
-	PersonnageJoueur greg;
-	Stage primaryStage;
-	Scene scene;
-	AnchorPane root;
+	private PersonnageJoueur greg;
+	private Stage primaryStage;
+	private Scene scene;
+	private Pane root;
+	
+	private HashMap<NomSalle, Salle> salles;
 	
 	public Jeu(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 		primaryStage.setResizable(false);
+		
+		salles = new HashMap<NomSalle, Salle>();
+		
 		initPersonnageJoueurScene();
+		initSallesScene();
 		initStage();
 		creationEvenementDeplacement();
 	}
@@ -36,13 +48,20 @@ public class Jeu {
 		greg = new PersonnageJoueur(haut, droite, bas, gauche);
 	}
 	
+	public void initSallesScene() {
+		//initilisation de l'ensemble des salles dans la HashMap
+		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
+		
+		salles.put(salleDepart.getNomSalle(), salleDepart);
+		
+	}
+	
 	public void initStage() throws IOException {
 		//Panneau qui correspond a la vue "UneFenetre.fxml"
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
-		//On assoscie � la scene le panneau cree precedemment
+		//On assoscie la scene le panneau cree precedemment
 		scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		root.getChildren().add(greg.getSpriteCourant());
+		root.getChildren().addAll(salles.get(NomSalle.SALLE_DEPART).getSprite(),greg.getSpriteCourant());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

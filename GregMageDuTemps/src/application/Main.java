@@ -21,10 +21,6 @@ public class Main extends Application {
 		try {
 			Jeu mageDuTemps = new Jeu(primaryStage);
 			
-			
-		
-			
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

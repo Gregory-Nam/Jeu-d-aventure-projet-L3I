@@ -38,7 +38,7 @@ public class PersonnageJoueur extends Personnage{
 			spritesPersonnageHM.put(deplacements[i], iv);
 		}
 		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacement.DROITE).getImage());
-		spriteCourant.setY(340);
+		System.out.println(spriteCourant.getX());
 		
 		
 	}
