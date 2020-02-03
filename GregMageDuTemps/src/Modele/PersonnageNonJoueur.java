@@ -17,6 +17,5 @@ public class PersonnageNonJoueur extends Personnage {
 	@Override
 	public void seDirigerAGauche() {
 		spriteCourant.setX(spriteCourant.getX() + 20);
-		
 	}
 }
