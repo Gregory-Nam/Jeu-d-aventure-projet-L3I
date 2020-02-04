@@ -7,18 +7,18 @@ public class Porte extends Interactif{
 
 	
 	private PaireSalleEtat tab [];
-	private double XMin;
-	private double XMax;
-	private ImageView spriteCourant;
+	private double xMin;
+	private double xMax;
+	private ImageView spritePorte;
 	private boolean estOuverte;
 	
 	
-	public Porte(Salle salleBefore, Salle salleAfter, double x) {
-		
-		this.XMin = x;
+	public Porte(Salle salle1, Salle salle2, double x) {
+		this.xMin = x;
+		this.xMax = xMin + spritePorte.getImage().getWidth();
 		tab = new PaireSalleEtat [1];
-		tab [0] = new PaireSalleEtat(salleBefore, false);
-		tab [1] = new PaireSalleEtat(salleAfter, false);
+		tab [0] = new PaireSalleEtat(salle1, false);
+		tab [1] = new PaireSalleEtat(salle2, false);
 	}
 	
 	@Override
@@ -29,11 +29,11 @@ public class Porte extends Interactif{
 	
 	public double getXMin() {
 		
-		return XMin;
+		return xMin;
 	}
 	
 	public double getXMax() {
-		return XMax;
+		return xMax;
 	}
 	
 }
