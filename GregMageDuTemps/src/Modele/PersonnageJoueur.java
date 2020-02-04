@@ -66,4 +66,10 @@ public class PersonnageJoueur extends Personnage{
 	public boolean rencontreMur(KeyCode code) {
 		return (code == KeyCode.LEFT) ? (xPosition <= 0) : (xPosition > 1000 - largeurPersonnage);
 	}
+
+	@Override
+	public void interagir() {
+		// TODO Auto-generated method stub
+		
+	}
 }

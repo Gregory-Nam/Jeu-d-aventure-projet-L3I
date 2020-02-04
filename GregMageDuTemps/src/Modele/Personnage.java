@@ -9,7 +9,7 @@ import javafx.scene.input.KeyCode;
 
 import java.io.File;
 
-public abstract class Personnage {
+public abstract class Personnage extends Interactif {
 	//ensemble des sprites pour le personnage
 	protected HashMap<Deplacement, ImageView> spritesPersonnageHM;
 	// la vue de l'image courante du personnage

@@ -18,4 +18,10 @@ public class PersonnageNonJoueur extends Personnage {
 	public void seDirigerAGauche() {
 		spriteCourant.setX(spriteCourant.getX() + 20);
 	}
+
+	@Override
+	public void interagir() {
+		// TODO Auto-generated method stub
+		
+	}
 }

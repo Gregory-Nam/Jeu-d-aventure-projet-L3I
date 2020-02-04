@@ -21,6 +21,7 @@ import javafx.scene.image.*;
 import Modele.Salle;
 
 public class Jeu {
+	
 	private PersonnageJoueur greg;
 	private Salle salleCourante;
 	private Stage primaryStage;
