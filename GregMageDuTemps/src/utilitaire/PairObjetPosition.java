@@ -7,7 +7,7 @@ public class PairObjetPosition {
 	private Interactif i;
 	private Pair <Double, Double> xPositions;
 	
-	PairObjetPosition(Interactif i, double xMin, double xMax) {
+	public PairObjetPosition(Interactif i, double xMin, double xMax) {
 		xPositions = new Pair<Double,Double>(xMin, xMax);		
 		this.i = i;
 	}

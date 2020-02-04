@@ -37,10 +37,12 @@ public class Salle {
 	
 	public ArrayList getPortesPositions() {
 		ArrayList<PairObjetPosition> positionsDesPorte = new ArrayList<PairObjetPosition>();
+		
 		for(Interactif p : objetsDeLaSalle ) {
 			if(!(p instanceof Porte)) continue;
 			positionsDesPorte.add(new PairObjetPosition(p, ((Porte)p).getXMin(), ((Porte)p).getXMax()));
 		}
+		
 		return positionsDesPorte;
 	}
 }
