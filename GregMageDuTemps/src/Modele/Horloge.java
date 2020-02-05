@@ -6,9 +6,8 @@ public class Horloge extends Interactif {
 	private boolean estActive;
 	
 	@Override
-	public Horloge interagir() {
+	public void interagir() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

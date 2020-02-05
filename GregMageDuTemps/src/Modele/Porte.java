@@ -22,9 +22,8 @@ public class Porte extends Interactif{
 	}
 	
 	@Override
-	public Porte interagir() {
-		// Changement du sprite courant et changement de salle
-		return null;
+	public void interagir() {
+		// Changement du sprite courant et changement de salle et appel de la methode static
 	}
 	
 	public double getXMin() {

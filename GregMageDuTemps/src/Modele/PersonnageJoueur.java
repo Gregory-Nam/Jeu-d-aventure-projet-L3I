@@ -68,9 +68,8 @@ public class PersonnageJoueur extends Personnage{
 	}
 
 	@Override
-	public PersonnageJoueur interagir() {
+	public void interagir() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
