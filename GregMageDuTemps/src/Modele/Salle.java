@@ -35,7 +35,7 @@ public class Salle {
 		return nomDeLaSalle;
 	}
 	
-	// gerer le cas ou il n'y a pas d'objet interactif par une insertion ???
+	// gerer le cas ou il n'y a pas d'objet interactif par une exception ???
 	public Interactif getinteractifDeLaSalleAUnePosition(double x) {
 		for(Interactif i : objetsDeLaSalle) {
 			if(i.getXMin() <= x && x >= i.getXMax())

@@ -11,4 +11,16 @@ public class Horloge extends Interactif {
 		
 	}
 
+	@Override
+	public double getXMin() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getXMax() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
