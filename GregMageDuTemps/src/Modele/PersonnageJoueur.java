@@ -72,4 +72,16 @@ public class PersonnageJoueur extends Personnage{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public double getXMin() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getXMax() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

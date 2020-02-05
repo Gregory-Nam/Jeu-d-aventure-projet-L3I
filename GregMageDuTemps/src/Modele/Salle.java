@@ -35,14 +35,12 @@ public class Salle {
 		return nomDeLaSalle;
 	}
 	
-	public ArrayList getPortesPositions() {
-		ArrayList<PairObjetPosition> positionsDesPorte = new ArrayList<PairObjetPosition>();
-		
-		for(Interactif p : objetsDeLaSalle ) {
-			if(!(p instanceof Porte)) continue;
-			positionsDesPorte.add(new PairObjetPosition(p, ((Porte)p).getXMin(), ((Porte)p).getXMax()));
+	// gerer le cas ou il n'y a pas d'objet interactif par une insertion ???
+	public Interactif getinteractifDeLaSalleAUnePosition(double x) {
+		for(Interactif i : objetsDeLaSalle) {
+			if(i.getXMin() <= x && x >= i.getXMax())
+				return i;
 		}
-		
-		return positionsDesPorte;
+		return null;
 	}
 }
