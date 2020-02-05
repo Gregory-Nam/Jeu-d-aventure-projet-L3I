@@ -52,8 +52,10 @@ public class Jeu {
 	
 	public void initSallesScene() {
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
+		Salle salleTest = new Salle (new File("Images/salles/Scale/Test_décor_1920_1080(scale.png"), NomSalle.SALLE_TEST);
 		
 		salles.put(salleDepart.getNomSalle(), salleDepart);
+		salles.put(salleTest.getNomSalle(), salleTest);
 		
 		salleCourante = new Salle(salleDepart);
 	}
@@ -90,4 +92,9 @@ public class Jeu {
 			
 		});
 	}
+
+	public void setSalleCourante(Salle salleCourante) {
+		this.salleCourante = salleCourante;
+	}
+		
 }
