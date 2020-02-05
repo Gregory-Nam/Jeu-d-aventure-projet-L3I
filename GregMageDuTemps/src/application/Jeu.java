@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.RootPaneContainer;
+
 import Modele.NomSalle;
 import Modele.Personnage;
 import Modele.PersonnageJoueur;
+import Modele.Porte;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -23,10 +26,10 @@ import Modele.Salle;
 public class Jeu {
 	
 	private PersonnageJoueur greg;
-	private Salle salleCourante;
+	private static Salle salleCourante;
 	private Stage primaryStage;
 	private Scene scene;
-	private Pane root;
+	private static Pane root;
 	
 	private HashMap<NomSalle, Salle> salles;
 	
@@ -52,8 +55,14 @@ public class Jeu {
 	
 	public void initSallesScene() {
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
-		Salle salleTest = new Salle (new File("Images/salles/Scale/Test_décor_1920_1080(scale.png"), NomSalle.SALLE_TEST);
+		Salle salleTest = new Salle (new File("Images/Fonds/MakingMap1.png"), NomSalle.SALLE_TEST);
 		
+		/** code moche juste pour TEST !!!!!! *********************************/
+		System.out.println("TEST AJOUT PORTE");
+		Porte p = new Porte(salleDepart, salleTest, 2);
+		salleDepart.ajoutInteractif(p);
+		salleTest.ajoutInteractif(p);
+		/*****************************************************************************/
 		salles.put(salleDepart.getNomSalle(), salleDepart);
 		salles.put(salleTest.getNomSalle(), salleTest);
 		
@@ -72,10 +81,10 @@ public class Jeu {
 	
 	public void creationEvenementDeplacement() {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 			@Override
 			public void handle(KeyEvent event) {
 				KeyCode kc = event.getCode();
+				
 				if(greg.rencontreMur(kc)) return;
 				switch(kc) {
 					case RIGHT:
@@ -85,16 +94,18 @@ public class Jeu {
 						greg.seDirigerAGauche();
 						break;
 					default:
-						System.out.println("A TRAITER");
+						salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()).interagir();
+						System.out.println("TEST INTERAGIR AVEC PORTE");
 				}
 				greg.changerSprite(kc);
 			}
-			
 		});
 	}
 
-	public void setSalleCourante(Salle salleCourante) {
-		this.salleCourante = salleCourante;
+	public static void setSalleCourante(Salle nouvelleSalle) {
+		salleCourante = nouvelleSalle;
+		root.getChildren().remove(0);
+		root.getChildren().add(0, salleCourante.getSprite());
 	}
 		
 }

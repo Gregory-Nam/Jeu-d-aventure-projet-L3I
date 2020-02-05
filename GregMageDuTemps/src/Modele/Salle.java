@@ -13,10 +13,12 @@ public class Salle {
 	private ArrayList<Interactif> objetsDeLaSalle;
 	//constructeur par recopie
 	public Salle(Salle s) {
+		objetsDeLaSalle = s.objetsDeLaSalle;
 		this.spriteSalle = s.spriteSalle;
 		this.nomDeLaSalle = s.nomDeLaSalle;
 	}
 	public Salle(File cheminImage, NomSalle nomDeLaSalle) {
+		objetsDeLaSalle = new ArrayList<Interactif>();
 		this.nomDeLaSalle = nomDeLaSalle;
 		initSalle(cheminImage);
 	}
@@ -33,6 +35,11 @@ public class Salle {
 	
 	public NomSalle getNomSalle() {
 		return nomDeLaSalle;
+	}
+	
+	public void ajoutInteractif(Interactif i) {
+		if(objetsDeLaSalle.contains(i)) return;
+		objetsDeLaSalle.add(i);
 	}
 	
 	// gerer le cas ou il n'y a pas d'objet interactif par une exception ???

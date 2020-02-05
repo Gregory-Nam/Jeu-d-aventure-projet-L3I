@@ -8,25 +8,30 @@ import javafx.scene.input.KeyCode;
 
 public class PersonnageJoueur extends Personnage{
 	
+	private final double largeurPersonnage;
 	public PersonnageJoueur(File ... sprites) {
 		super(sprites);
 		initPersonnage(sprites);
 		largeurPersonnage = spriteCourant.getImage().getWidth();
-		xPosition = spriteCourant.getX();
+		super.xMin = spriteCourant.getX();
+		super.xMax = getXMin() + spriteCourant.getImage().getWidth();
 	}
 	
 	@Override
 	public void seDirigerAGauche()  {
 		double nouvellePosition = spriteCourant.getX() - 10;
 		spriteCourant.setX(nouvellePosition);
-		super.xPosition = nouvellePosition;
+		super.xMin = nouvellePosition;
+		super.xMax = nouvellePosition + largeurPersonnage;
 	}
 	
 	@Override
 	public void seDirigerADroite() {
 		double nouvellePosition = spriteCourant.getX() + 10;
 		spriteCourant.setX(nouvellePosition);
-		super.xPosition = nouvellePosition;
+		super.xMin = nouvellePosition;
+		super.xMax = nouvellePosition + largeurPersonnage;
+
 	}
 	
 	public void initPersonnage(File sprites[]) {
@@ -37,10 +42,7 @@ public class PersonnageJoueur extends Personnage{
 			iv.setImage(img);
 			spritesPersonnageHM.put(deplacements[i], iv);
 		}
-		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacement.DROITE).getImage());
-		System.out.println(spriteCourant.getX());
-		
-		
+		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacement.DROITE).getImage());		
 	}
 	
 	public void changerSprite(KeyCode code) {
@@ -64,23 +66,28 @@ public class PersonnageJoueur extends Personnage{
 	}
 	
 	public boolean rencontreMur(KeyCode code) {
-		return (code == KeyCode.LEFT) ? (xPosition <= 0) : (xPosition > 1000 - largeurPersonnage);
+		return (code == KeyCode.LEFT) ? (super.xMin <= 0) : (super.xMin > 1000 - (getXMax() - getXMin()));
 	}
-
+	
+	public void replacerPersonnage() {
+		super.xMin = 0;
+		super.xMax = largeurPersonnage;
+		spriteCourant.setX(super.xMin);
+	}
+	
 	@Override
-	public void interagir() {
+ 	public void interagir() {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public double getXMin() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.xMin;
 	}
 
 	@Override
 	public double getXMax() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.xMax;
 	}
+
 }
