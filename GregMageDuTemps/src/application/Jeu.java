@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.swing.RootPaneContainer;
 
+import Modele.Interactif;
 import Modele.NomSalle;
 import Modele.Personnage;
 import Modele.PersonnageJoueur;
@@ -42,6 +43,8 @@ public class Jeu {
 		initPersonnageJoueurScene();
 		initSallesScene();
 		initStage();
+		initObjetInteractif();
+
 		creationEvenementDeplacement();
 	}
 	
@@ -55,18 +58,13 @@ public class Jeu {
 	
 	public void initSallesScene() {
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
-		Salle salleTest = new Salle (new File("Images/Fonds/MakingMap1.png"), NomSalle.SALLE_TEST);
-		
-		/** code moche juste pour TEST !!!!!! *********************************/
-		System.out.println("TEST AJOUT PORTE");
-		Porte p = new Porte(salleDepart, salleTest, 2);
-		salleDepart.ajoutInteractif(p);
-		salleTest.ajoutInteractif(p);
-		/*****************************************************************************/
+		Salle salle1 = new Salle(new File("Images/Salles/Periode_1/Salle_1.png"), NomSalle.SALLE_1);
+		Porte p1 = new Porte(salleDepart, salle1, 730, new File("Images/Elements/Porte_ferme_100x110.png"), false);
+		salle1.ajoutInteractif(p1);
 		salles.put(salleDepart.getNomSalle(), salleDepart);
-		salles.put(salleTest.getNomSalle(), salleTest);
+		salles.put(salle1.getNomSalle(), salle1);
 		
-		salleCourante = new Salle(salleDepart);
+		salleCourante = salle1;
 	}
 	
 	public void initStage() throws IOException {
@@ -74,9 +72,17 @@ public class Jeu {
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
 		//On assoscie la scene le panneau cree precedemment
 		scene = new Scene(root);
-		root.getChildren().addAll(salleCourante.getSprite(),greg.getSpriteCourant());
+		root.getChildren().addAll(salleCourante.getImageView(),greg.getImageView());
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+	
+	
+	public void initObjetInteractif() {
+		for(int i = 1, j = 0; i < root.getChildren().size(); ++i, ++j) {
+			root.getChildren().remove(i);
+			root.getChildren().add(salleCourante.getInteractifs().get(j).getImageView());
+		}
 	}
 	
 	public void creationEvenementDeplacement() {
@@ -94,7 +100,7 @@ public class Jeu {
 						greg.seDirigerAGauche();
 						break;
 					default:
-						salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()).interagir();
+						greg.replacerDroite();
 						System.out.println("TEST INTERAGIR AVEC PORTE");
 				}
 				greg.changerSprite(kc);
@@ -105,7 +111,7 @@ public class Jeu {
 	public static void setSalleCourante(Salle nouvelleSalle) {
 		salleCourante = nouvelleSalle;
 		root.getChildren().remove(0);
-		root.getChildren().add(0, salleCourante.getSprite());
+		root.getChildren().add(0, salleCourante.getImageView());
 	}
 		
 }

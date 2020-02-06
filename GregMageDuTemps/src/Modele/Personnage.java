@@ -21,7 +21,7 @@ public abstract class Personnage extends Interactif {
 	public abstract void seDirigerAGauche();
 	
 	
-	public ImageView getSpriteCourant() {
+	public ImageView getImageView() {
 		return spriteCourant;
 	}
 

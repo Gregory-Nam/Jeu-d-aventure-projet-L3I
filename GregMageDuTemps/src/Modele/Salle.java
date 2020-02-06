@@ -29,7 +29,7 @@ public class Salle {
 		spriteSalle.setImage(imgSalle);
 	}
 	
-	public ImageView getSprite() {
+	public ImageView getImageView() {
 		return spriteSalle;
 	}
 	
@@ -49,5 +49,9 @@ public class Salle {
 				return i;
 		}
 		return null;
+	}
+	
+	public ArrayList<Interactif> getInteractifs() {
+		return objetsDeLaSalle;
 	}
 }

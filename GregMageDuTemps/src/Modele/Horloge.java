@@ -1,5 +1,7 @@
 package Modele;
 
+import javafx.scene.image.ImageView;
+
 public class Horloge extends Interactif {
 
 	private int nbObjetsPourActiver;
@@ -20,6 +22,12 @@ public class Horloge extends Interactif {
 	public double getXMax() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ImageView getImageView() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

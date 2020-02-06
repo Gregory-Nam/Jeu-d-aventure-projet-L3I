@@ -69,12 +69,17 @@ public class PersonnageJoueur extends Personnage{
 		return (code == KeyCode.LEFT) ? (super.xMin <= 0) : (super.xMin > 1000 - (getXMax() - getXMin()));
 	}
 	
-	public void replacerPersonnage() {
+	public void replacerGauche() {
 		super.xMin = 0;
 		super.xMax = largeurPersonnage;
 		spriteCourant.setX(super.xMin);
 	}
 	
+	public void replacerDroite() {
+		super.xMin = 1000 - largeurPersonnage;
+		super.xMax = 1000;
+		spriteCourant.setX(super.xMin);
+	}
 	@Override
  	public void interagir() {
 		// TODO Auto-generated method stub
