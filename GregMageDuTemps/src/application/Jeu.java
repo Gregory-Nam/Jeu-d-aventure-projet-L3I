@@ -59,7 +59,7 @@ public class Jeu {
 	public void initSallesScene() {
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
 		Salle salle1 = new Salle(new File("Images/Salles/Periode_1/Salle_1.png"), NomSalle.SALLE_1);
-		Porte p1 = new Porte(salleDepart, salle1, 730, new File("Images/Elements/Porte_ferme_100x110.png"), false);
+		Porte p1 = new Porte(salleDepart, salle1, 730, new File("Images/Elements/Porte_ferme_100x110_Transparence.png"), false);
 		salle1.ajoutInteractif(p1);
 		salles.put(salleDepart.getNomSalle(), salleDepart);
 		salles.put(salle1.getNomSalle(), salle1);
