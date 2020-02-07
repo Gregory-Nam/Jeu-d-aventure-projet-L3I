@@ -42,6 +42,10 @@ public class Salle {
 		objetsDeLaSalle.add(i);
 	}
 	
+	public void supprimerInteractif(Interactif i) {
+		if(objetsDeLaSalle.contains(i)) objetsDeLaSalle.remove(i);
+	}
+	
 	// gerer le cas ou il n'y a pas d'objet interactif par une exception ???
 	public Interactif getinteractifDeLaSalleAUnePosition(double x) {
 		for(Interactif i : objetsDeLaSalle) {

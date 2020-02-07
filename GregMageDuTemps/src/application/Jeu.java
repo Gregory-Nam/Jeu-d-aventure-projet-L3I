@@ -48,7 +48,7 @@ public class Jeu {
 		creationEvenementDeplacement();
 	}
 	
-	public void initPersonnageJoueurScene() {
+	private void initPersonnageJoueurScene() {
 		File haut = new File("Images/Personnages/wizardNord_transparent.png");
 		File droite = new File("Images/Personnages/wizardDroite_transparent.png");
 		File bas = new File("Images/Personnages/wizardSud_transparent.png");
@@ -56,7 +56,7 @@ public class Jeu {
 		greg = new PersonnageJoueur(haut, droite, bas, gauche);
 	}
 	
-	public void initSallesScene() {
+	private void initSallesScene() {
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
 		Salle salle1 = new Salle(new File("Images/Salles/Periode_1/Salle_1.png"), NomSalle.SALLE_1);
 		Porte p1 = new Porte(salleDepart, salle1, 730, new File("Images/Elements/Porte_ferme_100x110_Transparence.png"), false);
@@ -67,7 +67,7 @@ public class Jeu {
 		salleCourante = salle1;
 	}
 	
-	public void initStage() throws IOException {
+	private void initStage() throws IOException {
 		//Panneau qui correspond a la vue "UneFenetre.fxml"
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
 		//On assoscie la scene le panneau cree precedemment
@@ -78,14 +78,19 @@ public class Jeu {
 	}
 	
 	
-	public void initObjetInteractif() {
+	private void initObjetInteractif() {
+		/* i commence a 1 car on a forcement la salle et le personnage deja present dans les enfants du root */
+		/* j permet l'acces aux objets de la salle */
 		for(int i = 1, j = 0; i < root.getChildren().size(); ++i, ++j) {
 			root.getChildren().remove(i);
 			root.getChildren().add(salleCourante.getInteractifs().get(j).getImageView());
 		}
+		/* on veut ajouter le personnage en dernier */
+		root.getChildren().add(greg.getImageView());
 	}
 	
-	public void creationEvenementDeplacement() {
+	
+	private void creationEvenementDeplacement() {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
