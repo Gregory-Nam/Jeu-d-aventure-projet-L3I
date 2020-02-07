@@ -57,14 +57,27 @@ public class Jeu {
 	}
 	
 	private void initSallesScene() {
+		/* SALLES */
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
 		Salle salle1 = new Salle(new File("Images/Salles/Periode_1/Salle_1.png"), NomSalle.SALLE_1);
-		Porte p1 = new Porte(salleDepart, salle1, 730, new File("Images/Elements/Porte_ferme_100x110_Transparence.png"), false);
+		Salle salleArgent = new Salle(new File("Images/Salles/Periode_1/Salle_Argent.png"), NomSalle.SALLE_ARGENT);
+		
+		/* PORTES */
+		Porte p1 = new Porte(salleDepart, salle1, 1000, true);
+		Porte p2 = new Porte(salle1, salleArgent,730, false);
+		
+		salleDepart.ajoutInteractif(p1);
+		salleDepart.ajoutInteractif(greg);
 		salle1.ajoutInteractif(p1);
+		salle1.ajoutInteractif(p2);
+		salleArgent.ajoutInteractif(p2);
+		
+		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
 		salles.put(salle1.getNomSalle(), salle1);
+		salles.put(salleArgent.getNomSalle(), salleArgent);
 		
-		salleCourante = salle1;
+		salleCourante = salleDepart;
 	}
 	
 	private void initStage() throws IOException {
@@ -72,7 +85,7 @@ public class Jeu {
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
 		//On assoscie la scene le panneau cree precedemment
 		scene = new Scene(root);
-		root.getChildren().addAll(salleCourante.getImageView(),greg.getImageView());
+		root.getChildren().addAll(salleCourante.getImageView());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -99,7 +112,13 @@ public class Jeu {
 				if(greg.rencontreMur(kc)) return;
 				switch(kc) {
 					case RIGHT:
-						greg.seDirigerADroite();
+						if(greg.getXMax() > root.getWidth() - 20 && salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()) != null) {
+							salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()).interagir();
+							greg.replacerGauche();
+						}
+							
+						else
+							greg.seDirigerADroite();
 						break;
 					case LEFT :
 						greg.seDirigerAGauche();
@@ -117,6 +136,10 @@ public class Jeu {
 		salleCourante = nouvelleSalle;
 		root.getChildren().remove(0);
 		root.getChildren().add(0, salleCourante.getImageView());
+	}
+	
+	public static Salle getSalleCourante() {
+		return salleCourante;
 	}
 		
 }

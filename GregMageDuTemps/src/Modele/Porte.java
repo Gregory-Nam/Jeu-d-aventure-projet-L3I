@@ -9,8 +9,10 @@ import javafx.scene.image.ImageView;
 
 public class Porte extends Interactif{
 
+	private static final File FICHIER_PORTE_OUVERTE = new File("Images/Elements/Porte_Ouverte.png");
+	private static final File FICHIER_PORTE_FERME = new File("Images/Elements/Porte_Ferme.png");
 	
-	private Salle tab [];
+	private Salle sallesLieesParLaPorte [];
 	private double xMin;
 	private double xMax;
 	private ImageView spritePorte;
@@ -18,31 +20,35 @@ public class Porte extends Interactif{
 	private boolean estPorteExtremite;
 	
 	
-	public Porte(Salle salle1, Salle salle2, double x, File imagePorte, boolean estPorteExtremite) {
+	public Porte(Salle salle1, Salle salle2, double x, boolean estPorteExtremite) {
 		if(!estPorteExtremite) {
-			initPorte(imagePorte);
+			initPorte();
 			spritePorte.setX(x);
+			this.xMin = x;
+			this.xMax = xMin + spritePorte.getImage().getWidth();
 		}
-		/* constructeur moche pour test */
-		this.xMin = x;
-		this.xMax = xMin + spritePorte.getImage().getWidth();
-		tab = new Salle [2];
-		tab [0] = salle1;
-		tab [1] = salle2;
+		
+		sallesLieesParLaPorte = new Salle [2];
+		sallesLieesParLaPorte [0] = salle1;
+		sallesLieesParLaPorte [1] = salle2;
 	}
 	
-	public void initPorte(File imagePorte) {
+	public void initPorte() {
 		spritePorte = new ImageView();
-		Image imgPorte = new Image(imagePorte.toURI().toString());
+		Image imgPorte = new Image(FICHIER_PORTE_FERME.toURI().toString());
 		spritePorte.setImage(imgPorte);
 	}
+	
 	@Override
 	public void interagir() {
-		// Changement du sprite courant et changement de salle et appel de la methode static
-		//petit test
 		/* code moche pour test *****************************************************/
 		System.out.println("interagir");
-		Jeu.setSalleCourante(tab[1]);
+		/* test sur l'adresse donc pas besoin de equals */
+		if(Jeu.getSalleCourante() == sallesLieesParLaPorte[0])
+			Jeu.setSalleCourante(sallesLieesParLaPorte[1]);
+		else
+			Jeu.setSalleCourante(sallesLieesParLaPorte[0]);
+		
 	}
 	
 	public double getXMin() {
