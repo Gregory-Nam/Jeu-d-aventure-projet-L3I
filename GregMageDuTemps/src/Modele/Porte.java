@@ -18,6 +18,7 @@ public class Porte extends Interactif{
 	private ImageView spritePorte;
 	private boolean estOuverte;
 	private boolean estPorteExtremite;
+	private boolean estFranchie = false;
 	
 	
 	public Porte(Salle salle1, Salle salle2, double x, boolean estPorteExtremite) {
@@ -27,11 +28,15 @@ public class Porte extends Interactif{
 			this.xMin = x;
 			this.xMax = xMin + spritePorte.getImage().getWidth();
 		}
-		
 		sallesLieesParLaPorte = new Salle [2];
 		sallesLieesParLaPorte [0] = salle1;
 		sallesLieesParLaPorte [1] = salle2;
 	}
+	
+	public Porte(Salle salle1, Salle salle2, double xSalle1, double xSalle2, boolean estPorteExtremite) {
+		this(salle1, salle2, xSalle1, estPorteExtremite);
+	}
+		
 	
 	public void initPorte() {
 		spritePorte = new ImageView();
@@ -67,4 +72,11 @@ public class Porte extends Interactif{
 		return spritePorte;
 	}
 	
+	public void setEstFranchie(boolean b) {
+		this.estFranchie = b;
+	}
+	
+	public boolean getEstFranchie() {
+		return estFranchie;
+	}
 }

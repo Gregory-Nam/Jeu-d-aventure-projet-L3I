@@ -102,7 +102,6 @@ public class Jeu {
 		root.getChildren().add(greg.getImageView());
 	}
 	
-	
 	private void creationEvenementDeplacement() {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -114,6 +113,7 @@ public class Jeu {
 					case RIGHT:
 						if(greg.getXMax() > root.getWidth() - 20 && salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()) != null) {
 							salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()).interagir();
+						
 							greg.replacerGauche();
 						}
 						else
@@ -140,5 +140,4 @@ public class Jeu {
 	public static Salle getSalleCourante() {
 		return salleCourante;
 	}
-		
 }

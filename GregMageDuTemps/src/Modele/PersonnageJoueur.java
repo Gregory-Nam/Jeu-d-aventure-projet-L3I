@@ -35,31 +35,31 @@ public class PersonnageJoueur extends Personnage{
 	}
 	
 	public void initPersonnage(File sprites[]) {
-		Deplacement[] deplacements = Deplacement.values();
+		Deplacements[] deplacements = Deplacements.values();
 		for(int i = 0; i < deplacements.length; ++i) {
 			Image img = new Image(sprites[i].toURI().toString());
 			ImageView iv = new ImageView();
 			iv.setImage(img);
 			spritesPersonnageHM.put(deplacements[i], iv);
 		}
-		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacement.DROITE).getImage());		
+		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.DROITE).getImage());		
 	}
 	
 	public void changerSprite(KeyCode code) {
 		switch(code) {
 			case RIGHT:
-				spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.DROITE).getImage());
+				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.DROITE).getImage());
 				break;
 			case LEFT:
-				spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.GAUCHE).getImage());
+				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.GAUCHE).getImage());
 				break;
 			case UP:
 				//traitement pour les interactions a faire
-				spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.HAUT).getImage());
+				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.HAUT).getImage());
 				break;
 			case DOWN:
 				//traitement pour les interactions a faire
-				spriteCourant.setImage(spritesPersonnageHM.get(Deplacement.BAS).getImage());
+				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.BAS).getImage());
 				break;
 		}		
 		

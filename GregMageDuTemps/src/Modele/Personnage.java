@@ -7,13 +7,13 @@ import java.io.File;
 
 public abstract class Personnage extends Interactif {
 	//ensemble des sprites pour le personnage
-	protected HashMap<Deplacement, ImageView> spritesPersonnageHM;
+	protected HashMap<Deplacements, ImageView> spritesPersonnageHM;
 	// la vue de l'image courante du personnage
 	// faire une paire <imageview, Deplacement> ?
 	protected ImageView spriteCourant;
 	
 	public Personnage(File ... sprites /* haut, droite, bas, gauche*/) {
-		spritesPersonnageHM = new HashMap<Deplacement,ImageView>();
+		spritesPersonnageHM = new HashMap<Deplacements,ImageView>();
 	}
 	
 	public abstract void seDirigerADroite();
