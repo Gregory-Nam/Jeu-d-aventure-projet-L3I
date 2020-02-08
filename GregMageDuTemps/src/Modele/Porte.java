@@ -35,6 +35,7 @@ public class Porte extends Interactif{
 	
 	public Porte(Salle salle1, Salle salle2, double xSalle1, double xSalle2, boolean estPorteExtremite) {
 		this(salle1, salle2, xSalle1, estPorteExtremite);
+		
 	}
 		
 	
@@ -54,8 +55,14 @@ public class Porte extends Interactif{
 		else
 			Jeu.setSalleCourante(sallesLieesParLaPorte[0]);
 		
-		if(xMin == 0) xMin = 1000;
-		else xMin = 0;
+		if(this.xMin == 940) {
+			this.xMin = 0;
+			this.xMax = 50;
+		}
+		else if(this.xMin == 0){
+			this.xMin = 940;
+			this.xMax = 1000;
+		}
 		
 	}
 	
