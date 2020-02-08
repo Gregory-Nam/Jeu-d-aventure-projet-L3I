@@ -49,6 +49,9 @@ public class Porte extends Interactif{
 		else
 			Jeu.setSalleCourante(sallesLieesParLaPorte[0]);
 		
+		if(xMin == 0) xMin = 1000;
+		else xMin = 0;
+		
 	}
 	
 	public double getXMin() {
