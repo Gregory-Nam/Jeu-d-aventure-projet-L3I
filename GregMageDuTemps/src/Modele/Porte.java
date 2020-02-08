@@ -22,12 +22,13 @@ public class Porte extends Interactif{
 	
 	
 	public Porte(Salle salle1, Salle salle2, double x, boolean estPorteExtremite) {
+		this.xMin = x;
 		if(!estPorteExtremite) {
 			initPorte();
 			spritePorte.setX(x);
-			this.xMin = x;
 			this.xMax = xMin + spritePorte.getImage().getWidth();
 		}
+		else this.xMax = this.xMin + 60;
 		sallesLieesParLaPorte = new Salle [2];
 		sallesLieesParLaPorte [0] = salle1;
 		sallesLieesParLaPorte [1] = salle2;

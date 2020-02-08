@@ -63,7 +63,7 @@ public class Jeu {
 		Salle salleArgent = new Salle(new File("Images/Salles/Periode_1/Salle_Argent.png"), NomSalle.SALLE_ARGENT);
 		
 		/* PORTES */
-		Porte p1 = new Porte(salleDepart, salle1, 1000, true);
+		Porte p1 = new Porte(salleDepart, salle1, 940, true);
 		Porte p2 = new Porte(salle1, salleArgent,730, false);
 		
 		salleDepart.ajoutInteractif(p1);
@@ -111,19 +111,22 @@ public class Jeu {
 				if(greg.rencontreMur(kc)) return;
 				switch(kc) {
 					case RIGHT:
-						if(greg.getXMax() > root.getWidth() - 20 && salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()) != null) {
-							salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()).interagir();
-						
+						if(greg.getXCentre() > 940 && salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXCentre()) != null) {
+							salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXCentre()).interagir();
 							greg.replacerGauche();
 						}
 						else
 							greg.seDirigerADroite();
 						break;
 					case LEFT :
-						greg.seDirigerAGauche();
+						if(greg.getXCentre() < 60 && salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXCentre()) != null) {
+							salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXCentre()).interagir();
+							greg.replacerDroite();
+						}
+						else
+							greg.seDirigerAGauche();
 						break;
 					default:
-						greg.replacerDroite();
 						System.out.println("TEST INTERAGIR AVEC PORTE");
 				}
 				greg.changerSprite(kc);

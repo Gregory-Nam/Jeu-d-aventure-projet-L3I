@@ -95,4 +95,7 @@ public class PersonnageJoueur extends Personnage{
 		return super.xMax;
 	}
 
+	public double getXCentre() {
+		return (super.xMin + super.xMax) / 2;
+	}
 }
