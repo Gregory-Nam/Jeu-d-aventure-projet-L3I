@@ -116,7 +116,6 @@ public class Jeu {
 							salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXMin()).interagir();
 							greg.replacerGauche();
 						}
-							
 						else
 							greg.seDirigerADroite();
 						break;

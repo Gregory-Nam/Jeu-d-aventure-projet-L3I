@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import utilitaire.PairObjetPosition;
+import utilitaire.Position;
 
 public class Salle {
 	private ImageView spriteSalle;
