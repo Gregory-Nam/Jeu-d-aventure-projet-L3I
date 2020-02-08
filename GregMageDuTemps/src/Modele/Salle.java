@@ -3,6 +3,7 @@ package Modele;
 import java.io.File;
 import java.util.ArrayList;
 
+import application.Jeu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import utilitaire.Position;
@@ -47,10 +48,9 @@ public class Salle {
 	}
 	
 	// gerer le cas ou il n'y a pas d'objet interactif par une exception ???
-	public Interactif getinteractifDeLaSalleAUnePosition(double x) {
+	public Interactif interactifAPosition(double x) {
 		for(Interactif i : objetsDeLaSalle) {
 			if(i.getXMin() <= x && x <= i.getXMax()) {
-				System.out.println(i);
 				return i;
 			}
 		}

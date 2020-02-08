@@ -26,7 +26,7 @@ import Modele.Salle;
 
 public class Jeu {
 	
-	private PersonnageJoueur greg;
+	private static PersonnageJoueur greg;
 	private static Salle salleCourante;
 	private Stage primaryStage;
 	private Scene scene;
@@ -81,9 +81,7 @@ public class Jeu {
 	}
 	
 	private void initStage() throws IOException {
-		//Panneau qui correspond a la vue "UneFenetre.fxml"
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
-		//On assoscie la scene le panneau cree precedemment
 		scene = new Scene(root);
 		root.getChildren().addAll(salleCourante.getImageView());
 		primaryStage.setScene(scene);
@@ -91,15 +89,17 @@ public class Jeu {
 	}
 	
 	
-	private void initObjetInteractif() {
-		/* i commence a 1 car on a forcement la salle et le personnage deja present dans les enfants du root */
-		/* j permet l'acces aux objets de la salle */
-		for(int i = 1, j = 0; i < root.getChildren().size(); ++i, ++j) {
+	private static void initObjetInteractif() {
+		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
+		for(int i = 1; i < root.getChildren().size(); ++i) {
 			root.getChildren().remove(i);
-			root.getChildren().add(salleCourante.getInteractifs().get(j).getImageView());
 		}
-		/* on veut ajouter le personnage en dernier */
-		root.getChildren().add(greg.getImageView());
+		/* AJOUT DES OBJETS INTERACTIFS DE LA SALLE COURANTE */
+		for(Interactif i : salleCourante.getInteractifs()) {
+			/* CONDITION POUR LE CAS DES PORTES EXTREMITE QUI N'ONT PAS D'IMAGEVIEW */
+			if(i.getImageView() == null) continue;
+			root.getChildren().add(i.getImageView());
+		}
 	}
 	
 	private void creationEvenementDeplacement() {
@@ -107,37 +107,55 @@ public class Jeu {
 			@Override
 			public void handle(KeyEvent event) {
 				KeyCode kc = event.getCode();
-				
-				if(greg.rencontreMur(kc)) return;
 				switch(kc) {
+				
+					/* DEPLACEMENT A DROITE */
 					case RIGHT:
-						if(greg.getXCentre() > 940 && salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXCentre()) != null) {
-							salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXCentre()).interagir();
+						/* DEPLACEMENT NORMAL SI CE N'EST PAS UNE EXTREMITE */
+						if(greg.getXCentre() < 950) {
+							greg.seDirigerADroite();
+							break;
+						}
+						/* EXTREMITE ATTEINTE, SEUL OBJET POSSIBLE (NORMALEMENT) EST UNE PORTE */
+						Interactif objetExtremiteDroite = salleCourante.interactifAPosition(greg.getXCentre());
+						if (objetExtremiteDroite != null && objetExtremiteDroite != greg) {
+							objetExtremiteDroite.interagir();
 							greg.replacerGauche();
 						}
-						else
-							greg.seDirigerADroite();
 						break;
+						
+					/* DEPLACEMENT A GAUCHE */
 					case LEFT :
-						if(greg.getXCentre() < 60 && salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXCentre()) != null) {
-							salleCourante.getinteractifDeLaSalleAUnePosition(greg.getXCentre()).interagir();
+						/* DEPLACEMENT NORMAL SI CE N'EST PAS UNE EXTREMITE */
+						if(greg.getXCentre() > 50) {
+							greg.seDirigerAGauche();
+							break;
+						}
+						/* EXTREMITE ATTEINTE, SEUL OBJET POSSIBLE (NORMALEMENT) EST UNE PORTE */
+						Interactif objetExtremiteGauche = salleCourante.interactifAPosition(greg.getXCentre());
+						if (objetExtremiteGauche != null && objetExtremiteGauche != greg) {
+							objetExtremiteGauche.interagir();
 							greg.replacerDroite();
 						}
-						else
-							greg.seDirigerAGauche();
 						break;
 					default:
 						System.out.println("TEST INTERAGIR AVEC PORTE");
 				}
+				/* CHANGEMENT DE L'IMAGE DU PERSONNAGE JOUEUR SELON LE DEPLACEMENT */
 				greg.changerSprite(kc);
 			}
 		});
 	}
 
 	public static void setSalleCourante(Salle nouvelleSalle) {
+		salleCourante.supprimerInteractif(greg);
 		salleCourante = nouvelleSalle;
+		salleCourante.ajoutInteractif(greg);
+		/* REMPLACEMENT DE L'ANCIENNE IMAGE DE LA SALLE AVEC LA NOUVELLE */
 		root.getChildren().remove(0);
-		root.getChildren().add(0, salleCourante.getImageView());
+		root.getChildren().set(0, salleCourante.getImageView());
+		/* MISE A JOUR DES OBJETS INTERACTIFS */
+		initObjetInteractif();
 	}
 	
 	public static Salle getSalleCourante() {

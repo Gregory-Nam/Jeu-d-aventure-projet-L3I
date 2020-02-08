@@ -2,6 +2,7 @@ package Modele;
 
 import java.io.File;
 
+import application.Jeu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
