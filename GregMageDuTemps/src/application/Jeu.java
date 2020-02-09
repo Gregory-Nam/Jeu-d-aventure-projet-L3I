@@ -17,11 +17,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.Border;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.image.*;
 import Modele.Salle;
 
@@ -36,6 +41,7 @@ public class Jeu {
 	private HashMap<NomSalle, Salle> salles;
 	
 	public Jeu(Stage primaryStage) throws IOException {
+		CompteARebours c = new CompteARebours(10, 2);
 		
 		this.primaryStage = primaryStage;
 		primaryStage.setResizable(false);
@@ -46,8 +52,11 @@ public class Jeu {
 		initSallesScene();
 		initStage();
 		initObjetInteractif();
-
 		creationEvenementDeplacement();
+		
+		
+		c.lancer();
+		primaryStage.titleProperty().bind(c.getStringPropery());
 	}
 	
 	private void initPersonnageJoueurScene() {
@@ -83,8 +92,11 @@ public class Jeu {
 	}
 	
 	private void initStage() throws IOException {
+		
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
+		
 		scene = new Scene(root);
+		
 		root.getChildren().addAll(salleCourante.getImageView());
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -93,7 +105,7 @@ public class Jeu {
 	
 	private static void initObjetInteractif() {
 		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
-		for(int i = 1; i < root.getChildren().size(); ++i) {
+		for(int i = 2; i < root.getChildren().size(); ++i) {
 			root.getChildren().remove(i);
 		}
 		/* AJOUT DES OBJETS INTERACTIFS DE LA SALLE COURANTE */

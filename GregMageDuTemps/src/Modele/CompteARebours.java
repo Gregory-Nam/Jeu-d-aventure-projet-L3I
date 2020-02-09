@@ -3,40 +3,66 @@ package Modele;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class CompteARebours {
 	private Timer chrono;
 	private TimerTask tache;
-	private int secondes;
-	private int minutes;
+	private IntegerProperty secondesP;
+	private IntegerProperty minutesP;
+	
+	private StringProperty secondesSP;
+	private StringProperty minutesSP;
+	
+	private StringProperty tempsTotalSP;
 	
 	public CompteARebours(int minutes, int secondes) {
-		this.minutes = minutes;
-		this.secondes = secondes;
+		/* INITIALISATION DES INTEGER ET STRING PROPERTY */
+		secondesP = new SimpleIntegerProperty();
+		minutesP = new SimpleIntegerProperty();
+		secondesSP = new SimpleStringProperty();
+		minutesSP = new SimpleStringProperty();
+		tempsTotalSP = new SimpleStringProperty();
+		
+		/* AFFECTATION DE LEURS VALEURS */
+		secondesP.set(secondes);
+		minutesP.set(minutes);
+		
+		/* LIAISON DES STRINGPROPERY AVEC LES MINUTESPROPERTY */
+		/* QUAND MINUTESP CHANGE, SECONDESP CHANGE, ETC.. */
+		secondesSP.bind(minutesP.asString());
+		minutesSP.bind(minutesP.asString());
+		tempsTotalSP.bind(new SimpleStringProperty("Temps restant : ").concat(minutesSP.concat(" minutes ").concat(secondesP).concat(" secondes")));
+		
+		/* INITIALISATION DU TIMER ET DU THREAD */
 		chrono = new Timer();
 		tache = new TimerTask() {
 			public void run() {
 				
-				if(CompteARebours.this.secondes == 0) {
-					--CompteARebours.this.minutes;
-					CompteARebours.this.secondes = 60;
+				/* CHANGEMENT DE LA MINUTE SI SECONDES = 0 */
+				/* PLATFORM RUN LATER EST NECESSAIRE POUR METTRE A JOUR UN ELEMENT DU GUI DANS UN THREAD AUTRE */
+				if(CompteARebours.this.secondesP.get() == 0) {
+					Platform.runLater(() -> CompteARebours.this.minutesP.set(CompteARebours.this.minutesP.get() - 1));
+					Platform.runLater(() -> CompteARebours.this.secondesP.set(60));
 				}
-				--CompteARebours.this.secondes;
-				System.out.println(CompteARebours.this.toString());
+				Platform.runLater(() ->CompteARebours.this.secondesP.set(CompteARebours.this.secondesP.get() - 1));
 			}
 		};
 		
 	}
 	
+	public StringProperty getStringPropery() {
+		return tempsTotalSP;
+	}
 	
 	public void lancer() {
 		chrono.scheduleAtFixedRate(tache, 1000, 1000);
 	}
 	
-	public String toString() {
-		return this.minutes + " " + this.secondes;
-	}
 	
 	
 }

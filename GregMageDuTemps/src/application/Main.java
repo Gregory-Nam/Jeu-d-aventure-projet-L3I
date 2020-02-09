@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 
 
 public class Main extends Application {
@@ -22,8 +23,8 @@ public class Main extends Application {
 		try {
 			
 			Jeu mageDuTemps = new Jeu(primaryStage);
-			CompteARebours c = new CompteARebours(10,0);
-			c.lancer();
+			
+			
 			
 		} catch(Exception e) {
 			e.printStackTrace();
