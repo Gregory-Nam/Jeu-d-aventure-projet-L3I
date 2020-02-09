@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.swing.RootPaneContainer;
 
+import Modele.CompteARebours;
 import Modele.Interactif;
 import Modele.NomSalle;
 import Modele.Personnage;
@@ -35,6 +36,7 @@ public class Jeu {
 	private HashMap<NomSalle, Salle> salles;
 	
 	public Jeu(Stage primaryStage) throws IOException {
+		
 		this.primaryStage = primaryStage;
 		primaryStage.setResizable(false);
 		

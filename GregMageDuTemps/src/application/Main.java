@@ -22,8 +22,7 @@ public class Main extends Application {
 		try {
 			
 			Jeu mageDuTemps = new Jeu(primaryStage);
-
-			CompteARebours c = new CompteARebours(10, 5);
+			CompteARebours c = new CompteARebours(10,0);
 			c.lancer();
 			
 		} catch(Exception e) {

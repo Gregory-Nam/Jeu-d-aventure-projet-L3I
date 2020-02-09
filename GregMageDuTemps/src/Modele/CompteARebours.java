@@ -3,6 +3,8 @@ package Modele;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.stage.Stage;
+
 public class CompteARebours {
 	private Timer chrono;
 	private TimerTask tache;
@@ -21,11 +23,7 @@ public class CompteARebours {
 					CompteARebours.this.secondes = 60;
 				}
 				--CompteARebours.this.secondes;
-					
-				
-				System.out.println("minutes " + CompteARebours.this.minutes);
-				System.out.println("secondes " + CompteARebours.this.secondes);
-				
+				System.out.println(CompteARebours.this.toString());
 			}
 		};
 		
@@ -36,6 +34,9 @@ public class CompteARebours {
 		chrono.scheduleAtFixedRate(tache, 1000, 1000);
 	}
 	
+	public String toString() {
+		return this.minutes + " " + this.secondes;
+	}
 	
 	
 }
