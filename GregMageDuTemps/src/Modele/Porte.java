@@ -18,7 +18,6 @@ public class Porte extends Interactif{
 	private ImageView spritePorte;
 	private boolean estOuverte;
 	private boolean estPorteExtremite;
-	private boolean estFranchie = false;
 	
 	
 	public Porte(Salle salle1, Salle salle2, double x, boolean estPorteExtremite) {
@@ -64,7 +63,6 @@ public class Porte extends Interactif{
 			this.xMin = 940;
 			this.xMax = 1000;
 		}
-		
 	}
 	
 	public double getXMin() {
@@ -78,13 +76,5 @@ public class Porte extends Interactif{
 	@Override
 	public ImageView getImageView() {
 		return spritePorte;
-	}
-	
-	public void setEstFranchie(boolean b) {
-		this.estFranchie = b;
-	}
-	
-	public boolean getEstFranchie() {
-		return estFranchie;
 	}
 }

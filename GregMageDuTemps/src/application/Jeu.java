@@ -138,8 +138,20 @@ public class Jeu {
 							greg.replacerDroite();
 						}
 						break;
+					case UP : //DEPLACEMENT VERS LE HAUT POUR RENTRER DANS UNE PORTE MURALE
+						Interactif objetPorteMurale = salleCourante.interactifAPosition(greg.getXCentre());
+						System.out.println(salleCourante.getInteractifs().toString());
+						if(objetPorteMurale != null && objetPorteMurale != greg 
+						   && greg.getXCentre() >= objetPorteMurale.getXMin() 
+						   && greg.getXCentre() <= objetPorteMurale.getXMax()) {
+							objetPorteMurale.interagir();
+							//CODE ULTRA SALE POUR TEST
+					objetPorteMurale.getImageView().setImage(new Image(new File("Images/Elements/Porte_Ouverte.png").toURI().toString()));
+						}
+						break;
 					default:
 						System.out.println("TEST INTERAGIR AVEC PORTE");
+						System.out.println("X centre : " + greg.getXCentre());
 				}
 				/* CHANGEMENT DE L'IMAGE DU PERSONNAGE JOUEUR SELON LE DEPLACEMENT */
 				greg.changerSprite(kc);
