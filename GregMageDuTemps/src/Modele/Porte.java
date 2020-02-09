@@ -16,11 +16,12 @@ public class Porte extends Interactif{
 	private double xMin;
 	private double xMax;
 	private ImageView spritePorte;
-	private boolean estOuverte;
+	private boolean estOuverte = false;
 	private boolean estPorteExtremite;
 	
 	
 	public Porte(Salle salle1, Salle salle2, double x, boolean estPorteExtremite) {
+		this.estPorteExtremite = estPorteExtremite;
 		this.xMin = x;
 		if(!estPorteExtremite) {
 			initPorte();
@@ -47,6 +48,11 @@ public class Porte extends Interactif{
 	
 	@Override
 	public void interagir() {
+		if(!estPorteExtremite && !estOuverte)
+		{
+			spritePorte.setImage(new Image(FICHIER_PORTE_OUVERTE.toURI().toString()));
+			estOuverte = true;
+		}
 		/* code moche pour test *****************************************************/
 		System.out.println("interagir");
 		/* test sur l'adresse donc pas besoin de equals */

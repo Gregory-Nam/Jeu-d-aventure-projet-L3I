@@ -2,6 +2,7 @@ package application;
 	
 import java.io.File;
 
+import Modele.CompteARebours;
 import Modele.PersonnageJoueur;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -19,7 +20,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
 			Jeu mageDuTemps = new Jeu(primaryStage);
+
+			CompteARebours c = new CompteARebours(10, 5);
+			c.lancer();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
