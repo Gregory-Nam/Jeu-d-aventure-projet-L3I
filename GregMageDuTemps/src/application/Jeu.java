@@ -154,10 +154,9 @@ public class Jeu {
 						break;
 					/*DEPLACEMENT VERS LE HAUT POUR INTERAGIR AVEC UN OBJET INTERACTIF */
 					case UP : 
+						if(greg.getXCentre() <= 50 || greg.getXCentre() >= 950) break;
 						Interactif objetInteractif = salleCourante.interactifAPosition(greg.getXCentre());
-						if(objetInteractif != null && objetInteractif != greg ) {
-							objetInteractif.interagir();
-						}
+						if(objetInteractif != null && objetInteractif != greg ) objetInteractif.interagir();
 						break;
 					default:
 						System.out.println("TEST INTERAGIR AVEC PORTE");

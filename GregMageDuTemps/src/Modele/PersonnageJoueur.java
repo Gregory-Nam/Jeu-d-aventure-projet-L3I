@@ -55,11 +55,9 @@ public class PersonnageJoueur extends Personnage{
 				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.GAUCHE).getImage());
 				break;
 			case UP:
-				//traitement pour les interactions a faire
 				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.HAUT).getImage());
 				break;
 			case DOWN:
-				//traitement pour les interactions a faire
 				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.BAS).getImage());
 				break;
 		}		
