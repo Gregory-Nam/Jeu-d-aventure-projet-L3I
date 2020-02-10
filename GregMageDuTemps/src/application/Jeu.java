@@ -105,7 +105,7 @@ public class Jeu {
 	
 	private static void initObjetInteractif() {
 		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
-		for(int i = 2; i < root.getChildren().size(); ++i) {
+		for(int i = 1; i < root.getChildren().size(); ++i) {
 			root.getChildren().remove(i);
 		}
 		/* AJOUT DES OBJETS INTERACTIFS DE LA SALLE COURANTE */
