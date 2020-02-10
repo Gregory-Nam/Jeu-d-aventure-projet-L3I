@@ -155,9 +155,7 @@ public class Jeu {
 					/*DEPLACEMENT VERS LE HAUT POUR INTERAGIR AVEC UN OBJET INTERACTIF */
 					case UP : 
 						Interactif objetInteractif = salleCourante.interactifAPosition(greg.getXCentre());
-						if(objetInteractif != null && objetInteractif != greg 
-						   && greg.getXCentre() >= objetInteractif.getXMin() 
-						   && greg.getXCentre() <= objetInteractif.getXMax()) {
+						if(objetInteractif != null && objetInteractif != greg ) {
 							objetInteractif.interagir();
 						}
 						break;
