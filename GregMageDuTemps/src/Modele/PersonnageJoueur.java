@@ -22,6 +22,7 @@ public class PersonnageJoueur extends Personnage{
 	public void seDirigerAGauche()  {
 		double nouvellePosition = spriteCourant.getX() - 10;
 		spriteCourant.setX(nouvellePosition);
+		this.changerSprite(Deplacements.GAUCHE);
 		super.xMin = nouvellePosition;
 		super.xMax = nouvellePosition + largeurPersonnage;
 	}
@@ -30,6 +31,7 @@ public class PersonnageJoueur extends Personnage{
 	public void seDirigerADroite() {
 		double nouvellePosition = spriteCourant.getX() + 10;
 		spriteCourant.setX(nouvellePosition);
+		this.changerSprite(Deplacements.DROITE);
 		super.xMin = nouvellePosition;
 		super.xMax = nouvellePosition + largeurPersonnage;
 
@@ -46,7 +48,10 @@ public class PersonnageJoueur extends Personnage{
 		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.DROITE).getImage());		
 	}
 	
-	public void changerSprite(KeyCode code) {
+	public void changerSprite(Deplacements d) {
+		if(spriteCourant.getImage().equals(spritesPersonnageHM.get(d).getImage())) return;
+		spriteCourant.setImage(spritesPersonnageHM.get(d).getImage());
+		/*
 		switch(code) {
 			case RIGHT:
 				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.DROITE).getImage());
@@ -60,7 +65,7 @@ public class PersonnageJoueur extends Personnage{
 			case DOWN:
 				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.BAS).getImage());
 				break;
-		}		
+		}		*/
 		
 	}
 	

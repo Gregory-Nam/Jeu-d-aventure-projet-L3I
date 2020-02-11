@@ -9,6 +9,9 @@ import javafx.scene.image.ImageView;
 import utilitaire.Position;
 
 public class Salle {
+	private static final double EXTREMITE_GAUCHE = 50;
+	private static final double EXTREMITE_DROITE = 950;
+	
 	private ImageView spriteSalle;
 	private final NomSalle nomDeLaSalle;
 	private ArrayList<Interactif> objetsDeLaSalle;
@@ -59,5 +62,13 @@ public class Salle {
 	
 	public ArrayList<Interactif> getInteractifs() {
 		return objetsDeLaSalle;
+	}
+
+	public static double getExtremiteDroite() {
+		return EXTREMITE_DROITE;
+	}
+	
+	public static double getExtremiteGauche() {
+		return EXTREMITE_GAUCHE;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javax.swing.RootPaneContainer;
 
 import Modele.CompteARebours;
+import Modele.Deplacements;
 import Modele.Interactif;
 import Modele.NomSalle;
 import Modele.Personnage;
@@ -31,7 +32,6 @@ import javafx.scene.image.*;
 import Modele.Salle;
 
 public class Jeu {
-	
 	private static PersonnageJoueur greg;
 	private static Salle salleCourante;
 	private Stage primaryStage;
@@ -96,7 +96,6 @@ public class Jeu {
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
 		
 		scene = new Scene(root);
-		
 		root.getChildren().addAll(salleCourante.getImageView());
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -125,49 +124,65 @@ public class Jeu {
 				
 					/* DEPLACEMENT A DROITE */
 					case RIGHT:
-						/* DEPLACEMENT NORMAL SI CE N'EST PAS UNE EXTREMITE */
-						if(greg.getXCentre() < 950) {
-							greg.seDirigerADroite();
-							break;
-						}
-						/* EXTREMITE ATTEINTE, SEUL OBJET POSSIBLE (NORMALEMENT) EST UNE PORTE */
-						Interactif objetExtremiteDroite = salleCourante.interactifAPosition(greg.getXCentre());
-						if (objetExtremiteDroite != null && objetExtremiteDroite != greg) {
-							objetExtremiteDroite.interagir();
-							greg.replacerGauche();
-						}
+						evenementsHorizontaux(Deplacements.DROITE);
 						break;
 						
 					/* DEPLACEMENT A GAUCHE */
 					case LEFT :
-						/* DEPLACEMENT NORMAL SI CE N'EST PAS UNE EXTREMITE */
-						if(greg.getXCentre() > 50) {
-							greg.seDirigerAGauche();
-							break;
-						}
-						/* EXTREMITE ATTEINTE, SEUL OBJET POSSIBLE (NORMALEMENT) EST UNE PORTE */
-						Interactif objetExtremiteGauche = salleCourante.interactifAPosition(greg.getXCentre());
-						if (objetExtremiteGauche != null && objetExtremiteGauche != greg) {
-							objetExtremiteGauche.interagir();
-							greg.replacerDroite();
-						}
+						evenementsHorizontaux(Deplacements.GAUCHE);
 						break;
+						
 					/*DEPLACEMENT VERS LE HAUT POUR INTERAGIR AVEC UN OBJET INTERACTIF */
 					case UP : 
-						if(greg.getXCentre() <= 50 || greg.getXCentre() >= 950) break;
+						greg.changerSprite(Deplacements.HAUT);
+						if(greg.getXCentre() <= Salle.getExtremiteGauche() || greg.getXCentre() >= Salle.getExtremiteDroite()) break;
 						Interactif objetInteractif = salleCourante.interactifAPosition(greg.getXCentre());
-						if(objetInteractif != null && objetInteractif != greg ) objetInteractif.interagir();
+						if(objetInteractif != null && objetInteractif != greg ) {
+							objetInteractif.interagir();
+							greg.changerSprite(Deplacements.BAS);
+						}
 						break;
+						
 					default:
 						System.out.println("TEST INTERAGIR AVEC PORTE");
 						System.out.println("X centre : " + greg.getXCentre());
 				}
-				/* CHANGEMENT DE L'IMAGE DU PERSONNAGE JOUEUR SELON LE DEPLACEMENT */
-				greg.changerSprite(kc);
 			}
 		});
 	}
 
+	private void evenementsHorizontaux(Deplacements d) {
+		/* CHOIX DE L'EXTREMITE SELON LE DEPLACEMENT DU PERSONNAGE */
+		double extremite;
+		boolean gauche;
+		if( d == Deplacements.DROITE ) {
+			extremite = Salle.getExtremiteDroite();
+			gauche = false;
+		}
+		else if ( d == Deplacements.GAUCHE ) {
+			extremite = Salle.getExtremiteGauche();
+			gauche = true;
+		}
+		else return;
+		
+		/* DEPLACEMENT NORMAL SI CE N'EST PAS UNE EXTREMITE */
+		if(!gauche && greg.getXCentre() < extremite ) {
+			greg.seDirigerADroite();
+			return;
+		}
+		else if (gauche && greg.getXCentre() > extremite) {
+			greg.seDirigerAGauche();
+			return;
+		}
+		
+		/* EXTREMITE ATTEINTE, SEUL OBJET POSSIBLE (NORMALEMENT) EST UNE PORTE */
+		Interactif objetExtremite = salleCourante.interactifAPosition(greg.getXCentre());
+		if (objetExtremite != null && objetExtremite != greg) {
+			objetExtremite.interagir();
+			greg.replacerGauche();
+		}
+	}
+	
 	public static void setSalleCourante(Salle nouvelleSalle) {
 		salleCourante.supprimerInteractif(greg);
 		salleCourante = nouvelleSalle;
