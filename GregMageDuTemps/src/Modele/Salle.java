@@ -41,9 +41,11 @@ public class Salle {
 		return nomDeLaSalle;
 	}
 	
-	public void ajoutInteractif(Interactif i) {
-		if(objetsDeLaSalle.contains(i)) return;
-		objetsDeLaSalle.add(i);
+	public void ajoutInteractif(Interactif ... interactifs) {
+		for(Interactif i : interactifs) {
+			if(objetsDeLaSalle.contains(i)) continue;
+			objetsDeLaSalle.add(i);
+		}
 	}
 	
 	public void supprimerInteractif(Interactif i) {

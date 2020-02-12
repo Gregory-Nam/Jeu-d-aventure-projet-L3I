@@ -72,17 +72,29 @@ public class Jeu {
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
 		Salle salle1 = new Salle(new File("Images/Salles/Periode_1/Salle_1.png"), NomSalle.SALLE_1);
 		Salle salleArgent = new Salle(new File("Images/Salles/Periode_1/Salle_Argent.png"), NomSalle.SALLE_ARGENT);
-		
+		Salle salle2 = new Salle(new File("Images/Salles/Periode_1/Salle_2.png"), NomSalle.SALLE_2);
+		Salle salle3 = new Salle(new File("Images/Salles/Periode_1/Salle_3.png"), NomSalle.SALLE_3);
+		Salle salleBronze = new Salle(new File("Images/Salles/Periode_1/Salle_bronze.png"), NomSalle.SALLE_BRONZE);
+		Salle salleOr = new Salle(new File("Images/Salles/Periode_1/Salle_or.png"), NomSalle.SALLE_OR);
+		Salle sallePiege = new Salle(new File("Images/Salles/Periode_1/Salle_piege.png"), NomSalle.SALLE_PIEGE);
+
 		/* PORTES */
 		Porte p1 = new Porte(salleDepart, salle1, 940, true);
 		Porte p2 = new Porte(salle1, salleArgent,730, false);
+		Porte p3 = new Porte(salle1, salle2, 940, true);
+		Porte p4 = new Porte(salle2,salle3, 940, true);
+		Porte p7 = new Porte(salle3, salleOr,940, true);
+		Porte p6 = new Porte(salle2, salleBronze,182, false);
+		Porte p5 = new Porte(salle3, sallePiege, 730, false);
 		
-		salleDepart.ajoutInteractif(p1);
-		salleDepart.ajoutInteractif(greg);
-		salle1.ajoutInteractif(p1);
-		salle1.ajoutInteractif(p2);
+		salleDepart.ajoutInteractif(p1,greg);
+		salle1.ajoutInteractif(p1,p2,p3);
+		salle2.ajoutInteractif(p3,p4,p6);
+		salle3.ajoutInteractif(p4,p5,p7);
 		salleArgent.ajoutInteractif(p2);
-		
+		salleOr.ajoutInteractif(p7);
+		salleBronze.ajoutInteractif(p6);
+		sallePiege.ajoutInteractif(p5);
 		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
 		salles.put(salle1.getNomSalle(), salle1);
@@ -179,7 +191,8 @@ public class Jeu {
 		Interactif objetExtremite = salleCourante.interactifAPosition(greg.getXCentre());
 		if (objetExtremite != null && objetExtremite != greg) {
 			objetExtremite.interagir();
-			greg.replacerGauche();
+			if(gauche) greg.replacerDroite();
+			else greg.replacerGauche();
 		}
 	}
 	
@@ -192,6 +205,7 @@ public class Jeu {
 		root.getChildren().set(0, salleCourante.getImageView());
 		/* MISE A JOUR DES OBJETS INTERACTIFS */
 		initObjetInteractif();
+		System.out.println(salleCourante.getNomSalle());
 	}
 	
 	public static Salle getSalleCourante() {
