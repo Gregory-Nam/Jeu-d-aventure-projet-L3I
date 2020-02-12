@@ -36,7 +36,9 @@ public class Jeu {
 	private static Salle salleCourante;
 	private Stage primaryStage;
 	private Scene scene;
+	private Scene sceneEnigme;
 	private static Pane root;
+	private static GridPane root2;
 	
 	private HashMap<NomSalle, Salle> salles;
 	
@@ -106,8 +108,11 @@ public class Jeu {
 	private void initStage() throws IOException {
 		
 		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
-		
+
+		root2 = FXMLLoader.load(getClass().getResource("/Vue/Enigme.fxml"));
+
 		scene = new Scene(root);
+		sceneEnigme = new Scene(root2);
 		root.getChildren().addAll(salleCourante.getImageView());
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -154,10 +159,12 @@ public class Jeu {
 							greg.changerSprite(Deplacements.BAS);
 						}
 						break;
-						
-					default:
-						System.out.println("TEST INTERAGIR AVEC PORTE");
-						System.out.println("X centre : " + greg.getXCentre());
+					case DOWN :
+						primaryStage.setScene(sceneEnigme);
+						break;
+					case A :
+						primaryStage.setScene(scene);
+						break;
 				}
 			}
 		});
