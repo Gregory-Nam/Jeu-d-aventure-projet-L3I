@@ -12,7 +12,7 @@ public abstract class Personnage extends Interactif {
 	// faire une paire <imageview, Deplacement> ?
 	protected ImageView spriteCourant;
 	
-	public Personnage(File ... sprites /* haut, droite, bas, gauche*/) {
+	public Personnage( File ... sprites /* haut, droite, bas, gauche*/) {
 		spritesPersonnageHM = new HashMap<Deplacements,ImageView>();
 	}
 	
@@ -20,6 +20,17 @@ public abstract class Personnage extends Interactif {
 	
 	public abstract void seDirigerAGauche();
 	
+	public void initPersonnage(File sprites[]) {
+		Deplacements[] deplacements = Deplacements.values();
+		for(int i = 0; i < sprites.length; ++i) {
+			Image img = new Image(sprites[i].toURI().toString());
+			System.out.println(sprites[i].toURI().toString());
+			ImageView iv = new ImageView();
+			iv.setImage(img);
+			spritesPersonnageHM.put(deplacements[i], iv);
+		}
+			
+	}
 	
 	public ImageView getImageView() {
 		return spriteCourant;

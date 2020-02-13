@@ -1,0 +1,27 @@
+NOM PNJ 1
+QUESTION
+blabla discours et on pose la question 1
+#
+MAUVAISE_REPONSE
+blabla t'as mal repondu fdp
+#
+BONNE_REPONSE
+blabla ouais t chaud mec
+#
+DEJA_REPONDU
+blabla ta deja rep batard
+#
+##
+NOM PNJ 2
+QUESTION
+blabla discours et on pose la question 1
+
+MAUVAISE_REPONSE
+blabla t'as mal repondu fdp
+
+BONNE_REPONSE
+blabla ouais t chaud mec
+
+DEJA_REPONDU
+blabla ta deja rep batard
+#

@@ -37,15 +37,10 @@ public class PersonnageJoueur extends Personnage{
 
 	}
 	
-	public void initPersonnage(File sprites[]) {
-		Deplacements[] deplacements = Deplacements.values();
-		for(int i = 0; i < deplacements.length; ++i) {
-			Image img = new Image(sprites[i].toURI().toString());
-			ImageView iv = new ImageView();
-			iv.setImage(img);
-			spritesPersonnageHM.put(deplacements[i], iv);
-		}
-		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.DROITE).getImage());		
+	@Override
+	public void initPersonnage(File[] sprites) {
+		super.initPersonnage(sprites);
+		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.DROITE).getImage());	
 	}
 	
 	public void changerSprite(Deplacements d) {
