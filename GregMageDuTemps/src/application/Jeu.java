@@ -9,6 +9,7 @@ import javax.swing.RootPaneContainer;
 
 import Modele.CompteARebours;
 import Modele.Deplacements;
+import Modele.Enigme;
 import Modele.Interactif;
 import Modele.NomSalle;
 import Modele.Personnage;
@@ -48,6 +49,13 @@ public class Jeu {
 		this.primaryStage = primaryStage;
 		primaryStage.setResizable(false);
 		
+		/* test moche */
+		try {
+			Enigme e = new Enigme();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		salles = new HashMap<NomSalle, Salle>();
 		
 		initPersonnageJoueurScene();
