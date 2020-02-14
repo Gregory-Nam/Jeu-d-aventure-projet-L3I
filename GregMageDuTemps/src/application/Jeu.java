@@ -5,37 +5,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.RootPaneContainer;
-
 import Modele.CompteARebours;
 import Modele.Deplacements;
 import Modele.EnigmePane;
-import Modele.AnalyseFichierEnigmeUtil;
 import Modele.Interactif;
 import Modele.NomSalle;
-import Modele.Personnage;
 import Modele.PersonnageJoueur;
 import Modele.PersonnageNonJoueur;
 import Modele.Porte;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.Border;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.image.*;
 import Modele.Salle;
-import Modele.TypeDialogue;
+
+
 
 public class Jeu {
 	private static PersonnageJoueur greg;
@@ -46,8 +33,8 @@ public class Jeu {
 	private static Pane root;
 	private static EnigmePane rootEnigme;
 	private PersonnageNonJoueur test;
-	
 	private HashMap<NomSalle, Salle> salles;
+	private static ArrayList<Salle> historiqueSalles;
 	
 	public Jeu(Stage primaryStage) throws IOException {
 		CompteARebours c = new CompteARebours(10, 2);
@@ -64,6 +51,7 @@ public class Jeu {
 		initObjetInteractif();
 		creationEvenementDeplacement();
 		creationEvenementEnigme();
+		
 		
 		c.lancer();
 		primaryStage.titleProperty().bind(c.getStringPropery());
@@ -115,6 +103,7 @@ public class Jeu {
 		salles.put(salle1.getNomSalle(), salle1);
 		salles.put(salleArgent.getNomSalle(), salleArgent);
 		
+		historiqueSalles = new ArrayList<Salle>();
 		salleCourante = salleDepart;
 	}
 	
@@ -174,11 +163,12 @@ public class Jeu {
 							greg.changerSprite(Deplacements.BAS);
 						}
 						break;
-					case DOWN :
-						primaryStage.setScene(sceneEnigme);
-						break;
-					case A :
-						primaryStage.setScene(scene);
+					case R :
+						
+						if(historiqueSalles.isEmpty()) break;
+						Salle lastSalle = historiqueSalles.get(historiqueSalles.size()-1);
+						setSalleCourante(salles.get(lastSalle.getNomSalle()));
+						historiqueSalles.remove(historiqueSalles.size()-1);
 						break;
 				}
 			}
@@ -237,6 +227,7 @@ public class Jeu {
 	
 public static void setSalleCourante(Salle nouvelleSalle) {
 		salleCourante.supprimerInteractif(greg);
+		historiqueSalles.add(new Salle(salleCourante));
 		salleCourante = nouvelleSalle;
 		salleCourante.ajoutInteractif(greg);
 		/* REMPLACEMENT DE L'ANCIENNE IMAGE DE LA SALLE AVEC LA NOUVELLE */
@@ -254,4 +245,5 @@ public static void setSalleCourante(Salle nouvelleSalle) {
 	public static Salle getSalleCourante() {
 		return salleCourante;
 	}
+	
 }

@@ -27,6 +27,7 @@ public class Salle {
 		initSalle(cheminImage);
 	}
 	
+	
 	private void initSalle(File cheminImage) {
 		spriteSalle = new ImageView();
 		Image imgSalle = new Image(cheminImage.toURI().toString());
@@ -74,4 +75,5 @@ public class Salle {
 	public static double getExtremiteGauche() {
 		return EXTREMITE_GAUCHE;
 	}
+	
 }

@@ -10,5 +10,4 @@ public enum Deplacements {
 		this.kc = kc;
 	}
 	
-	
 }
