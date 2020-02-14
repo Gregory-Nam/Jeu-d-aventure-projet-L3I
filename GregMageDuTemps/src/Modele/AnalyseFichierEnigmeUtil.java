@@ -13,6 +13,7 @@ public final class AnalyseFichierEnigmeUtil {
 	
 
 	public static String initDialogue(String chaine, TypeDialogue type) {
+		
 		int indiceDebut = chaine.indexOf(type.toString()) + type.toString().length() + 1;
 		int indiceFin = chaine.indexOf("#", indiceDebut);
 		return chaine.subSequence(indiceDebut, indiceFin).toString();
@@ -38,14 +39,20 @@ public final class AnalyseFichierEnigmeUtil {
 			while ( (ligne = buffer.readLine()) != null)
 			{    
 				/* RECHERCHE DU NOM DE PNJ */
-			    if(ensembleDesDialogues.equals("") && ligne.equals(str)) {
+			    if(ensembleDesDialogues.equals("") && !ligne.equals(str)) {
+			    	continue;
+			    }
+			    else if(ensembleDesDialogues.equals("") && ligne.equals(str)) {
+			    	
 			    	ensembleDesDialogues += ligne + '\n';
 			    }
 			    /* RECHERCHE DU DELIMITEUR */
-			    else if(ligne.equals("##"))
+			    else if(ligne.equals("##")) {
 			    	break;
+
+			    }
 			    /* FAIT PARTIE DE CE QU'ON RECHERCHE */
-			    else
+			    else if(!ensembleDesDialogues.equals(""))
 			    	ensembleDesDialogues += ligne + '\n';
 			}
 		} 

@@ -239,6 +239,8 @@ public static void setSalleCourante(Salle nouvelleSalle) {
 	}
 	
 	public static void lancerEnigme(PersonnageNonJoueur pnj) {
+		rootEnigme.changeDialogue(pnj.poseQuestion());
+		rootEnigme.changeImage(pnj.getImageView().getImage());
 		primaryStage.setScene(sceneEnigme);
 	}
 	
