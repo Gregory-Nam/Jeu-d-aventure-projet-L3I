@@ -11,7 +11,7 @@ public class PersonnageNonJoueur extends Personnage {
 	private HashMap<TypeDialogue, String> dialogues;
 	public PersonnageNonJoueur(double x, File ... sprites) {
 		super(sprites);
-		this.nom = NomPNJ.NOMAUPIF;
+		this.nom = NomPNJ.JACQUE;
 		dialogues = new HashMap<TypeDialogue, String>();
 		initPersonnage(sprites);
 		spriteCourant.setX(x);
@@ -41,7 +41,7 @@ public class PersonnageNonJoueur extends Personnage {
 		dialogues.put(TypeDialogue.QUESTION, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.QUESTION));
 		dialogues.put(TypeDialogue.MAUVAISE_REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.MAUVAISE_REPONSE));
 		dialogues.put(TypeDialogue.DEJA_REPONDU, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.DEJA_REPONDU));
-
+		dialogues.put(TypeDialogue.REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.REPONSE));
 	}
 	
 	@Override
@@ -74,6 +74,15 @@ public class PersonnageNonJoueur extends Personnage {
 	
 	public String ditQueTuAsDejaRepondu() {
 		return dialogues.get(TypeDialogue.DEJA_REPONDU);
+	}
+	
+	public String reponse() {
+		return dialogues.get(TypeDialogue.REPONSE);
+	}
+	
+	public Item donnerItem() {
+		/* TO-DO */
+		return null;
 	}
 	
 	

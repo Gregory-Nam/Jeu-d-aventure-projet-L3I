@@ -212,14 +212,17 @@ public class Jeu {
 		sceneEnigme.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				if(event.getCode() == KeyCode.ENTER) {
-					if(rootEnigme.getChamps().contentEquals("quitter")) {
+				KeyCode kc = event.getCode();
+				switch(kc) {
+					case ENTER :
+						if(rootEnigme.getChamps().equals("quitter")) {
+							primaryStage.setScene(scene);
+						}
+						rootEnigme.nettoyerChampsTexte();	
+						break;
+					case ESCAPE :
 						primaryStage.setScene(scene);
-					}
-					rootEnigme.nettoyerChampsTexte();						
-				}
-				else if (event.getCode() == KeyCode.ESCAPE) {
-					primaryStage.setScene(scene);
+						break;
 				}
 			}
 		});

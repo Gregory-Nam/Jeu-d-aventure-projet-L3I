@@ -10,9 +10,11 @@ import javafx.scene.input.KeyCode;
 public class PersonnageJoueur extends Personnage{
 	
 	private final double largeurPersonnage;
+	private boolean aBienReponduperiodeCourante;
 	public PersonnageJoueur(File ... sprites) {
 		super(sprites);
 		initPersonnage(sprites);
+		this.aBienReponduperiodeCourante = false;
 		largeurPersonnage = spriteCourant.getImage().getWidth();
 		super.xMin = spriteCourant.getX();
 		super.xMax = getXMin() + spriteCourant.getImage().getWidth();
@@ -96,5 +98,9 @@ public class PersonnageJoueur extends Personnage{
 
 	public double getXCentre() {
 		return (super.xMin + super.xMax) / 2;
+	}
+	
+	public void aBienRepondu() {
+		this.aBienReponduperiodeCourante = true;
 	}
 }
