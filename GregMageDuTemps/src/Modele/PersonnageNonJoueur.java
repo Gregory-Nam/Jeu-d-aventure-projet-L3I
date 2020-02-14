@@ -6,6 +6,8 @@ import java.io.File;
 import application.Jeu;
 public class PersonnageNonJoueur extends Personnage {
 	
+	private NomPNJ nom;
+	
 	public PersonnageNonJoueur(double x, File ... sprites) {
 		super(sprites);
 		initPersonnage(sprites);
@@ -44,4 +46,5 @@ public class PersonnageNonJoueur extends Personnage {
 	public double getXMax() {
 		return spriteCourant.getX() + spriteCourant.getImage().getWidth();
 	}
+	
 }

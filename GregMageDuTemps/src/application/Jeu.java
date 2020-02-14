@@ -226,9 +226,10 @@ public class Jeu {
 					if(rootEnigme.getChamps().contentEquals("quitter")) {
 						primaryStage.setScene(scene);
 					}
-					rootEnigme.nettoyerChampsTexte();
-
-						
+					rootEnigme.nettoyerChampsTexte();						
+				}
+				else if (event.getCode() == KeyCode.ESCAPE) {
+					primaryStage.setScene(scene);
 				}
 			}
 		});
