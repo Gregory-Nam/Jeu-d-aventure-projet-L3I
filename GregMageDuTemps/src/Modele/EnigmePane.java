@@ -1,5 +1,12 @@
 package Modele;
 
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,12 +16,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 public class EnigmePane extends GridPane {
+	interface Evenement {
+		public void ajoutEvemenent();
+	}
 	private SplitPane panneauDivise;
 	private AnchorPane panneauGauche;
 	private AnchorPane panneauDroit;
 	private TextField champsDeTexte;
 	private ImageView imagePersonnage;
 	private Label dialogue;
+	
 	
 	public EnigmePane() {
 
@@ -26,7 +37,6 @@ public class EnigmePane extends GridPane {
             throw new RuntimeException(exception);
         }	
         initEnfant();
-        
 		
 	}
 	
@@ -40,6 +50,12 @@ public class EnigmePane extends GridPane {
 		
 	}
 	
+	public void mettreEnActionChampsTextuel(Runnable r) {
+		
+		champsDeTexte.setOnAction(e -> {
+			r.run();
+		});
+	}
 	public void changeDialogue(String dialogue) {
 		/* fonctionnel */
 		this.dialogue.setText(dialogue);

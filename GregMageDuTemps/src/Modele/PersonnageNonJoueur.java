@@ -1,5 +1,10 @@
 package Modele;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import java.io.File;
 import java.util.HashMap;
@@ -8,11 +13,19 @@ import application.Jeu;
 public class PersonnageNonJoueur extends Personnage {
 	
 	private NomPNJ nom;
+	private final Salle salle;
 	private HashMap<TypeDialogue, String> dialogues;
-	public PersonnageNonJoueur(double x, File ... sprites) {
+	private BooleanProperty aRecuUneBonneReponse;
+	
+	
+	public PersonnageNonJoueur(double x, Salle s, File ... sprites) {
 		super(sprites);
+		
+		this.aRecuUneBonneReponse = new SimpleBooleanProperty(false);
 		this.nom = NomPNJ.JACQUE;
-		dialogues = new HashMap<TypeDialogue, String>();
+		this.dialogues = new HashMap<TypeDialogue, String>();
+		this.salle = s;
+		
 		initPersonnage(sprites);
 		spriteCourant.setX(x);
 		initDialogue();
@@ -51,7 +64,6 @@ public class PersonnageNonJoueur extends Personnage {
 
 	@Override
 	public double getXMin() {
-		// TODO Auto-generated method stub
 		return spriteCourant.getX();
 	}
 
@@ -80,10 +92,17 @@ public class PersonnageNonJoueur extends Personnage {
 		return dialogues.get(TypeDialogue.REPONSE);
 	}
 	
-	public Item donnerItem() {
+	public BooleanProperty getEtatReponseAttendu() {
+		return aRecuUneBonneReponse;
+	}
+	public Interactif donnerItem() {
 		/* TO-DO */
-		return null;
+		Porte p = new Porte(null, null, 500, false);
+		salle.ajoutInteractif(p);
+		return p;
 	}
 	
-	
+	public void aRecuUneBonneReponse() {
+		aRecuUneBonneReponse.setValue(true);
+	}
 }

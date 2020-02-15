@@ -52,7 +52,7 @@ public final class AnalyseFichierEnigmeUtil {
 
 			    }
 			    /* FAIT PARTIE DE CE QU'ON RECHERCHE */
-			    else if(!ensembleDesDialogues.equals(""))
+			    else
 			    	ensembleDesDialogues += ligne + '\n';
 			}
 		} 

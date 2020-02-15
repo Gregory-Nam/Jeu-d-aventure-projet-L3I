@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import Modele.CompteARebours;
 import Modele.Deplacements;
 import Modele.EnigmePane;
@@ -45,7 +44,7 @@ public class Jeu {
 		salles = new HashMap<NomSalle, Salle>();
 		
 		initPersonnageJoueurScene();
-		initSallesScene();
+		creationDesObjetsInteractifs();
 		initStage();
 		initEnigmeScene();
 		initObjetInteractif();
@@ -64,10 +63,42 @@ public class Jeu {
 		File bas = new File("Images/Personnages/wizardSud_transparent.png");
 		File gauche = new File("Images/Personnages/wizardGauche_transparent.png");
 		greg = new PersonnageJoueur(haut, droite, bas, gauche);
-		test = new PersonnageNonJoueur(150, haut,droite, bas,gauche);
+	}
+		
+	private void initStage() throws IOException {
+		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
+		scene = new Scene(root);
+		root.getChildren().addAll(salleCourante.getImageView());
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 	
-	private void initSallesScene() {
+	private void initEnigmeScene() {
+		rootEnigme = new EnigmePane();
+		sceneEnigme = new Scene(rootEnigme);	
+	}
+
+	private static void initObjetInteractif() {
+		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
+		for(int i = 1; i < root.getChildren().size(); ++i) {
+			root.getChildren().remove(i);
+		}
+		/* AJOUT DES OBJETS INTERACTIFS DE LA SALLE COURANTE */
+		for(Interactif i : salleCourante.getInteractifs()) {
+			/* CONDITION POUR LE CAS DES PORTES EXTREMITE QUI N'ONT PAS D'IMAGEVIEW */
+			if(i.getImageView() == null) continue;
+			System.out.println(i);
+			root.getChildren().add(i.getImageView());
+		}
+	}
+	
+	private void creationDesObjetsInteractifs() {
+		/* MOCHE POUR TEST */
+		File haut = new File("Images/Personnages/wizardNord_transparent.png");
+		File droite = new File("Images/Personnages/wizardDroite_transparent.png");
+		File bas = new File("Images/Personnages/wizardSud_transparent.png");
+		File gauche = new File("Images/Personnages/wizardGauche_transparent.png");
+		
 		/* SALLES */
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
 		Salle salle1 = new Salle(new File("Images/Salles/Periode_1/Salle_1.png"), NomSalle.SALLE_1);
@@ -88,9 +119,9 @@ public class Jeu {
 		Porte p6 = new Porte(salle2, salleBronze,182, false);
 		Porte p5 = new Porte(salle3, sallePiege, 730, false);
 		
-		
+		test = new PersonnageNonJoueur(150, salleDepart, haut,droite, bas,gauche);
+
 		salleDepart.ajoutInteractif(p1,test,greg);
-		System.out.println(salleDepart.getInteractifs());
 		salle1.ajoutInteractif(p1,p2,p3);
 		salle2.ajoutInteractif(p3,p4,p6);
 		salle3.ajoutInteractif(p4,p5,p7);
@@ -98,42 +129,22 @@ public class Jeu {
 		salleOr.ajoutInteractif(p7);
 		salleBronze.ajoutInteractif(p6);
 		sallePiege.ajoutInteractif(p5);
+		
 		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
 		salles.put(salle1.getNomSalle(), salle1);
 		salles.put(salleArgent.getNomSalle(), salleArgent);
+		salles.put(salleOr.getNomSalle(), salleOr);
+		salles.put(salleBronze.getNomSalle(), salleBronze);
+		salles.put(salle2.getNomSalle(), salle2);
+		salles.put(salle3.getNomSalle(), salle3);
+		salles.put(sallePiege.getNomSalle(), sallePiege);
+
 		
 		historiqueSalles = new ArrayList<Salle>();
 		salleCourante = salleDepart;
 	}
-	
-	private void initStage() throws IOException {
-		
-		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
-		scene = new Scene(root);
-		root.getChildren().addAll(salleCourante.getImageView());
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-	
-	private void initEnigmeScene() {
-		rootEnigme = new EnigmePane();
-		sceneEnigme = new Scene(rootEnigme);
-		
-	}
-	private static void initObjetInteractif() {
-		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
-		for(int i = 1; i < root.getChildren().size(); ++i) {
-			root.getChildren().remove(i);
-		}
-		/* AJOUT DES OBJETS INTERACTIFS DE LA SALLE COURANTE */
-		for(Interactif i : salleCourante.getInteractifs()) {
-			/* CONDITION POUR LE CAS DES PORTES EXTREMITE QUI N'ONT PAS D'IMAGEVIEW */
-			if(i.getImageView() == null) continue;
-			root.getChildren().add(i.getImageView());
-		}
-	}
-	
+
 	private void creationEvenementDeplacement() {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -214,21 +225,58 @@ public class Jeu {
 			public void handle(KeyEvent event) {
 				KeyCode kc = event.getCode();
 				switch(kc) {
-					case ENTER :
-						if(rootEnigme.getChamps().equals("quitter")) {
-							primaryStage.setScene(scene);
-						}
-						rootEnigme.nettoyerChampsTexte();	
-						break;
 					case ESCAPE :
 						primaryStage.setScene(scene);
+						if(greg.aBienRepondu())	ajoutDernierInteractif();
+						System.out.println("test de bonne reponse : " + greg.aBienRepondu());
 						break;
 				}
 			}
 		});
 	}
+		
+	public static void lancerEnigme(PersonnageNonJoueur pnj) {
+		primaryStage.setScene(sceneEnigme);
+		greg.liaisonDialogueAvecPNJ(pnj);
+
+		/* INITIALISATION DU DIALOGUE DE DEPART */
+		if(pnj.getEtatReponseAttendu().get())
+			rootEnigme.changeDialogue(pnj.ditQueTuAsDejaRepondu());
+		else
+			rootEnigme.changeDialogue(pnj.poseQuestion());
+			
+		
+		/* EVENEMENT SUR L'INPUT */
+		rootEnigme.mettreEnActionChampsTextuel(() -> {
+			/* CAS OU LA BONNE REPONSE A DEJA ETE DONNEE */
+			if(pnj.getEtatReponseAttendu().get()) 
+				rootEnigme.changeDialogue(pnj.ditQueTuAsDejaRepondu());
+			/* CAS OU LE JOUEUR DONNE LA BONNE REPONSE */
+			else if(rootEnigme.getChamps().equals(pnj.reponse())) {
+				pnj.aRecuUneBonneReponse();
+				rootEnigme.changeDialogue(pnj.repondAUneBonneReponse());
+				pnj.donnerItem();
+			}
+			/* CAS OU LE JOUEUR DONNE UNE MAUVAISE REPONSE */
+			else
+				rootEnigme.changeDialogue(pnj.repondAUneMauvaiseReponse());	
+			
+			rootEnigme.nettoyerChampsTexte();
+		});
+		
+	}
 	
-public static void setSalleCourante(Salle nouvelleSalle) {
+	public static void ajoutDernierInteractif() {
+		ArrayList<Interactif> interactifsSalleCourante = salleCourante.getInteractifs();
+		Interactif interactifAAjouter = interactifsSalleCourante.get(interactifsSalleCourante.size() - 1);
+		root.getChildren().add(1,interactifAAjouter.getImageView());
+	}
+	
+	public static Salle getSalleCourante() {
+		return salleCourante;
+	}
+	
+	public static void setSalleCourante(Salle nouvelleSalle) {
 		salleCourante.supprimerInteractif(greg);
 		historiqueSalles.add(new Salle(salleCourante));
 		salleCourante = nouvelleSalle;
@@ -238,17 +286,6 @@ public static void setSalleCourante(Salle nouvelleSalle) {
 		root.getChildren().set(0, salleCourante.getImageView());
 		/* MISE A JOUR DES OBJETS INTERACTIFS */
 		initObjetInteractif();
-		System.out.println(salleCourante.getNomSalle());
 	}
-	
-	public static void lancerEnigme(PersonnageNonJoueur pnj) {
-		rootEnigme.changeDialogue(pnj.poseQuestion());
-		rootEnigme.changeImage(pnj.getImageView().getImage());
-		primaryStage.setScene(sceneEnigme);
-	}
-	
-	public static Salle getSalleCourante() {
-		return salleCourante;
-	}
-	
+
 }

@@ -3,6 +3,8 @@ package Modele;
 import java.io.File;
 
 import application.Jeu;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -10,11 +12,12 @@ import javafx.scene.input.KeyCode;
 public class PersonnageJoueur extends Personnage{
 	
 	private final double largeurPersonnage;
-	private boolean aBienReponduperiodeCourante;
+	private BooleanProperty aBienReponduperiodeCourante;
 	public PersonnageJoueur(File ... sprites) {
 		super(sprites);
 		initPersonnage(sprites);
-		this.aBienReponduperiodeCourante = false;
+		
+		this.aBienReponduperiodeCourante = new SimpleBooleanProperty(false);
 		largeurPersonnage = spriteCourant.getImage().getWidth();
 		super.xMin = spriteCourant.getX();
 		super.xMax = getXMin() + spriteCourant.getImage().getWidth();
@@ -48,21 +51,7 @@ public class PersonnageJoueur extends Personnage{
 	public void changerSprite(Deplacements d) {
 		if(spriteCourant.getImage().equals(spritesPersonnageHM.get(d).getImage())) return;
 		spriteCourant.setImage(spritesPersonnageHM.get(d).getImage());
-		/*
-		switch(code) {
-			case RIGHT:
-				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.DROITE).getImage());
-				break;
-			case LEFT:
-				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.GAUCHE).getImage());
-				break;
-			case UP:
-				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.HAUT).getImage());
-				break;
-			case DOWN:
-				spriteCourant.setImage(spritesPersonnageHM.get(Deplacements.BAS).getImage());
-				break;
-		}		*/
+		
 		
 	}
 	
@@ -100,7 +89,11 @@ public class PersonnageJoueur extends Personnage{
 		return (super.xMin + super.xMax) / 2;
 	}
 	
-	public void aBienRepondu() {
-		this.aBienReponduperiodeCourante = true;
+	public boolean aBienRepondu() {
+		return aBienReponduperiodeCourante.get();
+	}
+
+	public void liaisonDialogueAvecPNJ(PersonnageNonJoueur pnj){
+		this.aBienReponduperiodeCourante.bind(pnj.getEtatReponseAttendu());
 	}
 }
