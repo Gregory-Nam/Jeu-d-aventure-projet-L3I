@@ -34,7 +34,8 @@ public class PersonnageNonJoueur extends Personnage {
 	@Override
 	public void initPersonnage(File[] sprites) {
 		super.initPersonnage(sprites);
-		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.HAUT).getImage());	
+		
+		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.BAS).getImage());	
 	}
 	
 	@Override

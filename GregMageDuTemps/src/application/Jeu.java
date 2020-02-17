@@ -48,6 +48,7 @@ public class Jeu {
 		initStage();
 		initEnigmeScene();
 		initObjetInteractif();
+
 		creationEvenementDeplacement();
 		creationEvenementEnigme();
 		
@@ -92,12 +93,17 @@ public class Jeu {
 		}
 	}
 	
+	private void initPNJ() {
+		File haut = new File("Images/PNJ/Klace_face_transparence.png");
+		File droite = new File("Images/PNJ/Klace_droite_transparence.png");
+		File bas = new File("Images/PNJ/Klace_face_transparence.png");
+		File gauche = new File("Images/PNJ/Klace_gauche_transparence.png");
+		
+		PersonnageNonJoueur pnj = new PersonnageNonJoueur(200, salles.get(NomSalle.SALLE_DEPART), haut, droite, bas, gauche);
+		salles.get(NomSalle.SALLE_DEPART).ajoutInteractif(pnj);
+	
+	}
 	private void creationDesObjetsInteractifs() {
-		/* MOCHE POUR TEST */
-		File haut = new File("Images/Personnages/wizardNord_transparent.png");
-		File droite = new File("Images/Personnages/wizardDroite_transparent.png");
-		File bas = new File("Images/Personnages/wizardSud_transparent.png");
-		File gauche = new File("Images/Personnages/wizardGauche_transparent.png");
 		
 		/* SALLES */
 		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
@@ -119,16 +125,8 @@ public class Jeu {
 		Porte p6 = new Porte(salle2, salleBronze,182, false);
 		Porte p5 = new Porte(salle3, sallePiege, 730, false);
 		
-		test = new PersonnageNonJoueur(150, salleDepart, haut,droite, bas,gauche);
 
-		salleDepart.ajoutInteractif(p1,test,greg);
-		salle1.ajoutInteractif(p1,p2,p3);
-		salle2.ajoutInteractif(p3,p4,p6);
-		salle3.ajoutInteractif(p4,p5,p7);
-		salleArgent.ajoutInteractif(p2);
-		salleOr.ajoutInteractif(p7);
-		salleBronze.ajoutInteractif(p6);
-		sallePiege.ajoutInteractif(p5);
+		
 		
 		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
@@ -139,8 +137,18 @@ public class Jeu {
 		salles.put(salle2.getNomSalle(), salle2);
 		salles.put(salle3.getNomSalle(), salle3);
 		salles.put(sallePiege.getNomSalle(), sallePiege);
-
 		
+		initPNJ();
+
+		salleDepart.ajoutInteractif(p1, greg);
+		salle1.ajoutInteractif(p1,p2,p3);
+		salle2.ajoutInteractif(p3,p4,p6);
+		salle3.ajoutInteractif(p4,p5,p7);
+		salleArgent.ajoutInteractif(p2);
+		salleOr.ajoutInteractif(p7);
+		salleBronze.ajoutInteractif(p6);
+		sallePiege.ajoutInteractif(p5);
+
 		historiqueSalles = new ArrayList<Salle>();
 		salleCourante = salleDepart;
 	}
