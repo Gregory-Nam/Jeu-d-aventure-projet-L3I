@@ -15,6 +15,8 @@ public class Salle {
 	private ImageView spriteSalle;
 	private final NomSalle nomDeLaSalle;
 	private ArrayList<Interactif> objetsDeLaSalle;
+	private ArrayList<Item> itemsDeposeParPnj;
+	
 	//constructeur par recopie
 	public Salle(Salle s) {
 		objetsDeLaSalle = s.objetsDeLaSalle;
@@ -23,6 +25,7 @@ public class Salle {
 	}
 	public Salle(File cheminImage, NomSalle nomDeLaSalle) {
 		objetsDeLaSalle = new ArrayList<Interactif>();
+		itemsDeposeParPnj = new ArrayList<Item>();
 		this.nomDeLaSalle = nomDeLaSalle;
 		initSalle(cheminImage);
 	}
@@ -49,6 +52,13 @@ public class Salle {
 		}
 	}
 	
+	public void ajoutItem(Item i) {
+		itemsDeposeParPnj.add(i);
+	}
+	
+	public ArrayList<Item> getItems() {
+		return itemsDeposeParPnj;
+	}
 	public void supprimerInteractif(Interactif i) {
 		if(objetsDeLaSalle.contains(i)) objetsDeLaSalle.remove(i);
 	}
@@ -64,6 +74,9 @@ public class Salle {
 		return null;
 	}
 	
+	public boolean aDesItems() {
+		return itemsDeposeParPnj.size() == 0 ? false : true;
+	}
 	public ArrayList<Interactif> getInteractifs() {
 		return objetsDeLaSalle;
 	}

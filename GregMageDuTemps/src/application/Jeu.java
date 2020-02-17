@@ -8,6 +8,7 @@ import Modele.CompteARebours;
 import Modele.Deplacements;
 import Modele.EnigmePane;
 import Modele.Interactif;
+import Modele.Item;
 import Modele.NomSalle;
 import Modele.PersonnageJoueur;
 import Modele.PersonnageNonJoueur;
@@ -98,8 +99,10 @@ public class Jeu {
 		File droite = new File("Images/PNJ/Klace_droite_transparence.png");
 		File bas = new File("Images/PNJ/Klace_face_transparence.png");
 		File gauche = new File("Images/PNJ/Klace_gauche_transparence.png");
-		
-		PersonnageNonJoueur pnj = new PersonnageNonJoueur(200, salles.get(NomSalle.SALLE_DEPART), haut, droite, bas, gauche);
+		File imagePourenigme = new File("Images/PNJ/Klace_face.png");
+		Item itemBronze = new Item(new File("Images/items/aiguille_Bronze1.png"), 230);
+		PersonnageNonJoueur pnj = new PersonnageNonJoueur(200, salles.get(NomSalle.SALLE_DEPART), itemBronze, imagePourenigme, haut, droite, bas, gauche);
+
 		salles.get(NomSalle.SALLE_DEPART).ajoutInteractif(pnj);
 	
 	}
@@ -177,7 +180,6 @@ public class Jeu {
 						Interactif objetInteractif = salleCourante.interactifAPosition(greg.getXCentre());
 
 						if(objetInteractif != null && objetInteractif != greg ) {
-
 							objetInteractif.interagir();
 							greg.changerSprite(Deplacements.BAS);
 						}
@@ -188,6 +190,18 @@ public class Jeu {
 						Salle lastSalle = historiqueSalles.get(historiqueSalles.size()-1);
 						setSalleCourante(salles.get(lastSalle.getNomSalle()));
 						historiqueSalles.remove(historiqueSalles.size()-1);
+						break;
+					case E :
+						if(!salleCourante.aDesItems()) break;
+						for(Item i : salleCourante.getItems())
+						{
+							if(greg.getXMin() < i.getXCentre() && i.getXCentre() < greg.getXMax())
+							{
+								greg.prendreItem(i);
+								supprimeItemScene(i);
+							}
+						}
+					default :
 						break;
 				}
 			}
@@ -227,6 +241,7 @@ public class Jeu {
 		}
 	}
 	
+	@SuppressWarnings("incomplete-switch")
 	private void creationEvenementEnigme() {
 		sceneEnigme.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -235,8 +250,6 @@ public class Jeu {
 				switch(kc) {
 					case ESCAPE :
 						primaryStage.setScene(scene);
-						if(greg.aBienRepondu())	ajoutDernierInteractif();
-						System.out.println("test de bonne reponse : " + greg.aBienRepondu());
 						break;
 				}
 			}
@@ -246,6 +259,7 @@ public class Jeu {
 	public static void lancerEnigme(PersonnageNonJoueur pnj) {
 		primaryStage.setScene(sceneEnigme);
 		greg.liaisonDialogueAvecPNJ(pnj);
+		rootEnigme.changeImage(pnj.getImageView().getImage());
 
 		/* INITIALISATION DU DIALOGUE DE DEPART */
 		if(pnj.getEtatReponseAttendu().get())
@@ -263,7 +277,9 @@ public class Jeu {
 			else if(rootEnigme.getChamps().equals(pnj.reponse())) {
 				pnj.aRecuUneBonneReponse();
 				rootEnigme.changeDialogue(pnj.repondAUneBonneReponse());
-				pnj.donnerItem();
+				salleCourante.ajoutItem(pnj.donnerItem());
+				ajoutItemScene();
+				
 			}
 			/* CAS OU LE JOUEUR DONNE UNE MAUVAISE REPONSE */
 			else
@@ -274,10 +290,15 @@ public class Jeu {
 		
 	}
 	
-	public static void ajoutDernierInteractif() {
-		ArrayList<Interactif> interactifsSalleCourante = salleCourante.getInteractifs();
-		Interactif interactifAAjouter = interactifsSalleCourante.get(interactifsSalleCourante.size() - 1);
-		root.getChildren().add(1,interactifAAjouter.getImageView());
+	private static void ajoutItemScene() {
+		ArrayList<Item> items = salleCourante.getItems();
+		for(int i = 0; i < items.size(); ++i) {
+			root.getChildren().add(items.get(i).getImageView());
+		}
+	}
+	
+	private void supprimeItemScene(Item i) {
+		root.getChildren().remove(i.getImageView());
 	}
 	
 	public static Salle getSalleCourante() {

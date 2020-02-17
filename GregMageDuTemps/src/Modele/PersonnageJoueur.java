@@ -2,10 +2,8 @@ package Modele;
 
 import java.io.File;
 
-import application.Jeu;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
@@ -69,6 +67,10 @@ public class PersonnageJoueur extends Personnage{
 		super.xMin = 1000 - largeurPersonnage;
 		super.xMax = 1000;
 		spriteCourant.setX(super.xMin);
+	}
+	
+	public void prendreItem(Item i) {
+		/* To-DO */
 	}
 	@Override
  	public void interagir() {

@@ -19,7 +19,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="121.0">
                <children>
-                  <ImageView fitHeight="296.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="400.0" fitWidth="508.0" focusTraversable="true" layoutX="47.0" layoutY="-219.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" style="-fx-image: center;" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="417.0">
                <children>

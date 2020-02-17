@@ -48,6 +48,7 @@ public class EnigmePane extends GridPane {
 		dialogue = (Label)panneauDroit.getChildren().get(0);
 		imagePersonnage = (ImageView) panneauGauche.getChildren().get(0);
 		
+		
 	}
 	
 	public void mettreEnActionChampsTextuel(Runnable r) {

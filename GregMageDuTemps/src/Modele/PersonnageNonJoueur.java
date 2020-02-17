@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.File;
 import java.util.HashMap;
@@ -13,18 +14,22 @@ import application.Jeu;
 public class PersonnageNonJoueur extends Personnage {
 	
 	private NomPNJ nom;
+	private Item itemADonner;
 	private final Salle salle;
 	private HashMap<TypeDialogue, String> dialogues;
 	private BooleanProperty aRecuUneBonneReponse;
+	private ImageView spritePourEnigme;
 	
 	
-	public PersonnageNonJoueur(double x, Salle s, File ... sprites) {
+	public PersonnageNonJoueur(double x, Salle s, Item i ,File spritePourEnigme, File ... sprites) {
 		super(sprites);
 		
+		this.spritePourEnigme = new ImageView(new Image(spritePourEnigme.toURI().toString()));
 		this.aRecuUneBonneReponse = new SimpleBooleanProperty(false);
 		this.nom = NomPNJ.JACQUE;
 		this.dialogues = new HashMap<TypeDialogue, String>();
 		this.salle = s;
+		this.itemADonner = i;
 		
 		initPersonnage(sprites);
 		spriteCourant.setX(x);
@@ -96,13 +101,14 @@ public class PersonnageNonJoueur extends Personnage {
 	public BooleanProperty getEtatReponseAttendu() {
 		return aRecuUneBonneReponse;
 	}
-	public Interactif donnerItem() {
-		/* TO-DO */
-		Porte p = new Porte(null, null, 500, false);
-		salle.ajoutInteractif(p);
-		return p;
+	public Item donnerItem() {
+		return itemADonner;
+		
 	}
 	
+	public ImageView getImagePourEnigme() {
+		return spritePourEnigme;
+	}
 	public void aRecuUneBonneReponse() {
 		aRecuUneBonneReponse.setValue(true);
 	}
