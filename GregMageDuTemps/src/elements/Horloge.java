@@ -1,4 +1,4 @@
-package Modele;
+package elements;
 
 import javafx.scene.image.ImageView;
 

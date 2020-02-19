@@ -1,7 +1,9 @@
-package Modele;
+package personnages;
 
 import java.io.File;
 
+import elements.Item;
+import enumerations.Deplacements;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;

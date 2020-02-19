@@ -1,7 +1,8 @@
-package Modele;
+package elements;
 
 import java.io.File;
 
+import enumerations.Materiaux;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -23,6 +24,7 @@ public class Item {
 	public ImageView getImageView() {
 		return imageViewItem;
 	}
+	
 	public double getXCentre() {
 		return xPosition + imageViewItem.getImage().getWidth() / 2;
 	}

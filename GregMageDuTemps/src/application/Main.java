@@ -2,12 +2,12 @@ package application;
 	
 import java.io.File;
 
-import Modele.CompteARebours;
-import Modele.PersonnageJoueur;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import personnages.PersonnageJoueur;
+import utilitaire.CompteARebours;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;

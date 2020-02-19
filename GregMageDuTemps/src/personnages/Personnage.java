@@ -1,7 +1,10 @@
-package Modele;
+package personnages;
 
 
 import java.util.HashMap;
+
+import elements.Interactif;
+import enumerations.Deplacements;
 import javafx.scene.image.*;
 import java.io.File;
 

@@ -1,6 +1,8 @@
-package Modele;
+package elements;
 
 import java.io.File;
+
+import enumerations.NomSalle;
 
 public class SalleHorloge extends Salle {
 

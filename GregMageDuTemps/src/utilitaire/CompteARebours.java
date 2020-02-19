@@ -1,4 +1,4 @@
-package Modele;
+package utilitaire;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -55,7 +55,7 @@ public class CompteARebours {
 		
 	}
 	
-	public StringProperty getStringPropery() {
+	public StringProperty getTempsTotalEnStringProperty() {
 		return tempsTotalSP;
 	}
 	

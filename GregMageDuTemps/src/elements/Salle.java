@@ -1,35 +1,34 @@
-package Modele;
+package elements;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import application.Jeu;
+import enumerations.NomSalle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import utilitaire.Position;
 
 public class Salle {
-	private static final double EXTREMITE_GAUCHE = 50;
-	private static final double EXTREMITE_DROITE = 950;
 	
-	private ImageView spriteSalle;
 	private final NomSalle nomDeLaSalle;
+	private ImageView spriteSalle;
 	private ArrayList<Interactif> objetsDeLaSalle;
 	private ArrayList<Item> itemsDeposeParPnj;
 	
-	//constructeur par recopie
+	/* CONSTRUCTEUR PAR RECOPIE */
 	public Salle(Salle s) {
 		objetsDeLaSalle = s.objetsDeLaSalle;
 		this.spriteSalle = s.spriteSalle;
 		this.nomDeLaSalle = s.nomDeLaSalle;
+		this.itemsDeposeParPnj = s.itemsDeposeParPnj;
 	}
+	
 	public Salle(File cheminImage, NomSalle nomDeLaSalle) {
 		objetsDeLaSalle = new ArrayList<Interactif>();
 		itemsDeposeParPnj = new ArrayList<Item>();
 		this.nomDeLaSalle = nomDeLaSalle;
 		initSalle(cheminImage);
 	}
-	
 	
 	private void initSalle(File cheminImage) {
 		spriteSalle = new ImageView();
@@ -59,8 +58,13 @@ public class Salle {
 	public ArrayList<Item> getItems() {
 		return itemsDeposeParPnj;
 	}
+	
 	public void supprimerInteractif(Interactif i) {
 		if(objetsDeLaSalle.contains(i)) objetsDeLaSalle.remove(i);
+	}
+	
+	public void supprimerItem(Item i) {
+		if(itemsDeposeParPnj.contains(i)) itemsDeposeParPnj.remove(i);
 	}
 	
 	// gerer le cas ou il n'y a pas d'objet interactif par une exception ???
@@ -77,16 +81,10 @@ public class Salle {
 	public boolean aDesItems() {
 		return itemsDeposeParPnj.size() == 0 ? false : true;
 	}
+	
 	public ArrayList<Interactif> getInteractifs() {
-		return objetsDeLaSalle;
+		return new ArrayList<Interactif>(objetsDeLaSalle);
 	}
 
-	public static double getExtremiteDroite() {
-		return EXTREMITE_DROITE;
-	}
-	
-	public static double getExtremiteGauche() {
-		return EXTREMITE_GAUCHE;
-	}
 	
 }

@@ -4,15 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import Modele.CompteARebours;
-import Modele.Deplacements;
-import Modele.EnigmePane;
-import Modele.Interactif;
-import Modele.Item;
-import Modele.NomSalle;
-import Modele.PersonnageJoueur;
-import Modele.PersonnageNonJoueur;
-import Modele.Porte;
+
+import elements.Interactif;
+import elements.Item;
+import elements.Porte;
+import elements.Salle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,11 +16,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import Modele.Salle;
+import personnages.PersonnageJoueur;
+import personnages.PersonnageNonJoueur;
+import utilitaire.CompteARebours;
+import enumerations.Deplacements;
+import enumerations.NomSalle;
+import fenetrePersonnalisee.EnigmePane;
 
 
 
 public class Jeu {
+	public static final int X_MAX_FENETRE = 940;
+	public static final int X_MIN_FENETRE = 0;
+	
 	private static PersonnageJoueur greg;
 	private static Salle salleCourante;
 	private	static Stage primaryStage;
@@ -50,12 +54,12 @@ public class Jeu {
 		initEnigmeScene();
 		initObjetInteractif();
 
-		creationEvenementDeplacement();
+		ajoutEvenement();
 		creationEvenementEnigme();
 		
 		
 		c.lancer();
-		primaryStage.titleProperty().bind(c.getStringPropery());
+		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
 		
 	}
 	
@@ -68,7 +72,7 @@ public class Jeu {
 	}
 		
 	private void initStage() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("/Vue/UneFenetre.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/vues/UneFenetre.fxml"));
 		scene = new Scene(root);
 		root.getChildren().addAll(salleCourante.getImageView());
 		primaryStage.setScene(scene);
@@ -92,6 +96,7 @@ public class Jeu {
 			System.out.println(i);
 			root.getChildren().add(i.getImageView());
 		}
+		ajoutItemScene();
 	}
 	
 	private void initPNJ() {
@@ -156,7 +161,7 @@ public class Jeu {
 		salleCourante = salleDepart;
 	}
 
-	private void creationEvenementDeplacement() {
+	private void ajoutEvenement() {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
@@ -176,7 +181,7 @@ public class Jeu {
 					/*DEPLACEMENT VERS LE HAUT POUR INTERAGIR AVEC UN OBJET INTERACTIF */
 					case UP : 
 						greg.changerSprite(Deplacements.HAUT);
-						if(greg.getXCentre() <= Salle.getExtremiteGauche() || greg.getXCentre() >= Salle.getExtremiteDroite()) break;
+						if(greg.getXCentre() <= X_MIN_FENETRE|| greg.getXCentre() >= X_MAX_FENETRE) break;
 						Interactif objetInteractif = salleCourante.interactifAPosition(greg.getXCentre());
 
 						if(objetInteractif != null && objetInteractif != greg ) {
@@ -193,13 +198,19 @@ public class Jeu {
 						break;
 					case E :
 						if(!salleCourante.aDesItems()) break;
+						Item itemAPrendre = null;
 						for(Item i : salleCourante.getItems())
 						{
-							if(greg.getXMin() < i.getXCentre() && i.getXCentre() < greg.getXMax())
-							{
-								greg.prendreItem(i);
-								supprimeItemScene(i);
+							if(greg.getXMin() < i.getXCentre() && i.getXCentre() < greg.getXMax()) {
+								itemAPrendre = i;
+								break;
 							}
+								
+						}
+						if(!itemAPrendre.equals(null)) {
+							greg.prendreItem(itemAPrendre);
+							supprimeItemScene(itemAPrendre);
+							salleCourante.supprimerItem(itemAPrendre);
 						}
 					default :
 						break;
@@ -213,21 +224,23 @@ public class Jeu {
 		double extremite;
 		boolean gauche;
 		if( d == Deplacements.DROITE ) {
-			extremite = Salle.getExtremiteDroite();
+			extremite = X_MAX_FENETRE;
+			System.out.println("Je vais a droite, extremite : " + extremite);
 			gauche = false;
 		}
 		else if ( d == Deplacements.GAUCHE ) {
-			extremite = Salle.getExtremiteGauche();
+			extremite = X_MIN_FENETRE;
+			System.out.println("Je vais a gauche, extremite : " + extremite);
 			gauche = true;
 		}
 		else return;
 		
 		/* DEPLACEMENT NORMAL SI CE N'EST PAS UNE EXTREMITE */
-		if(!gauche && greg.getXCentre() < extremite ) {
+		if(!gauche && greg.getXMin() < extremite ) {
 			greg.seDirigerADroite();
 			return;
 		}
-		else if (gauche && greg.getXCentre() > extremite) {
+		else if (gauche && greg.getXMin() > extremite) {
 			greg.seDirigerAGauche();
 			return;
 		}
@@ -297,8 +310,8 @@ public class Jeu {
 		}
 	}
 	
-	private void supprimeItemScene(Item i) {
-		root.getChildren().remove(i.getImageView());
+	private static void supprimeItemScene(Item i) {
+			root.getChildren().remove(i.getImageView());
 	}
 	
 	public static Salle getSalleCourante() {
@@ -307,6 +320,11 @@ public class Jeu {
 	
 	public static void setSalleCourante(Salle nouvelleSalle) {
 		salleCourante.supprimerInteractif(greg);
+		for(Item i : salleCourante.getItems()) {
+			supprimeItemScene(i);
+
+		}
+		
 		historiqueSalles.add(new Salle(salleCourante));
 		salleCourante = nouvelleSalle;
 		salleCourante.ajoutInteractif(greg);

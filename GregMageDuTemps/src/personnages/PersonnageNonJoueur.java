@@ -1,4 +1,4 @@
-package Modele;
+package personnages;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -7,10 +7,17 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import utilitaire.AnalyseFichierEnigmeUtil;
+
 import java.io.File;
 import java.util.HashMap;
 
 import application.Jeu;
+import elements.Item;
+import elements.Salle;
+import enumerations.Deplacements;
+import enumerations.NomPNJ;
+import enumerations.TypeDialogue;
 public class PersonnageNonJoueur extends Personnage {
 	
 	private NomPNJ nom;

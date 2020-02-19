@@ -1,9 +1,11 @@
-package Modele;
+package utilitaire;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import enumerations.TypeDialogue;
 
 public final class AnalyseFichierEnigmeUtil {
 
@@ -13,7 +15,6 @@ public final class AnalyseFichierEnigmeUtil {
 	
 
 	public static String initDialogue(String chaine, TypeDialogue type) {
-		
 		int indiceDebut = chaine.indexOf(type.toString()) + type.toString().length() + 1;
 		int indiceFin = chaine.indexOf("#", indiceDebut);
 		return chaine.subSequence(indiceDebut, indiceFin).toString();
@@ -21,7 +22,7 @@ public final class AnalyseFichierEnigmeUtil {
 	
 	public static String rechercheDialogues(String str) {
 		String ensembleDesDialogues = "";
-		String ligne = null;
+		String ligne = "";
 		
 		FileReader fichierEnigme;
 		BufferedReader buffer;
@@ -39,18 +40,17 @@ public final class AnalyseFichierEnigmeUtil {
 			while ( (ligne = buffer.readLine()) != null)
 			{    
 				/* RECHERCHE DU NOM DE PNJ */
-			    if(ensembleDesDialogues.equals("") && !ligne.equals(str)) {
+			    if(ensembleDesDialogues.equals("") && !ligne.equals(str)) 
 			    	continue;
-			    }
-			    else if(ensembleDesDialogues.equals("") && ligne.equals(str)) {
-			    	
+			    
+			    /* RECHERCHE PREMIERE OCCURENCE DU STRING PASSE EN PARAMETRE */
+			    else if(ensembleDesDialogues.equals("") && ligne.equals(str))
 			    	ensembleDesDialogues += ligne + '\n';
-			    }
+			    
 			    /* RECHERCHE DU DELIMITEUR */
-			    else if(ligne.equals("##")) {
+			    else if(ligne.equals("##")) 
 			    	break;
-
-			    }
+			    
 			    /* FAIT PARTIE DE CE QU'ON RECHERCHE */
 			    else
 			    	ensembleDesDialogues += ligne + '\n';

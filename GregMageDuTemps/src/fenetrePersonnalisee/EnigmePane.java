@@ -1,4 +1,4 @@
-package Modele;
+package fenetrePersonnalisee;
 
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
@@ -16,9 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 public class EnigmePane extends GridPane {
-	interface Evenement {
-		public void ajoutEvemenent();
-	}
+	
 	private SplitPane panneauDivise;
 	private AnchorPane panneauGauche;
 	private AnchorPane panneauDroit;
@@ -26,10 +24,9 @@ public class EnigmePane extends GridPane {
 	private ImageView imagePersonnage;
 	private Label dialogue;
 	
-	
 	public EnigmePane() {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vue/Enigme.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/Enigme.fxml"));
 		loader.setRoot(this);
         try {
             loader.load();
@@ -47,23 +44,19 @@ public class EnigmePane extends GridPane {
 		champsDeTexte = (TextField) this.getChildren().get(1);
 		dialogue = (Label)panneauDroit.getChildren().get(0);
 		imagePersonnage = (ImageView) panneauGauche.getChildren().get(0);
-		
-		
 	}
 	
 	public void mettreEnActionChampsTextuel(Runnable r) {
-		
 		champsDeTexte.setOnAction(e -> {
 			r.run();
 		});
 	}
+	
 	public void changeDialogue(String dialogue) {
-		/* fonctionnel */
 		this.dialogue.setText(dialogue);
 	}
 	
 	public void changeImage(Image imagePersonnage) {
-		/* fonctinnel */
 		this.imagePersonnage.setImage(imagePersonnage);
 	}
 	
@@ -73,7 +66,8 @@ public class EnigmePane extends GridPane {
 	
 	public void nettoyerChampsTexte() {
 		champsDeTexte.clear();
+		
+		
 	}
-	
 	
 }
