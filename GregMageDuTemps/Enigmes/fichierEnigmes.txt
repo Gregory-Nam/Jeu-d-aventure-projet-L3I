@@ -23,7 +23,7 @@ blabla discours et on pose la question 1
 REPONSE
 5#
 MAUVAISE_REPONSE
-blabla t'as mal repondu fdp
+blabla t'as mal repondu fd
 #
 BONNE_REPONSE
 blabla ouais t chaud mec
