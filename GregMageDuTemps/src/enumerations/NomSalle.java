@@ -1,0 +1,6 @@
+package enumerations;
+
+public enum NomSalle {
+	//A REMPLIR
+	SALLE_DEPART, SALLE_1, SALLE_2, SALLE_3, SALLE_PIEGE, SALLE_OR, SALLE_BRONZE, SALLE_ARGENT, SALLE_TEST;
+}

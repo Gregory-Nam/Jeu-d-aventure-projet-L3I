@@ -1,0 +1,34 @@
+JACQUE
+QUESTION
+Cher Greg, j'espere que ton sejour dans mon chateau est agreable AHAHAH
+
+As-tu vu combien de tableau il y a ?
+#
+REPONSE
+6#
+MAUVAISE_REPONSE
+blabla t'as mal repondu fdp
+#
+BONNE_REPONSE
+blabla ouais t chaud mec
+#
+DEJA_REPONDU
+blabla ta deja rep batard
+#
+##
+NOMAUPIF
+QUESTION
+blabla discours et on pose la question 1
+#
+REPONSE
+5#
+MAUVAISE_REPONSE
+blabla t'as mal repondu fdp
+#
+BONNE_REPONSE
+blabla ouais t chaud mec
+#
+DEJA_REPONDU
+blabla ta deja rep batard
+#
+##

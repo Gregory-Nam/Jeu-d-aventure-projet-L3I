@@ -1,0 +1,7 @@
+positions des portes x1-x2 (début-fin) (nombre de pixel en partant de l'extrémité gauche de l'ecran)
+Salle_1 730 - 829
+Salle_Argent(salle verticale) 730 - 829
+Salle_2 182-281
+Salle_Bronze(salle verticale) 182-181
+Salle_3 730-829
+Salle_Piège(salle verticale) 730-829
