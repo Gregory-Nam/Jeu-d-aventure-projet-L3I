@@ -67,6 +67,15 @@ public class EnigmePane extends GridPane {
 	public void nettoyerChampsTexte() {
 		champsDeTexte.clear();
 		
+	}
+	
+	public void desactiverEntree() {
+		champsDeTexte.setDisable(true);
+		champsDeTexte.setPromptText("Appuyez sur echap pour quitter...");
+	}
+	
+	public void activerEntree() {
+		champsDeTexte.setDisable(false);
 		
 	}
 	

@@ -32,7 +32,7 @@ public class PersonnageNonJoueur extends Personnage {
 		
 		this.spritePourEnigme = new ImageView(new Image(spritePourEnigme.toURI().toString()));
 		this.aRecuUneBonneReponse = new SimpleBooleanProperty(false);
-		this.nom = NomPNJ.JACQUE;
+		this.nom = NomPNJ.TEST;
 		this.dialogues = new HashMap<TypeDialogue, String>();
 		this.itemADonner = i;
 		
@@ -60,12 +60,18 @@ public class PersonnageNonJoueur extends Personnage {
 	}
 
 	private void initDialogue() {
-		String tousLesDialogues = AnalyseFichierEnigmeUtil.rechercheDialogues(nom.toString());
+		/*String tousLesDialogues = AnalyseFichierEnigmeUtil.rechercheDialogues(nom.toString());
 		dialogues.put(TypeDialogue.BONNE_REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.BONNE_REPONSE));
 		dialogues.put(TypeDialogue.QUESTION, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.QUESTION));
 		dialogues.put(TypeDialogue.MAUVAISE_REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.MAUVAISE_REPONSE));
 		dialogues.put(TypeDialogue.DEJA_REPONDU, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.DEJA_REPONDU));
-		dialogues.put(TypeDialogue.REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.REPONSE));
+		dialogues.put(TypeDialogue.REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.REPONSE));*/
+		
+		dialogues.put(TypeDialogue.BONNE_REPONSE, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.BONNE_REPONSE));
+		dialogues.put(TypeDialogue.QUESTION,AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.QUESTION));
+		dialogues.put(TypeDialogue.MAUVAISE_REPONSE, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.MAUVAISE_REPONSE));
+		dialogues.put(TypeDialogue.DEJA_REPONDU, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.DEJA_REPONDU));
+		dialogues.put(TypeDialogue.REPONSE, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.REPONSE));
 	}
 	
 	@Override

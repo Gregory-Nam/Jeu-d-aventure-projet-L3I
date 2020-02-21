@@ -272,6 +272,7 @@ public class Jeu {
 		
 		/* EVENEMENT SUR L'INPUT */
 		rootEnigme.mettreEnActionChampsTextuel(() -> {
+			rootEnigme.activerEntree();
 			/* CAS OU LA BONNE REPONSE A DEJA ETE DONNEE */
 			if(pnj.getEtatReponseAttendu().get()) 
 				rootEnigme.changeDialogue(pnj.ditQueTuAsDejaRepondu());
@@ -286,8 +287,8 @@ public class Jeu {
 			/* CAS OU LE JOUEUR DONNE UNE MAUVAISE REPONSE */
 			else {
 				rootEnigme.changeDialogue(pnj.repondAUneMauvaiseReponse());
+				rootEnigme.desactiverEntree();
 				greg.replacerGauche();
-
 				setSalleCourante(salles.get(NomSalle.SALLE_DEPART));
 			}
 			

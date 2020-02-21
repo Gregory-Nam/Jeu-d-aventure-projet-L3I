@@ -1,5 +1,5 @@
 package enumerations;
 
 public enum NomPNJ {
-	JACQUE, NOMAUPIF;
+	TEST, NOMAUPIF;
 }
