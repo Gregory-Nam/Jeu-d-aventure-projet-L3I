@@ -302,11 +302,13 @@ public class Jeu {
 			rootEnigme.changeDialogue(pnj.poseQuestion());
 		
 		/* EVENEMENT SUR L'INPUT */
+		rootEnigme.activerEntree();
 		rootEnigme.mettreEnActionChampsTextuel(() -> {
-			rootEnigme.activerEntree();
 			/* CAS OU LA BONNE REPONSE A DEJA ETE DONNEE */
-			if(pnj.getEtatReponseAttendu().get()) 
+			if(pnj.getEtatReponseAttendu().get()) {
 				rootEnigme.changeDialogue(pnj.ditQueTuAsDejaRepondu());
+				rootEnigme.desactiverEntree();
+			}
 			/* CAS OU LE JOUEUR DONNE LA BONNE REPONSE */
 			else if(rootEnigme.getChamps().equals(pnj.reponse())) {
 				pnj.aRecuUneBonneReponse();
