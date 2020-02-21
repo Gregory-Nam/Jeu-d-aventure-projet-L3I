@@ -22,20 +22,18 @@ public class PersonnageNonJoueur extends Personnage {
 	
 	private NomPNJ nom;
 	private Item itemADonner;
-	private final Salle salle;
 	private HashMap<TypeDialogue, String> dialogues;
 	private BooleanProperty aRecuUneBonneReponse;
 	private ImageView spritePourEnigme;
 	
 	
-	public PersonnageNonJoueur(double x, Salle s, Item i ,File spritePourEnigme, File ... sprites) {
+	public PersonnageNonJoueur(double x, Item i ,File spritePourEnigme, File ... sprites) {
 		super(sprites);
 		
 		this.spritePourEnigme = new ImageView(new Image(spritePourEnigme.toURI().toString()));
 		this.aRecuUneBonneReponse = new SimpleBooleanProperty(false);
 		this.nom = NomPNJ.JACQUE;
 		this.dialogues = new HashMap<TypeDialogue, String>();
-		this.salle = s;
 		this.itemADonner = i;
 		
 		initPersonnage(sprites);
