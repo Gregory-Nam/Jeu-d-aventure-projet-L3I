@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="758.0" style="-fx-background-color: #c7c7c7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="295.0" layoutY="14.0" text="Inventaire" textFill="WHITE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Pane id="paneHG" layoutX="179.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;">
+         <children>
+            <ImageView id="imgPaneHG" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="16.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Label" textAlignment="CENTER" textFill="WHITE" />
+         </children></Pane>
+      <Pane id="paneHD" layoutX="395.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;">
+         <children>
+            <ImageView id="imgPaneHD" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Label" textFill="WHITE" />
+         </children></Pane>
+      <Pane id="paneBG" layoutX="179.0" layoutY="305.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;">
+         <children>
+            <ImageView id="imgPaneBG" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Label" textAlignment="CENTER" textFill="WHITE" />
+         </children></Pane>
+      <Pane id="paneBD" layoutX="395.0" layoutY="305.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;">
+         <children>
+            <ImageView id="imgPaneBD" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Label" textFill="WHITE" />
+         </children></Pane>
+   </children>
+</Pane>

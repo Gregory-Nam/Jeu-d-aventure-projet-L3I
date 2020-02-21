@@ -29,4 +29,8 @@ public class Item {
 		return xPosition + imageViewItem.getImage().getWidth() / 2;
 	}
 	
+	public String getNom() {
+		return nom;
+	}
+	
 }
