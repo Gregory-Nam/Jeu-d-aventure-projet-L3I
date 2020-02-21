@@ -24,9 +24,10 @@ import enumerations.Deplacements;
 import enumerations.NomSalle;
 import fenetrePersonnalisee.EnigmePane;
 
-
-
 public class Jeu {
+	
+	private static Jeu instanceUnique = new Jeu();
+	
 	public static final int X_MAX_FENETRE = 940;
 	public static final int X_MIN_FENETRE = 0;
 	
@@ -35,15 +36,18 @@ public class Jeu {
 	private	static Stage primaryStage;
 	private static Scene scene;
 	private static Scene sceneEnigme;
+	private static Scene sceneFinJeu;
+	
 	private static Pane root;
 	private static EnigmePane rootEnigme;
-	private PersonnageNonJoueur test;
 	private static HashMap<NomSalle, Salle> salles;
 	
-	public Jeu(Stage primaryStage) throws IOException {
-		CompteARebours c = new CompteARebours(10, 2);
+	private Jeu() {}
+	
+	public void lancerJeu(Stage stage) throws IOException {
+		CompteARebours c = new CompteARebours(5, 5);
 		
-		this.primaryStage = primaryStage;
+		primaryStage = stage;
 		primaryStage.setResizable(false);
 		
 		salles = new HashMap<NomSalle, Salle>();
@@ -52,15 +56,15 @@ public class Jeu {
 		creationDesObjetsInteractifs();
 		initStage();
 		initEnigmeScene();
+		initSceneDeFin();
 		initObjetInteractif();
 
 		ajoutEvenement();
-		creationEvenementEnigme();
+		ajoutEvenementEnigme();
 		
 		
 		c.lancer();
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
-		
 	}
 	
 	private void initPersonnageJoueurScene() {
@@ -84,6 +88,32 @@ public class Jeu {
 		sceneEnigme = new Scene(rootEnigme);	
 	}
 
+	private void initSceneDeFin() throws IOException {
+		sceneFinJeu = new Scene(FXMLLoader.load(getClass().getResource("/vues/EcranDeFin.fxml")));
+		sceneFinJeu.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				KeyCode kc = event.getCode();
+				switch(kc){
+					case Q :
+						System.exit(0);
+						break;
+					case R :
+						try {
+							lancerJeu(primaryStage);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					break;
+					default: 
+						break;
+				}
+				
+			}
+		});
+	}
+	
 	private static void initObjetInteractif() {
 		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
 		for(int i = 1; i < root.getChildren().size();)
@@ -110,6 +140,7 @@ public class Jeu {
 
 	
 	}
+	
 	private void creationDesObjetsInteractifs() {
 		
 		/* SALLES */
@@ -132,8 +163,6 @@ public class Jeu {
 		PorteMurale p6 = new PorteMurale(salle2, salleBronze,182);
 		PorteMurale p5 = new PorteMurale(salle3, sallePiege, 730);
 
-		
-		
 		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
 		salles.put(salle1.getNomSalle(), salle1);
@@ -143,8 +172,7 @@ public class Jeu {
 		salles.put(salle2.getNomSalle(), salle2);
 		salles.put(salle3.getNomSalle(), salle3);
 		salles.put(sallePiege.getNomSalle(), sallePiege);
-		
-
+	
 		salleDepart.ajoutInteractif(p1, greg);
 		salle1.ajoutInteractif(p1,p2,p3);
 		salle2.ajoutInteractif(p3,p4,p6);
@@ -203,6 +231,10 @@ public class Jeu {
 							supprimeItemScene(itemAPrendre);
 							salleCourante.supprimerItem(itemAPrendre);
 						}
+						break;
+					case Q :
+						terminer();
+						break;
 					default :
 						break;
 				}
@@ -244,7 +276,7 @@ public class Jeu {
 	}
 	
 	@SuppressWarnings("incomplete-switch")
-	private void creationEvenementEnigme() {
+	private void ajoutEvenementEnigme() {
 		sceneEnigme.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
@@ -268,7 +300,6 @@ public class Jeu {
 			rootEnigme.changeDialogue(pnj.ditQueTuAsDejaRepondu());
 		else
 			rootEnigme.changeDialogue(pnj.poseQuestion());
-			
 		
 		/* EVENEMENT SUR L'INPUT */
 		rootEnigme.mettreEnActionChampsTextuel(() -> {
@@ -308,6 +339,10 @@ public class Jeu {
 			root.getChildren().remove(i.getImageView());
 	}
 	
+	public static void terminer() {
+		primaryStage.setScene(sceneFinJeu);
+	}
+	
 	public static Salle getSalleCourante() {
 		return salleCourante;
 	}
@@ -327,4 +362,7 @@ public class Jeu {
 		initObjetInteractif();
 	}
 
+	public static Jeu getInstanceUnique() {
+		return instanceUnique;
+	}
 }

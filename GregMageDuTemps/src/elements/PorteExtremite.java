@@ -17,7 +17,6 @@ public class PorteExtremite extends Interactif {
 		
 		sallesLieesParLaPorte [0] = salle1;
 		sallesLieesParLaPorte [1] = salle2;
-		
 	}
 	
 	@Override

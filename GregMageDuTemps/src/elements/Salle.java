@@ -52,7 +52,7 @@ public class Salle {
 	}
 	
 	public void ajoutItem(Item i) {
-		itemsDeposeParPnj.add(i);
+		if(!itemsDeposeParPnj.contains(i)) itemsDeposeParPnj.add(i);
 	}
 	
 	public ArrayList<Item> getItems() {

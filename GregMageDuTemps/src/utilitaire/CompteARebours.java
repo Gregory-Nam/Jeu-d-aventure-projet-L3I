@@ -3,6 +3,7 @@ package utilitaire;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import application.Jeu;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -46,10 +47,16 @@ public class CompteARebours {
 				/* CHANGEMENT DE LA MINUTE SI SECONDES = 0 */
 				/* PLATFORM RUN LATER EST NECESSAIRE POUR METTRE A JOUR UN ELEMENT DU GUI DANS UN THREAD AUTRE */
 				if(CompteARebours.this.secondesP.get() == 0) {
+					if(CompteARebours.this.minutesP.get() == 0){
+						this.cancel();
+						Platform.runLater(() -> Jeu.terminer());
+						return;
+					}
 					Platform.runLater(() -> CompteARebours.this.minutesP.set(CompteARebours.this.minutesP.get() - 1));
 					Platform.runLater(() -> CompteARebours.this.secondesP.set(60));
 				}
 				Platform.runLater(() ->CompteARebours.this.secondesP.set(CompteARebours.this.secondesP.get() - 1));
+				
 			}
 		};
 		
