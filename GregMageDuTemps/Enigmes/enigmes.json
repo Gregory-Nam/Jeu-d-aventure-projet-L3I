@@ -1,0 +1,17 @@
+{
+  "TEST": {
+    "QUESTION": " une enigme au pif",
+    "REPONSE": "6",
+    "MAUVAISE_REPONSE": "tu as mal répondu",
+    "BONNE_REPONSE": "tu as bien répondu",
+    "DEJA_REPONDU" :  "t'as deja rep lol"
+  },
+
+  "NOMAUPIF": {
+    "QUESTION": " une enigme au pif 2",
+    "REPONSE": "6",
+    "MAUVAISE_REPONSE": "tu as mal répondu",
+    "BONNE_REPONSE": "tu as bien répondu",
+    "DEJA_REPONDU": "t'as deja rep lol"
+  }
+}
