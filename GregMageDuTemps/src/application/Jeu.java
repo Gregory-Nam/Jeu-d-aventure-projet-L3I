@@ -7,7 +7,8 @@ import java.util.HashMap;
 
 import elements.Interactif;
 import elements.Item;
-import elements.Porte;
+import elements.PorteExtremite;
+import elements.PorteMurale;
 import elements.Salle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -37,8 +38,7 @@ public class Jeu {
 	private static Pane root;
 	private static EnigmePane rootEnigme;
 	private PersonnageNonJoueur test;
-	private HashMap<NomSalle, Salle> salles;
-	private static ArrayList<Salle> historiqueSalles;
+	private static HashMap<NomSalle, Salle> salles;
 	
 	public Jeu(Stage primaryStage) throws IOException {
 		CompteARebours c = new CompteARebours(10, 2);
@@ -86,14 +86,13 @@ public class Jeu {
 
 	private static void initObjetInteractif() {
 		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
-		for(int i = 1; i < root.getChildren().size(); ++i) {
+		for(int i = 1; i < root.getChildren().size();)
 			root.getChildren().remove(i);
-		}
+		
 		/* AJOUT DES OBJETS INTERACTIFS DE LA SALLE COURANTE */
 		for(Interactif i : salleCourante.getInteractifs()) {
 			/* CONDITION POUR LE CAS DES PORTES EXTREMITE QUI N'ONT PAS D'IMAGEVIEW */
 			if(i.getImageView() == null) continue;
-			System.out.println(i);
 			root.getChildren().add(i.getImageView());
 		}
 		ajoutItemScene();
@@ -106,9 +105,9 @@ public class Jeu {
 		File gauche = new File("Images/PNJ/Klace_gauche_transparence.png");
 		File imagePourenigme = new File("Images/PNJ/Klace_face.png");
 		Item itemBronze = new Item(new File("Images/items/aiguille_Bronze1.png"), 230);
-		PersonnageNonJoueur pnj = new PersonnageNonJoueur(200, salles.get(NomSalle.SALLE_DEPART), itemBronze, imagePourenigme, haut, droite, bas, gauche);
+		PersonnageNonJoueur pnj = new PersonnageNonJoueur(200, itemBronze, imagePourenigme, haut, droite, bas, gauche);
+		salles.get(NomSalle.SALLE_1).ajoutInteractif(pnj);
 
-		salles.get(NomSalle.SALLE_DEPART).ajoutInteractif(pnj);
 	
 	}
 	private void creationDesObjetsInteractifs() {
@@ -125,14 +124,13 @@ public class Jeu {
 
 		
 		/* PORTES */
-		Porte p1 = new Porte(salleDepart, salle1, 940, true);
-		Porte p2 = new Porte(salle1, salleArgent,730, false);
-		Porte p3 = new Porte(salle1, salle2, 940, true);
-		Porte p4 = new Porte(salle2,salle3, 940, true);
-		Porte p7 = new Porte(salle3, salleOr,940, true);
-		Porte p6 = new Porte(salle2, salleBronze,182, false);
-		Porte p5 = new Porte(salle3, sallePiege, 730, false);
-		
+		PorteExtremite p1 = new PorteExtremite(salleDepart, salle1);
+		PorteMurale p2 = new PorteMurale(salle1, salleArgent,730);
+		PorteExtremite p3 = new PorteExtremite(salle1, salle2);
+		PorteExtremite p4 = new PorteExtremite(salle2,salle3);
+		PorteExtremite p7 = new PorteExtremite(salle3, salleOr);
+		PorteMurale p6 = new PorteMurale(salle2, salleBronze,182);
+		PorteMurale p5 = new PorteMurale(salle3, sallePiege, 730);
 
 		
 		
@@ -146,7 +144,6 @@ public class Jeu {
 		salles.put(salle3.getNomSalle(), salle3);
 		salles.put(sallePiege.getNomSalle(), sallePiege);
 		
-		initPNJ();
 
 		salleDepart.ajoutInteractif(p1, greg);
 		salle1.ajoutInteractif(p1,p2,p3);
@@ -155,9 +152,10 @@ public class Jeu {
 		salleArgent.ajoutInteractif(p2);
 		salleOr.ajoutInteractif(p7);
 		salleBronze.ajoutInteractif(p6);
-		sallePiege.ajoutInteractif(p5);
+		sallePiege.ajoutInteractif(p5); 
 
-		historiqueSalles = new ArrayList<Salle>();
+		initPNJ();
+
 		salleCourante = salleDepart;
 	}
 
@@ -189,13 +187,6 @@ public class Jeu {
 							greg.changerSprite(Deplacements.BAS);
 						}
 						break;
-					case R :
-						
-						if(historiqueSalles.isEmpty()) break;
-						Salle lastSalle = historiqueSalles.get(historiqueSalles.size()-1);
-						setSalleCourante(salles.get(lastSalle.getNomSalle()));
-						historiqueSalles.remove(historiqueSalles.size()-1);
-						break;
 					case E :
 						if(!salleCourante.aDesItems()) break;
 						Item itemAPrendre = null;
@@ -225,12 +216,10 @@ public class Jeu {
 		boolean gauche;
 		if( d == Deplacements.DROITE ) {
 			extremite = X_MAX_FENETRE;
-			System.out.println("Je vais a droite, extremite : " + extremite);
 			gauche = false;
 		}
 		else if ( d == Deplacements.GAUCHE ) {
 			extremite = X_MIN_FENETRE;
-			System.out.println("Je vais a gauche, extremite : " + extremite);
 			gauche = true;
 		}
 		else return;
@@ -295,8 +284,12 @@ public class Jeu {
 				
 			}
 			/* CAS OU LE JOUEUR DONNE UNE MAUVAISE REPONSE */
-			else
-				rootEnigme.changeDialogue(pnj.repondAUneMauvaiseReponse());	
+			else {
+				rootEnigme.changeDialogue(pnj.repondAUneMauvaiseReponse());
+				greg.replacerGauche();
+
+				setSalleCourante(salles.get(NomSalle.SALLE_DEPART));
+			}
 			
 			rootEnigme.nettoyerChampsTexte();
 		});
@@ -320,12 +313,10 @@ public class Jeu {
 	
 	public static void setSalleCourante(Salle nouvelleSalle) {
 		salleCourante.supprimerInteractif(greg);
-		for(Item i : salleCourante.getItems()) {
-			supprimeItemScene(i);
-
-		}
 		
-		historiqueSalles.add(new Salle(salleCourante));
+		for(Item i : salleCourante.getItems())
+			supprimeItemScene(i);
+		
 		salleCourante = nouvelleSalle;
 		salleCourante.ajoutInteractif(greg);
 		/* REMPLACEMENT DE L'ANCIENNE IMAGE DE LA SALLE AVEC LA NOUVELLE */
