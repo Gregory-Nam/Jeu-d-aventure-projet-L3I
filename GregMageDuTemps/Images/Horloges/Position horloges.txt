@@ -1,0 +1,2 @@
+Horloge / position en partant de la gauche (xmin-xmax)
+Horloge argent / (92-152)
