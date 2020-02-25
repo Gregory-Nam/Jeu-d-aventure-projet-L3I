@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import elements.Horloge;
 import elements.Interactif;
 import elements.Item;
 import elements.PorteExtremite;
@@ -13,6 +14,7 @@ import elements.Salle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -21,8 +23,10 @@ import personnages.PersonnageJoueur;
 import personnages.PersonnageNonJoueur;
 import utilitaire.CompteARebours;
 import enumerations.Deplacements;
+import enumerations.Materiaux;
 import enumerations.NomSalle;
 import fenetrePersonnalisee.EnigmePane;
+import fenetrePersonnalisee.MortPane;
 
 public class Jeu {
 	
@@ -31,16 +35,18 @@ public class Jeu {
 	public static final int X_MAX_FENETRE = 940;
 	public static final int X_MIN_FENETRE = 0;
 	
-	private static PersonnageJoueur greg;
-	private static Salle salleCourante;
-	private	static Stage primaryStage;
-	private static Scene scene;
-	private static Scene sceneEnigme;
-	private static Scene sceneFinJeu;
+	public PersonnageJoueur greg;
+	private Salle salleCourante;
+	private Stage primaryStage;
+	private Scene scene;
+	private Scene sceneEnigme;
+	private Scene sceneFinJeu;
 	
-	private static Pane root;
-	private static EnigmePane rootEnigme;
-	private static HashMap<NomSalle, Salle> salles;
+	private Pane root;
+	private EnigmePane rootEnigme;
+	private MortPane rootMort;
+	
+	private HashMap<NomSalle, Salle> salles;
 	
 	private Jeu() {}
 	
@@ -89,9 +95,10 @@ public class Jeu {
 	}
 
 	private void initSceneDeFin() throws IOException {
-		sceneFinJeu = new Scene(FXMLLoader.load(getClass().getResource("/vues/EcranDeFin.fxml")));
+		rootMort = new MortPane();
+		sceneFinJeu = new Scene(rootMort);
+		
 		sceneFinJeu.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 			@Override
 			public void handle(KeyEvent event) {
 				KeyCode kc = event.getCode();
@@ -114,7 +121,7 @@ public class Jeu {
 		});
 	}
 	
-	private static void initObjetInteractif() {
+	private void initObjetInteractif() {
 		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
 		for(int i = 1; i < root.getChildren().size();)
 			root.getChildren().remove(i);
@@ -134,7 +141,7 @@ public class Jeu {
 		File bas = new File("Images/PNJ/Klace_face_transparence.png");
 		File gauche = new File("Images/PNJ/Klace_gauche_transparence.png");
 		File imagePourenigme = new File("Images/PNJ/Klace_face.png");
-		Item itemBronze = new Item(new File("Images/items/aiguille_Bronze1.png"), 230);
+		Item itemBronze = new Item(new File("Images/items/aiguille_Bronze1.png"), Materiaux.BRONZE, 230, "Aiguille");
 		PersonnageNonJoueur pnj = new PersonnageNonJoueur(200, itemBronze, imagePourenigme, haut, droite, bas, gauche);
 		salles.get(NomSalle.SALLE_1).ajoutInteractif(pnj);
 
@@ -162,6 +169,10 @@ public class Jeu {
 		PorteExtremite p7 = new PorteExtremite(salle3, salleOr);
 		PorteMurale p6 = new PorteMurale(salle2, salleBronze,182);
 		PorteMurale p5 = new PorteMurale(salle3, sallePiege, 730);
+		
+		/* HORLOGES */
+		Horloge horlogeArgent = new Horloge(new File("Images/Horloges/Horloge_argent_transparence.png"), Materiaux.BRONZE, 1, 92);
+		
 
 		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
@@ -173,9 +184,9 @@ public class Jeu {
 		salles.put(salle3.getNomSalle(), salle3);
 		salles.put(sallePiege.getNomSalle(), sallePiege);
 	
-		salleDepart.ajoutInteractif(p1, greg);
-		salle1.ajoutInteractif(p1,p2,p3);
-		salle2.ajoutInteractif(p3,p4,p6);
+		salleDepart.ajoutInteractif(p1);
+		salle1.ajoutInteractif(p1, p2,p3);
+		salle2.ajoutInteractif(p3,horlogeArgent,p4,p6,greg);
 		salle3.ajoutInteractif(p4,p5,p7);
 		salleArgent.ajoutInteractif(p2);
 		salleOr.ajoutInteractif(p7);
@@ -184,7 +195,7 @@ public class Jeu {
 
 		initPNJ();
 
-		salleCourante = salleDepart;
+		salleCourante = salle2;
 	}
 
 	private void ajoutEvenement() {
@@ -207,7 +218,7 @@ public class Jeu {
 					/*DEPLACEMENT VERS LE HAUT POUR INTERAGIR AVEC UN OBJET INTERACTIF */
 					case UP : 
 						greg.changerSprite(Deplacements.HAUT);
-						if(greg.getXCentre() <= X_MIN_FENETRE|| greg.getXCentre() >= X_MAX_FENETRE) break;
+						if(greg.getXCentre() <= X_MIN_FENETRE || greg.getXCentre() >= X_MAX_FENETRE) break;
 						Interactif objetInteractif = salleCourante.interactifAPosition(greg.getXCentre());
 
 						if(objetInteractif != null && objetInteractif != greg ) {
@@ -215,6 +226,7 @@ public class Jeu {
 							greg.changerSprite(Deplacements.BAS);
 						}
 						break;
+					/* PRENDRE UN ITEM DEPOSE PAR UN PNJ */
 					case E :
 						if(!salleCourante.aDesItems()) break;
 						Item itemAPrendre = null;
@@ -224,16 +236,16 @@ public class Jeu {
 								itemAPrendre = i;
 								break;
 							}
-								
 						}
+						
 						if(!itemAPrendre.equals(null)) {
 							greg.prendreItem(itemAPrendre);
 							supprimeItemScene(itemAPrendre);
 							salleCourante.supprimerItem(itemAPrendre);
 						}
 						break;
-					case Q :
-						terminer();
+					case A :
+						terminer("Quitter par soi meme");
 						break;
 					default :
 						break;
@@ -290,7 +302,7 @@ public class Jeu {
 		});
 	}
 		
-	public static void lancerEnigme(PersonnageNonJoueur pnj) {
+	public void lancerEnigme(PersonnageNonJoueur pnj) {
 		primaryStage.setScene(sceneEnigme);
 		greg.liaisonDialogueAvecPNJ(pnj);
 		rootEnigme.changeImage(pnj.getImageView().getImage());
@@ -330,26 +342,42 @@ public class Jeu {
 		
 	}
 	
-	private static void ajoutItemScene() {
+	private void ajoutItemScene() {
 		ArrayList<Item> items = salleCourante.getItems();
 		for(int i = 0; i < items.size(); ++i) {
 			root.getChildren().add(items.get(i).getImageView());
 		}
 	}
 	
-	private static void supprimeItemScene(Item i) {
+	private void supprimeItemScene(Item i) {
 			root.getChildren().remove(i.getImageView());
 	}
 	
-	public static void terminer() {
+	public void terminer(String message) {
+		rootMort.setRaisonDeLaMort(message);
 		primaryStage.setScene(sceneFinJeu);
+		
 	}
 	
-	public static Salle getSalleCourante() {
+	
+	public void changerDePeriode(int i) {
+		System.out.println("ON CHANGE DE PERIODE (waiting for lucaaaaaa");
+		/*
+		String periode = "Periode_" + i;
+
+		salles.forEach((nomSalle,salle) -> {
+				salle.initSalle(new File("Images/Salles/ "+ periode + "/" + nomSalle.toString() + ".png"));
+			}
+		);
+		*/
+		
+	}
+	
+	public Salle getSalleCourante() {
 		return salleCourante;
 	}
 	
-	public static void setSalleCourante(Salle nouvelleSalle) {
+	public void setSalleCourante(Salle nouvelleSalle) {
 		salleCourante.supprimerInteractif(greg);
 		
 		for(Item i : salleCourante.getItems())

@@ -27,13 +27,13 @@ public class PorteExtremite extends Interactif {
 	@Override
 	public void interagir() {
 		if(estFaceGauche()) 
-			Jeu.setSalleCourante(sallesLieesParLaPorte[1]);
+			Jeu.getInstanceUnique().setSalleCourante(sallesLieesParLaPorte[1]);
 		else
-			Jeu.setSalleCourante(sallesLieesParLaPorte[0]);
+			Jeu.getInstanceUnique().setSalleCourante(sallesLieesParLaPorte[0]);
 	}
 
 	private boolean estFaceGauche() {
-		return (Jeu.getSalleCourante() == sallesLieesParLaPorte[0]);
+		return (Jeu.getInstanceUnique().getSalleCourante() == sallesLieesParLaPorte[0]);
 	}
 	
 	@Override

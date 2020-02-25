@@ -4,6 +4,7 @@ package personnages;
 import java.util.HashMap;
 
 import elements.Interactif;
+import elements.Item;
 import enumerations.Deplacements;
 import javafx.scene.image.*;
 import java.io.File;
@@ -14,6 +15,7 @@ public abstract class Personnage extends Interactif {
 	// la vue de l'image courante du personnage
 	// faire une paire <imageview, Deplacement> ?
 	protected ImageView spriteCourant;
+	Item itemEnPossession;
 	
 	public Personnage( File ... sprites /* haut, droite, bas, gauche*/) {
 		spritesPersonnageHM = new HashMap<Deplacements,ImageView>();

@@ -13,6 +13,7 @@ public class PersonnageJoueur extends Personnage{
 	
 	private final double largeurPersonnage;
 	private BooleanProperty aBienReponduperiodeCourante;
+	
 	public PersonnageJoueur(File ... sprites) {
 		super(sprites);
 		initPersonnage(sprites);
@@ -72,13 +73,17 @@ public class PersonnageJoueur extends Personnage{
 	}
 	
 	public void prendreItem(Item i) {
-		/* To-DO */
+		super.itemEnPossession = i;
 	}
+	
 	@Override
  	public void interagir() {
 		// TODO Auto-generated method stub
 	}
 
+	public Item getItemEnMain() {
+		return super.itemEnPossession;
+	}
 	@Override
 	public double getXMin() {
 		return super.xMin;

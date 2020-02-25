@@ -21,7 +21,6 @@ import enumerations.TypeDialogue;
 public class PersonnageNonJoueur extends Personnage {
 	
 	private NomPNJ nom;
-	private Item itemADonner;
 	private HashMap<TypeDialogue, String> dialogues;
 	private BooleanProperty aRecuUneBonneReponse;
 	private ImageView spritePourEnigme;
@@ -34,7 +33,7 @@ public class PersonnageNonJoueur extends Personnage {
 		this.aRecuUneBonneReponse = new SimpleBooleanProperty(false);
 		this.nom = NomPNJ.TEST;
 		this.dialogues = new HashMap<TypeDialogue, String>();
-		this.itemADonner = i;
+		super.itemEnPossession = i;
 		
 		initPersonnage(sprites);
 		spriteCourant.setX(x);
@@ -76,7 +75,7 @@ public class PersonnageNonJoueur extends Personnage {
 	
 	@Override
 	public void interagir() {
-		Jeu.lancerEnigme(this);
+		Jeu.getInstanceUnique().lancerEnigme(this);
 	}
 
 	@Override
@@ -113,7 +112,7 @@ public class PersonnageNonJoueur extends Personnage {
 		return aRecuUneBonneReponse;
 	}
 	public Item donnerItem() {
-		return itemADonner;
+		return itemEnPossession;
 		
 	}
 	

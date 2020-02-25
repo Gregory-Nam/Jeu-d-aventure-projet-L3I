@@ -49,7 +49,7 @@ public class CompteARebours {
 				if(CompteARebours.this.secondesP.get() == 0) {
 					if(CompteARebours.this.minutesP.get() == 0){
 						this.cancel();
-						Platform.runLater(() -> Jeu.terminer());
+						Platform.runLater(() -> Jeu.getInstanceUnique().terminer("Temps fini"));
 						return;
 					}
 					Platform.runLater(() -> CompteARebours.this.minutesP.set(CompteARebours.this.minutesP.get() - 1));

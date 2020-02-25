@@ -13,11 +13,14 @@ public class Item {
 	private int xPosition;
 	private ImageView imageViewItem;
 	
-	public Item(File f, int position) {
+	public Item(File f, Materiaux materiaux, int position, String nom) {
 		Image i = new Image(f.toURI().toString());
 		imageViewItem = new ImageView(i);
 
+		this.materiaux = materiaux;
+		this.nom = nom;
 		this.xPosition = position;
+		
 		imageViewItem.setX(xPosition);
 	}
 	
@@ -30,7 +33,12 @@ public class Item {
 	}
 	
 	public String getNom() {
-		return nom;
+		return nom + " de " + this.materiaux.toString();
 	}
+	public Materiaux getMateriaux() {
+		return this.materiaux;
+	}
+	
+	
 	
 }

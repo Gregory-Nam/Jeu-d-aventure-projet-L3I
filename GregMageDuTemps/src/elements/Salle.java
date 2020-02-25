@@ -16,22 +16,17 @@ public class Salle {
 	private ArrayList<Item> itemsDeposeParPnj;
 	
 	/* CONSTRUCTEUR PAR RECOPIE */
-	public Salle(Salle s) {
-		objetsDeLaSalle = s.objetsDeLaSalle;
-		this.spriteSalle = s.spriteSalle;
-		this.nomDeLaSalle = s.nomDeLaSalle;
-		this.itemsDeposeParPnj = s.itemsDeposeParPnj;
-	}
+	
 	
 	public Salle(File cheminImage, NomSalle nomDeLaSalle) {
+		spriteSalle = new ImageView();
 		objetsDeLaSalle = new ArrayList<Interactif>();
 		itemsDeposeParPnj = new ArrayList<Item>();
 		this.nomDeLaSalle = nomDeLaSalle;
 		initSalle(cheminImage);
 	}
 	
-	private void initSalle(File cheminImage) {
-		spriteSalle = new ImageView();
+	public void initSalle(File cheminImage) {
 		Image imgSalle = new Image(cheminImage.toURI().toString());
 		spriteSalle.setImage(imgSalle);
 	}

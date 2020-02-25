@@ -7,6 +7,7 @@ public abstract class Interactif {
 
 	protected double xMin;
 	protected double xMax;
+	protected ImageView vueImageInteractif;
 	
 	public abstract ImageView getImageView();
 	public abstract void interagir();
