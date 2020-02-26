@@ -1,17 +1,41 @@
 {
-  "TEST": {
-    "QUESTION": " une enigme au pif",
+  "Klace": {
+    "QUESTION": "Salut toi ! Combien y a-t-il de tableaux dans ce chateau ?",
     "REPONSE": "6",
-    "MAUVAISE_REPONSE": "tu as mal r�pondu",
-    "BONNE_REPONSE": "tu as bien r�pondu",
-    "DEJA_REPONDU" :  "t'as deja rep lol"
+    "MAUVAISE_REPONSE": "Oupps! Tu as mal répondu. Tu ne peux pas avoir l'item",
+    "BONNE_REPONSE": "Bravo ! Tu as très bien répondu. Tu merites bien l'item pour activer l'horloge",
+    "DEJA_REPONDU" :  "Malheureusement, la bonne reponse a déjà été donnée."
   },
 
-  "NOMAUPIF": {
-    "QUESTION": " une enigme au pif 2",
-    "REPONSE": "6",
-    "MAUVAISE_REPONSE": "tu as mal r�pondu",
-    "BONNE_REPONSE": "tu as bien r�pondu",
-    "DEJA_REPONDU": "t'as deja rep lol"
+  "NOM_PNJ_2": {
+    "QUESTION": "Coucou toi,\nlorsque ma soeur avait 5 ans, j'avais le double de son age. Aujourd'hui, elle en a 40.\nQuel est mon age ?",
+    "REPONSE": "45",
+    "MAUVAISE_REPONSE": "Désolé, tu as mal répondu. Tu n'auras pas l'item",
+    "BONNE_REPONSE": "Félicitations, tu as bien répondu. Cet item est à toi",
+    "DEJA_REPONDU": "Mais tu as déjà répondu !"
+  },
+  
+  "NOM_PNJ_3": {
+    "QUESTION": "Sais-tu combien faut-il de temps (en secondes) pour qu'une horloge sonne midi,/nsi cette derniere sonne six heures en 5 secondes ?",
+    "REPONSE": "11",
+    "MAUVAISE_REPONSE": "Malheureusement, tu as mal répondu. Donc pas de récompense.",
+    "BONNE_REPONSE": "Exact, tu as bien répondu. Voici ta récompense",
+    "DEJA_REPONDU": "Désolé, je t'ai déjà donné l'item"
+  },
+
+  "NOM_PNJ_4": {
+    "QUESTION": "J'espère que tu es malin...\nSans lui, rien ne peut se faire.\nIl passe vite ou lentement.\nSouvent quand on le perd, on ne le rattrape plus.\nQui suis-je ?",
+    "REPONSE": "le temps",
+    "MAUVAISE_REPONSE": "Oupps, c'est raté. L'item t'echappes.",
+    "BONNE_REPONSE": "La reponse est correcte. Tu merites bien l'item",
+    "DEJA_REPONDU": "Pas besoin de me le repeter..."
+  },
+
+  "NOM_PNJ_5": {
+    "QUESTION": "J'ai un petit problème mathematiques...\nConnais-tu le nombre qui est tel que si on le multiplie par deux, on lui ajoute sa moitié puis son quart et enfin 1, donnera 100 ?",
+    "REPONSE": "36",
+    "MAUVAISE_REPONSE": "La réponse est fausse. Tu aurais du aller à l'école..",
+    "BONNE_REPONSE": "Merci beaucoup !",
+    "DEJA_REPONDU": "Encore merci !"
   }
 }
