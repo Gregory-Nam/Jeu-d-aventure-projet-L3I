@@ -26,6 +26,7 @@ import enumerations.Deplacements;
 import enumerations.Materiaux;
 import enumerations.NomSalle;
 import fenetrePersonnalisee.EnigmePane;
+import fenetrePersonnalisee.InventairePane;
 import fenetrePersonnalisee.MortPane;
 
 public class Jeu {
@@ -39,11 +40,13 @@ public class Jeu {
 	private Salle salleCourante;
 	private Stage primaryStage;
 	private Scene scene;
+	private Scene sceneInventaire;
 	private Scene sceneEnigme;
 	private Scene sceneFinJeu;
 	
 	private Pane root;
 	private EnigmePane rootEnigme;
+	private InventairePane rootInventaire;
 	private MortPane rootMort;
 	
 	private HashMap<NomSalle, Salle> salles;
@@ -60,8 +63,9 @@ public class Jeu {
 		
 		initPersonnageJoueurScene();
 		creationDesObjetsInteractifs();
-		initStage();
+		initStage();	
 		initEnigmeScene();
+		initInventaireScene();
 		initSceneDeFin();
 		initObjetInteractif();
 
@@ -92,6 +96,11 @@ public class Jeu {
 	private void initEnigmeScene() {
 		rootEnigme = new EnigmePane();
 		sceneEnigme = new Scene(rootEnigme);	
+	}
+	
+	private void initInventaireScene() {
+		rootInventaire = new InventairePane();
+		sceneInventaire = new Scene(rootInventaire);
 	}
 
 	private void initSceneDeFin() throws IOException {
@@ -340,6 +349,26 @@ public class Jeu {
 			rootEnigme.nettoyerChampsTexte();
 		});
 		
+	}
+	
+	public void voirInventaire() {
+		primaryStage.setScene(sceneInventaire);
+		
+		sceneInventaire.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				KeyCode kc = event.getCode();
+				switch(kc) {
+				case I :
+						primaryStage.setScene(sceneInventaire);
+						break;
+				
+				case ESCAPE :
+						primaryStage.setScene(scene);
+						break;
+				}
+			}
+		});
 	}
 	
 	private void ajoutItemScene() {

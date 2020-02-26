@@ -1,5 +1,7 @@
 package fenetrePersonnalisee;
 
+import java.util.ArrayList;
+
 import elements.Item;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -21,29 +23,30 @@ public class InventairePane extends Pane{
 	private Pane paneBD;
 	private ImageView imgBD;
 	private Label lblBD;
+	
+	private ArrayList<ImageView> lstImages;
 		
 	
 	
 	public InventairePane() {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/Enigme.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/Inventaire.fxml"));
 		loader.setRoot(this);
         try {
             loader.load();
         } catch (Exception exception) {
             throw new RuntimeException(exception);
         }	
-        initEnfant();
-		
+        initEnfant();	
+        initListe();
 	}
 	
-	public void initEnfant() {
-		paneParent = (Pane)this.getChildren().get(0);
+	private void initEnfant() {
 		//Initialisation des Pane enfants
-		paneHG = (Pane)paneParent.getChildren().get(0);
-		paneHD = (Pane)paneParent.getChildren().get(1);
-		paneBG = (Pane)paneParent.getChildren().get(2);
-		paneBD = (Pane)paneParent.getChildren().get(3);
+		paneHG = (Pane)this.getChildren().get(1);
+		paneHD = (Pane)this.getChildren().get(2);
+		paneBG = (Pane)this.getChildren().get(3);
+		paneBD = (Pane)this.getChildren().get(4);
 		//Initialisation des ImageView
 		imgHG = (ImageView)paneHG.getChildren().get(0);
 		imgHD = (ImageView)paneHD.getChildren().get(0);
@@ -56,20 +59,20 @@ public class InventairePane extends Pane{
 		lblBD = (Label)paneBD.getChildren().get(1);
 	}
 	
-	public void ajouterItem(Item o, int i) {
-		switch(i) {
-		case 0 : this.imgHG.setImage(o.getImageView().getImage());
-				 this.lblHG.setText(o.getNom());
-		break;
-		case 1 : this.imgHD.setImage(o.getImageView().getImage());
-				 this.lblHD.setText(o.getNom());
-		break;
-		case 2 : this.imgBG.setImage(o.getImageView().getImage());
-				 this.lblBG.setText(o.getNom());
-		break;
-		case 3 : this.imgBD.setImage(o.getImageView().getImage());
-				 this.lblBD.setText(o.getNom());
-		break;
+	private void initListe() {
+		this.lstImages = new ArrayList<ImageView>();
+		
+		lstImages.add(imgHG);
+		lstImages.add(imgHD);
+		lstImages.add(imgBG);
+		lstImages.add(imgBD);
+	}
+	
+	public void ajouterItem(Item o) {
+		for(ImageView img : lstImages) {
+			if(img == null) {
+				img.setImage(o.getImageView().getImage());
+			}
 		}
 	}
 	
