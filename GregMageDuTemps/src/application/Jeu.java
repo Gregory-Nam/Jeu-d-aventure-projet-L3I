@@ -253,8 +253,8 @@ public class Jeu {
 							salleCourante.supprimerItem(itemAPrendre);
 						}
 						break;
-					case A :
-						terminer("Quitter par soi meme");
+					case I :
+						voirInventaire();
 						break;
 					default :
 						break;
@@ -360,12 +360,12 @@ public class Jeu {
 				KeyCode kc = event.getCode();
 				switch(kc) {
 				case I :
-						primaryStage.setScene(sceneInventaire);
-						break;
+					primaryStage.setScene(scene);
+					break;
 				
 				case ESCAPE :
-						primaryStage.setScene(scene);
-						break;
+					primaryStage.setScene(scene);
+					break;
 				}
 			}
 		});
