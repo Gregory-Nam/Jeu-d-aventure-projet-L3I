@@ -2,31 +2,47 @@ package personnages;
 
 import java.io.File;
 
+
 import elements.Item;
 import enumerations.Deplacements;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 
 public class PersonnageJoueur extends Personnage{
+	
+	private static PersonnageJoueur greg = new PersonnageJoueur();
+	
+	private final static String HAUT = "Images/Personnages/wizardNord_transparent.png";
+	private final static String DROITE = "Images/Personnages/wizardDroite_transparent.png";
+	private final static String BAS = "Images/Personnages/wizardSud_transparent.png";
+	private final static String GAUCHE = "Images/Personnages/wizardGauche_transparent.png";
+	private final static int VELOCITE = 30;
 	
 	private final double largeurPersonnage;
 	private BooleanProperty aBienReponduperiodeCourante;
 	
-	public PersonnageJoueur(File ... sprites) {
-		super(sprites);
+	private PersonnageJoueur() {
+		super();
+		
+		File[] sprites = new File[4];
+		sprites[0] = new File(HAUT);
+		sprites[1] = new File(DROITE);
+		sprites[2] = new File(BAS);
+		sprites[3] = new File(GAUCHE);
 		initPersonnage(sprites);
 		
 		this.aBienReponduperiodeCourante = new SimpleBooleanProperty(false);
-		largeurPersonnage = spriteCourant.getImage().getWidth();
+		this.largeurPersonnage = spriteCourant.getImage().getWidth();
+		
 		super.xMin = spriteCourant.getX();
 		super.xMax = getXMin() + spriteCourant.getImage().getWidth();
 	}
 	
+	
 	@Override
 	public void seDirigerAGauche()  {
-		double nouvellePosition = spriteCourant.getX() - 10;
+		double nouvellePosition = spriteCourant.getX() - VELOCITE;
 		spriteCourant.setX(nouvellePosition);
 		this.changerSprite(Deplacements.GAUCHE);
 		super.xMin = nouvellePosition;
@@ -35,7 +51,7 @@ public class PersonnageJoueur extends Personnage{
 	
 	@Override
 	public void seDirigerADroite() {
-		double nouvellePosition = spriteCourant.getX() + 10;
+		double nouvellePosition = spriteCourant.getX() + VELOCITE;
 		spriteCourant.setX(nouvellePosition);
 		this.changerSprite(Deplacements.DROITE);
 		super.xMin = nouvellePosition;
@@ -54,10 +70,6 @@ public class PersonnageJoueur extends Personnage{
 		spriteCourant.setImage(spritesPersonnageHM.get(d).getImage());
 		
 		
-	}
-	
-	public boolean rencontreMur(KeyCode code) {
-		return (code == KeyCode.LEFT) ? (super.xMin <= 0) : (super.xMin > 1000 - (getXMax() - getXMin()));
 	}
 	
 	public void replacerGauche() {
@@ -84,6 +96,7 @@ public class PersonnageJoueur extends Personnage{
 	public Item getItemEnMain() {
 		return super.itemEnPossession;
 	}
+	
 	@Override
 	public double getXMin() {
 		return super.xMin;
@@ -96,6 +109,10 @@ public class PersonnageJoueur extends Personnage{
 
 	public double getXCentre() {
 		return (super.xMin + super.xMax) / 2;
+	}
+	
+	public static PersonnageJoueur getInstanceUnique() {
+		return greg;
 	}
 	
 	public boolean aBienRepondu() {

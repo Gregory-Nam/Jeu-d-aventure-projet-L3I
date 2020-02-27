@@ -26,26 +26,24 @@ public class PersonnageNonJoueur extends Personnage {
 	private ImageView spritePourEnigme;
 	
 	
-	public PersonnageNonJoueur(double x, Item i ,File spritePourEnigme, File ... sprites) {
-		super(sprites);
+	public PersonnageNonJoueur(NomPNJ nom, double x, Item i, File spritePourEnigme, File ... sprites) {
+		super();
+		super.itemEnPossession = i;
 		
 		this.spritePourEnigme = new ImageView(new Image(spritePourEnigme.toURI().toString()));
 		this.aRecuUneBonneReponse = new SimpleBooleanProperty(false);
-		this.nom = NomPNJ.TEST;
+		this.nom = nom;
 		this.dialogues = new HashMap<TypeDialogue, String>();
-		super.itemEnPossession = i;
 		
-		initPersonnage(sprites);
+		if(sprites.length > 1)
+			super.initPersonnage(sprites);
+		
+		spriteCourant = new ImageView(new Image(sprites[0].toURI().toString()));	
+
 		spriteCourant.setX(x);
 		initDialogue();
 	}
 
-	@Override
-	public void initPersonnage(File[] sprites) {
-		super.initPersonnage(sprites);
-		
-		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.BAS).getImage());	
-	}
 	
 	@Override
 	public void seDirigerADroite() {
@@ -59,13 +57,6 @@ public class PersonnageNonJoueur extends Personnage {
 	}
 
 	private void initDialogue() {
-		/*String tousLesDialogues = AnalyseFichierEnigmeUtil.rechercheDialogues(nom.toString());
-		dialogues.put(TypeDialogue.BONNE_REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.BONNE_REPONSE));
-		dialogues.put(TypeDialogue.QUESTION, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.QUESTION));
-		dialogues.put(TypeDialogue.MAUVAISE_REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.MAUVAISE_REPONSE));
-		dialogues.put(TypeDialogue.DEJA_REPONDU, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.DEJA_REPONDU));
-		dialogues.put(TypeDialogue.REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.REPONSE));*/
-		
 		dialogues.put(TypeDialogue.BONNE_REPONSE, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.BONNE_REPONSE));
 		dialogues.put(TypeDialogue.QUESTION,AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.QUESTION));
 		dialogues.put(TypeDialogue.MAUVAISE_REPONSE, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.MAUVAISE_REPONSE));
@@ -113,7 +104,6 @@ public class PersonnageNonJoueur extends Personnage {
 	}
 	public Item donnerItem() {
 		return itemEnPossession;
-		
 	}
 	
 	public ImageView getImagePourEnigme() {
