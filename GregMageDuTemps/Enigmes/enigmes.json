@@ -2,39 +2,39 @@
   "Klace": {
     "QUESTION": "Salut toi ! Combien y a-t-il de tableaux dans ce chateau ?",
     "REPONSE": "6",
-    "MAUVAISE_REPONSE": "Oupps! Tu as mal r√©pondu. Tu ne peux pas avoir l'item",
-    "BONNE_REPONSE": "Bravo ! Tu as tr√®s bien r√©pondu. Tu merites bien l'item pour activer l'horloge",
-    "DEJA_REPONDU" :  "Malheureusement, la bonne reponse a d√©j√† √©t√© donn√©e."
+    "MAUVAISE_REPONSE": "Oupps! Tu as mal rÈpondu. Tu ne peux pas avoir l'item",
+    "BONNE_REPONSE": "Bravo ! Tu as tr√®s bien rÈpondu. Tu merites bien l'item pour activer l'horloge",
+    "DEJA_REPONDU" :  "Malheureusement, la bonne reponse a dÈj‡† ÈtÈ donnÈe."
   },
 
-  "NOM_PNJ_2": {
+  "NOM_PNJ2": {
     "QUESTION": "Coucou toi,\nlorsque ma soeur avait 5 ans, j'avais le double de son age. Aujourd'hui, elle en a 40.\nQuel est mon age ?",
     "REPONSE": "45",
-    "MAUVAISE_REPONSE": "D√©sol√©, tu as mal r√©pondu. Tu n'auras pas l'item",
-    "BONNE_REPONSE": "F√©licitations, tu as bien r√©pondu. Cet item est √† toi",
-    "DEJA_REPONDU": "Mais tu as d√©j√† r√©pondu !"
+    "MAUVAISE_REPONSE": "DÈsolÈ, tu as mal rÈpondu. Tu n'auras pas l'item",
+    "BONNE_REPONSE": "FÈlicitations, tu as bien rÈpondu. Cet item est ‡† toi",
+    "DEJA_REPONDU": "Mais tu as dÈj‡† rÈpondu !"
   },
   
-  "NOM_PNJ_3": {
+  "NOM_PNJ3": {
     "QUESTION": "Sais-tu combien faut-il de temps (en secondes) pour qu'une horloge sonne midi,/nsi cette derniere sonne six heures en 5 secondes ?",
     "REPONSE": "11",
-    "MAUVAISE_REPONSE": "Malheureusement, tu as mal r√©pondu. Donc pas de r√©compense.",
-    "BONNE_REPONSE": "Exact, tu as bien r√©pondu. Voici ta r√©compense",
-    "DEJA_REPONDU": "D√©sol√©, je t'ai d√©j√† donn√© l'item"
+    "MAUVAISE_REPONSE": "Malheureusement, tu as mal rÈpondu. Donc pas de rÈcompense.",
+    "BONNE_REPONSE": "Exact, tu as bien rÈpondu. Voici ta rÈcompense",
+    "DEJA_REPONDU": "DÈsolÈ, je t'ai dÈj‡† donnÈ l'item"
   },
 
-  "NOM_PNJ_4": {
-    "QUESTION": "J'esp√®re que tu es malin...\nSans lui, rien ne peut se faire.\nIl passe vite ou lentement.\nSouvent quand on le perd, on ne le rattrape plus.\nQui suis-je ?",
+  "NOM_PNJ4": {
+    "QUESTION": "J'espË®re que tu es malin...\nSans lui, rien ne peut se faire.\nIl passe vite ou lentement.\nSouvent quand on le perd, on ne le rattrape plus.\nQui suis-je ?",
     "REPONSE": "le temps",
-    "MAUVAISE_REPONSE": "Oupps, c'est rat√©. L'item t'echappes.",
+    "MAUVAISE_REPONSE": "Oupps, c'est ratÈ. L'item t'echappes.",
     "BONNE_REPONSE": "La reponse est correcte. Tu merites bien l'item",
     "DEJA_REPONDU": "Pas besoin de me le repeter..."
   },
 
-  "NOM_PNJ_5": {
-    "QUESTION": "J'ai un petit probl√®me mathematiques...\nConnais-tu le nombre qui est tel que si on le multiplie par deux, on lui ajoute sa moiti√© puis son quart et enfin 1, donnera 100 ?",
+  "NOM_PNJ5": {
+    "QUESTION": "J'ai un petit problËme mathematiques...\nConnais-tu le nombre qui est tel que si on le multiplie par deux, on lui ajoute sa moitiÈ puis son quart et enfin 1, donnera 100 ?",
     "REPONSE": "36",
-    "MAUVAISE_REPONSE": "La r√©ponse est fausse. Tu aurais du aller √† l'√©cole..",
+    "MAUVAISE_REPONSE": "La rÈponse est fausse. Tu aurais du aller ‡ l'Ècole..",
     "BONNE_REPONSE": "Merci beaucoup !",
     "DEJA_REPONDU": "Encore merci !"
   }
