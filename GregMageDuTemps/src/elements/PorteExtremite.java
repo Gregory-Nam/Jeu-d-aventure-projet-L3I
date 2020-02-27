@@ -10,7 +10,7 @@ public class PorteExtremite extends Interactif {
 	
 	public PorteExtremite(Salle salle1, Salle salle2) {
 		super.xMin = Jeu.X_MAX_FENETRE;
-		super.xMax = xMin + 50;
+		super.xMax = xMin;
 		this.estFaceGauche = true;
 		
 		sallesLieesParLaPorte = new Salle [2];
@@ -43,8 +43,10 @@ public class PorteExtremite extends Interactif {
 
 	@Override
 	public double getXMax() {
-		return getXMin() + 50;
+		return getXMin();
 	}
+	
+	
 	
 	
 	

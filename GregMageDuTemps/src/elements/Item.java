@@ -2,15 +2,16 @@ package elements;
 
 import java.io.File;
 
+import application.Jeu;
 import enumerations.Materiaux;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import personnages.PersonnageJoueur;
 
-public class Item {
+public class Item extends Interactif{
 
 	private Materiaux materiaux;
 	private String nom;
-	private int xPosition;
 	private ImageView imageViewItem;
 	
 	public Item(File f, Materiaux materiaux, int position, String nom) {
@@ -19,17 +20,16 @@ public class Item {
 
 		this.materiaux = materiaux;
 		this.nom = nom;
-		this.xPosition = position;
+
+		super.xMin = position;
+		super.xMax = super.xMin + i.getWidth();
 		
-		imageViewItem.setX(xPosition);
+		imageViewItem.setX(xMin);
 	}
 	
+	@Override
 	public ImageView getImageView() {
 		return imageViewItem;
-	}
-	
-	public double getXCentre() {
-		return xPosition + imageViewItem.getImage().getWidth() / 2;
 	}
 	
 	public String getNom() {
@@ -37,6 +37,23 @@ public class Item {
 	}
 	public Materiaux getMateriaux() {
 		return this.materiaux;
+	}
+
+	@Override
+	public void interagir() {
+		PersonnageJoueur.getInstanceUnique().prendreItem(this);
+		Jeu.getInstanceUnique().getSalleCourante().supprimerInteractif(this);
+		Jeu.getInstanceUnique().initObjetInteractif();
+	}
+
+	@Override
+	public double getXMin() {
+		return super.xMin;
+	}
+
+	@Override
+	public double getXMax() {
+		return super.xMax;
 	}
 	
 	

@@ -13,4 +13,7 @@ public abstract class Interactif {
 	public abstract void interagir();
 	public abstract double getXMin();
 	public abstract double getXMax();
+	public double getXCentre() {
+		return (getXMin() + getXMax()) / 2;
+	}
 }

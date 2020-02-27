@@ -7,13 +7,15 @@ import enumerations.Materiaux;
 
 public class HorlogePiege extends Horloge{
 
-	public HorlogePiege(File image, Materiaux materiaux, int nbItemManquant, double position) {
-		super(image, materiaux, nbItemManquant,0, position);
-	}
+
 	
+	public HorlogePiege(File image, Materiaux materiaux, int periodeApresActivation, double position) {
+		super(image, materiaux, 0, periodeApresActivation, position);
+	}
+
 	@Override
 	public void interagir() {
-		Jeu.getInstanceUnique().terminer("Il semble que cette horloge était un piège...");
+		Jeu.getInstanceUnique().terminer("Il semble que cette horloge était un piège...", false );
 	}
 
 }

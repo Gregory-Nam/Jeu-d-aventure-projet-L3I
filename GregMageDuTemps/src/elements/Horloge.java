@@ -7,6 +7,8 @@ import application.Jeu;
 import enumerations.Materiaux;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import personnages.PersonnageJoueur;
+import personnages.PersonnageNonJoueur;
 
 public class Horloge extends Interactif {
 	private int periodeApresActivation;
@@ -33,45 +35,43 @@ public class Horloge extends Interactif {
 	public void interagir() {
 		/* L'HORLOGE A DEJA ETE ACTIVE */
 		if(aEteActive) return;
-		System.out.println("horloge a pas ete active");
-		Item item = Jeu.getInstanceUnique().greg.getItemEnMain();
+		Item item = PersonnageJoueur.getInstanceUnique().getItemEnMain();
 		if(item == null) return;
-		System.out.println("greg a un item");
+		if(Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation - 1) {
+			Jeu.getInstanceUnique().terminer("Tu n'étais pas dans le bon espace temps pour activer cet horloge...", false);
+			return;
+		}
 		
-		/* ON CHECK SI LE MATERIAUX DE L'ITEM CORRESPOND AU MATERIAUX DE L'HORLOGE */
-		if(!item.getMateriaux().equals(this.materiauxHorloge)) Jeu.getInstanceUnique().terminer("Mauvais matériaux utilisé sur l'horloge");
-		insererItemManquant(item);
-		System.out.println("meme materiaux");
-		System.out.println(peutEtreActive());
+		if(insererItemManquant(item) < 0) return;
+		PersonnageJoueur.getInstanceUnique().enleverItemEnMain();
 		
 		/* SI ON PEUT ACTIVE L'HORLOGE ON L'ACTIVE */
 		if(!peutEtreActive()) return;
 		aEteActive = true;
 		
-		Jeu.getInstanceUnique().changerDePeriode(periodeApresActivation);
-		
-		
+		Jeu.getInstanceUnique().changerDePeriode();
 	}
 
 	public boolean peutEtreActive() {
 		return itemPourActiver[itemPourActiver.length - 1] != (null);
 	}
 
-	private void insererItemManquant(Item item) {
+	private int insererItemManquant(Item item) {
 		if(!item.getMateriaux().equals(this.materiauxHorloge)) {
-			Jeu.getInstanceUnique().terminer("Mauvais materiaux utilise");
-			return;
+			Jeu.getInstanceUnique().terminer("L'horloge a été cassé par cet item en " + item.getMateriaux().toString(), false);
+			return -1;
 		}
 		
 		for(int i = 0; i < itemPourActiver.length; ++i) {
 			/* ITEM DEJA DANS L'HORLOGE */
-			if(itemPourActiver[i] == item) return;
+			if(itemPourActiver[i] == item) return -1;
 			/* ENDROIT A INSERER L'ITEM */
 			if(itemPourActiver[i] == null) {
 				itemPourActiver[i] = item;
-				return;
+				return 1;
 			}
-		}	
+		}
+		return -1;
 	}
 
 	@Override

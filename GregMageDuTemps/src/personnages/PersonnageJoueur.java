@@ -17,7 +17,7 @@ public class PersonnageJoueur extends Personnage{
 	private final static String DROITE = "Images/Personnages/wizardDroite_transparent.png";
 	private final static String BAS = "Images/Personnages/wizardSud_transparent.png";
 	private final static String GAUCHE = "Images/Personnages/wizardGauche_transparent.png";
-	private final static int VELOCITE = 30;
+	private final static int VELOCITE = 15;
 	
 	private final double largeurPersonnage;
 	private BooleanProperty aBienReponduperiodeCourante;
@@ -70,6 +70,10 @@ public class PersonnageJoueur extends Personnage{
 		spriteCourant.setImage(spritesPersonnageHM.get(d).getImage());
 		
 		
+	}
+	
+	public void enleverItemEnMain() {
+		super.itemEnPossession = null;
 	}
 	
 	public void replacerGauche() {

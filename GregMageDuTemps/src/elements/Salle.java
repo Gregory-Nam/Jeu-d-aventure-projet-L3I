@@ -7,13 +7,13 @@ import application.Jeu;
 import enumerations.NomSalle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import personnages.PersonnageJoueur;
 
 public class Salle {
 	
 	private final NomSalle nomDeLaSalle;
 	private ImageView spriteSalle;
 	private ArrayList<Interactif> objetsDeLaSalle;
-	private ArrayList<Item> itemsDeposeParPnj;
 	
 	/* CONSTRUCTEUR PAR RECOPIE */
 	
@@ -21,7 +21,6 @@ public class Salle {
 	public Salle(File cheminImage, NomSalle nomDeLaSalle) {
 		spriteSalle = new ImageView();
 		objetsDeLaSalle = new ArrayList<Interactif>();
-		itemsDeposeParPnj = new ArrayList<Item>();
 		this.nomDeLaSalle = nomDeLaSalle;
 		initSalle(cheminImage);
 	}
@@ -41,40 +40,23 @@ public class Salle {
 	
 	public void ajoutInteractif(Interactif ... interactifs) {
 		for(Interactif i : interactifs) {
-			if(objetsDeLaSalle.contains(i)) continue;
-			objetsDeLaSalle.add(i);
+			if(!objetsDeLaSalle.contains(i)) objetsDeLaSalle.add(i);
 		}
+		
 	}
 	
-	public void ajoutItem(Item i) {
-		if(!itemsDeposeParPnj.contains(i)) itemsDeposeParPnj.add(i);
-	}
-	
-	public ArrayList<Item> getItems() {
-		return itemsDeposeParPnj;
-	}
-	
-	public void supprimerInteractif(Interactif i) {
-		if(objetsDeLaSalle.contains(i)) objetsDeLaSalle.remove(i);
-	}
-	
-	public void supprimerItem(Item i) {
-		if(itemsDeposeParPnj.contains(i)) itemsDeposeParPnj.remove(i);
+	public boolean supprimerInteractif(Interactif i) {
+		return objetsDeLaSalle.remove(i);
 	}
 	
 	// gerer le cas ou il n'y a pas d'objet interactif par une exception ???
-	public Interactif interactifAPosition(double x) {
+	public Interactif interactifAPosition(double x1, double x2) {
 		for(Interactif i : objetsDeLaSalle) {
-			System.out.println();
-			if(i.getXMin() <= x && x <= i.getXMax()) {
+			if(i.getXCentre() <= x2 && i.getXCentre() >= x1 ) {
 				return i;
 			}
 		}
 		return null;
-	}
-	
-	public boolean aDesItems() {
-		return itemsDeposeParPnj.size() == 0 ? false : true;
 	}
 	
 	public ArrayList<Interactif> getInteractifs() {

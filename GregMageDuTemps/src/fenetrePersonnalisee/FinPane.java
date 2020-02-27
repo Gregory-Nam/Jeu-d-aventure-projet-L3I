@@ -4,11 +4,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class MortPane extends Pane {
+public class FinPane extends Pane {
 
-	private Label raisonDeLaMort;
+	private Label raisonDeLaFin;
+	private Label etatDeLaFin;
 	
-	public MortPane() {
+	public FinPane() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/EcranDeFin.fxml"));
 		loader.setRoot(this);
         try {
@@ -17,10 +18,12 @@ public class MortPane extends Pane {
             throw new RuntimeException(exception);
         }
         
-        raisonDeLaMort = (Label)this.getChildren().get(1);
+        etatDeLaFin = (Label)this.getChildren().get(0);
+        raisonDeLaFin = (Label)this.getChildren().get(1);
 	}
 	
-	public void setRaisonDeLaMort(String message) {
-		raisonDeLaMort.setText(message);
+	public void setRaisonDeLaFin(String message, boolean aGagne) {
+		if(aGagne)etatDeLaFin.setText("Bravo !");
+		raisonDeLaFin.setText(message);
 	}
 }

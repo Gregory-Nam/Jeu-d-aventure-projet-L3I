@@ -31,6 +31,9 @@
                </children></AnchorPane>
         </items>
       </SplitPane>
-      <TextField alignment="TOP_LEFT" prefHeight="87.0" prefWidth="600.0" promptText="Veuillez saisir une réponse... (Echap pour quitter)" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 5;" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+      <TextField alignment="TOP_LEFT" prefHeight="87.0" prefWidth="600.0" promptText="Veuillez saisir une réponse... (Echap pour quitter)" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 5;" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></TextField>
    </children>
 </fx:root>
