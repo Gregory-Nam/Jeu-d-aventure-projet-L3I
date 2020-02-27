@@ -9,21 +9,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Horloge extends Interactif {
-	private static final int PERIODE_APRES_ACTIVATION = 3;
+	private int periodeApresActivation;
 	private Item[] itemPourActiver;
 	private boolean aEteActive;
 	private Materiaux materiauxHorloge;
 	
-	public Horloge(File image, Materiaux materiaux, int nbItemManquant, double position) {
+	public Horloge(File image, Materiaux materiaux, int nbItemManquant, int periodeApresActivation, double position) {
 		Image i = new Image(image.toURI().toString());
-		super.vueImageInteractif = new ImageView(i);
-		vueImageInteractif.setX(position);
 		
+		super.vueImageInteractif = new ImageView(i);
 		super.xMin = position;
 		super.xMax = super.xMin + i.getWidth();
+		
+		vueImageInteractif.setX(position);
+		
 		this.materiauxHorloge = materiaux;
 		this.aEteActive = false;
 		this.itemPourActiver = new Item[nbItemManquant];
+		this.periodeApresActivation = periodeApresActivation;
 	}
 	
 	@Override
@@ -45,7 +48,7 @@ public class Horloge extends Interactif {
 		if(!peutEtreActive()) return;
 		aEteActive = true;
 		
-		Jeu.getInstanceUnique().changerDePeriode(PERIODE_APRES_ACTIVATION);
+		Jeu.getInstanceUnique().changerDePeriode(periodeApresActivation);
 		
 		
 	}
