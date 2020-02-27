@@ -14,10 +14,11 @@ public final class AnalyseFichierEnigmeUtil {
 	
 	public static String initDialoguesJSON(String nomPNJ, TypeDialogue type)  {
 		JSONParser parser = new JSONParser();
+		System.out.println(nomPNJ);
 		try {
 			Object obj = parser.parse(new FileReader("Enigmes/enigmes.json"));
 			JSONObject json = (JSONObject) obj;
-			json = (JSONObject) json.get(nomPNJ);
+			json = (JSONObject) json.get(nomPNJ.toString());
 			return (String)json.get(type.toString());
 		
 		} catch (Exception e) {
