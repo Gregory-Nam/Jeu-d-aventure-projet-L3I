@@ -79,4 +79,8 @@ public class EnigmePane extends GridPane {
 		
 	}
 	
+	public void activerFocus() {
+		champsDeTexte.requestFocus();
+	}
+	
 }

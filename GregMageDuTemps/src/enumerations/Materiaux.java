@@ -2,6 +2,6 @@ package enumerations;
 
 public enum Materiaux {
 
-	BRONZE, ARGENT, OR;
+	BRONZE, ARGENT, OR, PLAQUE_OR;
 	
 }

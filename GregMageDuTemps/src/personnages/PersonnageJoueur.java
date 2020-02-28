@@ -2,7 +2,8 @@ package personnages;
 
 import java.io.File;
 
-
+import application.Jeu;
+import elements.Inventaire;
 import elements.Item;
 import enumerations.Deplacements;
 import javafx.beans.property.BooleanProperty;
@@ -20,6 +21,7 @@ public class PersonnageJoueur extends Personnage{
 	private final static int VELOCITE = 15;
 	
 	private final double largeurPersonnage;
+	private Inventaire inventaire;
 	private BooleanProperty aBienReponduperiodeCourante;
 	
 	private PersonnageJoueur() {
@@ -34,6 +36,7 @@ public class PersonnageJoueur extends Personnage{
 		
 		this.aBienReponduperiodeCourante = new SimpleBooleanProperty(false);
 		this.largeurPersonnage = spriteCourant.getImage().getWidth();
+		this.inventaire = new Inventaire();
 		
 		super.xMin = spriteCourant.getX();
 		super.xMax = getXMin() + spriteCourant.getImage().getWidth();
@@ -68,8 +71,6 @@ public class PersonnageJoueur extends Personnage{
 	public void changerSprite(Deplacements d) {
 		if(spriteCourant.getImage().equals(spritesPersonnageHM.get(d).getImage())) return;
 		spriteCourant.setImage(spritesPersonnageHM.get(d).getImage());
-		
-		
 	}
 	
 	public void enleverItemEnMain() {
@@ -88,13 +89,17 @@ public class PersonnageJoueur extends Personnage{
 		spriteCourant.setX(super.xMin);
 	}
 	
-	public void prendreItem(Item i) {
-		super.itemEnPossession = i;
+	public void mettreItemdansInventaire(Item i) {
+		this.inventaire.ajouterItem(i);
+	}
+	
+	public void prendreItemEnMain(Item i) {
+		super.itemEnPossession = inventaire.getItem(i);
 	}
 	
 	@Override
  	public void interagir() {
-		// TODO Auto-generated method stub
+		Jeu.getInstanceUnique().afficheMessage("Je crois qu'il n'y a rien...",0.5);
 	}
 
 	public Item getItemEnMain() {
@@ -119,6 +124,9 @@ public class PersonnageJoueur extends Personnage{
 		return greg;
 	}
 	
+	public Inventaire getInventaire() {
+		return inventaire;
+	}
 	public boolean aBienRepondu() {
 		return aBienReponduperiodeCourante.get();
 	}

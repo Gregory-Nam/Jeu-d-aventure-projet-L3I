@@ -29,6 +29,7 @@ import enumerations.Deplacements;
 import enumerations.Materiaux;
 import enumerations.NomPNJ;
 import enumerations.NomSalle;
+import enumerations.Periode;
 import fenetrePersonnalisee.EnigmePane;
 import fenetrePersonnalisee.InventairePane;
 import fenetrePersonnalisee.FinPane;
@@ -55,13 +56,13 @@ public class Jeu {
 	private Label message;
 	
 	private HashMap<NomSalle, Salle> salles;
-	private int periodeCourante;
+	private Periode periodeCourante;
 	
 	private Jeu() {}
 	
 	public void lancerJeu(Stage stage) throws IOException {
 		CompteARebours c = new CompteARebours(1, 0);
-		this.periodeCourante = 1;
+		this.periodeCourante = Periode.PERIODE_1;
 		primaryStage = stage;
 		primaryStage.setResizable(false);
 		
@@ -81,7 +82,10 @@ public class Jeu {
 		
 		c.lancer();
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
-		afficheMessage("Periode 1");
+		greg.getInventaire().creerListener(rootInventaire);
+		afficheMessage(periodeCourante.toString().replace('_', ' '),2);
+		
+		
 	}
 	
 	private void initPersonnageJoueurScene() {
@@ -100,7 +104,8 @@ public class Jeu {
 	
 	private void initEnigmeScene() {
 		rootEnigme = new EnigmePane();
-		sceneEnigme = new Scene(rootEnigme);	
+		sceneEnigme = new Scene(rootEnigme);
+		
 	}
 	
 	private void initInventaireScene() {
@@ -154,8 +159,12 @@ public class Jeu {
 		/*File haut = new File("Images/PNJ/Klace_face_transparence.png");
 		File droite = new File("Images/PNJ/Klace_droite_transparence.png");
 		File gauche = new File("Images/PNJ/Klace_gauche_transparence.png");*/
-		Item itemBronze = new Item(new File("Images/items/aiguille_bronze_transparence.png"), Materiaux.BRONZE, 900, "Aiguille");
-		Item itemArgent = new Item(new File("Images/items/aiguille_argent_transparence.png"), Materiaux.ARGENT, 850, "Aiguille");
+		Item itemBronze = new Item(new File("Images/items/aiguille_bronze_transparence.png"),
+							       new File("Images/items/aiguille_bronze.png"),
+							       Materiaux.BRONZE, 900, "Aiguille");
+		Item itemArgent = new Item(new File("Images/items/aiguille_argent_transparence.png"),
+								   new File("Images/items/aiguille_argent.png"),
+								   Materiaux.ARGENT, 850, "Aiguille");
 		
 		
 		File bas = new File("Images/PNJ/Klace_face_transparence.png");
@@ -196,10 +205,10 @@ public class Jeu {
 		PorteMurale p5 = new PorteMurale(salle3, sallePiege, 730);
 		
 		/* HORLOGES */
-		Horloge horlogeBronze = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, 2, 60);
-		Horloge horlogeArgent = new Horloge(new File("Images/Horloges/Horloge_argent_transparence.png"), Materiaux.ARGENT, 1, 3, 92);
-		//Horloge horlogeOr = new Horloge(new File("Images/Horloges/Horloge_or_transparence.png"), Materiaux.OR, 2,9, 210);
-		//HorlogePiege horlogepiege = new HorlogePiege(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.OR, 2, 850);
+		Horloge horlogeBronze = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 60);
+		Horloge horlogeArgent = new Horloge(new File("Images/Horloges/Horloge_argent_transparence.png"), Materiaux.ARGENT, 1, Periode.PERIODE_3, 92);
+		Horloge horlogeOr = new Horloge(new File("Images/Horloges/Horloge_or_transparence.png"), Materiaux.OR, 2, Periode.PERIODE_OBJECTIF, 210);
+		HorlogePiege horlogePiege = new HorlogePiege(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.PLAQUE_OR, Periode.PERIODE_OBJECTIF, 850);
 
 		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
@@ -217,9 +226,9 @@ public class Jeu {
 		salle2.ajoutInteractif(p3,p4,p6);
 		salle3.ajoutInteractif(p4,p5,p7);
 		salleArgent.ajoutInteractif(p2,horlogeArgent);
-		salleOr.ajoutInteractif(p7);
+		salleOr.ajoutInteractif(p7, horlogeOr);
 		salleBronze.ajoutInteractif(p6,horlogeBronze);
-		sallePiege.ajoutInteractif(p5); 
+		sallePiege.ajoutInteractif(p5, horlogePiege); 
 
 		/* INITIALISATION DES PNJ */	
 		initPnjItemPeriode1();
@@ -252,7 +261,7 @@ public class Jeu {
 						if(greg.getXMin() <= X_MIN_FENETRE || greg.getXMax() >= X_MAX_FENETRE) break;
 						Interactif objetInteractif = salleCourante.interactifAPosition(greg.getXMin(), greg.getXMax());
 
-						if(objetInteractif != null && objetInteractif != greg ) {
+						if(objetInteractif != null) {
 							objetInteractif.interagir();
 							greg.changerSprite(Deplacements.BAS);
 						}
@@ -293,14 +302,13 @@ public class Jeu {
 		
 		/* EXTREMITE ATTEINTE, SEUL OBJET POSSIBLE (NORMALEMENT) EST UNE PORTE */
 		Interactif objetExtremite = salleCourante.interactifAPosition(greg.getXMin(),greg.getXMax());
-		if (objetExtremite != null && objetExtremite != greg) {
+		if (objetExtremite != null) {
 			objetExtremite.interagir();
 			if(gauche) greg.replacerDroite();
 			else greg.replacerGauche();
 		}
 	}
 	
-	@SuppressWarnings("incomplete-switch")
 	private void ajoutEvenementEnigme() {
 		sceneEnigme.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -309,6 +317,9 @@ public class Jeu {
 				switch(kc) {
 					case ESCAPE :
 						primaryStage.setScene(scene);
+						break;
+					default:
+						rootEnigme.activerFocus();
 						break;
 				}
 			}
@@ -392,15 +403,15 @@ public class Jeu {
 	
 	
 	public void changerDePeriode()  {
-		++periodeCourante;
-		String dossierPeriode = "Periode_" + periodeCourante;
+		periodeCourante = periodeCourante.suivante();
+		String dossierPeriode = periodeCourante.toString();
 		salles.forEach((nomSalle,salle) -> {
 				salle.initSalle(new File("Images/salles/"+ dossierPeriode + "/" + nomSalle.toString() + ".png"));
 			}
 		);
 		setSalleCourante(salles.get(NomSalle.SALLE_DEPART));
 		greg.replacerGauche();
-		afficheMessage(dossierPeriode.replace('_', ' '));
+		afficheMessage(dossierPeriode.replace('_', ' '), 2);
 		
 	}
 	
@@ -408,14 +419,14 @@ public class Jeu {
 		return salleCourante;
 	}
 	
-	public int getPeriodeCourante() {
+	public Periode getPeriodeCourante() {
 		return periodeCourante;
 	}
 	
-	public void afficheMessage(String message) {
+	public void afficheMessage(String message, double seconde) {
 		this.message.setVisible(true);
 		PauseTransition pause = new PauseTransition(
-		        Duration.seconds(2)
+		        Duration.seconds(seconde)
 		);
 		pause.setOnFinished(
 		        event -> this.message.setVisible(false)

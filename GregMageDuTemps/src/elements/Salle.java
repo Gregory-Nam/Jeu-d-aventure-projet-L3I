@@ -52,11 +52,12 @@ public class Salle {
 	// gerer le cas ou il n'y a pas d'objet interactif par une exception ???
 	public Interactif interactifAPosition(double x1, double x2) {
 		for(Interactif i : objetsDeLaSalle) {
+			if(i.equals(PersonnageJoueur.getInstanceUnique())) continue;
 			if(i.getXCentre() <= x2 && i.getXCentre() >= x1 ) {
 				return i;
 			}
 		}
-		return null;
+		return PersonnageJoueur.getInstanceUnique();
 	}
 	
 	public ArrayList<Interactif> getInteractifs() {

@@ -4,12 +4,13 @@ import java.io.File;
 
 import application.Jeu;
 import enumerations.Materiaux;
+import enumerations.Periode;
 
 public class HorlogePiege extends Horloge{
 
 
 	
-	public HorlogePiege(File image, Materiaux materiaux, int periodeApresActivation, double position) {
+	public HorlogePiege(File image, Materiaux materiaux, Periode periodeApresActivation, double position) {
 		super(image, materiaux, 0, periodeApresActivation, position);
 	}
 

@@ -5,18 +5,19 @@ import java.util.Arrays;
 
 import application.Jeu;
 import enumerations.Materiaux;
+import enumerations.Periode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
 import personnages.PersonnageNonJoueur;
 
 public class Horloge extends Interactif {
-	private int periodeApresActivation;
+	private Periode periodeApresActivation;
 	private Item[] itemPourActiver;
 	private boolean aEteActive;
 	private Materiaux materiauxHorloge;
 	
-	public Horloge(File image, Materiaux materiaux, int nbItemManquant, int periodeApresActivation, double position) {
+	public Horloge(File image, Materiaux materiaux, int nbItemManquant, Periode periodeApresActivation, double position) {
 		Image i = new Image(image.toURI().toString());
 		
 		super.vueImageInteractif = new ImageView(i);
@@ -37,7 +38,7 @@ public class Horloge extends Interactif {
 		if(aEteActive) return;
 		Item item = PersonnageJoueur.getInstanceUnique().getItemEnMain();
 		if(item == null) return;
-		if(Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation - 1) {
+		if(Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation.precente()) {
 			Jeu.getInstanceUnique().terminer("Tu n'étais pas dans le bon espace temps pour activer cet horloge...", false);
 			return;
 		}

@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import personnages.PersonnageJoueur;
 
 public class InventairePane extends Pane{
 
@@ -24,7 +25,10 @@ public class InventairePane extends Pane{
 	private ImageView imgBD;
 	private Label lblBD;
 	
-	private ArrayList<ImageView> lstImages;
+	private ArrayList<ImageView> images;
+	private ArrayList<Label> labels;
+	
+	private ArrayList<Item> itemsAjoute;
 		
 	
 	
@@ -60,22 +64,48 @@ public class InventairePane extends Pane{
 	}
 	
 	private void initListe() {
-		this.lstImages = new ArrayList<ImageView>();
+		this.images = new ArrayList<ImageView>();
+		this.labels = new ArrayList<Label>();
+		this.itemsAjoute = new ArrayList<Item>();
 		
-		lstImages.add(imgHG);
-		lstImages.add(imgHD);
-		lstImages.add(imgBG);
-		lstImages.add(imgBD);
+		images.add(imgHG);
+		images.add(imgHD);
+		images.add(imgBG);
+		images.add(imgBD);
+		
+		labels.add(lblHG);
+		labels.add(lblHD);
+		labels.add(lblBG);
+		labels.add(lblBD);
+		
 	}
 	
 	public void ajouterItem(Item o) {
-		for(ImageView img : lstImages) {
-			if(img == null) {
-				img.setImage(o.getImageView().getImage());
-			}
-		}
+		itemsAjoute.add(o);
+		int i = itemsAjoute.indexOf(o);
+		images.get(i).setImage(o.getImageViewPourInventaire().getImage());
+		labels.get(i).setText(o.getNom());
+		PersonnageJoueur.getInstanceUnique().prendreItemEnMain(o);
 	}
 	
+	public void supprimerItem(Item o) {
+		int i = itemsAjoute.indexOf(o);
+		itemsAjoute.remove(o);
+		images.get(i).setImage(null);
+		labels.get(i).setText("Vide");
+		raffraichissement(i);
+	}
+	
+	private void raffraichissement(int aPartirDe) {
+		for(int i = aPartirDe; i < itemsAjoute.size(); ++i) {
+			Item itemCourant = itemsAjoute.get(i);
+			images.get(i).setImage(itemCourant.getImageView().getImage());
+			labels.get(i).setText(itemCourant.getNom());
+		}
+	}
+	private void creerEvenement() {
+		
+	}
 	
 	
 	

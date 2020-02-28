@@ -1,7 +1,6 @@
 package elements;
 
 import java.io.File;
-
 import application.Jeu;
 import enumerations.Materiaux;
 import javafx.scene.image.Image;
@@ -13,10 +12,14 @@ public class Item extends Interactif{
 	private Materiaux materiaux;
 	private String nom;
 	private ImageView imageViewItem;
+	private ImageView imageViewItemPourInventaire;
 	
-	public Item(File f, Materiaux materiaux, int position, String nom) {
-		Image i = new Image(f.toURI().toString());
+	public Item(File image, File imagePourInventaire, Materiaux materiaux, int position, String nom) {
+		Image i = new Image(image.toURI().toString());
 		imageViewItem = new ImageView(i);
+		
+		i = new Image(imagePourInventaire.toURI().toString());
+		imageViewItemPourInventaire = new ImageView(i);
 
 		this.materiaux = materiaux;
 		this.nom = nom;
@@ -32,8 +35,12 @@ public class Item extends Interactif{
 		return imageViewItem;
 	}
 	
+	public ImageView getImageViewPourInventaire() {
+		return imageViewItemPourInventaire;
+	}
+	
 	public String getNom() {
-		return nom + " de " + this.materiaux.toString();
+		return nom + " en " + this.materiaux.toString();
 	}
 	public Materiaux getMateriaux() {
 		return this.materiaux;
@@ -41,7 +48,7 @@ public class Item extends Interactif{
 
 	@Override
 	public void interagir() {
-		PersonnageJoueur.getInstanceUnique().prendreItem(this);
+		PersonnageJoueur.getInstanceUnique().mettreItemdansInventaire(this);
 		Jeu.getInstanceUnique().getSalleCourante().supprimerInteractif(this);
 		Jeu.getInstanceUnique().initObjetInteractif();
 	}
