@@ -3,9 +3,12 @@ package fenetrePersonnalisee;
 import java.util.ArrayList;
 
 import elements.Item;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import personnages.PersonnageJoueur;
 
@@ -29,6 +32,7 @@ public class InventairePane extends Pane{
 	private ArrayList<Label> labels;
 	
 	private ArrayList<Item> itemsAjoute;
+	private ImageView itemSelectionne;
 		
 	
 	
@@ -43,6 +47,7 @@ public class InventairePane extends Pane{
         }	
         initEnfant();	
         initListe();
+        creerEvenement();
 	}
 	
 	private void initEnfant() {
@@ -103,10 +108,50 @@ public class InventairePane extends Pane{
 			labels.get(i).setText(itemCourant.getNom());
 		}
 	}
+	
 	private void creerEvenement() {
 		
+		EventHandler<MouseEvent> ev = e -> {
+			ImageView elementCourant = (ImageView)e.getSource();
+			Pane parentDuCourant = (Pane)elementCourant.getParent();
+			
+			if(elementCourant.getImage() == null) return;
+			
+			if(!existeUnItemSelectionne()) 
+				selection(parentDuCourant, elementCourant);
+			
+			else if(existeUnItemSelectionne() && elementCourant.getId().equals("selectionne"))
+				deselection(parentDuCourant, elementCourant);
+			
+			else {
+				deselection((Pane)itemSelectionne.getParent(), itemSelectionne);
+				selection(parentDuCourant, elementCourant);
+			}
+			
+		};
+		
+		for(ImageView img : images)
+			img.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
+
 	}
 	
+	
+	private void selection(Pane panneau, ImageView img) {
+		img.setId("selectionne");
+		panneau.setStyle(panneau.getStyle() + "-fx-border-color:red;-fx-border-width:5;");
+		itemSelectionne = img;
+	}
+	
+	private void deselection(Pane panneau, ImageView img){
+		img.setId("");
+		panneau.setStyle("-fx-background-color:grey;");
+		itemSelectionne = null;
+	}
+	
+	
+	private boolean existeUnItemSelectionne() {
+		return this.lookup("#selectionne") == null ? false : true;
+	}
 	
 	
 	

@@ -46,6 +46,8 @@ public class Inventaire {
 					panneauEcoute.ajouterItem(inventaireObserve.get(changement.getFrom()));
 				else if(changement.wasRemoved())
 					panneauEcoute.supprimerItem(inventaireObserve.get(changement.getFrom()));
+				else if(changement.wasUpdated())
+					System.out.println("update");
 
 			}
 		});
