@@ -74,6 +74,8 @@ public class PersonnageJoueur extends Personnage{
 	}
 	
 	public void enleverItemEnMain() {
+		System.out.println("enlever item main");
+		inventaire.supprimerItem(itemEnPossession);
 		super.itemEnPossession = null;
 	}
 	

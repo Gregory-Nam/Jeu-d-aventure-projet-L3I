@@ -35,9 +35,13 @@ public class Horloge extends Interactif {
 	@Override
 	public void interagir() {
 		/* L'HORLOGE A DEJA ETE ACTIVE */
+		System.out.println(aEteActive);
 		if(aEteActive) return;
 		Item item = PersonnageJoueur.getInstanceUnique().getItemEnMain();
-		if(item == null) return;
+		if(item == null) {
+			Jeu.getInstanceUnique().afficheMessage("Je devrais prendre un item...", 1);
+			return;
+		}
 		if(Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation.precente()) {
 			Jeu.getInstanceUnique().terminer("Tu n'étais pas dans le bon espace temps pour activer cet horloge...", false);
 			return;
@@ -47,7 +51,10 @@ public class Horloge extends Interactif {
 		PersonnageJoueur.getInstanceUnique().enleverItemEnMain();
 		
 		/* SI ON PEUT ACTIVE L'HORLOGE ON L'ACTIVE */
-		if(!peutEtreActive()) return;
+		if(!peutEtreActive()) {
+			Jeu.getInstanceUnique().afficheMessage("Ce ne sera pas suffisant", 1);
+			return;
+		}
 		aEteActive = true;
 		
 		Jeu.getInstanceUnique().changerDePeriode();

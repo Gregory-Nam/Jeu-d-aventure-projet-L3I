@@ -1,6 +1,0 @@
-nom / Salle / position en partant de la gauche (px) / periode d'apparition :
-Klace Heureouvair / Salle_3 / (564-611) / 1
-Slyne / Salle_2 / (599-626) / 1;2
-Carpenter / Salle_1 / (571-632) / 1;2;3
-Abitbol / Salle_piege (148-219)/ 3
-Zavier Mais / Salle_piège / (484-554)  / 3

@@ -61,7 +61,7 @@ public class Jeu {
 	private Jeu() {}
 	
 	public void lancerJeu(Stage stage) throws IOException {
-		CompteARebours c = new CompteARebours(1, 0);
+		CompteARebours c = new CompteARebours(5, 0);
 		this.periodeCourante = Periode.PERIODE_1;
 		primaryStage = stage;
 		primaryStage.setResizable(false);
@@ -152,34 +152,56 @@ public class Jeu {
 			if(i.getImageView() == null) continue;
 			root.getChildren().add(i.getImageView());
 		}
-		//ajoutItemScene();
 	}
 	
 	private void initPnjItemPeriode1() {
-		/*File haut = new File("Images/PNJ/Klace_face_transparence.png");
-		File droite = new File("Images/PNJ/Klace_droite_transparence.png");
-		File gauche = new File("Images/PNJ/Klace_gauche_transparence.png");*/
 		Item itemBronze = new Item(new File("Images/items/aiguille_bronze_transparence.png"),
 							       new File("Images/items/aiguille_bronze.png"),
-							       Materiaux.BRONZE, 900, "Aiguille");
+							       Materiaux.BRONZE, 630, "Aiguille");
 		Item itemArgent = new Item(new File("Images/items/aiguille_argent_transparence.png"),
 								   new File("Images/items/aiguille_argent.png"),
-								   Materiaux.ARGENT, 850, "Aiguille");
+								   Materiaux.ARGENT, 650, "Aiguille");
+		
+		Item itemOr1 = new Item(new File("Images/items/aiguille_or_transparence.png"),
+				   new File("Images/items/aiguille_or.png"),
+				   Materiaux.OR, 650, "Aiguille");
 		
 		
 		File bas = new File("Images/PNJ/Klace_face_transparence.png");
 		File imagePourenigme = new File("Images/PNJ/Klace_face.png");
-		PersonnageNonJoueur pnjBronze = new PersonnageNonJoueur(NomPNJ.KLACE, 850, itemBronze, imagePourenigme, bas);
+		PersonnageNonJoueur pnjBronze = new PersonnageNonJoueur(NomPNJ.KLACE_HEUREOUVERRE, 564, itemBronze, imagePourenigme, bas);
 		
-		bas = new File("Images/PNJ/NOM_PNJ2_face_transparence.png");
-		imagePourenigme = new File("Images/PNJ/NOM_PNJ2_face.png");
-		PersonnageNonJoueur pnjArgent = new PersonnageNonJoueur(NomPNJ.NOM_PNJ_2, 900, itemArgent, imagePourenigme,bas);
+		bas = new File("Images/PNJ/Slyne_face_transparence.png");
+		imagePourenigme = new File("Images/PNJ/Slyne_face.png");
+		PersonnageNonJoueur pnjArgent = new PersonnageNonJoueur(NomPNJ.SLYNE, 599, itemArgent, imagePourenigme,bas);
 		
-		salles.get(NomSalle.SALLE_ARGENT).ajoutInteractif(pnjArgent);
-		salles.get(NomSalle.SALLE_BRONZE).ajoutInteractif(pnjBronze);
-
-
+		bas = new File("Images/PNJ/Carpenter_face_transparence.png");
+		imagePourenigme = new File("Images/PNJ/Carpenter_face.png");
+		
+		PersonnageNonJoueur pnjOr1 = new PersonnageNonJoueur(NomPNJ.CARPENTER, 571, itemOr1, imagePourenigme, bas);
+		
+		salles.get(NomSalle.SALLE_2).ajoutInteractif(pnjArgent);
+		salles.get(NomSalle.SALLE_3).ajoutInteractif(pnjBronze);
+		salles.get(NomSalle.SALLE_1).ajoutInteractif(pnjOr1);
+	}
 	
+	private void initPnjItemPeriode3() {
+		
+		Item itemOr2 = new Item(new File("Images/items/Pendule_or_transparence.png"),
+				   new File("Images/items/Pendule_or.png"),
+				   Materiaux.OR, 650, "Pendule");
+		
+		File bas = new File("Images/PNJ/Abitbol_face_transparence.png");
+		File imagePourenigme = new File("Images/PNJ/Abitbol_face.png");
+		PersonnageNonJoueur pnjOr2 = new PersonnageNonJoueur(NomPNJ.ABITBOL, 148, itemOr2, imagePourenigme, bas);
+		
+		bas = new File("Images/PNJ/Zavier_face_transparence.png");
+		imagePourenigme = new File("Images/PNJ/Zavier_face.png");
+		PersonnageNonJoueur pnjPiege = new PersonnageNonJoueur(NomPNJ.ZAVIER_MAIS, 484, null, imagePourenigme, bas);
+
+		salles.get(NomSalle.SALLE_PIEGE).ajoutInteractif(pnjOr2,pnjPiege);
+		
+		
 	}
 	
 	private void creationDesObjetsInteractifs() {
@@ -205,10 +227,10 @@ public class Jeu {
 		PorteMurale p5 = new PorteMurale(salle3, sallePiege, 730);
 		
 		/* HORLOGES */
-		Horloge horlogeBronze = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 60);
+		Horloge horlogeBronze = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 889);
 		Horloge horlogeArgent = new Horloge(new File("Images/Horloges/Horloge_argent_transparence.png"), Materiaux.ARGENT, 1, Periode.PERIODE_3, 92);
-		Horloge horlogeOr = new Horloge(new File("Images/Horloges/Horloge_or_transparence.png"), Materiaux.OR, 2, Periode.PERIODE_OBJECTIF, 210);
-		HorlogePiege horlogePiege = new HorlogePiege(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.PLAQUE_OR, Periode.PERIODE_OBJECTIF, 850);
+		Horloge horlogeOr = new Horloge(new File("Images/Horloges/Horloge_or_transparence.png"), Materiaux.OR, 2, Periode.PERIODE_OBJECTIF, 853);
+		HorlogePiege horlogePiege = new HorlogePiege(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.PLAQUE_OR, Periode.PERIODE_OBJECTIF, 86);
 
 		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
@@ -255,7 +277,6 @@ public class Jeu {
 						
 					/*DEPLACEMENT VERS LE HAUT POUR INTERAGIR AVEC UN OBJET INTERACTIF */
 					case UP : 
-						System.out.println(getSalleCourante().getInteractifs());
 
 						greg.changerSprite(Deplacements.HAUT);
 						if(greg.getXMin() <= X_MIN_FENETRE || greg.getXMax() >= X_MAX_FENETRE) break;
@@ -291,11 +312,11 @@ public class Jeu {
 		else return;
 		
 		/* DEPLACEMENT NORMAL SI CE N'EST PAS UNE EXTREMITE */
-		if(!gauche && greg.getXMax() <= extremite ) {
+		if(!gauche && greg.getXMax() < extremite ) {
 			greg.seDirigerADroite();
 			return;
 		}
-		else if (gauche && greg.getXMin() >= extremite) {
+		else if (gauche && greg.getXMin() > extremite) {
 			greg.seDirigerAGauche();
 			return;
 		}
@@ -304,6 +325,7 @@ public class Jeu {
 		Interactif objetExtremite = salleCourante.interactifAPosition(greg.getXMin(),greg.getXMax());
 		if (objetExtremite != null) {
 			objetExtremite.interagir();
+			if(objetExtremite.equals(greg)) return;
 			if(gauche) greg.replacerDroite();
 			else greg.replacerGauche();
 		}
@@ -325,7 +347,8 @@ public class Jeu {
 			}
 		});
 	}
-		
+	
+	
 	public void lancerEnigme(PersonnageNonJoueur pnj) {
 		primaryStage.setScene(sceneEnigme);
 		greg.liaisonDialogueAvecPNJ(pnj);
@@ -353,6 +376,8 @@ public class Jeu {
 				pnj.aRecuUneBonneReponse();
 				rootEnigme.changeDialogue(pnj.repondAUneBonneReponse());
 				salleCourante.supprimerInteractif(greg);
+				/* CAS PNJ PIEGE */
+				if(pnj.donnerItem() == null) return;
 				salleCourante.ajoutInteractif(pnj.donnerItem());
 				salleCourante.ajoutInteractif(greg);
 				initObjetInteractif();
@@ -380,11 +405,13 @@ public class Jeu {
 				KeyCode kc = event.getCode();
 				switch(kc) {
 				case I :
-					primaryStage.setScene(scene);
-					break;
-				
 				case ESCAPE :
 					primaryStage.setScene(scene);
+					Item itemSelectionne = rootInventaire.getItemSelectionne();
+					System.out.println(itemSelectionne);
+					if( itemSelectionne != null) greg.prendreItemEnMain(itemSelectionne);
+					break;
+				default:
 					break;
 				}
 			}
@@ -404,6 +431,11 @@ public class Jeu {
 	
 	public void changerDePeriode()  {
 		periodeCourante = periodeCourante.suivante();
+		if(periodeCourante.equals(Periode.PERIODE_3)) initPnjItemPeriode3();
+		if(periodeCourante.equals(Periode.PERIODE_OBJECTIF)) {
+			terminer("Tu as retrouvé ton espace temps !", true);
+			return;
+		}
 		String dossierPeriode = periodeCourante.toString();
 		salles.forEach((nomSalle,salle) -> {
 				salle.initSalle(new File("Images/salles/"+ dossierPeriode + "/" + nomSalle.toString() + ".png"));

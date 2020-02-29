@@ -18,13 +18,17 @@ public class Inventaire {
 	}
 	
 	public boolean ajouterItem(Item i) {
-		if(!capaciteAtteinte() && !inventaireObserve.contains(i))
-			return this.inventaireObserve.add(i);
+		if(!capaciteAtteinte() && !inventaireObserve.contains(i)) {
+			this.inventaireObserve.add(i);
+			System.out.println(inventaireObserve);
+		}
 		
 		return false;
 	}
 	
 	public void supprimerItem(Item i) {
+		System.out.println("supprime item");
+		System.out.println(i);
 		inventaireObserve.remove(i);
 	}
 	
@@ -42,10 +46,12 @@ public class Inventaire {
 	public void creerListener(InventairePane panneauEcoute) {
 		inventaireObserve.addListener((Change<? extends Item> changement) -> {
 			while(changement.next()) {
-				if(changement.wasAdded())
+				if(changement.wasAdded()) {
 					panneauEcoute.ajouterItem(inventaireObserve.get(changement.getFrom()));
-				else if(changement.wasRemoved())
-					panneauEcoute.supprimerItem(inventaireObserve.get(changement.getFrom()));
+				}
+				else if(changement.wasRemoved()) {
+					panneauEcoute.supprimerItem(changement.getRemoved().get(0));
+				}
 				else if(changement.wasUpdated())
 					System.out.println("update");
 

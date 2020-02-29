@@ -14,7 +14,6 @@ import personnages.PersonnageJoueur;
 
 public class InventairePane extends Pane{
 
-	private Pane paneParent;
 	private Pane paneHG;
 	private ImageView imgHG;
 	private Label lblHG;
@@ -32,7 +31,8 @@ public class InventairePane extends Pane{
 	private ArrayList<Label> labels;
 	
 	private ArrayList<Item> itemsAjoute;
-	private ImageView itemSelectionne;
+	
+	private ImageView imgItemSelectionne;
 		
 	
 	
@@ -88,66 +88,85 @@ public class InventairePane extends Pane{
 	public void ajouterItem(Item o) {
 		itemsAjoute.add(o);
 		int i = itemsAjoute.indexOf(o);
-		images.get(i).setImage(o.getImageViewPourInventaire().getImage());
-		labels.get(i).setText(o.getNom());
-		PersonnageJoueur.getInstanceUnique().prendreItemEnMain(o);
+		remplir(i, o);
 	}
 	
 	public void supprimerItem(Item o) {
 		int i = itemsAjoute.indexOf(o);
 		itemsAjoute.remove(o);
-		images.get(i).setImage(null);
-		labels.get(i).setText("Vide");
+		/* ON VIDE LA CASE */
+		vider(i);
+		/* DESELECTIONNE LA CASE */
+		deselection();
+		/* ON DEPLACE LES ELEMENTS DANS L'INVENTAIRE */
 		raffraichissement(i);
 	}
 	
 	private void raffraichissement(int aPartirDe) {
+		/* ON DECALE TOUS LES ITEMS VERS LA CASE PRECENDENTE */
 		for(int i = aPartirDe; i < itemsAjoute.size(); ++i) {
 			Item itemCourant = itemsAjoute.get(i);
-			images.get(i).setImage(itemCourant.getImageView().getImage());
-			labels.get(i).setText(itemCourant.getNom());
+			remplir(i, itemCourant);
 		}
+		
+		/* ON VIDE LA DERNIERE CASE REMPLI */
+		vider(itemsAjoute.size());
 	}
 	
-	private void creerEvenement() {
-		
+	private void vider(int indice) {
+		images.get(itemsAjoute.size()).setImage(null);
+		labels.get(itemsAjoute.size()).setText("Vide");
+	}
+	
+	private void remplir(int indice, Item item) {
+		images.get(indice).setImage(item.getImageViewPourInventaire().getImage());
+		labels.get(indice).setText(item.getNom());
+	}
+	
+	private void creerEvenement() {	
 		EventHandler<MouseEvent> ev = e -> {
+			/* ELEMENT SUR LEQUEL ON A CLIQUE */
 			ImageView elementCourant = (ImageView)e.getSource();
 			Pane parentDuCourant = (Pane)elementCourant.getParent();
-			
+			/* PAS D'ITEM A SUR CETTE PARTIE */
 			if(elementCourant.getImage() == null) return;
 			
+			/* SELECTION BASIQUE */
 			if(!existeUnItemSelectionne()) 
 				selection(parentDuCourant, elementCourant);
-			
+			/* DESELECTION BASIQUE*/
 			else if(existeUnItemSelectionne() && elementCourant.getId().equals("selectionne"))
-				deselection(parentDuCourant, elementCourant);
-			
+				deselection();
+			/* DESELECTION DE L'ANCIEN ITEM SELECTION ET SELECTION DU NOUVEAU */
 			else {
-				deselection((Pane)itemSelectionne.getParent(), itemSelectionne);
+				deselection();
 				selection(parentDuCourant, elementCourant);
 			}
-			
 		};
-		
+		/* APPLIQUE L'EVENEMENT POUR CHAQUE IMAGEVIEW DE L'INVENTAIRE */
 		for(ImageView img : images)
 			img.addEventHandler(MouseEvent.MOUSE_CLICKED, ev);
-
 	}
 	
 	
 	private void selection(Pane panneau, ImageView img) {
 		img.setId("selectionne");
 		panneau.setStyle(panneau.getStyle() + "-fx-border-color:red;-fx-border-width:5;");
-		itemSelectionne = img;
+		imgItemSelectionne = img;
 	}
 	
-	private void deselection(Pane panneau, ImageView img){
-		img.setId("");
-		panneau.setStyle("-fx-background-color:grey;");
-		itemSelectionne = null;
+	private void deselection(){
+		ImageView selectionne = (ImageView)this.lookup("#selectionne");
+		if(selectionne == null) return;
+		selectionne.setId("");
+		selectionne.getParent().setStyle("-fx-background-color:grey;");
+		imgItemSelectionne = null;
 	}
 	
+	
+	public Item getItemSelectionne() {
+		return imgItemSelectionne == null ? null : itemsAjoute.get(images.indexOf(imgItemSelectionne));
+	}
 	
 	private boolean existeUnItemSelectionne() {
 		return this.lookup("#selectionne") == null ? false : true;

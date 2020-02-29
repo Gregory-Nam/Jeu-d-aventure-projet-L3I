@@ -18,28 +18,28 @@
       <Pane id="i1" layoutX="179.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;">
          <children>
             	<ImageView id="imgItem1" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            	<Label id = "labelItem1" layoutX="16.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Label" textAlignment="CENTER" textFill="WHITE" />
+            	<Label id="labelItem1" layoutX="16.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Vide" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>
       
       <Pane id="i2" layoutX="395.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;">
          <children>
             	<ImageView id="imgItem2" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            	<Label id = "labelItem2" layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Label" textFill="WHITE" />
+            	<Label id="labelItem2" layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Vide" textFill="WHITE" />
          </children>
       </Pane>
       
       <Pane id="i3" layoutX="179.0" layoutY="305.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;">
          <children>
-            	<ImageView id = "imgItem3" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-           		<Label id = "labelItem3" layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Label" textAlignment="CENTER" textFill="WHITE" />
+            	<ImageView id="imgItem3" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+           		<Label id="labelItem3" layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Vide" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </Pane>
       
       <Pane id="i4" layoutX="395.0" layoutY="305.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;">
          <children>
             	<ImageView id="imgItem4" fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            	<Label id="imgItem4" layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Label" textFill="WHITE" />
+            	<Label id="imgItem4" layoutX="18.0" layoutY="178.0" prefHeight="17.0" prefWidth="168.0" text="Vide" textFill="WHITE" />
          </children>
      </Pane>
    </children>
