@@ -1,5 +1,5 @@
 {
-  "Klace": {
+  "Klace Heureouverre": {
     "QUESTION": "Salut toi ! Combien y a-t-il de tableaux dans ce chateau ?",
     "REPONSE": "6",
     "MAUVAISE_REPONSE": "Oupps! Tu as mal répondu. Tu ne peux pas avoir l'item",
@@ -7,7 +7,7 @@
     "DEJA_REPONDU" :  "Malheureusement, la bonne reponse a déjà  été donnée."
   },
 
-  "NOM_PNJ2": {
+  "Slyne": {
     "QUESTION": "Coucou toi,\nlorsque ma soeur avait 5 ans, j'avais le double de son age. Aujourd'hui, elle en a 40.\nQuel est mon age ?",
     "REPONSE": "45",
     "MAUVAISE_REPONSE": "Désolé, tu as mal répondu. Tu n'auras pas l'item",
@@ -15,7 +15,7 @@
     "DEJA_REPONDU": "Mais tu as déjà  répondu !"
   },
   
-  "NOM_PNJ3": {
+  "Carpenter": {
     "QUESTION": "Sais-tu combien faut-il de temps (en secondes) pour qu'une horloge sonne midi,/nsi cette derniere sonne six heures en 5 secondes ?",
     "REPONSE": "11",
     "MAUVAISE_REPONSE": "Malheureusement, tu as mal répondu. Donc pas de récompense.",
@@ -23,7 +23,7 @@
     "DEJA_REPONDU": "Désolé, je t'ai déjà  donné l'item"
   },
 
-  "NOM_PNJ4": {
+  "Abitbol": {
     "QUESTION": "J'espè¨re que tu es malin...\nSans lui, rien ne peut se faire.\nIl passe vite ou lentement.\nSouvent quand on le perd, on ne le rattrape plus.\nQui suis-je ?",
     "REPONSE": "le temps",
     "MAUVAISE_REPONSE": "Oupps, c'est raté. L'item t'echappes.",
@@ -31,7 +31,7 @@
     "DEJA_REPONDU": "Pas besoin de me le repeter..."
   },
 
-  "NOM_PNJ5": {
+  "Zavier Mais": {
     "QUESTION": "J'ai un petit problème mathematiques...\nConnais-tu le nombre qui est tel que si on le multiplie par deux, on lui ajoute sa moitié puis son quart et enfin 1, donnera 100 ?",
     "REPONSE": "36",
     "MAUVAISE_REPONSE": "La réponse est fausse. Tu aurais du aller à l'école..",
