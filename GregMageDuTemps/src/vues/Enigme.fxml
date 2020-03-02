@@ -19,11 +19,11 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="121.0">
                <children>
-                  <ImageView fitHeight="400.0" fitWidth="508.0" focusTraversable="true" layoutX="47.0" layoutY="-219.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imagePersonnage" fitHeight="400.0" fitWidth="508.0" focusTraversable="true" layoutX="47.0" layoutY="-219.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="417.0">
                <children>
-                  <Label alignment="CENTER" layoutX="18.0" layoutY="1.0" prefHeight="296.0" prefWidth="382.0" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label fx:id="dialogue" alignment="CENTER" layoutX="18.0" layoutY="1.0" prefHeight="296.0" prefWidth="382.0" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Cambria Bold Italic" size="20.0" />
                      </font>
@@ -31,7 +31,7 @@
                </children></AnchorPane>
         </items>
       </SplitPane>
-      <TextField alignment="TOP_LEFT" prefHeight="87.0" prefWidth="600.0" promptText="Veuillez saisir une réponse... (Echap pour quitter)" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 5;" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+      <TextField fx:id="champsDeTexte" alignment="TOP_LEFT" prefHeight="87.0" prefWidth="600.0" promptText="Veuillez saisir une réponse... (Echap pour quitter)" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 5;" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></TextField>

@@ -2,8 +2,8 @@ package elements;
 
 import java.util.ArrayList;
 
-import fenetrePersonnalisee.EnigmePane;
-import fenetrePersonnalisee.InventairePane;
+import controleurs.EnigmeControleur;
+import controleurs.InventaireControleur;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
@@ -40,7 +40,7 @@ public class Inventaire {
 		return inventaireObserve.size() == TAILLE_INVENTAIRE;
 	}
 	
-	public void creerListener(InventairePane panneauEcoute) {
+	public void creerListener(InventaireControleur panneauEcoute) {
 		inventaireObserve.addListener((Change<? extends Item> changement) -> {
 			while(changement.next()) {
 				if(changement.wasAdded()) {

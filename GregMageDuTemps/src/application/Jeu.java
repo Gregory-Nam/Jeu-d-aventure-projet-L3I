@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import controleurs.EnigmeControleur;
+import controleurs.FinControleur;
+import controleurs.InventaireControleur;
 import elements.Horloge;
 import elements.HorlogePiege;
 import elements.Interactif;
@@ -31,9 +34,6 @@ import enumerations.Materiaux;
 import enumerations.NomPNJ;
 import enumerations.NomSalle;
 import enumerations.Periode;
-import fenetrePersonnalisee.EnigmePane;
-import fenetrePersonnalisee.InventairePane;
-import fenetrePersonnalisee.FinPane;
 
 public class Jeu {
 	
@@ -51,9 +51,9 @@ public class Jeu {
 	private Scene sceneFinJeu;
 	
 	private Pane root;
-	private EnigmePane rootEnigme;
-	private InventairePane rootInventaire;
-	private FinPane rootMort;
+	private EnigmeControleur rootEnigme;
+	private InventaireControleur rootInventaire;
+	private FinControleur rootMort;
 	private Label message;
 	
 	private HashMap<NomSalle, Salle> salles;
@@ -105,18 +105,18 @@ public class Jeu {
 	}
 	
 	private void initEnigmeScene() {
-		rootEnigme = new EnigmePane();
+		rootEnigme = new EnigmeControleur();
 		sceneEnigme = new Scene(rootEnigme);
 		
 	}
 	
 	private void initInventaireScene() {
-		rootInventaire = new InventairePane();
+		rootInventaire = new InventaireControleur();
 		sceneInventaire = new Scene(rootInventaire);
 	}
 
 	private void initSceneDeFin() throws IOException {
-		rootMort = new FinPane();
+		rootMort = new FinControleur();
 		sceneFinJeu = new Scene(rootMort);
 		
 		sceneFinJeu.setOnKeyPressed(new EventHandler<KeyEvent>() {

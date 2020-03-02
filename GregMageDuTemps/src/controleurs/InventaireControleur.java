@@ -1,4 +1,4 @@
-package fenetrePersonnalisee;
+package controleurs;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import personnages.PersonnageJoueur;
 
-public class InventairePane extends Pane{
+public class InventaireControleur extends Pane{
 
 	@FXML
 	private ImageView imgHG;
@@ -40,7 +40,7 @@ public class InventairePane extends Pane{
 		
 	
 	
-	public InventairePane() {
+	public InventaireControleur() {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/Inventaire.fxml"));
 		loader.setRoot(this);

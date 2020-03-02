@@ -1,17 +1,21 @@
-package fenetrePersonnalisee;
+package controleurs;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class FinPane extends Pane {
+public class FinControleur extends Pane {
 
+	@FXML
 	private Label raisonDeLaFin;
+	@FXML
 	private Label etatDeLaFin;
 	
-	public FinPane() {
+	public FinControleur() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/EcranDeFin.fxml"));
 		loader.setRoot(this);
+		loader.setController(this);
         try {
             loader.load();
         } catch (Exception exception) {
