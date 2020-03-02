@@ -53,6 +53,8 @@ public class Salle {
 	public Interactif interactifAPosition(double x1, double x2) {
 		for(Interactif i : objetsDeLaSalle) {
 			if(i.equals(PersonnageJoueur.getInstanceUnique())) continue;
+			System.out.println(i + " centre : " + i.getXMax());
+			System.out.println(x1+ " " + x2);
 			if(i.getXCentre() <= x2 && i.getXCentre() >= x1 ) {
 				return i;
 			}

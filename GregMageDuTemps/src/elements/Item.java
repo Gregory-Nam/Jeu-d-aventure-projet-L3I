@@ -18,14 +18,16 @@ public class Item extends Interactif{
 		Image i = new Image(image.toURI().toString());
 		imageViewItem = new ImageView(i);
 		
+		super.xMin = position;
+		super.xMax = super.xMin + i.getWidth();
+		
 		i = new Image(imagePourInventaire.toURI().toString());
 		imageViewItemPourInventaire = new ImageView(i);
 
 		this.materiaux = materiaux;
 		this.nom = nom;
 
-		super.xMin = position;
-		super.xMax = super.xMin + i.getWidth();
+		
 		
 		imageViewItem.setX(xMin);
 	}
@@ -48,6 +50,7 @@ public class Item extends Interactif{
 
 	@Override
 	public void interagir() {
+		System.out.println("lol");
 		PersonnageJoueur.getInstanceUnique().mettreItemdansInventaire(this);
 		Jeu.getInstanceUnique().getSalleCourante().supprimerInteractif(this);
 		Jeu.getInstanceUnique().initObjetInteractif();

@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -41,7 +42,7 @@ public class Jeu {
 	public static final int X_MAX_FENETRE = 1000;
 	public static final int X_MIN_FENETRE = 0;
 	
-	public PersonnageJoueur greg;
+	private PersonnageJoueur greg;
 	private Salle salleCourante;
 	private Stage primaryStage;
 	private Scene scene;
@@ -61,7 +62,7 @@ public class Jeu {
 	private Jeu() {}
 	
 	public void lancerJeu(Stage stage) throws IOException {
-		CompteARebours c = new CompteARebours(5, 0);
+		CompteARebours c = new CompteARebours(10, 0);
 		this.periodeCourante = Periode.PERIODE_1;
 		primaryStage = stage;
 		primaryStage.setResizable(false);
@@ -84,6 +85,7 @@ public class Jeu {
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
 		greg.getInventaire().creerListener(rootInventaire);
 		afficheMessage(periodeCourante.toString().replace('_', ' '),2);
+		
 		
 		
 	}

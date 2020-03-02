@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import elements.Item;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -14,22 +15,25 @@ import personnages.PersonnageJoueur;
 
 public class InventairePane extends Pane{
 
-	private Pane paneHG;
+	@FXML
 	private ImageView imgHG;
+	@FXML
 	private Label lblHG;
-	private Pane paneHD;
+	@FXML
 	private ImageView imgHD;
+	@FXML
 	private Label lblHD;
-	private Pane paneBG;
+	@FXML
 	private ImageView imgBG;
+	@FXML
 	private Label lblBG;
-	private Pane paneBD;
+	@FXML
 	private ImageView imgBD;
+	@FXML
 	private Label lblBD;
 	
 	private ArrayList<ImageView> images;
 	private ArrayList<Label> labels;
-	
 	private ArrayList<Item> itemsAjoute;
 	
 	private ImageView imgItemSelectionne;
@@ -40,32 +44,14 @@ public class InventairePane extends Pane{
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/Inventaire.fxml"));
 		loader.setRoot(this);
+		loader.setController(this);
         try {
             loader.load();
         } catch (Exception exception) {
             throw new RuntimeException(exception);
         }	
-        initEnfant();	
         initListe();
         creerEvenement();
-	}
-	
-	private void initEnfant() {
-		//Initialisation des Pane enfants
-		paneHG = (Pane)this.getChildren().get(1);
-		paneHD = (Pane)this.getChildren().get(2);
-		paneBG = (Pane)this.getChildren().get(3);
-		paneBD = (Pane)this.getChildren().get(4);
-		//Initialisation des ImageView
-		imgHG = (ImageView)paneHG.getChildren().get(0);
-		imgHD = (ImageView)paneHD.getChildren().get(0);
-		imgBG = (ImageView)paneBG.getChildren().get(0);
-		imgBD = (ImageView)paneBD.getChildren().get(0);
-		//Initialisation des Labels
-		lblHG = (Label)paneHG.getChildren().get(1);
-		lblHD = (Label)paneHD.getChildren().get(1);
-		lblBG = (Label)paneBG.getChildren().get(1);
-		lblBD = (Label)paneBD.getChildren().get(1);
 	}
 	
 	private void initListe() {

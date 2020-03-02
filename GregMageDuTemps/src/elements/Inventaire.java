@@ -20,15 +20,12 @@ public class Inventaire {
 	public boolean ajouterItem(Item i) {
 		if(!capaciteAtteinte() && !inventaireObserve.contains(i)) {
 			this.inventaireObserve.add(i);
-			System.out.println(inventaireObserve);
 		}
 		
 		return false;
 	}
 	
 	public void supprimerItem(Item i) {
-		System.out.println("supprime item");
-		System.out.println(i);
 		inventaireObserve.remove(i);
 	}
 	
@@ -52,8 +49,6 @@ public class Inventaire {
 				else if(changement.wasRemoved()) {
 					panneauEcoute.supprimerItem(changement.getRemoved().get(0));
 				}
-				else if(changement.wasUpdated())
-					System.out.println("update");
 
 			}
 		});
