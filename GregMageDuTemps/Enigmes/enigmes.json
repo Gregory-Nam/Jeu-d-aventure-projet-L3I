@@ -1,7 +1,7 @@
 {
   "Klace Heureouverre": {
     "QUESTION": "Salut toi ! Combien y a-t-il de tableaux dans ce chateau ?",
-    "REPONSE": "6",
+    "REPONSE": "13",
     "MAUVAISE_REPONSE": "Oupps! Tu as mal répondu. Tu ne peux pas avoir l'item",
     "BONNE_REPONSE": "Bravo ! Tu as trÃ¨s bien répondu. Tu merites bien l'item pour activer l'horloge",
     "DEJA_REPONDU" :  "Malheureusement, la bonne reponse a déjà  été donnée."
