@@ -57,6 +57,7 @@ public class Jeu {
 	private Label message;
 	
 	private HashMap<NomSalle, Salle> salles;
+	private HashMap<NomPNJ, PersonnageNonJoueur> pnj;
 	private Periode periodeCourante;
 	
 	private Jeu() {}
@@ -84,10 +85,7 @@ public class Jeu {
 		c.lancer();
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
 		greg.getInventaire().creerListener(rootInventaire);
-		afficheMessage(periodeCourante.toString().replace('_', ' '),2);
-		
-		
-		
+		afficheMessage(periodeCourante.toString().replace('_', ' '),2);		
 	}
 	
 	private void initPersonnageJoueurScene() {
@@ -157,6 +155,7 @@ public class Jeu {
 	}
 	
 	private void initPnjItemPeriode1() {
+		pnj = new HashMap<>();
 		Item itemBronze = new Item(new File("Images/items/aiguille_bronze_transparence.png"),
 							       new File("Images/items/aiguille_bronze.png"),
 							       Materiaux.BRONZE, 630, "Aiguille");
@@ -185,13 +184,15 @@ public class Jeu {
 		salles.get(NomSalle.SALLE_2).ajoutInteractif(pnjArgent);
 		salles.get(NomSalle.SALLE_3).ajoutInteractif(pnjBronze);
 		salles.get(NomSalle.SALLE_1).ajoutInteractif(pnjOr1);
+		pnj.put(pnjBronze.getNom(), pnjBronze);
+		pnj.put(pnjArgent.getNom(), pnjArgent);
+		pnj.put(pnjOr1.getNom(), pnjOr1);
 	}
 	
 	private void initPnjItemPeriode3() {
-		
 		Item itemOr2 = new Item(new File("Images/items/Pendule_or_transparence.png"),
-				   new File("Images/items/Pendule_or.png"),
-				   Materiaux.OR, 650, "Pendule");
+								new File("Images/items/Pendule_or.png"),
+								Materiaux.OR, 650, "Pendule");
 		
 		File bas = new File("Images/PNJ/Abitbol_face_transparence.png");
 		File imagePourenigme = new File("Images/PNJ/Abitbol_face.png");
@@ -202,8 +203,8 @@ public class Jeu {
 		PersonnageNonJoueur pnjPiege = new PersonnageNonJoueur(NomPNJ.ZAVIER_MAIS, 484, null, imagePourenigme, bas);
 
 		salles.get(NomSalle.SALLE_PIEGE).ajoutInteractif(pnjOr2,pnjPiege);
-		
-		
+		pnj.put(pnjOr2.getNom(), pnjOr2);
+		pnj.put(pnjPiege.getNom(), pnjPiege);
 	}
 	
 	private void creationDesObjetsInteractifs() {
@@ -420,10 +421,6 @@ public class Jeu {
 		});
 	}
 	
-	public void supprimeItemScene(Item i) {
-			root.getChildren().remove(i.getImageView());
-	}
-	
 	public void terminer(String message, boolean aGagne) {
 		rootMort.setRaisonDeLaFin(message, aGagne);
 		primaryStage.setScene(sceneFinJeu);
@@ -432,18 +429,31 @@ public class Jeu {
 	
 	
 	public void changerDePeriode()  {
+		PersonnageNonJoueur pnjMort;
 		periodeCourante = periodeCourante.suivante();
-		if(periodeCourante.equals(Periode.PERIODE_3)) initPnjItemPeriode3();
-		if(periodeCourante.equals(Periode.PERIODE_OBJECTIF)) {
+		if(periodeCourante.equals(Periode.PERIODE_2)) {
+			pnjMort = pnj.get(NomPNJ.KLACE_HEUREOUVERRE);
+			pnj.remove(NomPNJ.KLACE_HEUREOUVERRE);
+			salles.get(NomSalle.SALLE_3).supprimerInteractif(pnjMort);
+		}
+		else if(periodeCourante.equals(Periode.PERIODE_3)) {
+			initPnjItemPeriode3();
+			pnjMort = pnj.get(NomPNJ.SLYNE);
+			pnj.remove(NomPNJ.SLYNE);
+			salles.get(NomSalle.SALLE_2).supprimerInteractif(pnjMort);
+		}
+		else if(periodeCourante.equals(Periode.PERIODE_OBJECTIF)) {
 			terminer("Tu as retrouvé ton espace temps !", true);
 			return;
 		}
+		
 		String dossierPeriode = periodeCourante.toString();
 		salles.forEach((nomSalle,salle) -> {
 				salle.initSalle(new File("Images/salles/"+ dossierPeriode + "/" + nomSalle.toString() + ".png"));
 			}
 		);
 		setSalleCourante(salles.get(NomSalle.SALLE_DEPART));
+		
 		greg.replacerGauche();
 		afficheMessage(dossierPeriode.replace('_', ' '), 2);
 		

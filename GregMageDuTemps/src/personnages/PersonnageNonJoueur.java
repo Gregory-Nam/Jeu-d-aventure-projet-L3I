@@ -64,6 +64,9 @@ public class PersonnageNonJoueur extends Personnage {
 		dialogues.put(TypeDialogue.REPONSE, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.REPONSE));
 	}
 	
+	public NomPNJ getNom() {
+		return nom;
+	}
 	@Override
 	public void interagir() {
 		Jeu.getInstanceUnique().lancerEnigme(this);
