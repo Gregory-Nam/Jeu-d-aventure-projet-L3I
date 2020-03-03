@@ -34,28 +34,58 @@ import enumerations.Materiaux;
 import enumerations.NomPNJ;
 import enumerations.NomSalle;
 import enumerations.Periode;
-
+/**
+ * 
+ * @author Ahmadou Bamba MBAYE
+ *La classe principale du jeu
+ */
 public class Jeu {
 	
 	private static Jeu instanceUnique = new Jeu();
-	
+	/**
+	 * La largeur maximale de la fenetre initialisée à 1000
+	 */
 	public static final int X_MAX_FENETRE = 1000;
+	/**
+	 * La largeur minimale de la fenetre initialisée à 0
+	 */
 	public static final int X_MIN_FENETRE = 0;
-	
+	/**
+	 * Le personnage joueur nommé Greg
+	 */
 	private PersonnageJoueur greg;
+	/**
+	 * La salle courante de type Salle
+	 */
 	private Salle salleCourante;
+	/**
+	 * Le premier stage de type Stage
+	 */
 	private Stage primaryStage;
+	/**
+	 * La scene de type Scene
+	 */
 	private Scene scene;
 	private Scene sceneInventaire;
+	/**
+	 *La scene de l'énigme de btype Scene
+	 */
 	private Scene sceneEnigme;
+	/**
+	*La scene de la fin du jeu
+	*/
 	private Scene sceneFinJeu;
-	
+	/**
+	 * La racine de type Pane
+	 */
 	private Pane root;
 	private EnigmeControleur rootEnigme;
 	private InventaireControleur rootInventaire;
 	private FinControleur rootMort;
 	private Label message;
-	
+	/**
+	 * Un HasMap de clee NomSalle et de valeur Salle
+	 */
 	private HashMap<NomSalle, Salle> salles;
 	private HashMap<NomPNJ, PersonnageNonJoueur> pnj;
 	private Periode periodeCourante;
@@ -92,7 +122,10 @@ public class Jeu {
 		greg = PersonnageJoueur.getInstanceUnique();
 
 	}
-		
+		/**
+	 * Cette methode privee permet d'initialiser le stage.
+	 * @throws IOException Lever l'exception.
+	 */
 	private void initStage() throws IOException {
 		root = FXMLLoader.load(getClass().getResource("/vues/UneFenetre.fxml"));
 		scene = new Scene(root);
@@ -101,7 +134,9 @@ public class Jeu {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	
+	/**
+	 * Cette methode initialise l'enigme du scene
+	 */
 	private void initEnigmeScene() {
 		rootEnigme = new EnigmeControleur();
 		sceneEnigme = new Scene(rootEnigme);
@@ -139,7 +174,11 @@ public class Jeu {
 			}
 		});
 	}
-	
+	/**
+	 * Cette methode privee permet d'initialiser les objets interactifs.
+	 * Elle supprime toutes les imageview des objets interactifs.
+	 * Elle ajoute des objets interactifs de la salle courante.
+	 */
 	public void initObjetInteractif() {
 		/* SUPPRESSION DE TOUTES LES IMAGEVIEW DES OBJETS INTERACTIFS */
 		for(int i = 2; i < root.getChildren().size();) {
@@ -153,7 +192,9 @@ public class Jeu {
 			root.getChildren().add(i.getImageView());
 		}
 	}
-	
+	/**
+	 * Cette methode initialise le Personnage Non Joueur en ncréant de nouvel items
+	 */
 	private void initPnjItemPeriode1() {
 		pnj = new HashMap<>();
 		Item itemBronze = new Item(new File("Images/items/aiguille_bronze_transparence.png"),
@@ -206,7 +247,42 @@ public class Jeu {
 		pnj.put(pnjOr2.getNom(), pnjOr2);
 		pnj.put(pnjPiege.getNom(), pnjPiege);
 	}
-	
+	/**
+	 * Cette methode permet de creer des objets interactis.
+	 * <ul>
+		 * <li>Les Salles</li>
+			 * <ul>
+				 * <li>La salle de départ</li>
+				 * <li>La salle numéro 1</li>
+				 * <li>La salle d'argent</li>
+				 * <li>La salle numéro 2</li>
+				 * <li>La salle numéro 3</li>
+				 * <li>La salle de bronze</li>
+				 * <li>La salle d'or</li>
+				 * <li>La salle piège</li>
+			 * </ul>
+		 * <li>des portes</li>
+		 	* <ul>
+				 * <li>La porte d'extrémité P1</li>
+				 * <li>La porte murale P2</li>
+				 * <li>La porte d'extrémité P3</li>
+				 * <li>La porte d'extrémité P4</li>
+				 * <li>La porte d'extrémité P7</li>
+				 * <li>La porte murale P6</li>
+				 * <li>La porte murale P5</li>
+			 * </ul>
+	 	 *<li>des horloges</li>
+	        * <ul>
+				 * <li>L'horloge Bronze</li>
+				 * <li>L'horloge Argent</li>
+				 * <li>L'horloge Or</li>
+				 * <li>L'horloge piège</li>
+	  		 *</ul>
+		 * <li>en remplissant les HashMap</li>
+		 * <li>en ajoutant des interactifs dans les salles</li>
+		 * <li>en initialisant le PNJ</li>
+	 * </ul>
+	 */
 	private void creationDesObjetsInteractifs() {
 		
 		/* SALLES */
@@ -260,7 +336,11 @@ public class Jeu {
 
 		salleCourante = salleDepart;
 	}
-
+/**
+	 * Cette methode privee permet d'ajouter des evenements du deplacement du personnage joueur.
+	 * Elle gere les deplacements horizontaux (A gauche et A droite).
+	 * Elle gere les deplacements vers le haut pour interagir avec un objet interactif et vers le bas.
+	 */
 	private void ajoutEvenement() {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -299,7 +379,21 @@ public class Jeu {
 			}
 		});
 	}
-
+/**
+	 * Cette methode gere les evenements horizontaux des deplacements:
+	 * <ul>
+		 * <li>Si le personnage Joueur se deplace vers la droite</li>
+		 * L'extremite sera la largeur maximale de la fenetre
+		 * <li>Si le personnage Joueur se deplace vers la gauche</li>
+		 * L'extremite sera la largeur manimale de la fenetre
+		 * <li>Si le PJ ne va pas a gauche et sa largeur minimale est inferieure a l'extremite</li>
+		 * Le PNJ se dirigera vers la droite
+		 * <li>Si le PJ va a gauche et sa largeur minimale est superieure a l'extremite</li>
+		 * Le PNJ se dirigera vers la gauche
+		 * <li>Si l'extremite est attteinte la seule possibilite est la porte
+	 * </ul>
+	 * @param d Un déplacement
+	 */
 	private void evenementsHorizontaux(Deplacements d) {
 		/* CHOIX DE L'EXTREMITE SELON LE DEPLACEMENT DU PERSONNAGE */
 		double extremite;
@@ -333,7 +427,9 @@ public class Jeu {
 			else greg.replacerGauche();
 		}
 	}
-	
+	/**
+	 * Cette methode cree l'evenement du l'enigme
+	 */
 	private void ajoutEvenementEnigme() {
 		sceneEnigme.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -351,7 +447,16 @@ public class Jeu {
 		});
 	}
 	
-	
+	/**
+	 * Cette methode permet de lancer l'enigme et le dialogue.Elle initialise le dialogue de départ en vérifiant  les cas ou:
+	 *<ul>
+		 *<li>LA BONNE REPONSE A DEJA ETE DONNEE</li>
+		 *<li>LE JOUEUR DONNE LA BONNE REPONSE</li>
+		 *<li>PNJ PIEGE</li>
+		 *<li>LE JOUEUR DONNE UNE MAUVAISE REPONSE</li>
+	 *</ul>
+	 * @param pnj Le Personnage non Joueur
+	 */
 	public void lancerEnigme(PersonnageNonJoueur pnj) {
 		primaryStage.setScene(sceneEnigme);
 		greg.liaisonDialogueAvecPNJ(pnj);
@@ -443,7 +548,7 @@ public class Jeu {
 			salles.get(NomSalle.SALLE_2).supprimerInteractif(pnjMort);
 		}
 		else if(periodeCourante.equals(Periode.PERIODE_OBJECTIF)) {
-			terminer("Tu as retrouv� ton espace temps !", true);
+			terminer("Tu as retrouvé ton espace temps !", true);
 			return;
 		}
 		
@@ -458,7 +563,10 @@ public class Jeu {
 		afficheMessage(dossierPeriode.replace('_', ' '), 2);
 		
 	}
-	
+	/**
+	 * Cette methode de type Salle recupere la salle courante.
+	 * @return Elle retourne la salle courante
+	 */
 	public Salle getSalleCourante() {
 		return salleCourante;
 	}
@@ -480,7 +588,11 @@ public class Jeu {
 
 	}
 	
-	
+	/**
+	 * Cette methode met a jour la salle courante et les objets interactifs
+	 * en remplacant l'image ancienne de la salle avec la nouvelle image
+	 * @param nouvelleSalle La nouvelle salle
+	 */
 	public void setSalleCourante(Salle nouvelleSalle) {
 		salleCourante.supprimerInteractif(greg);
 	
@@ -494,7 +606,10 @@ public class Jeu {
 		/* MISE A JOUR DES OBJETS INTERACTIFS */
 		initObjetInteractif();
 	}
-
+/**
+	 * Cette methode de type Jeu recupere l'instance unique.
+	 * @return Elle retourne l'instance unique
+	 */
 	public static Jeu getInstanceUnique() {
 		return instanceUnique;
 	}
