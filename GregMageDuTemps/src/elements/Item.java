@@ -6,14 +6,32 @@ import enumerations.Materiaux;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
-
+/**
+ *
+ * @author Ahmadou Bamba MBAYE.
+ *La classe Item represente les items (Bronze, Argent et Or), les items sont definis par leur materiaux, leur nom,
+ *leur position et leur image.
+ */
 public class Item extends Interactif{
-
+/**
+	 *Les materiaux de type Materiaux
+	 */
 	private Materiaux materiaux;
+	/**
+	 *Le nom d'un item
+	 */
 	private String nom;
+	/**
+	 *L'image de l'item
+	 */
 	private ImageView imageViewItem;
 	private ImageView imageViewItemPourInventaire;
-	
+	/**
+	 * Le constructeur de la classe Item cree un item en precisant sa position.
+	 * Il initialise et met a jour la position
+	 * @param f Le fichier
+	 * @param position La position
+	 */
 	public Item(File image, File imagePourInventaire, Materiaux materiaux, int position, String nom) {
 		Image i = new Image(image.toURI().toString());
 		imageViewItem = new ImageView(i);
@@ -31,7 +49,10 @@ public class Item extends Interactif{
 		
 		imageViewItem.setX(xMin);
 	}
-	
+	/**
+	 * Cette methode permet de recuperer l'image en vue.
+	 * @return Elle retourne l'image qui est en vue.
+	 */
 	@Override
 	public ImageView getImageView() {
 		return imageViewItem;
