@@ -9,18 +9,52 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+/**
+ * 
+ * @author Ahmadou Bamba MBAYE.
+ * Cette classe permet de faire le compte a rebours avec un chrono de type Timer, une tache, des secondes, des minutes
+ * 
+ *
+ */
 public class CompteARebours {
+	/**
+	 * L'attribut chrono de type Timer.
+	 * 
+	 */
 	private Timer chrono;
+	/**
+	 * L'attribut tache de type TimerTask.
+	 */
 	private TimerTask tache;
+	/**
+	 * L'attribut secondesP de type IntegerProperty.
+	 */
 	private IntegerProperty secondesP;
+	/**
+	 * L'attribut minutesP de type IntegerProperty.
+	 */
 	private IntegerProperty minutesP;
-	
+	/**
+	 * L'attribut minutesSP de type StringProperty.
+	 */
 	private StringProperty secondesSP;
+	/**
+	 * L'attribut minutesSP de type StringProperty.
+	 */
 	private StringProperty minutesSP;
-	
+	/**
+	 * L'attribut tempsTotalSP de type StringProperty.
+	 */
 	private StringProperty tempsTotalSP;
-	
+	/**
+	 * Le constructeur de la classe CompteARebours a deux parametres minites et secondes.
+	 * Il initialise les integers et les string property.
+	 * Il affecte les sencondes et les minutes a leurs valeurs.
+	 * Il fait la liaison des STRINGPROPERY avec les MINUTESPROPERTY.
+	 * Ce constructeur permet d'initialiser aussi le TIMER et le THREAD.
+	 * @param minutes Les minutes de chrono
+	 * @param secondes Les secondes du chrono
+	 */
 	public CompteARebours(int minutes, int secondes) {
 		/* INITIALISATION DES INTEGER ET STRING PROPERTY */
 		secondesP = new SimpleIntegerProperty();
@@ -61,15 +95,17 @@ public class CompteARebours {
 		};
 		
 	}
-	
+	/**
+	 * Cette methode permet de recuperer le StringPropery.
+	 * @return Elle retourne le temps total
+	 */
 	public StringProperty getTempsTotalEnStringProperty() {
 		return tempsTotalSP;
 	}
-	
+	/**
+	 * Cette methode permet de lancer le chrono de facon automatique quand le jeu est lancé.
+	 */
 	public void lancer() {
 		chrono.scheduleAtFixedRate(tache, 1000, 1000);
-	}
-	
-	
-	
+	}	
 }
