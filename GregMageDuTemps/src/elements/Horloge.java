@@ -8,6 +8,7 @@ import enumerations.Materiaux;
 import enumerations.Periode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import personnages.Personnage;
 import personnages.PersonnageJoueur;
 import personnages.PersonnageNonJoueur;
 /**
@@ -51,7 +52,6 @@ public class Horloge extends Interactif {
 	@Override
 	public void interagir() {
 		/* L'HORLOGE A DEJA ETE ACTIVE */
-		System.out.println(aEteActive);
 		if(aEteActive) return;
 		Item item = PersonnageJoueur.getInstanceUnique().getItemEnMain();
 		if(item == null) {
@@ -59,7 +59,9 @@ public class Horloge extends Interactif {
 			return;
 		}
 		if(Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation.precente()) {
-			Jeu.getInstanceUnique().terminer("Tu n'Ã©tais pas dans le bon espace temps pour activer cet horloge...", false);
+			Jeu.getInstanceUnique().terminer("Tu n'étais pas dans le bon espace temps pour activer cet horloge...", false);
+			PersonnageJoueur.getInstanceUnique().replacerGauche();
+			PersonnageJoueur.getInstanceUnique().enleverItemEnMain();			
 			return;
 		}
 		
