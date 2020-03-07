@@ -128,9 +128,9 @@ public class InventaireControleur extends Pane {
 	}
 	
 	/**
-	 * Mise à jour de l'inventaire après une suppression
+	 * <p> Mise à jour de l'inventaire après une suppression.
 	 * pour ne pas avoir une case vide entre deux items.
-	 * Elle décale tous les items suivant l'item supprimé sur la case précedente.
+	 * Elle décale tous les items suivant l'item supprimé sur la case précedente. </p>
 	 * @param aPartirDe correspond à la position de l'item qui a été supprimé
 	 */
 	private void raffraichissement(int aPartirDe) {

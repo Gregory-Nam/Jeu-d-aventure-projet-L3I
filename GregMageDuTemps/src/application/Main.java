@@ -10,7 +10,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		
 		try {
-			Jeu.getInstanceUnique().lancerJeu(primaryStage);
+			Jeu.getInstanceUnique().commencer(primaryStage);
 				
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import controleurs.EnigmeControleur;
 import controleurs.FinControleur;
 import controleurs.InventaireControleur;
+import controleurs.MenuControleur;
 import elements.Horloge;
 import elements.HorlogePiege;
 import elements.Interactif;
@@ -18,6 +19,7 @@ import elements.Salle;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.SepiaTone;
@@ -61,12 +63,13 @@ public class Jeu {
 	/**
 	 * Le premier stage de type Stage
 	 */
-	private Stage primaryStage;
+	private static Stage primaryStage;
 	/**
 	 * La scene de type Scene
 	 */
 	private Scene scene;
 	private Scene sceneInventaire;
+	private Scene sceneMenu;
 	/**
 	 *La scene de l'énigme de btype Scene
 	 */
@@ -81,6 +84,7 @@ public class Jeu {
 	private Pane root;
 	private EnigmeControleur rootEnigme;
 	private InventaireControleur rootInventaire;
+	private MenuControleur rootMenu;
 	private FinControleur rootMort;
 	private Label message;
 	/**
@@ -91,12 +95,19 @@ public class Jeu {
 	private Periode periodeCourante;
 	
 	private Jeu() {}
-	
-	public void lancerJeu(Stage stage) throws IOException {
-		CompteARebours c = new CompteARebours(10, 0);
-		this.periodeCourante = Periode.PERIODE_1;
+	public void commencer(Stage stage) {
 		primaryStage = stage;
 		primaryStage.setResizable(false);
+		initSceneMenu();
+		voirMenu();
+		
+		primaryStage.show();
+	}
+	
+	public void lancerJeu() throws IOException {
+		CompteARebours c = new CompteARebours(10, 0);
+		this.periodeCourante = Periode.PERIODE_1;
+		
 		
 		salles = new HashMap<NomSalle, Salle>();
 		
@@ -162,7 +173,7 @@ public class Jeu {
 						break;
 					case R :
 						try {
-							lancerJeu(primaryStage);
+							lancerJeu();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -173,6 +184,11 @@ public class Jeu {
 				
 			}
 		});
+	}
+	
+	private void initSceneMenu() {
+		rootMenu = new MenuControleur();
+		sceneMenu = new Scene(rootMenu);
 	}
 	/**
 	 * Cette methode privee permet d'initialiser les objets interactifs.
@@ -373,6 +389,9 @@ public class Jeu {
 					case I :
 						voirInventaire();
 						break;
+					case ESCAPE :
+						primaryStage.setScene(sceneMenu);
+						break;
 					default :
 						break;
 				}
@@ -516,7 +535,6 @@ public class Jeu {
 				case ESCAPE :
 					primaryStage.setScene(scene);
 					Item itemSelectionne = rootInventaire.getItemSelectionne();
-					System.out.println(itemSelectionne);
 					if( itemSelectionne != null) greg.prendreItemEnMain(itemSelectionne);
 					break;
 				default:
@@ -526,12 +544,17 @@ public class Jeu {
 		});
 	}
 	
+	public void voirMenu() {
+		primaryStage.setScene(sceneMenu);
+	}
 	public void terminer(String message, boolean aGagne) {
 		rootMort.setRaisonDeLaFin(message, aGagne);
 		primaryStage.setScene(sceneFinJeu);
 		
 	}
-	
+	public void reprendre() {
+		primaryStage.setScene(scene);
+	}
 	
 	public void changerDePeriode()  {
 		PersonnageNonJoueur pnjMort;
@@ -612,5 +635,9 @@ public class Jeu {
 	 */
 	public static Jeu getInstanceUnique() {
 		return instanceUnique;
+	}
+	
+	public static Stage getPrimaryStage() {
+		return primaryStage;
 	}
 }
