@@ -5,21 +5,39 @@ import java.io.File;
 import application.Jeu;
 import enumerations.Materiaux;
 import enumerations.Periode;
+
 /**
-*La classe Horloge piege hÃ©rite de la classe Horloge. Une des piÃ¨ces contiendra une horloge qui est censÃ©e permettre au joueur de retrouver sa dimension temporelle trÃ¨s simplement, sans objet Ã  trouver et sans Ã©nigme Ã  rÃ©soudre. Ã‰videmment cela nâ€™est pas aussi simple. Sâ€™il interagit avec cette derniÃ¨re,
-il dÃ©truira totalement lâ€™espace-temps dans lequel il se situe et mourra
-**/
+ * Implémentation de l'horloge piège. </br>
+ * Cette classe hérite de Horloge.
+ * @author Grégory NAM.
+ * @author Hugo CHALIK.
+ * @author Luca BEVILACQUA.
+ * @author Ahmadou Bamba MBAYE.
+ * @see    Interactif
+ */
 public class HorlogePiege extends Horloge{
 
 
-	
+	/**
+	 * Constructeur d'Horloge piège. </br>
+	 * Le constructeur est le même que celui d'horloge,
+	 * sauf qu'il ne prend pas en parametre le nombre d'item à inserer
+	 * l'horloge piège a tout ses items.
+	 * @param image image de l'horloge.
+	 * @param nbItemManquant nombre d'items à inserer pour activer l'horloge.
+	 * @param periodeApresActivation periode dans laquelle l'horloge permet d'aller.
+	 * @param position position de l'horloge dans la salle.
+	 */
 	public HorlogePiege(File image, Materiaux materiaux, Periode periodeApresActivation, double position) {
 		super(image, materiaux, 0, periodeApresActivation, position);
 	}
 
+	/**
+	 * Entraine la fin du jeu.
+	 */
 	@Override
 	public void interagir() {
-		Jeu.getInstanceUnique().terminer("Il semble que cette horloge Ã©tait un piÃ¨ge...", false );
+		Jeu.getInstanceUnique().terminer("Il semble que cette horloge était un piège...", false );
 	}
 
 }
