@@ -126,7 +126,7 @@ public class Jeu {
 		
 		c.lancer();
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
-		greg.getInventaire().creerListener(rootInventaire);
+		rootInventaire.creerListener(greg.getInventaire());
 		afficheMessage(periodeCourante.toString().replace('_', ' '),2);		
 	}
 	
