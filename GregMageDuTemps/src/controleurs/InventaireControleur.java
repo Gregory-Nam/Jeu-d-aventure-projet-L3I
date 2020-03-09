@@ -2,7 +2,10 @@ package controleurs;
 
 import java.util.ArrayList;
 
+import elements.Inventaire;
 import elements.Item;
+import javafx.collections.ListChangeListener.Change;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -240,6 +243,28 @@ public class InventaireControleur extends Pane {
 	 */
 	private boolean existeUnItemSelectionne() {
 		return this.lookup("#selectionne") == null ? false : true;
+	}
+	
+	/**
+	 * Permet de créer un lien entre l'inventaire graphique et l'inventaire "modèle". </br>
+	 * On ajouter un écouteur sur la liste observable de l'inventaire qui permet d'effectuer
+	 * les changements graphiques lorsqu'une modification est ralisée sur la liste des items
+	 * de l'inventaire.
+	 * @param inventaire inventaire avec lequel on veut créer un lien.
+	 */
+	public void creerListener(Inventaire inventaire) {
+		ObservableList<Item> listeInventaire = inventaire.getInventaire();
+		listeInventaire.addListener((Change<? extends Item> changement) -> {
+			while(changement.next()) {
+				if(changement.wasAdded()) {
+					this.ajouterItem(listeInventaire.get(changement.getFrom()));
+				}
+				else if(changement.wasRemoved()) {
+					this.supprimerItem(changement.getRemoved().get(0));
+				}
+
+			}
+		});
 	}
 	
 	
