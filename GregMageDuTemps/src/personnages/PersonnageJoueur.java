@@ -134,7 +134,7 @@ public class PersonnageJoueur extends Personnage{
 	}
 	
 	public void prendreItemEnMain(Item i) {
-		super.itemEnPossession = inventaire.getItem(i);
+		super.itemEnPossession = i;
 	}
 	
 	@Override
