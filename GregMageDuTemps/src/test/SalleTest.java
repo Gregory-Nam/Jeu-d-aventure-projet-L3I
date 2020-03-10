@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import elements.Horloge;
 import elements.Interactif;
-import elements.Item;
-import elements.PorteMurale;
 import elements.Salle;
 import enumerations.Materiaux;
 import enumerations.NomSalle;

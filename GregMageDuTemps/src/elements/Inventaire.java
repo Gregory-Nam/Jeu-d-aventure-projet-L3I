@@ -1,14 +1,7 @@
 package elements;
 
 import java.util.ArrayList;
-import java.util.Observer;
-
-import controleurs.EnigmeControleur;
-import controleurs.InventaireControleur;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 
 /**

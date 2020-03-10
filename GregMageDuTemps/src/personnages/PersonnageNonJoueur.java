@@ -2,9 +2,6 @@ package personnages;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import utilitaire.AnalyseFichierEnigmeUtil;
@@ -14,8 +11,6 @@ import java.util.HashMap;
 
 import application.Jeu;
 import elements.Item;
-import elements.Salle;
-import enumerations.Deplacements;
 import enumerations.NomPNJ;
 import enumerations.TypeDialogue;
 /**

@@ -3,7 +3,6 @@ package application;
 import java.io.File;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import controleurs.EnigmeControleur;
@@ -20,10 +19,8 @@ import elements.Salle;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -32,6 +29,7 @@ import javafx.util.Duration;
 import personnages.PersonnageJoueur;
 import personnages.PersonnageNonJoueur;
 import utilitaire.CompteARebours;
+import utilitaire.FinisseurDeJeu;
 import enumerations.Deplacements;
 import enumerations.Materiaux;
 import enumerations.NomPNJ;
@@ -394,6 +392,8 @@ public class Jeu {
 						primaryStage.setScene(sceneMenu);
 						break;
 					default :
+						System.out.println("lol");
+						FinisseurDeJeu.finirJeu();
 						break;
 				}
 			}

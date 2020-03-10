@@ -3,7 +3,6 @@ package elements;
 import java.io.File;
 import java.util.ArrayList;
 
-import application.Jeu;
 import enumerations.NomSalle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

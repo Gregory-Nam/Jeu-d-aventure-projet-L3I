@@ -11,10 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import personnages.PersonnageJoueur;
 
 /**
  * Cette classe est le <b>controleur</b> de la vue Inventaire.fxml

@@ -1,12 +1,6 @@
 package elements;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
-import application.Jeu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

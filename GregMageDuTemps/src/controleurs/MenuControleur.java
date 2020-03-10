@@ -1,8 +1,6 @@
 package controleurs;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 import application.Jeu;
 import javafx.event.EventHandler;
@@ -116,6 +114,8 @@ public class MenuControleur extends Pane {
 					else
 						visibiliteEnfant(labelCommande);
 					visibiliteEnfant(groupMenu);
+					break;
+				default:
 					break;
 			}
 			this.getScene().removeEventHandler(KeyEvent.KEY_PRESSED, retourArriere);

@@ -1,16 +1,13 @@
 package elements;
 
 import java.io.File;
-import java.util.Arrays;
 
 import application.Jeu;
 import enumerations.Materiaux;
 import enumerations.Periode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import personnages.Personnage;
 import personnages.PersonnageJoueur;
-import personnages.PersonnageNonJoueur;
 
 /**
  * Implémentation des horloges du Jeu. </br>
