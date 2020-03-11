@@ -214,14 +214,14 @@ public class Jeu {
 		pnj = new HashMap<>();
 		Item itemBronze = new Item(new File("Images/items/aiguille_bronze_transparence.png"),
 							       new File("Images/items/aiguille_bronze.png"),
-							       Materiaux.BRONZE, 630, "Aiguille");
+							       Materiaux.BRONZE, 634, "Aiguille");
 		Item itemArgent = new Item(new File("Images/items/aiguille_argent_transparence.png"),
 								   new File("Images/items/aiguille_argent.png"),
-								   Materiaux.ARGENT, 650, "Aiguille");
+								   Materiaux.ARGENT, 669, "Aiguille");
 		
 		Item itemOr1 = new Item(new File("Images/items/aiguille_or_transparence.png"),
 				   new File("Images/items/aiguille_or.png"),
-				   Materiaux.OR, 650, "Aiguille");
+				   Materiaux.OR, 641, "Aiguille");
 		
 		
 		File bas = new File("Images/PNJ/Klace_face_transparence.png");
@@ -392,8 +392,12 @@ public class Jeu {
 						primaryStage.setScene(sceneMenu);
 						break;
 					default :
-						System.out.println("lol");
-						FinisseurDeJeu.finirJeu();
+						try {
+							FinisseurDeJeu.finirJeu(scene, sceneEnigme, sceneInventaire,rootEnigme, pnj, salles);
+						}
+						catch(Exception e) {
+							System.exit(0);
+						}
 						break;
 				}
 			}
@@ -499,7 +503,7 @@ public class Jeu {
 				rootEnigme.desactiverEntree();
 			}
 			/* CAS OU LE JOUEUR DONNE LA BONNE REPONSE */
-			else if(rootEnigme.getChamps().equals(pnj.reponse())) {
+			else if(rootEnigme.getTexteDuChamps().equals(pnj.reponse())) {
 				rootEnigme.desactiverEntree();
 				pnj.aRecuUneBonneReponse();
 				rootEnigme.changeDialogue(pnj.repondAUneBonneReponse());

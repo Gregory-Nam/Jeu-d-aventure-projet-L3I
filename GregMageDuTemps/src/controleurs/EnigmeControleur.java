@@ -1,5 +1,6 @@
 package controleurs;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -42,10 +43,13 @@ public class EnigmeControleur extends GridPane {
 		this.imagePersonnage.setImage(imagePersonnage);
 	}
 	
-	public String getChamps() {
+	public String getTexteDuChamps() {
 		return champsDeTexte.getText();
 	}
 	
+	public TextField getChamps() {
+		return champsDeTexte;
+	}
 	public void nettoyerChampsTexte() {
 		champsDeTexte.clear();
 		
@@ -63,6 +67,11 @@ public class EnigmeControleur extends GridPane {
 	
 	public void activerFocus() {
 		champsDeTexte.requestFocus();
+	}
+	
+	public void mettreText(String texte) {
+		champsDeTexte.setText(texte);
+		champsDeTexte.fireEvent(new ActionEvent());
 	}
 	
 }
