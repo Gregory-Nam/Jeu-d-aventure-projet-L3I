@@ -554,6 +554,7 @@ public class Jeu {
 	public void voirMenu() {
 		primaryStage.setScene(sceneMenu);
 	}
+	
 	public void terminer(String message, boolean aGagne) {
 		rootMort.setRaisonDeLaFin(message, aGagne);
 		primaryStage.setScene(sceneFinJeu);
@@ -561,6 +562,7 @@ public class Jeu {
 	}
 	public void reprendre() {
 		primaryStage.setScene(scene);
+		greg.replacerGauche();
 	}
 	
 	public void changerDePeriode()  {
