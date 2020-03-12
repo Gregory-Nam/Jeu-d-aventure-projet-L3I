@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,15 +24,18 @@ import personnages.PersonnageJoueur;
 class SalleTest {
 
 	//Ces test sont broken à cause de l'interface graphique
-	
 	Salle s;
 	
-	
-	@BeforeEach
-	void setUp() throws Exception {
-		s = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_1);
+	@BeforeAll
+	static void setUpApp() throws Exception {
+		AppDeTest.setUpClass();
 	}
 
+	@BeforeEach
+	void setUp() {
+		s = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_1);
+	}
+	
 	@AfterEach
 	void tearDown() throws Exception {
 	}

@@ -248,7 +248,7 @@ public class Jeu {
 	private void initPnjItemPeriode3() {
 		Item itemOr2 = new Item(new File("Images/items/Pendule_or_transparence.png"),
 								new File("Images/items/Pendule_or.png"),
-								Materiaux.OR, 650, "Pendule");
+								Materiaux.OR, 218, "Pendule");
 		
 		File bas = new File("Images/PNJ/Abitbol_face_transparence.png");
 		File imagePourenigme = new File("Images/PNJ/Abitbol_face.png");
@@ -391,13 +391,15 @@ public class Jeu {
 					case ESCAPE :
 						primaryStage.setScene(sceneMenu);
 						break;
-					default :
+					case P :
 						try {
 							FinisseurDeJeu.finirJeu(scene, sceneEnigme, sceneInventaire,rootEnigme, pnj, salles);
 						}
 						catch(Exception e) {
 							System.exit(0);
 						}
+						break;
+					default:
 						break;
 				}
 			}

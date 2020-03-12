@@ -16,7 +16,7 @@
   },
   
   "Carpenter": {
-    "QUESTION": "Sais-tu combien faut-il de temps (en secondes) pour qu'une horloge sonne midi,/nsi cette derniere sonne six heures en 5 secondes ?",
+    "QUESTION": "Sais-tu combien faut-il de temps (en secondes) pour qu'une horloge sonne midi, \nsi cette derniere sonne six heures en 5 secondes ?",
     "REPONSE": "11",
     "MAUVAISE_REPONSE": "Malheureusement, tu as mal répondu. Donc pas de récompense.",
     "BONNE_REPONSE": "Exact, tu as bien répondu. Voici ta récompense",
