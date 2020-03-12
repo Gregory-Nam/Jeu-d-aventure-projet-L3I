@@ -26,9 +26,6 @@ public class FinisseurDeJeu {
 	private static final KeyEvent gauche = new KeyEvent(KeyEvent.KEY_PRESSED, "g", "gauche", KeyCode.LEFT, false, false, false, false);
 	private static final KeyEvent interagir = new KeyEvent(KeyEvent.KEY_PRESSED, "i", "interagir", KeyCode.UP, false, false, false, false);
 	private static final KeyEvent echap = new KeyEvent(KeyEvent.KEY_PRESSED, "q", "escape", KeyCode.ESCAPE, false, false, false, false);
-	private static final ActionEvent valide = new ActionEvent();
-
-
 	private static Scene sceneJeu;
 	private static Scene sceneEnigme;
 	private static HashMap<NomPNJ,PersonnageNonJoueur> pnjs;
@@ -56,80 +53,30 @@ public class FinisseurDeJeu {
 		FinisseurDeJeu.pnjs = pnjs;
 		jeu = Jeu.getInstanceUnique();
 		greg = PersonnageJoueur.getInstanceUnique();
-		salleEnigmeBronze();
-		
-	}
-	
-	
-	private static void salleEnigmeBronze() {
+		//salleEnigmeBronze();
+		PauseTransition transition = new PauseTransition(new Duration(0.8));
+
 		salleAvantObjectif = NomSalle.SALLE_2;
 		directionHorloge = droite;
 		directionPorte = gauche;
 		xPorte = 200;
 		xHorloge = 900;
-		PauseTransition transition = new PauseTransition(new Duration(0.8));
-		transition.setOnFinished(event ->{
-	    	if(jeu.getSalleCourante().getNomSalle() != NomSalle.SALLE_3) {
-		    	KeyEvent.fireEvent(sceneJeu, droite);
-		    	transition.play();
+		finirEtape(transition,NomSalle.SALLE_3, droite, pnjs.get(NomPNJ.KLACE_HEUREOUVERRE),"13");
+			
+	}
+	
+	private static void finirEtape(PauseTransition t,NomSalle nom, KeyEvent deplacementDepart, PersonnageNonJoueur pnj, String reponse) {
+		t.setOnFinished(event ->{
+	    	if(jeu.getSalleCourante().getNomSalle() != nom) {
+		    	KeyEvent.fireEvent(sceneJeu, deplacementDepart);
+		    	t.play();
 	    	}  
-	    	else transition.stop();
 
 	    });
-		deplacerJusquauPNJ(transition, pnjs.get(NomPNJ.KLACE_HEUREOUVERRE), droite, "13");
+		if(!itemMisOr1)deplacerJusquauPNJ(t, pnj, deplacementDepart, reponse);
+		else allerSalleMurale(t, NomSalle.SALLE_3, xPorte);
 	}
 	
-	private static void salleEnigmeArgent() {
-		salleAvantObjectif = NomSalle.SALLE_1;
-		directionHorloge = gauche;
-		directionPorte = gauche;
-		xPorte = 760;
-		xHorloge = 105;
-		PauseTransition transition = new PauseTransition(new Duration(0.8));
-		transition.setOnFinished(event ->{
-	    	if(jeu.getSalleCourante().getNomSalle() != NomSalle.SALLE_2) {
-		    	KeyEvent.fireEvent(sceneJeu, droite);
-		    	transition.play();
-	    	} 
-	    	else transition.play();
-
-	    });
-		deplacerJusquauPNJ(transition, pnjs.get(NomPNJ.SLYNE), droite, "45");
-	}
-	
-	private static void salleEnigmeOr1() {
-		directionHorloge = droite;
-		xHorloge = 865;
-		PauseTransition transition = new PauseTransition(new Duration(0.8));
-		transition.setOnFinished(event ->{
-	    	if(jeu.getSalleCourante().getNomSalle() != NomSalle.SALLE_1) {
-		    	KeyEvent.fireEvent(sceneJeu, droite);
-		    	transition.play();
-	    	}
-	    	else transition.play();
-
-	    });
-		
-		deplacerJusquauPNJ(transition, pnjs.get(NomPNJ.CARPENTER), droite, "11");
-		
-	}
-	
-	private static void salleEnigmeOr2() {
-		directionHorloge = droite;
-		directionPorte = gauche;
-		xPorte = 760;
-		xHorloge = 865;
-		PauseTransition transition = new PauseTransition(new Duration(1));
-		transition.setOnFinished(event ->{
-	    	if(jeu.getSalleCourante().getNomSalle() != NomSalle.SALLE_3) {
-		    	KeyEvent.fireEvent(sceneJeu, gauche);
-		    	transition.play();
-	    	}
-	    	else transition.stop();
-
-	    });
-		allerSalleMurale(transition, NomSalle.SALLE_3, xPorte);
-	}
 	private static void deplacerJusquauPNJ(PauseTransition t, PersonnageNonJoueur pnj, KeyEvent deplacement, String reponse) {
 		
 		t.setOnFinished(event ->{
@@ -168,8 +115,7 @@ public class FinisseurDeJeu {
 	    		else if(itemMisOr1) {
 	    			item2pris = true;
 	    			allerSalleMurale(t, NomSalle.SALLE_PIEGE, xPorte);
-	    		}
-	    			
+	    		}    			
     		}
 	    });
 		t.play();
@@ -199,9 +145,9 @@ public class FinisseurDeJeu {
 		t.play();
 	}
 	
-	private static void allerHorloge(PauseTransition t, int xHorloge) {
+	private static void allerHorloge(PauseTransition t, int horlogeX) {
 		t.setOnFinished(event ->{
-	        if(!(xHorloge - 10 < greg.getXCentre() && greg.getXCentre() < xHorloge + 10)){
+	        if(!(horlogeX - 10 < greg.getXCentre() && greg.getXCentre() < horlogeX + 10)){
 	        	KeyEvent.fireEvent(sceneJeu, directionHorloge);
 	    		t.play();
     		}
@@ -213,17 +159,26 @@ public class FinisseurDeJeu {
 	    		}
 	    		KeyEvent.fireEvent(sceneJeu, interagir);
 	    		if(jeu.getPeriodeCourante().equals(Periode.PERIODE_2)) {
-	    			salleEnigmeArgent();
+	    			salleAvantObjectif = NomSalle.SALLE_1;
+	    			directionHorloge = gauche;
+	    			directionPorte = gauche;
+	    			xPorte = 760;
+	    			xHorloge = 105;
+	    			finirEtape(t,NomSalle.SALLE_2, droite, pnjs.get(NomPNJ.SLYNE), "45");
 	    		}
-	    		else if(jeu.getPeriodeCourante().equals(Periode.PERIODE_3) && !itemMisOr1){
-	    			salleEnigmeOr1();
-				}
-	    		else if(itemMisOr1) {
-	    			salleEnigmeOr2();
-	    			
+	    		else if(jeu.getPeriodeCourante().equals(Periode.PERIODE_3) && !itemMisOr1) {
+	    			directionHorloge = droite;
+	    			xHorloge = 865;
+	    			finirEtape(t,NomSalle.SALLE_2, droite, pnjs.get(NomPNJ.CARPENTER), "11");
 	    		}
-	    		else
-	    			t.stop();
+	    		else if(!item2pris){
+	    			directionHorloge = droite;
+	    			directionPorte = gauche;
+	    			xPorte = 760;
+	    			xHorloge = 865;
+	    			finirEtape(t,NomSalle.SALLE_3, droite,null, null);
+	    		}
+	    		return;
 	    	}
 	    });
 		
