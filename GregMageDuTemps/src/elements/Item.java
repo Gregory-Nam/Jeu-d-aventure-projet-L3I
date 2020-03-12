@@ -8,15 +8,15 @@ import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
 
 /**
- * Implémentations des items du jeu.
- * @author Grégory NAM.
+ * Implï¿½mentations des items du jeu.
+ * @author Gregory NAM.
  * @author Hugo CHALIK.
  * @author Luca BEVILACQUA.
  * @author Ahmadou Bamba MBAYE.
  */
 public class Item extends Interactif{
 	/**
-	 * Le matériaux de l'item.
+	 * Le matï¿½riaux de l'item.
 	 */
 	
 	private Materiaux materiaux;
@@ -42,7 +42,7 @@ public class Item extends Interactif{
 	 * Constructeur d'Item.
 	 * @param image Fichier de l'image de l'Item dans le jeu.
 	 * @param imagePourInventaire Fichier de l'image pour l'inventaire. 
-	 * @param materiaux Matériaux de l'Item.
+	 * @param materiaux Matï¿½riaux de l'Item.
 	 * @param position Position de l'Item.
 	 * @param nom Nom de l'Item.
 	 */
@@ -76,16 +76,16 @@ public class Item extends Interactif{
 	}
 	
 	/**
-	 * Renvoie le nom complet de l'Item (avec son matériaux).
-	 * @return le nom complet de l'Item (avec son matériaux).
+	 * Renvoie le nom complet de l'Item (avec son matï¿½riaux).
+	 * @return le nom complet de l'Item (avec son matï¿½riaux).
 	 */
 	public String getNom() {
 		return nom + " en " + this.materiaux.toString();
 	}
 	
 	/**
-	 * Renvoie le matériaux de l'item.
-	 * @return le matérieux de l'item.
+	 * Renvoie le materiaux de l'item.
+	 * @return le materieux de l'item.
 	 */
 	public Materiaux getMateriaux() {
 		return this.materiaux;
@@ -93,8 +93,8 @@ public class Item extends Interactif{
 
 	/**
 	 * L'interaction avec un item permet de l'ajouter dans l'inventaire
-	 * du PersonnageJoueur, de la supprimer de la salle et également
-	 * de mettre à jour les objets interactifs sur la scene.
+	 * du PersonnageJoueur, de la supprimer de la salle et ï¿½galement
+	 * de mettre ï¿½ jour les objets interactifs sur la scene.
 	 */
 	@Override
 	public void interagir() {
