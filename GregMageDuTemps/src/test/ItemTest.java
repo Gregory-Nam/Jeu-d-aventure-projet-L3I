@@ -5,16 +5,23 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import elements.Item;
 import enumerations.Materiaux;
+import javafx.scene.image.Image;
 
 class ItemTest {
 
 	Item it;
+	
+	@BeforeAll
+	static void setUpApp() throws Exception {
+		AppDeTest.setUpClass();
+	}
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -34,11 +41,21 @@ class ItemTest {
 	}
 
 	@Test
+	@Disabled
 	void testInteragir() {
-		fail("Not yet implemented");
+		
 	}
 
-
+	@Test
+	void testGetXMax() {
+		assertEquals(650,  it.getXMax());
+	}
+	
+	@Test
+	void testGetXMin() {
+		assertEquals(630, it.getXMin());
+	}
+	
 	@Test
 	void testGetImageViewPourInventaire() {
 		fail("Not yet implemented");
@@ -46,17 +63,17 @@ class ItemTest {
 
 	@Test
 	void testGetNom() {
-		fail("Not yet implemented");
+		assertEquals("Aiguille en BRONZE", it.getNom());
 	}
 
 	@Test
 	void testGetMateriaux() {
-		fail("Not yet implemented");
+		assertEquals(Materiaux.BRONZE, it.getMateriaux());
 	}
 
 	@Test
 	void testGetXCentre() {
-		fail("Not yet implemented");
+		assertEquals(640, it.getXCentre());
 	}
 
 }
