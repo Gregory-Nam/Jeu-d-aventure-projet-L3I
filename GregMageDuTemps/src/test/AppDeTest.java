@@ -1,5 +1,7 @@
 package test;
 
+
+import application.Jeu;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,7 +11,7 @@ import javafx.stage.Stage;
  * - TestFX (mais projet devait être sous maven) </br>
  * - Creer une fausse application </br>
  * 
- * Le code de cette clase a été pris sur StackOverflow : </br>
+ * Le code de cette classe a été pris sur StackOverflow : </br>
  * https://stackoverflow.com/questions/11385604/how-do-you-unit-test-a-javafx-controller-with-junit?fbclid=IwAR2BU_y3Fa68FdKuvbXSWlASQAWOTHG-G-ywg5xyIgooZsR8oyr5UAS_5rc </br>
  * 
  * @author StackOverflow
@@ -20,7 +22,6 @@ public class AppDeTest extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	public static void setUpClass() throws InterruptedException {
