@@ -8,7 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
 /**
- * Implémentation des salles du Jeu. </br>
+ * Implémentation des salles du Jeu. 
+ * </br>
  * Une salle est représentée par une ImageView et un nom, elle contient des interactifs.
  * @author Grégory NAM.
  * @author Hugo CHALIK.
@@ -74,7 +75,8 @@ public class Salle {
 	/**
 	 * Permet d'ajouter des objets interactifs dans la salle
 	 * à condition qu'ils ne soient déjà pas présents.
-	 * @param interactifs que l'on veut ajouter.
+	 * @param interactifs 
+	 * 					interactifs que l'on veut ajouter.
 	 */
 	public void ajoutInteractif(Interactif ... interactifs) {
 		for(Interactif i : interactifs) {
@@ -85,7 +87,8 @@ public class Salle {
 	
 	/**
 	 * Permet de supprimer un objet interactif de la salle.
-	 * @param interactif que l'on souhaite supprimer.
+	 * @param i
+	 * 		 interactif que l'on souhaite supprimer.
 	 * @return vrai si l'objet a été supprimé, sinon faux.
 	 */
 	public boolean supprimerInteractif(Interactif i) {

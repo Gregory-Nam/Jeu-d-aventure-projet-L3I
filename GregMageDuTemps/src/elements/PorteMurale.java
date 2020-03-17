@@ -5,7 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * Implémentation des portes murales du jeu. </br>
+ * Implémentation des portes murales du jeu. 
+ * </br>
  * Cette classe hérite de PorteExtremite.
  * @author Grégory NAM.
  * @author Hugo CHALIK.

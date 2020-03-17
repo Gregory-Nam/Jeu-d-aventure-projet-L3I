@@ -2,20 +2,18 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import elements.Horloge;
-import enumerations.Materiaux;
-import enumerations.Periode;
+import elements.PorteMurale;
+import elements.Salle;
 
-class HorlogeTest {
+class PorteMuraleTest {
 
-	Horloge h;
+	PorteMurale p;
+	Salle s, s1;
 	
 	@BeforeAll
 	static void setUpApp() throws Exception {
@@ -24,7 +22,7 @@ class HorlogeTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 889);
+		p = new PorteMurale(s, s1, 730);
 	}
 
 	@AfterEach
@@ -33,27 +31,37 @@ class HorlogeTest {
 
 	@Test
 	void testInteragir() {
-		
+		fail("Not yet implemented");
 	}
 
 	@Test
 	void testGetXMin() {
-		assertEquals(889, h.getXMin());
+		assertEquals(730, p.getXMin());
 	}
 
 	@Test
 	void testGetXMax() {
-		assertEquals(949, h.getXMax());
+		assertEquals(830, p.getXMax());
 	}
 
 	@Test
-	void testGetMateriaux() {
-		assertEquals(Materiaux.BRONZE, h.getMateriaux());
+	void testPorteMurale() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testInitPorte() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testPorteExtremite() {
+		fail("Not yet implemented");
 	}
 
 	@Test
 	void testGetXCentre() {
-		assertEquals(919, h.getXCentre());
+		assertEquals(780, p.getXCentre());
 	}
 
 }

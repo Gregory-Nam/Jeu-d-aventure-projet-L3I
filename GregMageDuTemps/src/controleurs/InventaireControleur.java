@@ -100,7 +100,7 @@ public class InventaireControleur extends Pane {
 	/**
 	 * Ajoute l'item passé en parametre
 	 * dans la liste des items ajoutés et qui rempli la case dans la vue
-	 * @param o
+	 * @param o Item que l'on veut ajouter
 	 * @see remplir
 	 */
 	public void ajouterItem(Item o) {
@@ -113,9 +113,7 @@ public class InventaireControleur extends Pane {
 	 * Suppression de l'item passé en parametre
 	 * dans la liste des items ajoutés, désélectionne la case
 	 * où était l'item et fait un raffraichissement de l'inventaire
-	 * @param o
-	 * @see raffraichssement
-	 * @see deselection
+	 * @param o item que l'on veut supprimer
 	 */
 	public void supprimerItem(Item o) {
 		int i = itemsAjoute.indexOf(o);
@@ -244,7 +242,8 @@ public class InventaireControleur extends Pane {
 	}
 	
 	/**
-	 * Permet de créer un lien entre l'inventaire graphique et l'inventaire "modèle". </br>
+	 * Permet de créer un lien entre l'inventaire graphique et l'inventaire "modèle". 
+	 * </br>
 	 * On ajouter un écouteur sur la liste observable de l'inventaire qui permet d'effectuer
 	 * les changements graphiques lorsqu'une modification est ralisée sur la liste des items
 	 * de l'inventaire.

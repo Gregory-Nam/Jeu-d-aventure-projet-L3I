@@ -7,7 +7,8 @@ import enumerations.Materiaux;
 import enumerations.Periode;
 
 /**
- * Implémentation de l'horloge piège. </br>
+ * Implémentation de l'horloge piège. 
+ * </br>
  * Cette classe hérite de Horloge.
  * @author Grégory NAM.
  * @author Hugo CHALIK.
@@ -19,12 +20,13 @@ public class HorlogePiege extends Horloge{
 
 
 	/**
-	 * Constructeur d'Horloge piège. </br>
+	 * Constructeur d'Horloge piège. 
+	 * </br>
 	 * Le constructeur est le même que celui d'horloge,
 	 * sauf qu'il ne prend pas en parametre le nombre d'item à inserer
 	 * l'horloge piège a tout ses items.
 	 * @param image image de l'horloge.
-	 * @param nbItemManquant nombre d'items à inserer pour activer l'horloge.
+	 * @param materiaux materiaux de l'horloge.
 	 * @param periodeApresActivation periode dans laquelle l'horloge permet d'aller.
 	 * @param position position de l'horloge dans la salle.
 	 */

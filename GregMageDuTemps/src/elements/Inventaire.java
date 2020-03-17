@@ -5,11 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Impl�mentations de l'Inventaire.
- * Un inventaire sera utilis� par le PersonnageJoueur. </br>
- * On peut �galement penser qu'il pourrait �tre utilis� pour
+ * Implementations de l'Inventaire.
+ * Un inventaire sera utilise par le PersonnageJoueur. 
+ * </br>
+ * On peut egalement penser qu'il pourrait etre utilise pour
  * un conteneur tel un coffre.
- * @author Gr�gory NAM.
+ * @author Gregory NAM.
  * @author Hugo CHALIK.
  */
 public class Inventaire {

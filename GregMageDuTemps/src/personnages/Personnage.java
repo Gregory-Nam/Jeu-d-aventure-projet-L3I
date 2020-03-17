@@ -33,7 +33,6 @@ public abstract class Personnage extends Interactif {
 	Item itemEnPossession;
 	/**
 	 * Le constructeur de la classe personnage cree un sprite personnage
-	 * @param sprites Les sprites
 	 */
 	public Personnage () {
 		spritesPersonnageHM = new HashMap<Deplacements,ImageView>();

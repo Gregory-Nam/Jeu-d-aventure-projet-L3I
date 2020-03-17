@@ -15,9 +15,9 @@ import enumerations.NomPNJ;
 import enumerations.TypeDialogue;
 /**
  * @author Ahmadou Bamba MBAYE.
- * La classe PersonnageNonJoueur herite de la classe Personnage  Elle gere les personnages non joueurs.
- * Cette classe contient comme parametre le nom du personnage non joueur, l'item a donner, un HashMap qui contient
- * et un boolean confirmant s'il a bien repondu
+ * La classe PersonnageNonJoueur herite de la classe Personnage. Elle gere les personnages non joueurs.
+ * Cette classe contient comme parametre le nom du personnage non joueur, l'item a donner, une HashMap qui contient les dialogues
+ * et un boolean confirmant s'il a bien repondu.
  */
 public class PersonnageNonJoueur extends Personnage {
 	/**
@@ -25,7 +25,7 @@ public class PersonnageNonJoueur extends Personnage {
 	 */
 	private NomPNJ nom;
 	/**
-	 * Un hashMap qui contient le type de dialogue et un string
+	 * Un HashMap qui contient le type de dialogue et le dialogue
 	 */
 	private HashMap<TypeDialogue, String> dialogues;
 	/**
@@ -33,22 +33,23 @@ public class PersonnageNonJoueur extends Personnage {
 	 */
 	private BooleanProperty aRecuUneBonneReponse;
 	/**
-	 * Le prite pour l'enigme de type ImageView
+	 * Le sprite pour l'enigme de type ImageView
 	 */
 	private ImageView spritePourEnigme;
 	
 	/**
-	 * Le constructeur de la classe PersonnageNonJoueur prend en paramètre un nom du personnage non joueur,
-	 *un nombre x, un item i, un sprite pour l'énigme:
+	 * Le constructeur de la classe PersonnageNonJoueur prend en parametre un nom du personnage non joueur,
+	 * un nombre x, un item i, un sprite pour l'enigme :
 	 * <ul>
-		 * <li>il récupère tout ce qui était dans le constructeur de la classe mère Personnage en affectant l'item
-		 *en possession à i</li>
-		 * <li>il crée un nouvelle image en vue</li>
-		 * <li>le sprite pour enigme en creant une nouvelle image</li>
-		 * <li>il crée un nouveau boolean SimpleBooleanProperty qui prend false en paramètre de sorti</li>
-		 * <li>il initialise le nom du personnage non joueur</li>
-		 * <li>il crée le dialogue dans un HashMap</li>
+		 * <li> il recupere tout ce qui etait dans le constructeur de la classe mere Personnage en affectant l'item
+		 * en possession de� i</li>
+		 * <li> il cree un nouvelle image en vue</li>
+		 * <li> le sprite pour enigme en creant une nouvelle image</li>
+		 * <li> il cree un nouveau boolean SimpleBooleanProperty qui prend false en parametre de sortie</li>
+		 * <li> il initialise le nom du personnage non joueur</li>
+		 * <li> il cree le dialogue dans un HashMap</li>
 	 * </ul>
+	 * @param nom nom du PNJ
 	 * @param x la position
 	 * @param i un item quelconque
 	 * @param spritePourEnigme Le sprite pour l'enigme
@@ -73,7 +74,7 @@ public class PersonnageNonJoueur extends Personnage {
 	}
 
 	/**
-	 * La méthode abstraite seDirigerADroite() gére la cas ou le personnage se dirige vers la droite..
+	 * La methode abstraite seDirigerADroite() gere la cas ou le personnage se dirige vers la droite..
 	 * Elle met a jour la position du spriteCourant
 	 */
 	@Override
@@ -82,7 +83,7 @@ public class PersonnageNonJoueur extends Personnage {
 		
 	}
 	/**
-	 * La méthode abstraite seDirigerAGauche() gére la cas ou le personnage se dirige vers la gauche..
+	 * La methode abstraite seDirigerAGauche() gere la cas ou le personnage se dirige vers la gauche..
 	 * Elle met a jour la position du spriteCourant
 	 */
 	@Override
