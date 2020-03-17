@@ -6,14 +6,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label fx:id="raisonDeLaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="10.0" prefHeight="381.0" prefWidth="584.0" text="Perdu" textFill="WHITE">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label fx:id = "etatDeLaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="132.0" layoutY="216.0" prefHeight="17.0" prefWidth="336.0" text="qd" textAlignment="CENTER" textFill="WHITE" />
-      <Label layoutX="132.0" layoutY="233.0" text="Appuyez sur Q pour quitter ou sur R pour retenter votre chance" textFill="WHITE" />
-   </children>
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" style="-fx-background-color: black;"
+	type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Label fx:id="raisonDeLaFin" alignment="CENTER"
+			contentDisplay="CENTER" layoutX="8.0" layoutY="10.0"
+			prefHeight="381.0" prefWidth="584.0" text="Perdu" textFill="WHITE">
+			<font>
+				<Font size="23.0" />
+			</font>
+		</Label>
+		<Label fx:id="etatDeLaFin" alignment="CENTER"
+			contentDisplay="CENTER" layoutX="132.0" layoutY="216.0"
+			prefHeight="17.0" prefWidth="336.0" text="qd" textAlignment="CENTER"
+			textFill="WHITE" />
+		<Label layoutX="132.0" layoutY="233.0"
+			text="Appuyez sur Q pour quitter ou sur R pour retenter votre chance"
+			textFill="WHITE" />
+	</children>
 </fx:root>

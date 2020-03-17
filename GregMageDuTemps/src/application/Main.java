@@ -4,6 +4,11 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Classe principale
+ * @author grego
+ *
+ */
 public class Main extends Application {
 	
 	@Override

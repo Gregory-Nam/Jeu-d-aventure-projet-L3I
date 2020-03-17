@@ -527,7 +527,6 @@ public class Jeu {
 				greg.replacerGauche();
 				setSalleCourante(salles.get(NomSalle.SALLE_DEPART));
 			}
-			
 			rootEnigme.nettoyerChampsTexte();
 		});
 		

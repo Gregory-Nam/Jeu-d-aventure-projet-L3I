@@ -14,30 +14,84 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+/**
+ * Classe de MenuControleur, controleur de la vue Menu.
+ * @author Gregory NAM.
+ *
+ */
+
 public class MenuControleur extends Pane {
+	/**
+	 * Label qui correspond au bouton permettant de lancer une partie ou de reprendre la partie en cours.
+	 */
 	@FXML
 	private Label btnJouer;
+	
+	/**
+	 * Label qui correspond au bouton permettant d'afficher les commandes du Jeu.
+	 */
 	@FXML
 	private Label btnCommandes;
+	
+	/**
+	 * Label qui correspond au bouton permettant d'afficher l'histoire du Jeu.
+	 */
 	@FXML
 	private Label btnHistoire;
+	
+	/**
+	 * Label qui correspond au bouton permetant de quitter le Jeu.
+	 */
 	@FXML
 	private Label btnQuitter;
+	
+	/**
+	 * Group qui ennglobe l'ensemble des boutons du menu.
+	 */
 	@FXML
 	private Group groupMenu;
 	
+	/**
+	 * Label qui correspond au texte des commandes.
+	 */
 	@FXML
 	private Label labelCommande;
+	
+	/**
+	 * Label qui correspond au texte de l'histoire.
+	 */
 	@FXML
 	private Label labelHistoire;
 	
+	/**
+	 * Evenement qui permet de quitter.
+	 */
 	EventHandler<MouseEvent> cliqueQuitter;
+
+	/**
+	 * Evenement du clique sur le bouton Jouer.
+	 */
 	EventHandler<MouseEvent> cliqueJouer;
+	
+	/**
+	 * Evenement du clique sur le bouton Histoire ou Commande.
+	 */
 	EventHandler<MouseEvent> cliqueHistoireCommande;
+	
+	/**
+	 * Evenement du clique sur le bouton reprendre.
+	 */
 	EventHandler<MouseEvent> cliqueReprendre;
+	
+	/**
+	 * Evenement de la touche pour revenir en arrière dans le menu.
+	 */
 	EventHandler<KeyEvent> retourArriere;
 
 
+	/**
+	 * Constructeur de MenuControleur.
+	 */
 	public MenuControleur() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/Menu.fxml"));
 		loader.setRoot(this);
@@ -55,6 +109,9 @@ public class MenuControleur extends Pane {
 	    initSurvoler();
 	}
 	
+	/**
+	 * Permet d'initialiser l'evenement Quitter.
+	 */
 	private void initQuitter() {
 		cliqueQuitter = c -> {
 			System.exit(0);;
@@ -62,6 +119,9 @@ public class MenuControleur extends Pane {
 		btnQuitter.addEventHandler(MouseEvent.MOUSE_CLICKED,cliqueQuitter);
 	}
 	
+	/**
+	 * Permet d'initialiser l'evenement Jouer.
+	 */
 	private void initJouer() {
 		cliqueJouer = c -> {
 			try {
@@ -76,12 +136,18 @@ public class MenuControleur extends Pane {
 		btnJouer.addEventHandler(MouseEvent.MOUSE_CLICKED,cliqueJouer);
 	}
 	
+	/**
+	 * Permet d'initialiser l'evenement Reprendre.
+	 */
 	private void initReprendre() {
 		cliqueReprendre = c -> {
 			Jeu.getInstanceUnique().reprendre();
 		};
 	}
 	
+	/**
+	 * Permet d'initialiser l'evenement Histoire / Commande.
+	 */
 	private void initHistoireCommande() {
 		
 		cliqueHistoireCommande = c -> {
@@ -99,11 +165,18 @@ public class MenuControleur extends Pane {
 		btnCommandes.addEventHandler(MouseEvent.MOUSE_CLICKED,cliqueHistoireCommande);
 	}
 	
+	/**
+	 * Permet de modifier la visiblite du noeud passé en paramètre.
+	 * @param enfant noeud dont on souhaite modifier la visibilité.
+	 */
 	private void visibiliteEnfant(Node enfant) {
 		enfant.setVisible(!enfant.isVisible());
 		enfant.setDisable(!enfant.isDisabled());
 	}
 	
+	/**
+	 * Permet d'initialiser l'evenement pour revenir en arrière dans le menu.
+	 */
 	private void initRetourArriereDansMenu() {
 		retourArriere = k -> {
 			KeyCode kc = k.getCode();
@@ -123,6 +196,9 @@ public class MenuControleur extends Pane {
 		
 	}
 	
+	/**
+	 * Permet d'initialiser l'effet "hover" des boutons.
+	 */
 	private void initSurvoler() {
 		EventHandler<MouseEvent> entrer = s -> {
 			Node element = ((Node)s.getSource());
