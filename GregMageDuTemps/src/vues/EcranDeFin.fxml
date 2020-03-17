@@ -21,7 +21,7 @@
 		</Label>
 		<Label fx:id="etatDeLaFin" alignment="CENTER"
 			contentDisplay="CENTER" layoutX="132.0" layoutY="216.0"
-			prefHeight="17.0" prefWidth="336.0" text="qd" textAlignment="CENTER"
+			prefHeight="17.0" prefWidth="336.0" text="" textAlignment="CENTER"
 			textFill="WHITE" />
 		<Label layoutX="132.0" layoutY="233.0"
 			text="Appuyez sur Q pour quitter ou sur R pour retenter votre chance"

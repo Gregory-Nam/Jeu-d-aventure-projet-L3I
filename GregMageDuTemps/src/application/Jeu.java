@@ -101,7 +101,7 @@ public class Jeu {
 		primaryStage = stage;
 		primaryStage.setResizable(false);
 		initSceneMenu();
-		voirMenu();
+		afficheMenu();
 		
 		primaryStage.show();
 	}
@@ -134,7 +134,6 @@ public class Jeu {
 	
 	private void initPersonnageJoueurScene() {
 		greg = PersonnageJoueur.getInstanceUnique();
-
 	}
 		/**
 	 * Cette methode privee permet d'initialiser le stage.
@@ -165,7 +164,6 @@ public class Jeu {
 	private void initSceneDeFin() throws IOException {
 		rootMort = new FinControleur();
 		sceneFinJeu = new Scene(rootMort);
-		
 		sceneFinJeu.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
@@ -176,15 +174,15 @@ public class Jeu {
 						break;
 					case R :
 						try {
-							lancerJeu();
+							Jeu.getInstanceUnique().lancerJeu();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-					break;
+						break;
 					default: 
+						System.out.println("lol");
 						break;
 				}
-				
 			}
 		});
 	}
@@ -328,7 +326,7 @@ public class Jeu {
 		Horloge horlogeBronze = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 889);
 		Horloge horlogeArgent = new Horloge(new File("Images/Horloges/Horloge_argent_transparence.png"), Materiaux.ARGENT, 1, Periode.PERIODE_3, 92);
 		Horloge horlogeOr = new Horloge(new File("Images/Horloges/Horloge_or_transparence.png"), Materiaux.OR, 2, Periode.PERIODE_OBJECTIF, 853);
-		HorlogePiege horlogePiege = new HorlogePiege(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.PLAQUE_OR, Periode.PERIODE_OBJECTIF, 86);
+		HorlogePiege horlogePiege = new HorlogePiege(new File("Images/Horloges/Horloge_piege_transparence.png"), Materiaux.PLAQUE_OR, Periode.PERIODE_OBJECTIF, 86);
 
 		/* REMPLISSAGE DE LA HASHMAP */
 		salles.put(salleDepart.getNomSalle(), salleDepart);
@@ -379,21 +377,22 @@ public class Jeu {
 						
 					/*DEPLACEMENT VERS LE HAUT POUR INTERAGIR AVEC UN OBJET INTERACTIF */
 					case UP : 
-
 						greg.changerSprite(Deplacements.HAUT);
 						if(greg.getXMin() <= X_MIN_FENETRE || greg.getXMax() >= X_MAX_FENETRE) break;
 						Interactif objetInteractif = salleCourante.interactifAPosition(greg.getXMin(), greg.getXMax());
 
-						if(objetInteractif != null) {
+						if(objetInteractif != null)
 							objetInteractif.interagir();
-						}
 						break;
+					/* OUVERTURE DE L'INVENTAIRE */
 					case I :
-						voirInventaire();
+						afficheInventaire();
 						break;
+					/* MENU */
 					case ESCAPE :
 						primaryStage.setScene(sceneMenu);
 						break;
+					/* FINIR JEU */
 					case P :
 						try {
 							FinisseurDeJeu.finirJeu(scene, sceneEnigme, sceneInventaire,rootEnigme, pnj, salles);
@@ -532,7 +531,7 @@ public class Jeu {
 		
 	}
 	
-	public void voirInventaire() {
+	public void afficheInventaire() {
 		primaryStage.setScene(sceneInventaire);
 		
 		sceneInventaire.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -553,7 +552,7 @@ public class Jeu {
 		});
 	}
 	
-	public void voirMenu() {
+	public void afficheMenu() {
 		primaryStage.setScene(sceneMenu);
 	}
 	
@@ -562,6 +561,7 @@ public class Jeu {
 		primaryStage.setScene(sceneFinJeu);
 		
 	}
+	
 	public void reprendre() {
 		primaryStage.setScene(scene);
 		greg.replacerGauche();
@@ -591,7 +591,7 @@ public class Jeu {
 			root.setEffect(colorAdjust);
 		}
 		else if(periodeCourante.equals(Periode.PERIODE_OBJECTIF)) {
-			terminer("Tu as retrouvÃ© ton espace temps !", true);
+			terminer("Tu as retrouvé ton espace temps !", true);
 			return;
 		}
 		
