@@ -1,8 +1,11 @@
 package elements;
 
 import java.io.File;
+
+import enumerations.Deplacements;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import personnages.PersonnageJoueur;
 
 /**
  * Implémentation des portes murales du jeu. </br>
@@ -74,6 +77,7 @@ public class PorteMurale extends PorteExtremite{
 			estOuverte = true;
 		}
 		super.interagir();
+		PersonnageJoueur.getInstanceUnique().changerSprite(Deplacements.BAS);
 	}
 	
 	@Override

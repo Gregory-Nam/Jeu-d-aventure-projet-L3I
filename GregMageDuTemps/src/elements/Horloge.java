@@ -3,6 +3,7 @@ package elements;
 import java.io.File;
 
 import application.Jeu;
+import enumerations.Deplacements;
 import enumerations.Materiaux;
 import enumerations.Periode;
 import javafx.scene.image.Image;
@@ -102,6 +103,7 @@ public class Horloge extends Interactif {
 		}
 		aEteActive = true;
 		
+		PersonnageJoueur.getInstanceUnique().changerSprite(Deplacements.DROITE);
 		Jeu.getInstanceUnique().changerDePeriode();
 	}
 
