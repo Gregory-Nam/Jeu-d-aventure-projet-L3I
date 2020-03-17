@@ -21,6 +21,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -125,7 +128,8 @@ public class Jeu {
 		c.lancer();
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
 		rootInventaire.creerListener(greg.getInventaire());
-		afficheMessage(periodeCourante.toString().replace('_', ' '),2);		
+		afficheMessage(periodeCourante.toString().replace('_', ' '),2);
+		
 	}
 	
 	private void initPersonnageJoueurScene() {
@@ -382,7 +386,6 @@ public class Jeu {
 
 						if(objetInteractif != null) {
 							objetInteractif.interagir();
-							greg.changerSprite(Deplacements.BAS);
 						}
 						break;
 					case I :
@@ -568,7 +571,10 @@ public class Jeu {
 	public void changerDePeriode()  {
 		PersonnageNonJoueur pnjMort;
 		periodeCourante = periodeCourante.suivante();
+		ColorAdjust colorAdjust = new ColorAdjust();
 		if(periodeCourante.equals(Periode.PERIODE_2)) {
+			colorAdjust.setSaturation(-0.5);
+			root.setEffect(colorAdjust);
 			pnjMort = pnj.get(NomPNJ.KLACE_HEUREOUVERRE);
 			pnj.remove(NomPNJ.KLACE_HEUREOUVERRE);
 			salles.get(NomSalle.SALLE_3).supprimerInteractif(pnjMort);
@@ -578,6 +584,12 @@ public class Jeu {
 			pnjMort = pnj.get(NomPNJ.SLYNE);
 			pnj.remove(NomPNJ.SLYNE);
 			salles.get(NomSalle.SALLE_2).supprimerInteractif(pnjMort);
+			
+			colorAdjust.setBrightness(-0.2);
+			colorAdjust.setContrast(0.1);
+			Effect sepia = new SepiaTone(0.5);
+			colorAdjust.setInput(sepia);
+			root.setEffect(colorAdjust);
 		}
 		else if(periodeCourante.equals(Periode.PERIODE_OBJECTIF)) {
 			terminer("Tu as retrouvé ton espace temps !", true);

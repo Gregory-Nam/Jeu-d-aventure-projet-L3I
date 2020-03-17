@@ -128,8 +128,6 @@ public class FinisseurDeJeu {
 		    	t.play();
 	    	}
 	    	else if(  xPorte - 10 < greg.getXCentre() && greg.getXCentre() < xPorte + 10){
-	    		if(item2pris) System.out.println("on est devant");
-
 	    		KeyEvent.fireEvent(sceneJeu, interagir);
 	    		if(itemMisOr1 && !item2pris) deplacerJusquauPNJ(t, pnjs.get(NomPNJ.ABITBOL), gauche, "le temps");
 	    		else if(item2pris) allerDansUneSalle(t, NomSalle.SALLE_OR, droite);
