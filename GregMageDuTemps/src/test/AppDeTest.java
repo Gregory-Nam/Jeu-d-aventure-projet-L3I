@@ -6,13 +6,19 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * Cette classe permet de créer un environnement de test. </br>
- * Nous avions deux solutions : <br/>
- * - TestFX (mais projet devait être sous maven) </br>
- * - Creer une fausse application </br>
+ * Cette classe permet de créer un environnement de test. 
+ * </br>
+ * Nous avions deux solutions :
+ * </br>
+ * - TestFX (mais projet devait être sous maven) 
+ * </br>
+ * - Creer une fausse application 
+ * </br>
  * 
- * Le code de cette classe a été pris sur StackOverflow : </br>
- * https://stackoverflow.com/questions/11385604/how-do-you-unit-test-a-javafx-controller-with-junit?fbclid=IwAR2BU_y3Fa68FdKuvbXSWlASQAWOTHG-G-ywg5xyIgooZsR8oyr5UAS_5rc </br>
+ * Le code de cette classe a été pris sur StackOverflow : 
+ * </br>
+ * https://stackoverflow.com/questions/11385604/how-do-you-unit-test-a-javafx-controller-with-junit?fbclid=IwAR2BU_y3Fa68FdKuvbXSWlASQAWOTHG-G-ywg5xyIgooZsR8oyr5UAS_5rc 
+ * </br>
  * 
  * @author StackOverflow
  *

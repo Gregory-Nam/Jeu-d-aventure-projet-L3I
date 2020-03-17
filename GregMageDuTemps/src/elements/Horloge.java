@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
 
 /**
- * Implémentation des horloges du Jeu. </br>
+ * Implémentation des horloges du Jeu. 
+ * </br>
  * Une horloge est un objet interactif composée d'un certain matériaux.
  * @author Grégory NAM.
  * @author Hugo CHALIK.
@@ -67,7 +68,8 @@ public class Horloge extends Interactif {
 	}
 	
 	/**
-	 * Interaction avec l'horloge. </br>
+	 * Interaction avec l'horloge. 
+	 * </br>
 	 * Une interaction avec l'horloge est possible si celle-ci n'a pas déjà été activée;
 	 * L'interaction avec l'horloge peu :
 	 * <ul>
@@ -86,7 +88,7 @@ public class Horloge extends Interactif {
 			return;
 		}
 		/* MAUVAISE PERIODE */
-		if(Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation.precente()) {
+		if(Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation.precedente()) {
 			Jeu.getInstanceUnique().terminer("Tu n'étais pas dans le bon espace temps pour activer cet horloge...", false);
 			PersonnageJoueur.getInstanceUnique().replacerGauche();
 			PersonnageJoueur.getInstanceUnique().enleverItemEnMain();			
@@ -123,7 +125,7 @@ public class Horloge extends Interactif {
 	 */
 	private int insererItemManquant(Item item) {
 		if(!item.getMateriaux().equals(this.materiauxHorloge)) {
-			Jeu.getInstanceUnique().terminer("L'horloge a été cassé par cet item en " + item.getMateriaux().toString(), false);
+			Jeu.getInstanceUnique().terminer("L'horloge a été cassée par cet item en " + item.getMateriaux().toString(), false);
 			return -1;
 		}
 		

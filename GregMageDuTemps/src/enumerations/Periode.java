@@ -9,12 +9,12 @@ public enum Periode {
 		this.periode = s;
 	}
 	
-	public Periode precente() {
+	public Periode precedente() {
 		return ordinal() != 0 ? periodes[ordinal() - 1] : periodes[0];
 	}
 	
 	public Periode suivante() {
-		return ordinal() != periodes.length ? periodes[ordinal() + 1] : periodes[ordinal()];
+		return ordinal() != periodes.length-1 ? periodes[ordinal() + 1] : periodes[ordinal()];
 	}
 	
 	@Override

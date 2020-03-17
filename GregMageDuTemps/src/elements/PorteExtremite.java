@@ -4,7 +4,8 @@ import application.Jeu;
 import javafx.scene.image.ImageView;
 
 /**
- * Implémentation des portes Extremite du jeu. </br>
+ * Implémentation des portes Extremite du jeu. 
+ * </br>
  * Cette classe hérite de Interactif.
  * @author Grégory NAM.
  * @author Hugo CHALIK.

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import application.Jeu;
 import elements.Horloge;
 import elements.Interactif;
 import elements.Salle;
@@ -23,8 +24,8 @@ import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
 
 class SalleTest {
-
-	//Ces test sont broken � cause de l'interface graphique
+	
+	
 	Salle s;
 	ImageView img;
 	
@@ -41,12 +42,6 @@ class SalleTest {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-
-	@Test
-	void testInitSalle() {
-		
-	}
-	
 	
 	@Test
 	@Disabled
@@ -98,6 +93,10 @@ class SalleTest {
 	@Test
 	void testGetInteractifs() {
 	    Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 45);
+	    s.ajoutInteractif(h);
+	    ArrayList<Interactif> ar = new ArrayList<Interactif>();
+	    ar.add(h);
+	    assertEquals(ar, s.getInteractifs());
 	}
 
 }

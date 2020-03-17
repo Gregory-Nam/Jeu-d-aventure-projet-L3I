@@ -1,7 +1,7 @@
 package enumerations;
 /**
  * @author Ahmadou Bamba MBAYE<br>
- * Cette ennumération contient la liste des salles dans cette ordre:
+ * Cette ennumeration contient la liste des salles dans cette ordre:
  *<ol>
  *     <li>Les Salles simples</li>
 	 *     <ul>

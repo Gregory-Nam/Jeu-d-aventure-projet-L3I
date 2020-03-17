@@ -43,17 +43,8 @@ class ItemTest {
 	}
 
 	@Test
-	@Disabled
-	void testGetImageView() {
-		fail("Problème de récupération d'ImageView");
-		assertTrue(Objects.equals(it.getImageView(), it2.getImageView()));
-	}
-
-	@Test
-	@Disabled
-	void testInteragir() {
-		fail("Pas d'instanciation du jeu donc ne fonctionne pas");
-		//it.interagir();
+	void testInteragir() {	
+		it.interagir();
 		Inventaire inv = PersonnageJoueur.getInstanceUnique().getInventaire();
 		assertTrue(inv.getInventaire().contains(it));
 		assertFalse(Jeu.getInstanceUnique().getSalleCourante().getInteractifs().contains(it));
@@ -69,12 +60,6 @@ class ItemTest {
 		assertEquals(630, it.getXMin());
 	}
 	
-	@Test
-	@Disabled
-	void testGetImageViewPourInventaire() {
-		fail("Problème de récupération d'ImageView");
-	}
-
 	@Test
 	void testGetNom() {
 		assertEquals("Aiguille en BRONZE", it.getNom());
