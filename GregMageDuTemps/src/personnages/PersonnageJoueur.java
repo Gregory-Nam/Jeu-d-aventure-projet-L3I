@@ -195,7 +195,15 @@ public class PersonnageJoueur extends Personnage{
 	public boolean aBienRepondu() {
 		return aBienReponduperiodeCourante.get();
 	}
-/**
+	
+
+	public void reinitialiser() {
+		this.replacerGauche();
+		changerSprite(Deplacements.DROITE);
+		this.inventaire = new Inventaire();
+	}
+	
+	/**
 	 * Cette methode fait la liaison du dialogue avec personnage non joueur
 	 * @param pnj
 	 * Le personnage non joueur

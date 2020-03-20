@@ -129,7 +129,6 @@ public class Jeu {
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
 		rootInventaire.creerListener(greg.getInventaire());
 		afficheMessage(periodeCourante.toString().replace('_', ' '),2);
-		greg.replacerGauche();
 		
 	}
 	
@@ -175,6 +174,7 @@ public class Jeu {
 						break;
 					case R :
 						try {
+							greg.reinitialiser();
 							Jeu.getInstanceUnique().lancerJeu();
 						} catch (IOException e) {
 							e.printStackTrace();

@@ -9,6 +9,8 @@ import utilitaire.AnalyseFichierEnigmeUtil;
 import java.io.File;
 import java.util.HashMap;
 
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Replace;
+
 import application.Jeu;
 import elements.Item;
 import enumerations.NomPNJ;
@@ -186,6 +188,7 @@ public class PersonnageNonJoueur extends Personnage {
 	public ImageView getImagePourEnigme() {
 		return spritePourEnigme;
 	}
+	
 	/**
 	 * Cette methode est un boolean qui retournant TRUE si la reponse recu est la bonne
 	 */

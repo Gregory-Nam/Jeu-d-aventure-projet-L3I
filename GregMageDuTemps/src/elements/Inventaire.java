@@ -46,6 +46,7 @@ public class Inventaire {
 	 * @return vrai si l'item a été ajouté, faux sinon.
 	 */
 	public boolean ajouterItem(Item i) {
+		System.out.println("taille inventaire avant ajout " + inventaireObserve.size());
 		if(!capaciteAtteinte() && !inventaireObserve.contains(i)) {
 			return this.inventaireObserve.add(i);
 		}
@@ -84,5 +85,4 @@ public class Inventaire {
 	private boolean capaciteAtteinte() {
 		return inventaireObserve.size() == TAILLE_INVENTAIRE;
 	}
-
 }
