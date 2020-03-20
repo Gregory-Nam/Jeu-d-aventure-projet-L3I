@@ -129,6 +129,7 @@ public class Jeu {
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
 		rootInventaire.creerListener(greg.getInventaire());
 		afficheMessage(periodeCourante.toString().replace('_', ' '),2);
+		greg.replacerGauche();
 		
 	}
 	
@@ -563,6 +564,7 @@ public class Jeu {
 	
 	public void reprendre() {
 		primaryStage.setScene(scene);
+		System.out.println("xD");
 		greg.replacerGauche();
 	}
 	

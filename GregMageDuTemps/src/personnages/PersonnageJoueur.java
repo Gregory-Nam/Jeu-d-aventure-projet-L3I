@@ -115,6 +115,7 @@ public class PersonnageJoueur extends Personnage{
 		super.xMin = 0;
 		super.xMax = largeurPersonnage;
 		spriteCourant.setX(super.xMin);
+		changerSprite(Deplacements.DROITE);
 	}
 	/**
 	 * La méthode replacerDroite() replace le personnage joueur:
