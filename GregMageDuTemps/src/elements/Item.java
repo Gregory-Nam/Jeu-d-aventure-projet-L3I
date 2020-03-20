@@ -98,7 +98,7 @@ public class Item extends Interactif{
 	 */
 	@Override
 	public void interagir() {
-		PersonnageJoueur.getInstanceUnique().mettreItemdansInventaire(this);
+		PersonnageJoueur.getInstanceUnique().prendreItem(this);
 		Jeu.getInstanceUnique().getSalleCourante().supprimerInteractif(this);
 		Jeu.getInstanceUnique().initObjetInteractif();
 	}

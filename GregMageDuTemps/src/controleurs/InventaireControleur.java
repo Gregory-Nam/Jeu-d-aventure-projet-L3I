@@ -128,9 +128,9 @@ public class InventaireControleur extends Pane {
 	}
 	
 	/**
-	 * <p> Mise à jour de l'inventaire après une suppression.
+	 * Mise à jour de l'inventaire après une suppression.
 	 * pour ne pas avoir une case vide entre deux items.
-	 * Elle décale tous les items suivant l'item supprimé sur la case précedente. </p>
+	 * Elle décale tous les items suivant l'item supprimé sur la case précedente.
 	 * @param aPartirDe correspond à la position de l'item qui a été supprimé
 	 */
 	private void raffraichissement(int aPartirDe) {
@@ -202,7 +202,7 @@ public class InventaireControleur extends Pane {
 	}
 	
 	/**
-	 * Selectionne un item sur lequel on a cliqué
+	 * Selectionne un item sur lequel on a cliqué.
 	 * Un cadre rouge est ajouté sur le panneau et un id de valeur
 	 * "selectionne" est ajouté à l'ImageView.
 	 * @param panneau panneau correspondant a la case de l'item selectionné
@@ -215,8 +215,8 @@ public class InventaireControleur extends Pane {
 	}
 	
 	/**
-	 * Deselectionne un item
-	 * Le cadre rouge et l'id de valeur "selectionne" sont enlevés
+	 * Deselectionne un item.
+	 * Le cadre rouge et l'id de valeur "selectionne" sont enlevés.
 	 */
 	private void deselection(){
 		ImageView selectionne = (ImageView)this.lookup("#selectionne");
@@ -244,7 +244,7 @@ public class InventaireControleur extends Pane {
 	
 	/**
 	 * Permet de créer un lien entre l'inventaire graphique et l'inventaire "modèle". 
-	 * </br>
+	 * <br>
 	 * On ajouter un écouteur sur la liste observable de l'inventaire qui permet d'effectuer
 	 * les changements graphiques lorsqu'une modification est ralisée sur la liste des items
 	 * de l'inventaire.

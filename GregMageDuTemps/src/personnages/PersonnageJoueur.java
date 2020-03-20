@@ -9,34 +9,63 @@ import enumerations.Deplacements;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
+
 /**
+ * Implémentation de PersonnageJoueur (Singleton)
+ * @author Grégory NAM
+ * @author Hugo CHALIK
+ * @author Luca BEVILACQUA
  * @author Ahmadou Bamba MBAYE.
- * La classe PersonnageJoueur herite la classe Personnage. Elle gere les personnages joueurs.
- * Cette classe contient comme parametre la largeur du personnage et un boolean confirmant s'il a bien repondu
  */
 public class PersonnageJoueur extends Personnage{
 	
+	/**
+	 * Instance unique de PersonnageJoueur
+	 */
 	private static PersonnageJoueur greg = new PersonnageJoueur();
 	
-	private final static String HAUT = "Images/Personnages/wizardNord_transparent.png";
-	private final static String DROITE = "Images/Personnages/wizardDroite_transparent.png";
-	private final static String BAS = "Images/Personnages/wizardSud_transparent.png";
-	private final static String GAUCHE = "Images/Personnages/wizardGauche_transparent.png";
-	private final static int VELOCITE = 15;
 	/**
-	 * La lergeur du personnage joueur
+	 * Sprite du PersonnageJoueur de dos.
+	 */
+	private final static String HAUT = "Images/Personnages/wizardNord_transparent.png";
+	
+	/**
+	 * Sprite du PersonnageJoueur vers la droite.
+	 */
+	private final static String DROITE = "Images/Personnages/wizardDroite_transparent.png";
+	
+	/**
+	 * Sprite du PersonnageJoueur de face.
+	 */
+	private final static String BAS = "Images/Personnages/wizardSud_transparent.png";
+	
+	/**
+	 * Sprite du PersonnageJoueur vers la gauche.
+	 */
+	private final static String GAUCHE = "Images/Personnages/wizardGauche_transparent.png";
+	
+	/**
+	 * Vitese de deplacement en pixel.
+	 */
+	private final static int VELOCITE = 15;
+	
+	/**
+	 * La largeur du sprite du PersonnageJoueur en pixel.
 	 */
 	private final double largeurPersonnage;
-	private Inventaire inventaire;
+	
 	/**
-	 * Boolean qui retourne vrai TRUE si le personnage a bien repondu
+	 * L'inventaire du PersonnageJoueur.
+	 */
+	private Inventaire inventaire;
+	
+	/**
+	 * Une propriete booleene qui permet de lier le PNJ avec le PJ.
 	 */
 	private BooleanProperty aBienReponduperiodeCourante;
+	
 	/**
-	 * Le constructeur sans paramÃ¨tre de la classe PersonnageJoueur recupere le constructeur de la classe mÃ¨re ensuite crÃ©er un tbaleau
-	 *de sprites contenant 4 elÃ¨ments : HAUT, DROITE, BAS et GAUCHE.
-	 * Ce constructeur crÃ©e aussi un nouveau boolean SimpleBooleanProperty qui prend faux comme paramÃ¨tre et un nouveau inventaire et initialise 
-	 *la largeur du personnage.Il rÃ©cupere la position minimale et maximale a l'aide de la classe mÃ¨re Personnage
+	 * Le constructeur privé de PersonnageJoueur.
 	 */
 	private PersonnageJoueur() {
 		super();
@@ -55,10 +84,7 @@ public class PersonnageJoueur extends Personnage{
 		super.xMin = spriteCourant.getX();
 		super.xMax = getXMin() + spriteCourant.getImage().getWidth();
 	}
-	
-	/**
-	 * La mÃ©thode seDirigerAGauche() gÃ©re la cas ou le personnage se dirige vers la gauche..
-	 */
+
 	@Override
 	public void seDirigerAGauche()  {
 		double nouvellePosition = spriteCourant.getX() - VELOCITE;
@@ -67,9 +93,7 @@ public class PersonnageJoueur extends Personnage{
 		super.xMin = nouvellePosition;
 		super.xMax = nouvellePosition + largeurPersonnage;
 	}
-	/**
-	 * La mÃ©thode seDirigerADroite() gÃ©re la sas ou le personnage se dirige vers la droite..
-	 */
+
 	@Override
 	public void seDirigerADroite() {
 		double nouvellePosition = spriteCourant.getX() + VELOCITE;
@@ -79,37 +103,32 @@ public class PersonnageJoueur extends Personnage{
 		super.xMax = nouvellePosition + largeurPersonnage;
 
 	}
-	/**
-	 * Cette methode fait appel a la methode initPersonnage de la classe mere Personnage.
-	 * Elle cree un spriteCourant avec une nouvelle image
-	 */
+	
 	@Override
 	public void initPersonnage(File[] sprites) {
 		super.initPersonnage(sprites);
 		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.DROITE).getImage());	
 	}
 	/**
-	 * Cette methode qui prend un paramÃ¨tre d de type dÃ©placements permet de changer le sprite.
-	 * Si l'image du sprite courant est egale a l'image du spritePersonnage.
-	 * on met a jour l'image le sprite personnage
-	 * @param d Le deplacement
+	 * Permet de mettre à jour l'ImageView courante selon le deplacement passé en paramètre.
+	 * @param d Le deplacement.
 	 */
 	public void changerSprite(Deplacements d) {
 		if(spriteCourant.getImage().equals(spritesPersonnageHM.get(d).getImage())) return;
 		spriteCourant.setImage(spritesPersonnageHM.get(d).getImage());
 	}
 	
+	/**
+	 * Permet d'enlever l'item que le PersonnageJoueur à dans les mains.
+	 * Cela l'enlève également de l'inventaire.
+	 */
 	public void enleverItemEnMain() {
-		System.out.println("enlever item main");
 		inventaire.supprimerItem(itemEnPossession);
 		super.itemEnPossession = null;
 	}
+	
 	/**
-	 * La mÃ©thode replacerGauche() replace le personnage joueur:
-	 * <ul>
-	 *     <li>quand la xMin est null et le xMax est egal a la largeur du personnage joueur </li>
-	 *     <li>et mit a joueur le xMin du spriteCourant</li>
-	 * </ul>
+	 * Permet de replacer le PersonnageJoueur tout à gauche de la vue.
 	 */
 	public void replacerGauche() {
 		super.xMin = 0;
@@ -118,11 +137,7 @@ public class PersonnageJoueur extends Personnage{
 		changerSprite(Deplacements.DROITE);
 	}
 	/**
-	 * La mÃ©thode replacerDroite() replace le personnage joueur:
-	 * <ul>
-	 *     <li>quand la xMax est egal a 1000 et le xMin est egal a la difference entre xMax et la largeur du personnage joueur </li>
-	 *     <li>et mit a joueur le xMin du spriteCourant</li>
-	 * </ul>
+	 * Permet de replacer le PersonnageJoueur tout à droite de la vue.
 	 */
 	public void replacerDroite() {
 		super.xMin = 1000 - largeurPersonnage;
@@ -130,11 +145,20 @@ public class PersonnageJoueur extends Personnage{
 		spriteCourant.setX(super.xMin);
 	}
 	
-	public void mettreItemdansInventaire(Item i) {
+	/**
+	 * Permet d'ajouter l'item passé en paramètre dans l'inventaire.
+	 * @param i item à prendre.
+	 */
+	public void prendreItem(Item i) {
 		this.inventaire.ajouterItem(i);
 	}
 	
+	/**
+	 * Permet de prendre un item présent dans l'inventaire en main.
+	 * @param i item à prendre.
+	 */
 	public void prendreItemEnMain(Item i) {
+		if(inventaire.getItem(i) == null) return;
 		super.itemEnPossession = i;
 	}
 	
@@ -142,71 +166,67 @@ public class PersonnageJoueur extends Personnage{
  	public void interagir() {
 		Jeu.getInstanceUnique().afficheMessage("Je crois qu'il n'y a rien...",0.5);
 	}
-/**
-	 * La methode getItemEnMain() recupere l'item en main
-	 * @return l'item en main
+
+	/**
+	 * Renvoie l'item en possession du PersonnageJoueur.
+	 * @return l'item en possession du PersonnageJoueur.
 	 */
 	public Item getItemEnMain() {
 		return super.itemEnPossession;
 	}
-	/**
-	 * La methode getXMin() recupere la valeur xMin
-	 * @return La valeur de xMin
-	 */
+	
 	@Override
 	public double getXMin() {
 		return super.xMin;
 	}
-/**
-	 * La methode getXMax() recupere la valeur xMax
-	 * @return La valeur de xMax
-	 */
+	
 	@Override
 	public double getXMax() {
 		return super.xMax;
 	}
-/**
-	 * La methode getXCentre() recupere la valeur du centre
-	 * @return La valeur du centre (moyenne entre xMin et xMax)
-	 */
+	
 	public double getXCentre() {
 		return (super.xMin + super.xMax) / 2;
 	}
+	
 	/**
-	 * La methode getInstanceUnique() recupere l'instance unique du greg
-	 * @return Le personnage joueur Greg
+	 * Renvoie l'instance unique de PersonnageJoueur.
+	 * @return l'instance unique de PersonnageJoueur.
 	 */
 	public static PersonnageJoueur getInstanceUnique() {
 		return greg;
 	}
+	
 	/**
-	 * La methode getInventaire() recupere l'inventaire
-	 * @return Un inventaire
+	 * Renvoie l'inventaire
+	 * @return l'inventaire
 	 */
 	public Inventaire getInventaire() {
 		return inventaire;
 	}
+	
 	/**
-	 * Cette methode retourne un boolean
-	 * @return
-	 * Elle retourne <strong>TRUE</strong> si le personnage a bien repondu.
-	 * Elle retourne <strong>FALSE</strong> si le personnage a mal repondu
+	 * Renvoie si le PersonnageJoueur a bien répondu
+	 * @return vrai si le PersonnageJoueur a donnée une bonne réponse,
+	 *         faux si le PersonnageJoueur a donnée une mauvaise réponse ou n'a pas répondu.
 	 */
 	public boolean aBienRepondu() {
 		return aBienReponduperiodeCourante.get();
 	}
 	
 
+	/**
+	 * Permet de reinitialiser le PersonnageJoueur.
+	 * Il est replacer a gauche et l'inventaire est recréée.
+	 */
 	public void reinitialiser() {
 		this.replacerGauche();
-		changerSprite(Deplacements.DROITE);
 		this.inventaire = new Inventaire();
 	}
 	
 	/**
-	 * Cette methode fait la liaison du dialogue avec personnage non joueur
-	 * @param pnj
-	 * Le personnage non joueur
+	 * Permet de faire la liaison du dialogue le PNJ passé en paramètre.
+	 * @param pnj le pnj avec qui on veut faire la liaison.
 	 */
 	public void liaisonDialogueAvecPNJ(PersonnageNonJoueur pnj){
 		this.aBienReponduperiodeCourante.bind(pnj.getEtatReponseAttendu());

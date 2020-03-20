@@ -15,47 +15,38 @@ import application.Jeu;
 import elements.Item;
 import enumerations.NomPNJ;
 import enumerations.TypeDialogue;
+
 /**
+ * Implémentation de PersonnageNonJoueur
+ * @author Grégory NAM
+ * @author Hugo CHALIK
+ * @author Luca BEVILACQUA
  * @author Ahmadou Bamba MBAYE.
- * La classe PersonnageNonJoueur herite de la classe Personnage. Elle gere les personnages non joueurs.
- * Cette classe contient comme parametre le nom du personnage non joueur, l'item a donner, une HashMap qui contient les dialogues
- * et un boolean confirmant s'il a bien repondu.
  */
 public class PersonnageNonJoueur extends Personnage {
+	
 	/**
-	 *Le nom du personnage non joueur
+	 * Le nom du PNJ
 	 */
 	private NomPNJ nom;
+	
 	/**
-	 * Un HashMap qui contient le type de dialogue et le dialogue
+	 * HashMap qui contient le type de dialogue et le dialogue.
 	 */
 	private HashMap<TypeDialogue, String> dialogues;
+	
 	/**
-	 * Un boolean qui retourne vrai si le personnage a bien repondu a la question
+	 * Une propriété booléene qui permet de lier le PNJ avec le PJ.
 	 */
 	private BooleanProperty aRecuUneBonneReponse;
+	
 	/**
-	 * Le sprite pour l'enigme de type ImageView
+	 * L'ImageView du PNJ pour la vue de l'enigme.
 	 */
 	private ImageView spritePourEnigme;
 	
 	/**
-	 * Le constructeur de la classe PersonnageNonJoueur prend en parametre un nom du personnage non joueur,
-	 * un nombre x, un item i, un sprite pour l'enigme :
-	 * <ul>
-		 * <li> il recupere tout ce qui etait dans le constructeur de la classe mere Personnage en affectant l'item
-		 * en possession de  i</li>
-		 * <li> il cree un nouvelle image en vue</li>
-		 * <li> le sprite pour enigme en creant une nouvelle image</li>
-		 * <li> il cree un nouveau boolean SimpleBooleanProperty qui prend false en parametre de sortie</li>
-		 * <li> il initialise le nom du personnage non joueur</li>
-		 * <li> il cree le dialogue dans un HashMap</li>
-	 * </ul>
-	 * @param nom nom du PNJ
-	 * @param x la position
-	 * @param i un item quelconque
-	 * @param spritePourEnigme Le sprite pour l'enigme
-	 * @param sprites Les sprites
+	 * Le constructeur de la classe PersonnageNonJoueur.
 	 */
 	public PersonnageNonJoueur(NomPNJ nom, double x, Item i, File spritePourEnigme, File ... sprites) {
 		super();
@@ -75,25 +66,18 @@ public class PersonnageNonJoueur extends Personnage {
 		initDialogue();
 	}
 
-	/**
-	 * La methode abstraite seDirigerADroite() gere la cas ou le personnage se dirige vers la droite..
-	 * Elle met a jour la position du spriteCourant
-	 */
 	@Override
 	public void seDirigerADroite() {
 		spriteCourant.setX(spriteCourant.getX() - 20);
-		
 	}
-	/**
-	 * La methode abstraite seDirigerAGauche() gere la cas ou le personnage se dirige vers la gauche..
-	 * Elle met a jour la position du spriteCourant
-	 */
+	
 	@Override
 	public void seDirigerAGauche() {
 		spriteCourant.setX(spriteCourant.getX() + 20);
 	}
+	
 	/**
-	 * Cette methode permet d'affecter chaque dialogue a son Type de dialogue Ã  l'aide l'enumeration TypeDialogue
+	 * Permet d'initialiser la HashMap contenant les dialogues du PNJ.
 	 */
 	private void initDialogue() {
 		dialogues.put(TypeDialogue.BONNE_REPONSE, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.BONNE_REPONSE));
@@ -102,95 +86,97 @@ public class PersonnageNonJoueur extends Personnage {
 		dialogues.put(TypeDialogue.DEJA_REPONDU, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.DEJA_REPONDU));
 		dialogues.put(TypeDialogue.REPONSE, AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.REPONSE));
 	}
+	
 	/**
-	 * La methode getNom() recupere le nom du personnage non joueur
-	 * @return Le nom du personnage non joueur
+	 * Renvoie le nom du PNJ.
+	 * @return le nom du PNJ.
 	 */
 	public NomPNJ getNom() {
 		return nom;
 	}
-	/**
-	 * Cette methode gere l'interagissement en lancant les enigmes
-	 */
+	
 	@Override
 	public void interagir() {
 		Jeu.getInstanceUnique().lancerEnigme(this);
 	}
-	/**
-	 * La methode getXMin() recupere la valeur xMin
-	 * @return La valeur de xMin
-	 */
+	
 	@Override
 	public double getXMin() {
 		return spriteCourant.getX();
 	}
-	/**
-	 * La methode getXMax() recupere la valeur xMax
-	 * @return La valeur de xMax
-	 */
+	
 	@Override
 	public double getXMax() {
 		return spriteCourant.getX() + spriteCourant.getImage().getWidth();
 	}
+	
 	/**
-	 * Cette methode permet de poser la question
-	 * @return Elle retourne la <strong>QUESTION</strong>
+	 * Renvoie la question de l'enigme du PNJ.
+	 * @return la question de l'enigme du PNJ.
 	 */
 	public String poseQuestion() {
 		return dialogues.get(TypeDialogue.QUESTION);
 	}
+	
 	/**
-	 * Cette methode donne une MAUVAISE_REPONSE
-	 * @return Elle retourne la <strong>MAUVAISE_REPONSE</strong>
+	 * Renvoie la réponse à une mauvaise réponse.
+	 * @return la réponse à une mauvaise réponse.
 	 */
 	public String repondAUneMauvaiseReponse() {
 		return dialogues.get(TypeDialogue.MAUVAISE_REPONSE);
 	}
+	
 	/**
-	 * Cette methode donne une BONNE_REPONSE
-	 * @return Elle retourne la <strong>BONNE_REPONSE</strong>
+	 * Renvoie la réponse à une bonne réponse.
+	 * @return la réponse à une bonne réponse.
 	 */
 	public String repondAUneBonneReponse() {
 		return dialogues.get(TypeDialogue.BONNE_REPONSE);
 	}
+	
 	/**
-	 * Cette methode signale si une question est deja repondue
-	 * @return Elle retourne un message precisant que la question est <strong>DEJA_REPONDU</strong>
+	 * Renvoie la réponse à une bonne réponse déjà donnée.
+	 * @return la réponse à une bonne réponse déjà donnée.
 	 */
 	public String ditQueTuAsDejaRepondu() {
 		return dialogues.get(TypeDialogue.DEJA_REPONDU);
 	}
+	
 	/**
-	 * Cette methode donne une reponse
-	 * @return Elle retourne la <strong>REPONSE</strong>
+	 * Renvoie la réponse à l'énigme.
+	 * @return la réponse à l'énigme.
 	 */
 	public String reponse() {
 		return dialogues.get(TypeDialogue.REPONSE);
 	}
+	
 	/**
-	 * Cette methode est boolean qui recupere la reponse attendue
-	 * @return Elle retourne la bonne reponse
+	 * Renvoie une propriété booléene qui correspond à l'état de la réponse recu.
+	 * @return une propriété booléene qui correspond à l'état de la réponse recu.
 	 */
 	public BooleanProperty getEtatReponseAttendu() {
 		return aRecuUneBonneReponse;
 	}
+	
 	/**
-	 * Cette methode donne l'item
-	 * @return Elle retourne l'item a donner
+	 * Renvoie l'item en possession.
+	 * @return l'item en possession.
 	 */
 	public Item donnerItem() {
 		return itemEnPossession;
 	}
+	
 	/**
-	 * Cette methode recupere l'image pour l'enigme
-	 * @return Elle un sprite pour l'enigme
+	 * Renvoie l'ImageView du PNJ pour la vue de l'énigme.
+	 * @return l'ImageView du PNJ pour la vue de l'énigme.
 	 */
 	public ImageView getImagePourEnigme() {
 		return spritePourEnigme;
 	}
 	
 	/**
-	 * Cette methode est un boolean qui retournant TRUE si la reponse recu est la bonne
+	 * Permet de mettre la propriété booléenne à vrai si
+	 * le PNJ a recu une bonne réponse du PersonnageJoueur.
 	 */
 	public void aRecuUneBonneReponse() {
 		aRecuUneBonneReponse.setValue(true);

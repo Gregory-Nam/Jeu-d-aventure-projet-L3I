@@ -21,6 +21,11 @@ import javafx.util.Duration;
 import personnages.PersonnageJoueur;
 import personnages.PersonnageNonJoueur;
 
+/**
+ * Classe utilitaire pour finir le jeu.
+ * @author Grégory NAM
+ *
+ */
 public class FinisseurDeJeu {
 	private static final KeyEvent droite = new KeyEvent(KeyEvent.KEY_PRESSED, "d", "droite", KeyCode.RIGHT, false, false, false, false);
 	private static final KeyEvent gauche = new KeyEvent(KeyEvent.KEY_PRESSED, "g", "gauche", KeyCode.LEFT, false, false, false, false);
@@ -44,6 +49,15 @@ public class FinisseurDeJeu {
 	
 	private FinisseurDeJeu() {};
 	
+	/**
+	 * Permet de finir le jeu.
+	 * @param sceneJeu la scène du jeu.
+	 * @param sceneEnigme la scène de l'enigme.
+	 * @param sceneInventaire la scène de l'inventaire.
+	 * @param rootEnigme le controleur de l'énigme.
+	 * @param pnjs les pnjs.
+	 * @param salles les salles.
+	 */
 	public static void finirJeu(Scene sceneJeu, Scene sceneEnigme, Scene sceneInventaire, EnigmeControleur rootEnigme,
 								HashMap<NomPNJ,PersonnageNonJoueur> pnjs, HashMap<NomSalle, Salle> salles)
 	{

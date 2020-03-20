@@ -5,21 +5,21 @@ import javafx.util.Pair;
 
 /**
  * Implémentation des Interactifs.
- * @author Grégory NAM.
- * @author Hugo CHALIK.
- * @author Luca BEVILACQUA.
- * @author Ahmadou Bamba MBAYE.
+ * @author Grégory NAM
+ * @author Hugo CHALIK
+ * @author Luca BEVILACQUA
+ * @author Ahmadou Bamba MBAYE
  */
 public abstract class Interactif {
 
 	/**
-	 * Position x minimal. </br>
+	 * Position x minimal. <br>
 	 * Soit le début de l'image de l'interactif sur la scène.
 	 */
 	protected double xMin;
 
 	/**
-	 * Position x maximal. </br>
+	 * Position x maximal. <br>
 	 * Soit la fin de l'image de l'interactif sur la scène.
 	 */
 	protected double xMax;
