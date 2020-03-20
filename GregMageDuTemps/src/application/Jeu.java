@@ -140,7 +140,7 @@ public class Jeu {
 	 * @throws IOException Lever l'exception.
 	 */
 	private void initStage() throws IOException {
-		root = FXMLLoader.load(getClass().getResource("/vues/UneFenetre.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/vues/LeJeu.fxml"));
 		scene = new Scene(root);
 		message = (Label)root.getChildren().get(0);
 		root.getChildren().add(0, salleCourante.getImageView());
@@ -180,7 +180,6 @@ public class Jeu {
 						}
 						break;
 					default: 
-						System.out.println("lol");
 						break;
 				}
 			}
