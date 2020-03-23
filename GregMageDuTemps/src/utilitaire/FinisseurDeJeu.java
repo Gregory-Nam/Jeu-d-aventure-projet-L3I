@@ -2,18 +2,15 @@ package utilitaire;
 
 import java.util.HashMap;
 
-import com.sun.glass.ui.Robot;
 
 import application.Jeu;
 import controleurs.EnigmeControleur;
 import elements.Item;
 import elements.Salle;
-import enumerations.Deplacements;
 import enumerations.NomPNJ;
 import enumerations.NomSalle;
 import enumerations.Periode;
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -67,9 +64,7 @@ public class FinisseurDeJeu {
 		FinisseurDeJeu.pnjs = pnjs;
 		jeu = Jeu.getInstanceUnique();
 		greg = PersonnageJoueur.getInstanceUnique();
-		//salleEnigmeBronze();
-		PauseTransition transition = new PauseTransition(new Duration(0.8));
-
+		PauseTransition transition = new PauseTransition(new Duration(1));
 		salleAvantObjectif = NomSalle.SALLE_2;
 		directionHorloge = droite;
 		directionPorte = gauche;
@@ -143,7 +138,7 @@ public class FinisseurDeJeu {
 	    	}
 	    	else if(  xPorte - 10 < greg.getXCentre() && greg.getXCentre() < xPorte + 10){
 	    		KeyEvent.fireEvent(sceneJeu, interagir);
-	    		if(itemMisOr1 && !item2pris) deplacerJusquauPNJ(t, pnjs.get(NomPNJ.ABITBOL), gauche, "le temps");
+	    		if(itemMisOr1 && !item2pris) deplacerJusquauPNJ(t, pnjs.get(NomPNJ.ABITBOL), gauche, "TEMPS");
 	    		else if(item2pris) allerDansUneSalle(t, NomSalle.SALLE_OR, droite);
 	    		else allerHorloge(t, xHorloge);
     		}

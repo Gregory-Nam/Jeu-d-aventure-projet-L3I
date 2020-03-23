@@ -4,6 +4,7 @@ import java.io.File;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import controleurs.EnigmeControleur;
 import controleurs.FinControleur;
@@ -541,7 +542,9 @@ public class Jeu {
 				rootEnigme.desactiverEntree();
 			}
 			/* CAS OU LE JOUEUR DONNE LA BONNE REPONSE */
-			else if(rootEnigme.getTexteDuChamps().equals(pnj.reponse())) {
+			// expression reguliere : reponse du pnj précédé d'un espace ou rien et suivi d'un espace, d'un point, d'une virgule, d'un point d'exclamation ou rien
+			else if(Pattern.compile("(^|[ ])"+ pnj.reponse() + "($|[.,! ])").matcher(rootEnigme.getTexteDuChamps().toLowerCase()).find()) {
+				/* La condition */
 				rootEnigme.desactiverEntree();
 				pnj.aRecuUneBonneReponse();
 				rootEnigme.changeDialogue(pnj.repondAUneBonneReponse());

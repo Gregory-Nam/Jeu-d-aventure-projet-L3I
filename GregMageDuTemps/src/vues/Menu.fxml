@@ -9,48 +9,33 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-	prefWidth="600.0" style="-fx-background-color: black;"
-	type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<Group fx:id="groupMenu" layoutX="-21.0" layoutY="14.0">
 			<children>
-				<Label layoutX="132.0" layoutY="11.0"
-					text="Greg, Mage du temps" textFill="WHITE">
+				<Label layoutX="132.0" layoutY="11.0" text="Greg, Mage du temps" textFill="WHITE">
 					<font>
 						<Font name="Calibri" size="43.0" />
 					</font>
 				</Label>
-				<Label fx:id="btnJouer" alignment="CENTER" layoutX="170.0"
-					layoutY="93.0" prefHeight="40.0" prefWidth="301.0"
-					style="-fx-background-color: gray;" text="Jouer" textFill="WHITE">
+				<Label fx:id="btnJouer" alignment="CENTER" layoutX="170.0" layoutY="93.0" prefHeight="40.0" prefWidth="301.0" style="-fx-background-color: gray;" text="Jouer" textFill="WHITE">
 					<font>
 						<Font size="25.0" />
 					</font>
 				</Label>
 
-				<Label fx:id="btnCommandes" alignment="CENTER" layoutX="170.0"
-					layoutY="224.0" prefHeight="40.0" prefWidth="301.0"
-					style="-fx-background-color: gray;" text="Commandes"
-					textFill="WHITE">
+				<Label fx:id="btnCommandes" alignment="CENTER" layoutX="170.0" layoutY="224.0" prefHeight="40.0" prefWidth="301.0" style="-fx-background-color: gray;" text="Commandes" textFill="WHITE">
 					<font>
 						<Font size="25.0" />
 					</font>
 				</Label>
-				<Label fx:id="btnHistoire" alignment="CENTER" layoutX="170.0"
-					layoutY="160.0" prefHeight="40.0" prefWidth="301.0"
-					style="-fx-background-color: gray;" text="Histoire du jeu"
-					textFill="WHITE">
+				<Label fx:id="btnHistoire" alignment="CENTER" layoutX="170.0" layoutY="160.0" prefHeight="40.0" prefWidth="301.0" style="-fx-background-color: gray;" text="Histoire du jeu" textFill="WHITE">
 					<font>
 						<Font size="25.0" />
 					</font>
 				</Label>
 
-				<Label fx:id="btnQuitter" alignment="CENTER" layoutX="170.0"
-					layoutY="286.0" prefHeight="40.0" prefWidth="301.0"
-					style="-fx-background-color: gray;" text="Quitter" textFill="WHITE">
+				<Label fx:id="btnQuitter" alignment="CENTER" layoutX="170.0" layoutY="286.0" prefHeight="40.0" prefWidth="301.0" style="-fx-background-color: gray;" text="Quitter" textFill="WHITE">
 					<font>
 						<Font size="25.0" />
 					</font>
@@ -58,22 +43,21 @@
 			</children>
 		</Group>
 
-		<Label fx:id="labelCommande" alignment="CENTER" disable="true"
-			layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0"
-			text="ICI ON AFFICHERA LES COMMANDES" textFill="WHITE"
-			visible="false">
+		<Label fx:id="labelCommande" alignment="CENTER" contentDisplay="TOP" disable="true" layoutX="2.0" layoutY="-1.0" prefHeight="411.0" prefWidth="600.0" text="Déplacement gauche : flèche gauche&#10;Déplacement droit : flèche droite&#10;Intéragir : flèche du haut&#10;Ouvrir inventaire : i&#10;(cliquez sur un item pour le selectionner)&#10;Finisseur de jeu automatique : p" textAlignment="CENTER" textFill="WHITE" visible="false" wrapText="true">
 			<font>
-				<Font name="Calibri" size="36.0" />
+				<Font name="Calibri" size="31.0" />
 			</font>
 		</Label>
-		<Label fx:id="labelHistoire" alignment="TOP_CENTER"
-			disable="true" prefHeight="400.0" prefWidth="600.0"
-			text="ICI NOUS AURONS L'HISTOIRE DU JEU " textFill="WHITE"
-			visible="false">
+		<Label fx:id="labelHistoire" alignment="TOP_CENTER" disable="true" prefHeight="400.0" prefWidth="600.0" text="ICI NOUS AURONS L'HISTOIRE DU JEU " textFill="WHITE" visible="false">
 			<font>
 				<Font name="Calibri" size="30.0" />
 			</font>
 		</Label>
+      <Label fx:id="indication" alignment="TOP_CENTER" contentDisplay="TOP" disable="true" layoutY="20.0" opacity="0.18" prefHeight="380.0" prefWidth="600.0" text="Echap pour revenir en arrière" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Calibri" size="30.0" />
+         </font>
+      </Label>
 
 	</children>
 </fx:root>

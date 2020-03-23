@@ -26,7 +26,6 @@ public final class AnalyseFichierEnigmeUtil {
 	 */
 	public static String initDialoguesJSON(String nomPNJ, TypeDialogue type)  {
 		JSONParser parser = new JSONParser();
-		System.out.println(nomPNJ);
 		try {
 			Object obj = parser.parse(new FileReader("Enigmes/enigmes.json"));
 			JSONObject json = (JSONObject) obj;

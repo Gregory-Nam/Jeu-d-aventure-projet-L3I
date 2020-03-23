@@ -64,6 +64,11 @@ public class MenuControleur extends Pane {
 	private Label labelHistoire;
 	
 	/**
+	 * Label qui correspond a un texte d'indication
+	 */
+	@FXML
+	private Label indication;
+	/**
 	 * Evenement qui permet de quitter.
 	 */
 	EventHandler<MouseEvent> cliqueQuitter;
@@ -158,7 +163,7 @@ public class MenuControleur extends Pane {
 			else	
 				visibiliteEnfant(labelCommande);
 			
-			
+			visibiliteEnfant(indication);
 			this.getScene().addEventHandler(KeyEvent.KEY_PRESSED,retourArriere);
 		};
 		btnHistoire.addEventHandler(MouseEvent.MOUSE_CLICKED,cliqueHistoireCommande);
@@ -187,6 +192,7 @@ public class MenuControleur extends Pane {
 					else
 						visibiliteEnfant(labelCommande);
 					visibiliteEnfant(groupMenu);
+					visibiliteEnfant(indication);
 					break;
 				default:
 					break;

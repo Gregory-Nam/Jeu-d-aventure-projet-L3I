@@ -255,7 +255,6 @@ public class InventaireControleur extends Pane {
 		listeInventaire.addListener((Change<? extends Item> changement) -> {
 			while(changement.next()) {
 				if(changement.wasAdded()) {
-					System.out.println("taille inventaire controleur avant ajout " + itemsAjoute.size());
 					this.ajouterItem(listeInventaire.get(changement.getFrom()));
 				}
 				else if(changement.wasRemoved()) {
