@@ -614,7 +614,7 @@ public class Jeu {
 	 * Permet de reprendre la partie la où on était après avoir affiché le menu.
 	 */
 	public void reprendre() {
-		greg.replacerGauche();
+		primaryStage.setScene(scene);
 	}
 	
 	/**

@@ -3,7 +3,7 @@
     "QUESTION": "Salut toi ! Combien y a-t-il de tableaux dans ce chateau ?",
     "REPONSE": "13",
     "MAUVAISE_REPONSE": "Oupps! Tu as mal répondu. Tu ne peux pas avoir l'item",
-    "BONNE_REPONSE": "Bravo ! Tu as trÃ¨s bien répondu. Tu merites bien l'item pour activer l'horloge",
+    "BONNE_REPONSE": "Bravo ! Tu as trés bien répondu. Tu mérites bien l'item pour activer l'horloge",
     "DEJA_REPONDU" :  "Malheureusement, la bonne reponse a déjà  été donnée."
   },
 
@@ -24,8 +24,8 @@
   },
 
   "Abitbol": {
-    "QUESTION": "J'espè¨re que tu es malin...\nSans lui, rien ne peut se faire.\nIl passe vite ou lentement.\nSouvent quand on le perd, on ne le rattrape plus.\nQui suis-je ?",
-    "REPONSE": "le temps",
+    "QUESTION": "J'espère que tu es malin...\nSans lui, rien ne peut se faire.\nIl passe vite ou lentement.\nSouvent quand on le perd, on ne le rattrape plus.\nQui suis-je ?",
+    "REPONSE": "temps",
     "MAUVAISE_REPONSE": "Oupps, c'est raté. L'item t'echappes.",
     "BONNE_REPONSE": "La reponse est correcte. Tu merites bien l'item",
     "DEJA_REPONDU": "Pas besoin de me le repeter..."

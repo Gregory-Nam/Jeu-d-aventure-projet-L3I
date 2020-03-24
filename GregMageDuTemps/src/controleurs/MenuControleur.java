@@ -146,6 +146,7 @@ public class MenuControleur extends Pane {
 	 */
 	private void initReprendre() {
 		cliqueReprendre = c -> {
+			System.out.println("bug");
 			Jeu.getInstanceUnique().reprendre();
 		};
 	}
