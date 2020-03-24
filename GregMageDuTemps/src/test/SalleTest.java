@@ -3,6 +3,7 @@ package test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -28,6 +29,7 @@ class SalleTest {
 	
 	Salle s;
 	ImageView img;
+	File f;
 	
 	@BeforeAll
 	static void setUpApp() throws Exception {
@@ -36,7 +38,8 @@ class SalleTest {
 
 	@BeforeEach
 	void setUp() {
-		s = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_1);
+		f = new File("Images/Salles/Periode_1/Salle_depart.png");
+		s = new Salle(f, NomSalle.SALLE_1);
 	}
 	
 	@AfterEach
@@ -44,12 +47,12 @@ class SalleTest {
 	}
 	
 	@Test
-	@Disabled
 	void testGetImageView() {
 		img = new ImageView();
 		img.setImage(new Image(new File("Images/Salles/Periode_1/Salle_depart.png").toURI().toString()));
-		System.out.println(img.equals(s.getImageView()));
-		assertTrue(img.getImage().equals(s.getImageView().getImage()));
+		assertTrue(AppDeTest.compareImages(img.getImage(), s.getImageView().getImage()));
+		img.setImage(new Image(new File("Images/Salles/Periode_1/Salle_2.png").toURI().toString()));
+		assertFalse(AppDeTest.compareImages(img.getImage(), s.getImageView().getImage()));
 	}
 
 	@Test

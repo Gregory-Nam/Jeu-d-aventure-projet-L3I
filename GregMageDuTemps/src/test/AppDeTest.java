@@ -1,8 +1,11 @@
 package test;
 
 
+import java.awt.image.BufferedImage;
+
 import application.Jeu;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -15,13 +18,13 @@ import javafx.stage.Stage;
  * - Creer une fausse application 
  * </br>
  * 
- * Le code de cette classe a été pris sur StackOverflow : 
+ * Le code de cette classe a été pris sur StackOverflow (pour le setUpClass) : 
  * </br>
  * https://stackoverflow.com/questions/11385604/how-do-you-unit-test-a-javafx-controller-with-junit?fbclid=IwAR2BU_y3Fa68FdKuvbXSWlASQAWOTHG-G-ywg5xyIgooZsR8oyr5UAS_5rc 
  * </br>
  * 
  * @author StackOverflow
- *
+ * @author Grégory NAM
  */
 public class AppDeTest extends Application {
 
@@ -41,5 +44,13 @@ public class AppDeTest extends Application {
 	    t.start();
 	    System.out.printf("FX App thread started\n");
 	    Thread.sleep(500);
+	}
+	
+	public static boolean compareImages(Image image1, Image image2) {
+		for (int i = 0; i < image1.getWidth(); i++) {
+		  for (int j = 0; j < image2.getHeight(); j++)
+			  if (image1.getPixelReader().getArgb(i, j) != image2.getPixelReader().getArgb(i, j)) return false;
+		}
+		return true;
 	}
 }
