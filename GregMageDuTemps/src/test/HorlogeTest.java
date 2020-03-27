@@ -12,10 +12,13 @@ import org.junit.jupiter.api.Test;
 import elements.Horloge;
 import enumerations.Materiaux;
 import enumerations.Periode;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 class HorlogeTest {
 
 	Horloge h;
+	ImageView img;
 	
 	@BeforeAll
 	static void setUpApp() throws Exception {
@@ -32,11 +35,6 @@ class HorlogeTest {
 	}
 
 	@Test
-	void testInteragir() {
-		
-	}
-
-	@Test
 	void testGetXMin() {
 		assertEquals(889, h.getXMin());
 	}
@@ -44,6 +42,15 @@ class HorlogeTest {
 	@Test
 	void testGetXMax() {
 		assertEquals(949, h.getXMax());
+	}
+	
+	@Test
+	public void testGetImageView() {
+		img = new ImageView();
+		img.setImage(new Image(new File("Images/Horloges/Horloge_bronze_transparence.png").toURI().toString()));
+		assertTrue(AppDeTest.compareImages(img.getImage(), h.getImageView().getImage()));
+		img.setImage(new Image(new File("Images/Horloges/Horloge_argent_transparence.png").toURI().toString()));
+		assertFalse(AppDeTest.compareImages(img.getImage(), h.getImageView().getImage()));
 	}
 
 	@Test
@@ -55,5 +62,7 @@ class HorlogeTest {
 	void testGetXCentre() {
 		assertEquals(919, h.getXCentre());
 	}
+	
+	
 
 }

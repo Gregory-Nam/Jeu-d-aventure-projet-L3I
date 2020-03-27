@@ -2,18 +2,16 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import application.Jeu;
 import elements.Horloge;
 import elements.Interactif;
 import elements.Salle;

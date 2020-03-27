@@ -1,9 +1,6 @@
 package test;
 
 
-import java.awt.image.BufferedImage;
-
-import application.Jeu;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;

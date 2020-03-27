@@ -93,8 +93,8 @@ public class Item extends Interactif{
 
 	/**
 	 * L'interaction avec un item permet de l'ajouter dans l'inventaire
-	 * du PersonnageJoueur, de la supprimer de la salle et �galement
-	 * de mettre � jour les objets interactifs sur la scene.
+	 * du PersonnageJoueur, de la supprimer de la salle et egalement
+	 * de mettre a jour les objets interactifs sur la scene.
 	 */
 	@Override
 	public void interagir() {

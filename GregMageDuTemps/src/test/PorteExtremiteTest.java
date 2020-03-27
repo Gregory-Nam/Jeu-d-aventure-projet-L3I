@@ -2,14 +2,14 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.io.File;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import application.Jeu;
 import elements.PorteExtremite;
 import elements.Salle;
 import enumerations.NomSalle;
@@ -38,8 +38,9 @@ class PorteExtremiteTest {
 	}
 
 	@Test
+	@Disabled
 	void testInteragir() {
-		fail("NullPointerException, ne fonctionne pas");
+		fail("NullPointerException, ne fonctionne pas dans l'environnement de test");
 	}
 
 	@Test
@@ -60,10 +61,10 @@ class PorteExtremiteTest {
 		assertEquals(1000, p.getXMax()); 
 		*/
 	}
-
+	
 	@Test
-	void testPorteExtremite() {
-		fail("Not yet implemented");
+	void testGetImageView() {
+		assertNull(p.getImageView());
 	}
 
 }

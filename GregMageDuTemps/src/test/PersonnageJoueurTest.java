@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.io.File;
 
 import org.junit.jupiter.api.AfterEach;
@@ -14,7 +15,6 @@ import elements.Item;
 import enumerations.Deplacements;
 import enumerations.Materiaux;
 import enumerations.NomPNJ;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
