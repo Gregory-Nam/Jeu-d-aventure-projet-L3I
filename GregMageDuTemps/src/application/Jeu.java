@@ -353,14 +353,15 @@ public class Jeu {
 	private void initialisationDesElements() {
 		
 		/* SALLES */
-		Salle salleDepart = new Salle(new File("Images/Salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
-		Salle salle1 = new Salle(new File("Images/Salles/Periode_1/Salle_1.png"), NomSalle.SALLE_1);
-		Salle salleArgent = new Salle(new File("Images/Salles/Periode_1/Salle_Argent.png"), NomSalle.SALLE_ARGENT);
-		Salle salle2 = new Salle(new File("Images/Salles/Periode_1/Salle_2.png"), NomSalle.SALLE_2);
-		Salle salle3 = new Salle(new File("Images/Salles/Periode_1/Salle_3.png"), NomSalle.SALLE_3);
-		Salle salleBronze = new Salle(new File("Images/Salles/Periode_1/Salle_bronze.png"), NomSalle.SALLE_BRONZE);
-		Salle salleOr = new Salle(new File("Images/Salles/Periode_1/Salle_or.png"), NomSalle.SALLE_OR);
-		Salle sallePiege = new Salle(new File("Images/Salles/Periode_1/Salle_piege.png"), NomSalle.SALLE_PIEGE);
+		Salle salleDepart = new Salle(new File("Images/salles/Periode_1/Salle_depart.png"), NomSalle.SALLE_DEPART);
+		System.out.println(salleDepart.getImageView());
+		Salle salle1 = new Salle(new File("Images/salles/Periode_1/Salle_1.png"), NomSalle.SALLE_1);
+		Salle salleArgent = new Salle(new File("Images/salles/Periode_1/Salle_Argent.png"), NomSalle.SALLE_ARGENT);
+		Salle salle2 = new Salle(new File("Images/salles/Periode_1/Salle_2.png"), NomSalle.SALLE_2);
+		Salle salle3 = new Salle(new File("Images/salles/Periode_1/Salle_3.png"), NomSalle.SALLE_3);
+		Salle salleBronze = new Salle(new File("Images/salles/Periode_1/Salle_bronze.png"), NomSalle.SALLE_BRONZE);
+		Salle salleOr = new Salle(new File("Images/salles/Periode_1/Salle_or.png"), NomSalle.SALLE_OR);
+		Salle sallePiege = new Salle(new File("Images/salles/Periode_1/Salle_piege.png"), NomSalle.SALLE_PIEGE);
 
 		
 		/* PORTES */
