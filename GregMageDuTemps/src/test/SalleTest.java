@@ -36,6 +36,7 @@ class SalleTest {
 	void setUp() {
 		f = new File("Images/Salles/Periode_1/Salle_depart.png");
 		s = new Salle(f, NomSalle.SALLE_1);
+		PersonnageJoueur.getInstanceUnique().reinitialiser();
 	}
 
 	@AfterEach
