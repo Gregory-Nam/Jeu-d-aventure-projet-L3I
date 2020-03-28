@@ -8,23 +8,23 @@ import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
 
 /**
- * Implémentation des portes murales du jeu. 
- * </br>
- * Cette classe hérite de PorteExtremite.
- * @author Grégory NAM.
+ * ImplÃ©mentation des portes murales du jeu. </br>
+ * Cette classe hÃ©rite de PorteExtremite.
+ * 
+ * @author GrÃ©gory NAM.
  * @author Hugo CHALIK.
  * @author Luca BEVILACQUA.
  * @author Ahmadou Bamba MBAYE.
  * @see PorteExtremite
  * @see Interactif
  */
-public class PorteMurale extends PorteExtremite{
+public class PorteMurale extends PorteExtremite {
 
 	/**
 	 * Constante du fichier de l'image de la porte ouverte.
 	 */
 	private static final File FICHIER_PORTE_OUVERTE = new File("Images/Elements/Porte_Ouverte.png");
-	
+
 	/**
 	 * Constante du fichier de l'image de la porte fermee.
 	 */
@@ -36,27 +36,28 @@ public class PorteMurale extends PorteExtremite{
 	private ImageView spritePorte;
 
 	/**
-	 * Boolean qui représente l'état de la porte.
+	 * Boolean qui reprÃ©sente l'Ã©tat de la porte.
 	 */
 	private boolean estOuverte;
-	
+
 	/**
 	 * Constructeur de PorteMurale.
-	 * @param salle1 la première salle avec laquelle la porte fait le lien.
-	 * @param salle2 la deuxième salle avec laquelle la porte fait le lien.
+	 * 
+	 * @param salle1   la premiÃ©re salle avec laquelle la porte fait le lien.
+	 * @param salle2   la deuxiÃ©me salle avec laquelle la porte fait le lien.
 	 * @param position la position de la porte.
 	 */
 	public PorteMurale(Salle salle1, Salle salle2, double position) {
 		super(salle1, salle2);
 		initPorte();
-		
+
 		super.xMin = position;
 		super.xMax = xMin + spritePorte.getImage().getWidth();
 		spritePorte.setX(position);
 
 		this.estOuverte = false;
 	}
-	
+
 	/**
 	 * Permet d'initialiser l'ImageView de la porte.
 	 */
@@ -65,22 +66,21 @@ public class PorteMurale extends PorteExtremite{
 		Image imgPorte = new Image(FICHIER_PORTE_FERME.toURI().toString());
 		spritePorte.setImage(imgPorte);
 	}
-	
+
 	/**
-	 * L'interaction avec une porte permet de changer
-	 * changer l'ImageView de la porte pour l'ouvrir et
-	 * de changer la salle courante.
+	 * L'interaction avec une porte permet de changer changer l'ImageView de la
+	 * porte pour l'ouvrir et de changer la salle courante.
 	 */
 	@Override
 	public void interagir() {
-		if(!estOuverte) {
+		if (!estOuverte) {
 			spritePorte.setImage(new Image(FICHIER_PORTE_OUVERTE.toURI().toString()));
 			estOuverte = true;
 		}
 		super.interagir();
 		PersonnageJoueur.getInstanceUnique().changerSprite(Deplacements.BAS);
 	}
-	
+
 	@Override
 	public double getXMin() {
 		return super.xMin;
@@ -89,7 +89,7 @@ public class PorteMurale extends PorteExtremite{
 	public double getXMax() {
 		return super.xMax;
 	}
-	
+
 	@Override
 	public ImageView getImageView() {
 		return spritePorte;

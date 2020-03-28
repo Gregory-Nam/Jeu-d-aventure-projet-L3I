@@ -11,107 +11,113 @@ import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
 
 /**
- * ImplÈmentation des horloges du Jeu. 
- * </br>
- * Une horloge est un objet interactif composÈe d'un certain matÈriaux.
- * @author GrÈgory NAM.
- * @author Hugo CHALIK.
- * @author Luca BEVILACQUA.
- * @author Ahmadou Bamba MBAYE.
- * @see    Interactif
- * @see    Materiaux
+ * Impl√©mentation des horloges du Jeu. </br>
+ * Une horloge est un objet interactif compos√©e d'un certain mat√©riaux.
+ * 
+ * @author Gr√©gory NAM
+ * @author Hugo CHALIK
+ * @author Luca BEVILACQUA
+ * @author Ahmadou Bamba MBAYE
+ * @see Interactif
+ * @see Materiaux
  */
 public class Horloge extends Interactif {
-	
+
 	/**
-	 * La pÈriode aprËs l'activation de l'horloge.
+	 * La p√©riode apr√©s l'activation de l'horloge.
 	 */
 	private Periode periodeApresActivation;
-	
+
 	/*
-	 * Tableau qui represente les items manquants de l'horloge. </br>
-	 * Il doit Ítre rempli pour que l'horloge puisse Ítre activÈ.
+	 * Tableau qui represente les items manquants de l'horloge. </br> Il doit √©tre
+	 * rempli pour que l'horloge puisse √©tre activ√©.
 	 */
 	private Item[] itemPourActiver;
-	
+
 	/**
-	 * Boolean qui vÈrifie si l'horloge a ÈtÈ activÈe.
+	 * Boolean qui v√©rifie si l'horloge a √©t√© activ√©e.
 	 */
 	private boolean aEteActive;
-	
+
 	/**
-	 * MatÈriaux de l'horloge.
+	 * Mat√©riaux de l'horloge.
 	 */
 	private Materiaux materiauxHorloge;
-	
+
 	/**
 	 * Constructeur de l'horloge.
-	 * @param image image de l'horloge.
-	 * @param materiaux matÈriaux de l'horloge.
-	 * @param nbItemManquant nombre d'items ‡ inserer pour activer l'horloge.
+	 * 
+	 * @param image                  image de l'horloge.
+	 * @param materiaux              mat√©riaux de l'horloge.
+	 * @param nbItemManquant         nombre d'items √© inserer pour activer
+	 *                               l'horloge.
 	 * @param periodeApresActivation periode dans laquelle l'horloge permet d'aller.
-	 * @param position position de l'horloge dans la salle.
+	 * @param position               position de l'horloge dans la salle.
 	 */
-	public Horloge(File image, Materiaux materiaux, int nbItemManquant, Periode periodeApresActivation, double position) {
+	public Horloge(File image, Materiaux materiaux, int nbItemManquant, Periode periodeApresActivation,
+			double position) {
 		Image i = new Image(image.toURI().toString());
-		
+
 		super.vueImageInteractif = new ImageView(i);
 		super.xMin = position;
 		super.xMax = super.xMin + i.getWidth();
-		
+
 		vueImageInteractif.setX(position);
-		
+
 		this.materiauxHorloge = materiaux;
 		this.aEteActive = false;
 		this.itemPourActiver = new Item[nbItemManquant];
 		this.periodeApresActivation = periodeApresActivation;
 	}
-	
+
 	/**
-	 * Interaction avec l'horloge. 
-	 * </br>
-	 * Une interaction avec l'horloge est possible si celle-ci n'a pas dÈj‡ ÈtÈ activÈe;
-	 * L'interaction avec l'horloge peu :
+	 * Interaction avec l'horloge. </br>
+	 * Une interaction avec l'horloge est possible si celle-ci n'a pas d√©j√© √©t√©
+	 * activ√©e; L'interaction avec l'horloge peu :
 	 * <ul>
-	 * 		<li> Provoquer la fin du jeu (mauvais item utilisÈ ou mauvaise pÈriode) </li>
-	 * 		<li> Afficher un message aucun item ne lui a ÈtÈ prÈsentÈ.
+	 * <li>Provoquer la fin du jeu (mauvais item utilis√© ou mauvaise p√©riode)</li>
+	 * <li>Afficher un message aucun item ne lui a √©t√© pr√©sent√©.
 	 * </ul>
 	 */
 	@Override
 	public void interagir() {
 		/* L'HORLOGE A DEJA ETE ACTIVE */
-		if(aEteActive) return;
+		if (aEteActive)
+			return;
 		Item item = PersonnageJoueur.getInstanceUnique().getItemEnMain();
 		/* AUCUN ITEM PRESENTE */
-		if(item == null) {
+		if (item == null) {
 			Jeu.getInstanceUnique().afficheMessage("Je devrais prendre un item...", 1);
 			return;
 		}
 		/* MAUVAISE PERIODE */
-		if(Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation.precedente()) {
-			Jeu.getInstanceUnique().terminer("Tu n'Ètais pas dans le bon espace temps pour activer cet horloge...", false);
+		if (Jeu.getInstanceUnique().getPeriodeCourante() != periodeApresActivation.precedente()) {
+			Jeu.getInstanceUnique().terminer("Tu n'√©tais pas dans le bon espace temps pour activer cet horloge...",
+					false);
 			PersonnageJoueur.getInstanceUnique().replacerGauche();
-			PersonnageJoueur.getInstanceUnique().enleverItemEnMain();			
+			PersonnageJoueur.getInstanceUnique().enleverItemEnMain();
 			return;
 		}
 		/* MAUVAIS ITEM */
-		if(insererItemManquant(item) < 0) return;
+		if (insererItemManquant(item) < 0)
+			return;
 		PersonnageJoueur.getInstanceUnique().enleverItemEnMain();
-		
+
 		/* SI ON PEUT ACTIVE L'HORLOGE ON L'ACTIVE */
-		if(!peutEtreActive()) {
+		if (!peutEtreActive()) {
 			Jeu.getInstanceUnique().afficheMessage("Ce ne sera pas suffisant", 1);
 			return;
 		}
 		aEteActive = true;
-		
+
 		PersonnageJoueur.getInstanceUnique().changerSprite(Deplacements.DROITE);
 		Jeu.getInstanceUnique().changerDePeriode();
 	}
 
 	/**
-	 * Renvoie si l'horloge peut Ítre activÈe.
-	 * @return vrai si l'horloge peut Ítre activÈe, faux sinon.
+	 * Renvoie si l'horloge peut √©tre activ√©e.
+	 * 
+	 * @return vrai si l'horloge peut √©tre activ√©e, faux sinon.
 	 */
 	public boolean peutEtreActive() {
 		return itemPourActiver[itemPourActiver.length - 1] != (null);
@@ -119,46 +125,50 @@ public class Horloge extends Interactif {
 
 	/**
 	 * Permet d'inserer un item dans l'horloge. </br>
-	 * L'item n'est pas insÈrÈe si ce n'est pas le bon et provoque la fin du jeu.
+	 * L'item n'est pas ins√©r√©e si ce n'est pas le bon et provoque la fin du jeu.
+	 * 
 	 * @param item l'item a inserer.
-	 * @return 1 si l'item a ÈtÈ inserer, sinon renvoie -1.
+	 * @return 1 si l'item a √©t√© inserer, sinon renvoie -1.
 	 */
 	private int insererItemManquant(Item item) {
-		if(!item.getMateriaux().equals(this.materiauxHorloge)) {
-			Jeu.getInstanceUnique().terminer("L'horloge a ÈtÈ cassÈe par cet item en " + item.getMateriaux().toString(), false);
+		if (!item.getMateriaux().equals(this.materiauxHorloge)) {
+			Jeu.getInstanceUnique().terminer("L'horloge a √©t√© cass√©e par cet item en " + item.getMateriaux().toString(),
+					false);
 			return -1;
 		}
-		
-		for(int i = 0; i < itemPourActiver.length; ++i) {
+
+		for (int i = 0; i < itemPourActiver.length; ++i) {
 			/* ITEM DEJA DANS L'HORLOGE */
-			if(itemPourActiver[i] == item) return -1;
+			if (itemPourActiver[i] == item)
+				return -1;
 			/* ENDROIT A INSERER L'ITEM */
-			if(itemPourActiver[i] == null) {
+			if (itemPourActiver[i] == null) {
 				itemPourActiver[i] = item;
 				return 1;
 			}
 		}
 		return -1;
 	}
-	
+
 	@Override
 	public double getXMin() {
 		return super.xMin;
 	}
-	
+
 	@Override
 	public double getXMax() {
 		return super.xMax;
 	}
-	
+
 	@Override
 	public ImageView getImageView() {
 		return super.vueImageInteractif;
 	}
 
 	/**
-	 * Renvoiele matÈriaux de l'horloge.
-	 * @return le matÈriaux de l'horloge.
+	 * Renvoiele mat√©riaux de l'horloge.
+	 * 
+	 * @return le mat√©riaux de l'horloge.
 	 */
 	public Materiaux getMateriaux() {
 		return this.materiauxHorloge;

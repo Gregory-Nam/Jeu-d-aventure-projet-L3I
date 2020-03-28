@@ -10,18 +10,19 @@ import javafx.scene.layout.*;
 
 /**
  * Controleur de la vue Enigme
+ * 
  * @author Gregory NAM
  *
  */
 public class EnigmeControleur extends GridPane {
 	/**
-	 * TextField qui permet au joueur de répondre.
+	 * TextField qui permet au joueur de rÃ©pondre.
 	 */
 	@FXML
 	private TextField champsDeTexte;
-	
+
 	/**
-	 * ImageView du PNJ qui sera affiché.
+	 * ImageView du PNJ qui sera affichÃ©.
 	 */
 	@FXML
 	private ImageView imagePersonnage;
@@ -30,7 +31,7 @@ public class EnigmeControleur extends GridPane {
 	 */
 	@FXML
 	private Label dialogue;
-	
+
 	/**
 	 * Constructeur de EnigmeControleur.
 	 */
@@ -38,96 +39,101 @@ public class EnigmeControleur extends GridPane {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/Enigme.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);
-        try {
-            loader.load();
-        } 
-        catch (Exception exception) {
-            throw new RuntimeException(exception);
-        }	
+		try {
+			loader.load();
+		} catch (Exception exception) {
+			throw new RuntimeException(exception);
+		}
 	}
-	
+
 	/**
-	 * Methode qui permet de définir une action lorsque l'on a appuyé sur
-	 * entrée dans le champs textuel.
-	 * @param r runnable qui contient les actions à effectuer.
+	 * Methode qui permet de dÃ©finir une action lorsque l'on a appuyÃ© sur entrÃ©e
+	 * dans le champs textuel.
+	 * 
+	 * @param r runnable qui contient les actions Ã© effectuer.
 	 */
 	public void mettreEnActionChampsTextuel(Runnable r) {
 		champsDeTexte.setOnAction(e -> {
 			r.run();
 		});
 	}
-	
+
 	/**
 	 * Permet de modifier le texte du champs textuel.
+	 * 
 	 * @param dialogue
 	 */
 	public void changeDialogue(String dialogue) {
 		this.dialogue.setText(dialogue);
 	}
-	
+
 	/**
 	 * Permet de modifier l'image qui correspond a celle du personnage.
+	 * 
 	 * @param imagePersonnage image que l'on souhaite appliquer.
 	 */
 	public void changeImage(Image imagePersonnage) {
 		this.imagePersonnage.setImage(imagePersonnage);
 	}
-	
+
 	/**
 	 * Renvoie le texte du champs textuel.
+	 * 
 	 * @return le texte du champs textuel.
 	 */
 	public String getTexteDuChamps() {
 		return champsDeTexte.getText();
 	}
-	
+
 	/**
 	 * Renvoie le champs textuel.
+	 * 
 	 * @return le champs textuel.
 	 */
 	public TextField getChamps() {
 		return champsDeTexte;
 	}
-	
+
 	/**
 	 * Permet de vider le champs textuel.
 	 */
 	public void nettoyerChampsTexte() {
 		champsDeTexte.clear();
 	}
-	
+
 	/**
-	 * Permet d'empecher au joueur d'écrire du texte.
+	 * Permet d'empecher au joueur d'Ã©crire du texte.
 	 */
 	public void desactiverEntree() {
 		champsDeTexte.setDisable(true);
 		champsDeTexte.setPromptText("Appuyez sur echap pour quitter...");
 	}
-	
+
 	/**
-	 * Permet d'autoriser le joueur à écrire du texte.
+	 * Permet d'autoriser le joueur Ã© Ã©crire du texte.
 	 */
 	public void activerEntree() {
 		champsDeTexte.setDisable(false);
-		
+
 	}
-	
+
 	/**
-	 * Permet d'activer le focus sur le champs textuel. Cela signifie
-	 * que le joueur n'a pas a cliquer sur la zone de texte avant d'écrire.
+	 * Permet d'activer le focus sur le champs textuel. Cela signifie que le joueur
+	 * n'a pas a cliquer sur la zone de texte avant d'Ã©crire.
 	 */
 	public void activerFocus() {
 		champsDeTexte.requestFocus();
 	}
-	
+
 	/**
 	 * NE PAS UTILISER CETTE METHODE HORS DU FINISSEUR DE JEU. <br>
-	 * Permet de simuler une entrée utilisateur.
-	 * @param texte texte que l'on souhaite écrire
+	 * Permet de simuler une entrÃ©e utilisateur.
+	 * 
+	 * @param texte texte que l'on souhaite Ã©crire
 	 */
 	public void mettreText(String texte) {
 		champsDeTexte.setText(texte);
 		champsDeTexte.fireEvent(new ActionEvent());
 	}
-	
+
 }

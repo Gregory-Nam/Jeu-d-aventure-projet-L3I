@@ -19,12 +19,12 @@ class PorteMuraleTest {
 	PorteMurale p;
 	Salle s, s1;
 	ImageView img;
-	
+
 	@BeforeAll
 	static void setUpApp() throws Exception {
 		AppDeTest.setUpClass();
 	}
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		p = new PorteMurale(s, s1, 730);
@@ -37,14 +37,14 @@ class PorteMuraleTest {
 
 	@Test
 	void testInteragir() {
-		
+
 		img.setImage(new Image(new File("Images/Elements/Porte_Ferme.png").toURI().toString()));
 		assertTrue(AppDeTest.compareImages(img.getImage(), p.getImageView().getImage()));
 		try {
 			p.interagir();
-		} 
-		catch (Exception e) {
-			//Test du changement d'ImageView, le super.interagir de PorteExtremite ne fonctionnant pas dans l'environement de test
+		} catch (Exception e) {
+			// Test du changement d'ImageView, le super.interagir de PorteExtremite ne
+			// fonctionnant pas dans l'environement de test
 		}
 		img.setImage(new Image(new File("Images/Elements/Porte_Ouverte.png").toURI().toString()));
 		assertTrue(AppDeTest.compareImages(img.getImage(), p.getImageView().getImage()));
@@ -59,7 +59,7 @@ class PorteMuraleTest {
 	void testGetXMax() {
 		assertEquals(830, p.getXMax());
 	}
-	
+
 	@Test
 	void testGetImageView() {
 		img.setImage(new Image(new File("Images/Elements/Porte_Ferme.png").toURI().toString()));
@@ -74,7 +74,6 @@ class PorteMuraleTest {
 		img.setImage(new Image(new File("Images/Elements/Porte_Ferme.png").toURI().toString()));
 		assertTrue(AppDeTest.compareImages(img.getImage(), p.getImageView().getImage()));
 	}
-
 
 	@Test
 	void testGetXCentre() {

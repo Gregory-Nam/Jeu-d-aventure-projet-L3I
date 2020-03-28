@@ -20,7 +20,7 @@ class NomPNJTest {
 
 	@Test
 	void testToString() {
-		
+
 		assertEquals("Zavier Mais", NomPNJ.ZAVIER_MAIS.toString());
 		assertEquals("Slyne", NomPNJ.SLYNE.toString());
 		assertEquals("Carpenter", NomPNJ.CARPENTER.toString());

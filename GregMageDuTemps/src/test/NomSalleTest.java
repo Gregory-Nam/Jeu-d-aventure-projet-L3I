@@ -20,7 +20,7 @@ class NomSalleTest {
 
 	@Test
 	void testToString() {
-		
+
 		assertEquals("Salle_depart", NomSalle.SALLE_DEPART.toString());
 		assertEquals("Salle_1", NomSalle.SALLE_1.toString());
 		assertEquals("Salle_2", NomSalle.SALLE_2.toString());
@@ -29,8 +29,7 @@ class NomSalleTest {
 		assertEquals("Salle_argent", NomSalle.SALLE_ARGENT.toString());
 		assertEquals("Salle_or", NomSalle.SALLE_OR.toString());
 		assertEquals("Salle_piege", NomSalle.SALLE_PIEGE.toString());
-		
-		
+
 	}
 
 }

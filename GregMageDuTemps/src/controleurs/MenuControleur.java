@@ -16,55 +16,57 @@ import javafx.scene.layout.Pane;
 
 /**
  * Classe de MenuControleur, controleur de la vue Menu.
+ * 
  * @author Gregory NAM.
  *
  */
 
 public class MenuControleur extends Pane {
 	/**
-	 * Label qui correspond au bouton permettant de lancer une partie ou de reprendre la partie en cours.
+	 * Label qui correspond au bouton permettant de lancer une partie ou de
+	 * reprendre la partie en cours.
 	 */
 	@FXML
 	private Label btnJouer;
-	
+
 	/**
 	 * Label qui correspond au bouton permettant d'afficher les commandes du Jeu.
 	 */
 	@FXML
 	private Label btnCommandes;
-	
+
 	/**
 	 * Label qui correspond au bouton permettant d'afficher l'histoire du Jeu.
 	 */
 	@FXML
 	private Label btnHistoire;
-	
+
 	/**
 	 * Label qui correspond au bouton permetant de quitter le Jeu.
 	 */
 	@FXML
 	private Label btnQuitter;
-	
+
 	/**
-	 * Group qui ennglobe l'ensemble des boutons du menu.
+	 * Group qui englobe l'ensemble des boutons du menu.
 	 */
 	@FXML
 	private Group groupMenu;
-	
+
 	/**
 	 * Label qui correspond au texte des commandes.
 	 */
 	@FXML
 	private Label labelCommande;
-	
+
 	/**
 	 * Label qui correspond au texte de l'histoire.
 	 */
 	@FXML
 	private Label labelHistoire;
-	
+
 	/**
-	 * Label qui correspond a un texte d'indication
+	 * Label qui correspond a un texte d'indication.
 	 */
 	@FXML
 	private Label indication;
@@ -77,22 +79,21 @@ public class MenuControleur extends Pane {
 	 * Evenement du clique sur le bouton Jouer.
 	 */
 	EventHandler<MouseEvent> cliqueJouer;
-	
+
 	/**
 	 * Evenement du clique sur le bouton Histoire ou Commande.
 	 */
 	EventHandler<MouseEvent> cliqueHistoireCommande;
-	
+
 	/**
 	 * Evenement du clique sur le bouton reprendre.
 	 */
 	EventHandler<MouseEvent> cliqueReprendre;
-	
+
 	/**
-	 * Evenement de la touche pour revenir en arrière dans le menu.
+	 * Evenement de la touche pour revenir en arriÃ©re dans le menu.
 	 */
 	EventHandler<KeyEvent> retourArriere;
-
 
 	/**
 	 * Constructeur de MenuControleur.
@@ -101,29 +102,30 @@ public class MenuControleur extends Pane {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/Menu.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);
-	    try {
-	        loader.load();
-	    } catch (Exception exception) {
-	        throw new RuntimeException(exception);
-	    }	
-	    initReprendre();
-	    initJouer();
-	    initQuitter();
-	    initHistoireCommande();
-	    initRetourArriereDansMenu();
-	    initSurvoler();
+		try {
+			loader.load();
+		} catch (Exception exception) {
+			throw new RuntimeException(exception);
+		}
+		initReprendre();
+		initJouer();
+		initQuitter();
+		initHistoireCommande();
+		initRetourArriereDansMenu();
+		initSurvoler();
 	}
-	
+
 	/**
 	 * Permet d'initialiser l'evenement Quitter.
 	 */
 	private void initQuitter() {
 		cliqueQuitter = c -> {
-			System.exit(0);;
+			System.exit(0);
+			;
 		};
-		btnQuitter.addEventHandler(MouseEvent.MOUSE_CLICKED,cliqueQuitter);
+		btnQuitter.addEventHandler(MouseEvent.MOUSE_CLICKED, cliqueQuitter);
 	}
-	
+
 	/**
 	 * Permet d'initialiser l'evenement Jouer.
 	 */
@@ -138,9 +140,9 @@ public class MenuControleur extends Pane {
 				e.printStackTrace();
 			}
 		};
-		btnJouer.addEventHandler(MouseEvent.MOUSE_CLICKED,cliqueJouer);
+		btnJouer.addEventHandler(MouseEvent.MOUSE_CLICKED, cliqueJouer);
 	}
-	
+
 	/**
 	 * Permet d'initialiser l'evenement Reprendre.
 	 */
@@ -150,77 +152,78 @@ public class MenuControleur extends Pane {
 			Jeu.getInstanceUnique().reprendre();
 		};
 	}
-	
+
 	/**
 	 * Permet d'initialiser l'evenement Histoire / Commande.
 	 */
 	private void initHistoireCommande() {
-		
+
 		cliqueHistoireCommande = c -> {
 			visibiliteEnfant(groupMenu);
-			
-			if(c.getSource().equals(btnHistoire))
+
+			if (c.getSource().equals(btnHistoire))
 				visibiliteEnfant(labelHistoire);
-			else	
+			else
 				visibiliteEnfant(labelCommande);
-			
+
 			visibiliteEnfant(indication);
-			this.getScene().addEventHandler(KeyEvent.KEY_PRESSED,retourArriere);
+			this.getScene().addEventHandler(KeyEvent.KEY_PRESSED, retourArriere);
 		};
-		btnHistoire.addEventHandler(MouseEvent.MOUSE_CLICKED,cliqueHistoireCommande);
-		btnCommandes.addEventHandler(MouseEvent.MOUSE_CLICKED,cliqueHistoireCommande);
+		btnHistoire.addEventHandler(MouseEvent.MOUSE_CLICKED, cliqueHistoireCommande);
+		btnCommandes.addEventHandler(MouseEvent.MOUSE_CLICKED, cliqueHistoireCommande);
 	}
-	
+
 	/**
-	 * Permet de modifier la visiblite du noeud passé en paramètre.
-	 * @param enfant noeud dont on souhaite modifier la visibilité.
+	 * Permet de modifier la visiblite du noeud passÃ© en paramÃ©tre.
+	 * 
+	 * @param enfant noeud dont on souhaite modifier la visibilitÃ©.
 	 */
 	private void visibiliteEnfant(Node enfant) {
 		enfant.setVisible(!enfant.isVisible());
 		enfant.setDisable(!enfant.isDisabled());
 	}
-	
+
 	/**
-	 * Permet d'initialiser l'evenement pour revenir en arrière dans le menu.
+	 * Permet d'initialiser l'evenement pour revenir en arriÃ©re dans le menu.
 	 */
 	private void initRetourArriereDansMenu() {
 		retourArriere = k -> {
 			KeyCode kc = k.getCode();
-			switch(kc) {
-				case ESCAPE :
-					if(labelHistoire.isVisible())
-						visibiliteEnfant(labelHistoire);
-					else
-						visibiliteEnfant(labelCommande);
-					visibiliteEnfant(groupMenu);
-					visibiliteEnfant(indication);
-					break;
-				default:
-					break;
+			switch (kc) {
+			case ESCAPE:
+				if (labelHistoire.isVisible())
+					visibiliteEnfant(labelHistoire);
+				else
+					visibiliteEnfant(labelCommande);
+				visibiliteEnfant(groupMenu);
+				visibiliteEnfant(indication);
+				break;
+			default:
+				break;
 			}
 			this.getScene().removeEventHandler(KeyEvent.KEY_PRESSED, retourArriere);
 		};
-		
+
 	}
-	
+
 	/**
 	 * Permet d'initialiser l'effet "hover" des boutons.
 	 */
 	private void initSurvoler() {
 		EventHandler<MouseEvent> entrer = s -> {
-			Node element = ((Node)s.getSource());
+			Node element = ((Node) s.getSource());
 			element.setStyle(element.getStyle() + "-fx-opacity:0.5;");
-			
+
 		};
-		
+
 		EventHandler<MouseEvent> sortir = s -> {
-			((Node)s.getSource()).setStyle("-fx-background-color:gray;");
+			((Node) s.getSource()).setStyle("-fx-background-color:gray;");
 		};
-		
+
 		groupMenu.getChildren().subList(1, groupMenu.getChildren().size()).forEach(n -> {
 			n.setOnMouseEntered(entrer);
-			n.setOnMouseExited(sortir);	
+			n.setOnMouseExited(sortir);
 		});
-		
+
 	}
 }

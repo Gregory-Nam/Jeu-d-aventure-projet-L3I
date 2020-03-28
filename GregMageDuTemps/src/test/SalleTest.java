@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 import java.io.File;
 
 import java.util.ArrayList;
@@ -23,12 +22,11 @@ import javafx.scene.image.ImageView;
 import personnages.PersonnageJoueur;
 
 class SalleTest {
-	
-	
+
 	Salle s;
 	ImageView img;
 	File f;
-	
+
 	@BeforeAll
 	static void setUpApp() throws Exception {
 		AppDeTest.setUpClass();
@@ -39,11 +37,11 @@ class SalleTest {
 		f = new File("Images/Salles/Periode_1/Salle_depart.png");
 		s = new Salle(f, NomSalle.SALLE_1);
 	}
-	
+
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-	
+
 	@Test
 	void testGetImageView() {
 		img = new ImageView();
@@ -61,7 +59,8 @@ class SalleTest {
 
 	@Test
 	void testAjoutInteractif() {
-		Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 889);
+		Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1,
+				Periode.PERIODE_2, 889);
 		s.ajoutInteractif(h);
 		ArrayList<Interactif> ar = new ArrayList<Interactif>();
 		ar.add(h);
@@ -70,34 +69,43 @@ class SalleTest {
 
 	@Test
 	void testSupprimerInteractif() {
-		Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 889);
+		Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1,
+				Periode.PERIODE_2, 889);
 		assertFalse(s.supprimerInteractif(h));
 		s.ajoutInteractif(h);
 		assertTrue(s.supprimerInteractif(h));
 		ArrayList<Interactif> ar = s.getInteractifs();
 		assertFalse(ar.contains(h));
-		
+
 	}
 
 	@Test
 	void testInteractifAPosition() {
-		Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 20);
+		Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1,
+				Periode.PERIODE_2, 20);
 		s.ajoutInteractif(h);
-		PersonnageJoueur.getInstanceUnique().seDirigerADroite(); //Greg se dirige deux fois � droite pour matcher avec la position de l'int�ractif
-		PersonnageJoueur.getInstanceUnique().seDirigerADroite(); //la fonction devrait renvoyer l'interactif
-		assertEquals(h, s.interactifAPosition(PersonnageJoueur.getInstanceUnique().getXMin(), PersonnageJoueur.getInstanceUnique().getXMax()));
-		PersonnageJoueur.getInstanceUnique().seDirigerADroite(); //Greg se d�place encore deux fois � droite pour sortir de la zone de match entre l'interactif et lui m�me
-		PersonnageJoueur.getInstanceUnique().seDirigerADroite(); //la fonction devrait renvoyer l'instance unique du personnage
-		assertEquals(PersonnageJoueur.getInstanceUnique(), s.interactifAPosition(PersonnageJoueur.getInstanceUnique().getXMin(), PersonnageJoueur.getInstanceUnique().getXMax()));
+		PersonnageJoueur.getInstanceUnique().seDirigerADroite(); // Greg se dirige deux fois é droite pour matcher
+																	// avec la position de l'intéractif
+		PersonnageJoueur.getInstanceUnique().seDirigerADroite(); // la fonction devrait renvoyer l'interactif
+		assertEquals(h, s.interactifAPosition(PersonnageJoueur.getInstanceUnique().getXMin(),
+				PersonnageJoueur.getInstanceUnique().getXMax()));
+		PersonnageJoueur.getInstanceUnique().seDirigerADroite(); // Greg se déplace encore deux fois é droite pour
+																	// sortir de la zone de match entre l'interactif et
+																	// lui méme
+		PersonnageJoueur.getInstanceUnique().seDirigerADroite(); // la fonction devrait renvoyer l'instance unique du
+																	// personnage
+		assertEquals(PersonnageJoueur.getInstanceUnique(), s.interactifAPosition(
+				PersonnageJoueur.getInstanceUnique().getXMin(), PersonnageJoueur.getInstanceUnique().getXMax()));
 	}
 
 	@Test
 	void testGetInteractifs() {
-	    Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 45);
-	    s.ajoutInteractif(h);
-	    ArrayList<Interactif> ar = new ArrayList<Interactif>();
-	    ar.add(h);
-	    assertEquals(ar, s.getInteractifs());
+		Horloge h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1,
+				Periode.PERIODE_2, 45);
+		s.ajoutInteractif(h);
+		ArrayList<Interactif> ar = new ArrayList<Interactif>();
+		ar.add(h);
+		assertEquals(ar, s.getInteractifs());
 	}
 
 }

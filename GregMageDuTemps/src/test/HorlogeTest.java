@@ -19,15 +19,16 @@ class HorlogeTest {
 
 	Horloge h;
 	ImageView img;
-	
+
 	@BeforeAll
 	static void setUpApp() throws Exception {
 		AppDeTest.setUpClass();
 	}
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
-		h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1, Periode.PERIODE_2, 889);
+		h = new Horloge(new File("Images/Horloges/Horloge_bronze_transparence.png"), Materiaux.BRONZE, 1,
+				Periode.PERIODE_2, 889);
 	}
 
 	@AfterEach
@@ -43,7 +44,7 @@ class HorlogeTest {
 	void testGetXMax() {
 		assertEquals(949, h.getXMax());
 	}
-	
+
 	@Test
 	public void testGetImageView() {
 		img = new ImageView();
@@ -62,7 +63,5 @@ class HorlogeTest {
 	void testGetXCentre() {
 		assertEquals(919, h.getXCentre());
 	}
-	
-	
 
 }

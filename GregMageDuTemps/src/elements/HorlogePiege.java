@@ -7,28 +7,26 @@ import enumerations.Materiaux;
 import enumerations.Periode;
 
 /**
- * Implémentation de l'horloge piège. 
- * </br>
- * Cette classe hérite de Horloge.
- * @author Grégory NAM.
- * @author Hugo CHALIK.
- * @author Luca BEVILACQUA.
- * @author Ahmadou Bamba MBAYE.
- * @see    Interactif
+ * ImplÃ©mentation de l'horloge piÃ©ge. </br>
+ * Cette classe hÃ©rite de Horloge.
+ * 
+ * @author GrÃ©gory NAM
+ * @author Hugo CHALIK
+ * @author Luca BEVILACQUA
+ * @author Ahmadou Bamba MBAYE
+ * @see Interactif
  */
-public class HorlogePiege extends Horloge{
-
+public class HorlogePiege extends Horloge {
 
 	/**
-	 * Constructeur d'Horloge piège. 
-	 * </br>
-	 * Le constructeur est le même que celui d'horloge,
-	 * sauf qu'il ne prend pas en parametre le nombre d'item à inserer
-	 * l'horloge piège a tout ses items.
-	 * @param image image de l'horloge.
-	 * @param materiaux materiaux de l'horloge.
+	 * Constructeur d'Horloge piÃ©ge. </br>
+	 * Le constructeur est le mÃ©me que celui d'horloge, sauf qu'il ne prend pas en
+	 * parametre le nombre d'item Ã© inserer l'horloge piÃ©ge a tout ses items.
+	 * 
+	 * @param image                  image de l'horloge.
+	 * @param materiaux              materiaux de l'horloge.
 	 * @param periodeApresActivation periode dans laquelle l'horloge permet d'aller.
-	 * @param position position de l'horloge dans la salle.
+	 * @param position               position de l'horloge dans la salle.
 	 */
 	public HorlogePiege(File image, Materiaux materiaux, Periode periodeApresActivation, double position) {
 		super(image, materiaux, 0, periodeApresActivation, position);
@@ -39,7 +37,7 @@ public class HorlogePiege extends Horloge{
 	 */
 	@Override
 	public void interagir() {
-		Jeu.getInstanceUnique().terminer("Il semble que cette horloge était un piège...", false );
+		Jeu.getInstanceUnique().terminer("Il semble que cette horloge Ã©tait un piÃ©ge...", false);
 	}
 
 }
