@@ -44,8 +44,8 @@ public class FinisseurDeJeu {
 	private static KeyEvent directionPorte;
 	private static int xPorte;
 	private static int xHorloge;
-	private static boolean itemMisOr1 = false;
-	private static boolean item2pris = false;
+	private static boolean itemMisOr1;
+	private static boolean item2pris;
 
 	private FinisseurDeJeu() {
 	};
@@ -69,6 +69,8 @@ public class FinisseurDeJeu {
 		jeu = Jeu.getInstanceUnique();
 		greg = PersonnageJoueur.getInstanceUnique();
 		PauseTransition transition = new PauseTransition(new Duration(1));
+		itemMisOr1 = false;
+		item2pris = false;
 		salleAvantObjectif = NomSalle.SALLE_2;
 		directionHorloge = droite;
 		directionPorte = gauche;
@@ -151,9 +153,11 @@ public class FinisseurDeJeu {
 			} else {
 				if (item2pris)
 					directionPorte = droite;
+				
 				KeyEvent.fireEvent(sceneJeu, directionPorte);
 				t.play();
 			}
+			return;
 		});
 
 		t.play();
@@ -204,10 +208,8 @@ public class FinisseurDeJeu {
 				t.play();
 			} else if (jeu.getPeriodeCourante().equals(Periode.PERIODE_3)) {
 				allerHorloge(t, xHorloge);
-			} else {
-				t.stop();
 			}
-
+			return;
 		});
 		t.play();
 	}

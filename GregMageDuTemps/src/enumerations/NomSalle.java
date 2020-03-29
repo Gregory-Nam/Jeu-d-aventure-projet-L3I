@@ -11,7 +11,7 @@ package enumerations;
  */
 public enum NomSalle {
 	SALLE_DEPART("Salle_depart"), SALLE_1("Salle_1"), SALLE_2("Salle_2"), SALLE_3("Salle_3"),
-	SALLE_PIEGE("Salle_piege"), SALLE_OR("Salle_or"), SALLE_BRONZE("Salle_bronze"), SALLE_ARGENT("Salle_argent");
+	SALLE_PIEGE("Salle_Piege"), SALLE_OR("Salle_or"), SALLE_BRONZE("Salle_bronze"), SALLE_ARGENT("Salle_argent");
 
 	/**
 	 * Le nom de la salle

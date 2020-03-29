@@ -361,7 +361,7 @@ public class Jeu {
 		Salle salle3 = new Salle(new File("Images/salles/Periode_1/Salle_3.png"), NomSalle.SALLE_3);
 		Salle salleBronze = new Salle(new File("Images/salles/Periode_1/Salle_bronze.png"), NomSalle.SALLE_BRONZE);
 		Salle salleOr = new Salle(new File("Images/salles/Periode_1/Salle_or.png"), NomSalle.SALLE_OR);
-		Salle sallePiege = new Salle(new File("Images/salles/Periode_1/Salle_piege.png"), NomSalle.SALLE_PIEGE);
+		Salle sallePiege = new Salle(new File("Images/salles/Periode_1/Salle_Piege.png"), NomSalle.SALLE_PIEGE);
 
 		/* PORTES */
 		PorteExtremite p1 = new PorteExtremite(salleDepart, salle1);
