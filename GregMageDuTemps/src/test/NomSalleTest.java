@@ -28,7 +28,7 @@ class NomSalleTest {
 		assertEquals("Salle_bronze", NomSalle.SALLE_BRONZE.toString());
 		assertEquals("Salle_argent", NomSalle.SALLE_ARGENT.toString());
 		assertEquals("Salle_or", NomSalle.SALLE_OR.toString());
-		assertEquals("Salle_piege", NomSalle.SALLE_PIEGE.toString());
+		assertEquals("Salle_Piege", NomSalle.SALLE_PIEGE.toString());
 
 	}
 

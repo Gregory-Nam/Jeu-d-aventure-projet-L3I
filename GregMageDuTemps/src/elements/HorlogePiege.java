@@ -37,7 +37,7 @@ public class HorlogePiege extends Horloge {
 	 */
 	@Override
 	public void interagir() {
-		Jeu.getInstanceUnique().terminer("Il semble que cette horloge était un piége...", false);
+		Jeu.getInstanceUnique().terminer("Il semble que cette horloge était un piège...", false);
 	}
 
 }

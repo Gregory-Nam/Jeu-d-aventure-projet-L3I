@@ -33,7 +33,7 @@ public final class AnalyseFichierEnigmeUtil {
 			JSONObject json = (JSONObject) obj;
 			json = (JSONObject) json.get(nomPNJ.toString());
 			return (String) json.get(type.toString());
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

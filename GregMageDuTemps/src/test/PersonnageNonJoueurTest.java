@@ -93,20 +93,20 @@ class PersonnageNonJoueurTest {
 
 	@Test
 	void testRepondAUneMauvaiseReponse() {
-		assertEquals("Oupps! Tu as mal repondu. Tu ne peux pas avoir l'item", pnj1.repondAUneMauvaiseReponse());
-		assertEquals("Desole, tu as mal repondu. Tu n'auras pas l'item", pnj2.repondAUneMauvaiseReponse());
+		assertEquals("Oupps! Tu as mal repondu. Tu ne peux pas avoir l'item.", pnj1.repondAUneMauvaiseReponse());
+		assertEquals("Desole, tu as mal repondu. Tu n'auras pas l'item.", pnj2.repondAUneMauvaiseReponse());
 		assertEquals("Malheureusement, tu as mal repondu. Donc pas de recompense.", pnj3.repondAUneMauvaiseReponse());
 		assertEquals("Oupps, c'est rate. L'item t'echappes.", pnj4.repondAUneMauvaiseReponse());
-		assertEquals("La reponse est fausse. Tu aurais du aller a l'ecole..", pnj5.repondAUneMauvaiseReponse());
+		assertEquals("La reponse est fausse. Tu aurais du aller a l'ecole...", pnj5.repondAUneMauvaiseReponse());
 	}
 
 	@Test
 	void testRepondAUneBonneReponse() {
-		assertEquals("Bravo ! Tu as tres bien repondu. Tu merites bien l'item pour activer l'horloge",
+		assertEquals("Bravo ! Tu as tres bien repondu. Tu merites bien l'item pour activer l'horloge !",
 				pnj1.repondAUneBonneReponse());
-		assertEquals("Felicitations, tu as bien repondu. Cet item est a toi", pnj2.repondAUneBonneReponse());
-		assertEquals("Exact, tu as bien repondu. Voici ta recompense", pnj3.repondAUneBonneReponse());
-		assertEquals("La reponse est correcte. Tu merites bien l'item", pnj4.repondAUneBonneReponse());
+		assertEquals("Felicitations, tu as bien repondu. Cet item est a toi.", pnj2.repondAUneBonneReponse());
+		assertEquals("Exact, tu as bien repondu. Voici ta recompense.", pnj3.repondAUneBonneReponse());
+		assertEquals("La reponse est correcte. Tu merites bien l'item.", pnj4.repondAUneBonneReponse());
 		assertEquals("Merci beaucoup !", pnj5.repondAUneBonneReponse());
 	}
 
@@ -114,7 +114,7 @@ class PersonnageNonJoueurTest {
 	void testDitQueTuAsDejaRepondu() {
 		assertEquals("Malheureusement, la bonne reponse a deja ete donnee.", pnj1.ditQueTuAsDejaRepondu());
 		assertEquals("Mais tu as deja repondu !", pnj2.ditQueTuAsDejaRepondu());
-		assertEquals("Desole, je t'ai deja donne l'item", pnj3.ditQueTuAsDejaRepondu());
+		assertEquals("Desole, je t'ai deja donne l'item.", pnj3.ditQueTuAsDejaRepondu());
 		assertEquals("Pas besoin de me le repeter...", pnj4.ditQueTuAsDejaRepondu());
 		assertEquals("Encore merci !", pnj5.ditQueTuAsDejaRepondu());
 	}
