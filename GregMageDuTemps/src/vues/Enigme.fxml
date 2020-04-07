@@ -6,31 +6,58 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="358.0" minHeight="10.0" prefHeight="325.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: black;">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="121.0">
-               <children>
-                  <ImageView fitHeight="400.0" fitWidth="508.0" focusTraversable="true" layoutX="47.0" layoutY="-219.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
-               </children></AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="417.0">
-               <children>
-                  <Label alignment="CENTER" layoutX="18.0" layoutY="1.0" prefHeight="296.0" prefWidth="382.0" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font name="Cambria Bold Italic" size="20.0" />
-                     </font>
-                  </Label>
-               </children></AnchorPane>
-        </items>
-      </SplitPane>
-      <TextField alignment="TOP_LEFT" prefHeight="87.0" prefWidth="600.0" promptText="Veuillez saisir une réponse... (Echap pour quitter)" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 5;" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-   </children>
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" style="-fx-background-color: black;"
+	type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<columnConstraints>
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+			prefWidth="100.0" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints maxHeight="358.0" minHeight="10.0"
+			prefHeight="325.0" vgrow="SOMETIMES" />
+		<RowConstraints maxHeight="193.0" minHeight="10.0"
+			prefHeight="75.0" vgrow="SOMETIMES" />
+	</rowConstraints>
+	<children>
+		<SplitPane dividerPositions="0.29797979797979796"
+			prefHeight="160.0" prefWidth="200.0"
+			style="-fx-background-color: black;">
+			<items>
+				<AnchorPane minHeight="0.0" minWidth="0.0"
+					prefHeight="296.0" prefWidth="121.0">
+					<children>
+						<ImageView fx:id="imagePersonnage" fitHeight="400.0"
+							fitWidth="508.0" focusTraversable="true" layoutX="47.0"
+							layoutY="-219.0" nodeOrientation="INHERIT" pickOnBounds="true"
+							preserveRatio="true" />
+					</children>
+				</AnchorPane>
+				<AnchorPane minHeight="0.0" minWidth="0.0"
+					prefHeight="264.0" prefWidth="417.0">
+					<children>
+						<Label fx:id="dialogue" alignment="CENTER" layoutX="18.0"
+							layoutY="1.0" prefHeight="296.0" prefWidth="382.0"
+							text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel"
+							textAlignment="CENTER" textFill="WHITE" wrapText="true">
+							<font>
+								<Font name="Cambria Bold Italic" size="20.0" />
+							</font>
+						</Label>
+					</children>
+				</AnchorPane>
+			</items>
+		</SplitPane>
+		<TextField fx:id="champsDeTexte" alignment="TOP_LEFT"
+			prefHeight="87.0" prefWidth="600.0"
+			promptText="Veuillez saisir une réponse... (Echap pour quitter)"
+			style="-fx-background-color: black; -fx-border-color: grey; -fx-border-width: 5;"
+			GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+			<font>
+				<Font name="System Bold" size="12.0" />
+			</font>
+		</TextField>
+	</children>
 </fx:root>

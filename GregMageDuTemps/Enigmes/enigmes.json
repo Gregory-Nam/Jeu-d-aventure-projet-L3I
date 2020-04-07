@@ -1,0 +1,41 @@
+{
+  "Klace Heureouverre": {
+    "QUESTION": "Salut toi ! Combien y a-t-il de tableaux dans ce chateau ?",
+    "REPONSE": "13",
+    "MAUVAISE_REPONSE": "Oupps! Tu as mal repondu. Tu ne peux pas avoir l'item.",
+    "BONNE_REPONSE": "Bravo ! Tu as tres bien repondu. Tu merites bien l'item pour activer l'horloge !",
+    "DEJA_REPONDU" :  "Malheureusement, la bonne reponse a deja ete donnee."
+  },
+
+  "Slyne": {
+    "QUESTION": "Coucou toi,\nlorsque ma soeur avait 5 ans, j'avais le double de son age. Aujourd'hui, elle en a 40.\nQuel est mon age ?",
+    "REPONSE": "45",
+    "MAUVAISE_REPONSE": "Desole, tu as mal repondu. Tu n'auras pas l'item.",
+    "BONNE_REPONSE": "Felicitations, tu as bien repondu. Cet item est a toi.",
+    "DEJA_REPONDU": "Mais tu as deja repondu !"
+  },
+  
+  "Carpenter": {
+    "QUESTION": "Sais-tu combien faut-il de temps (en secondes) pour qu'une horloge sonne midi, \nsi cette derniere sonne six heures en 5 secondes ?",
+    "REPONSE": "11",
+    "MAUVAISE_REPONSE": "Malheureusement, tu as mal repondu. Donc pas de recompense.",
+    "BONNE_REPONSE": "Exact, tu as bien repondu. Voici ta recompense.",
+    "DEJA_REPONDU": "Desole, je t'ai deja donne l'item."
+  },
+
+  "Abitbol": {
+    "QUESTION": "J'espere que tu es malin...\nSans lui, rien ne peut se faire.\nIl passe vite ou lentement.\nSouvent quand on le perd, on ne le rattrape plus.\nQui suis-je ?",
+    "REPONSE": "temps",
+    "MAUVAISE_REPONSE": "Oupps, c'est rate. L'item t'echappes.",
+    "BONNE_REPONSE": "La reponse est correcte. Tu merites bien l'item.",
+    "DEJA_REPONDU": "Pas besoin de me le repeter..."
+  },
+
+  "Zavier Mais": {
+    "QUESTION": "J'ai un petit probleme mathematique...\nConnais-tu le nombre qui est tel que si on le multiplie par deux, on lui ajoute sa moitie puis son quart et enfin 1, donnera 100 ?",
+    "REPONSE": "36",
+    "MAUVAISE_REPONSE": "La reponse est fausse. Tu aurais du aller a l'ecole...",
+    "BONNE_REPONSE": "Merci beaucoup !",
+    "DEJA_REPONDU": "Encore merci !"
+  }
+}

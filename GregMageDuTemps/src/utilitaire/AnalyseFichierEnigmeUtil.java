@@ -1,65 +1,44 @@
 package utilitaire;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import enumerations.TypeDialogue;
 
+/**
+ * Classe utilitaire pour l'analyse de fichier JSON.
+ * 
+ * @author Grégory NAM.
+ *
+ */
 public final class AnalyseFichierEnigmeUtil {
 
-	
 	/* CLASSE UTILITAIRE, ON VEUT PAS QU'ELLE SOIT INSTANCIEE */
-	private AnalyseFichierEnigmeUtil() {}
-	
-
-	public static String initDialogue(String chaine, TypeDialogue type) {
-		int indiceDebut = chaine.indexOf(type.toString()) + type.toString().length() + 1;
-		int indiceFin = chaine.indexOf("#", indiceDebut);
-		return chaine.subSequence(indiceDebut, indiceFin).toString();
+	private AnalyseFichierEnigmeUtil() {
 	}
-	
-	public static String rechercheDialogues(String str) {
-		String ensembleDesDialogues = "";
-		String ligne = "";
-		
-		FileReader fichierEnigme;
-		BufferedReader buffer;
-		
-		try {
-			fichierEnigme = new FileReader("Enigmes/fichierEnigmes.txt");
-			buffer = new BufferedReader(fichierEnigme);
-		}
-		catch(FileNotFoundException exception) {
-			exception.printStackTrace();
-			return null;
-		}
 
+	/**
+	 * Renvoie le dialogue pour le PNJ et le type de dialogue passé en paramétre.
+	 * 
+	 * @param nomPNJ nom du PNJ dont on veut le dialogue
+	 * @param type   le type de dialogue que l'on souhaite récupérer.
+	 * @return le dialogue pour le PNJ et le type de dialogue passé en paramétre.
+	 */
+	public static String initDialoguesJSON(String nomPNJ, TypeDialogue type) {
+		JSONParser parser = new JSONParser();
 		try {
-			while ( (ligne = buffer.readLine()) != null)
-			{    
-				/* RECHERCHE DU NOM DE PNJ */
-			    if(ensembleDesDialogues.equals("") && !ligne.equals(str)) 
-			    	continue;
-			    
-			    /* RECHERCHE PREMIERE OCCURENCE DU STRING PASSE EN PARAMETRE */
-			    else if(ensembleDesDialogues.equals("") && ligne.equals(str))
-			    	ensembleDesDialogues += ligne + '\n';
-			    
-			    /* RECHERCHE DU DELIMITEUR */
-			    else if(ligne.equals("##")) 
-			    	break;
-			    
-			    /* FAIT PARTIE DE CE QU'ON RECHERCHE */
-			    else
-			    	ensembleDesDialogues += ligne + '\n';
-			}
-		} 
-		catch (IOException e) {
+			Object obj = parser.parse(new FileReader("Enigmes/enigmes.json"));
+			JSONObject json = (JSONObject) obj;
+			json = (JSONObject) json.get(nomPNJ.toString());
+			return (String) json.get(type.toString());
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ensembleDesDialogues;
-		
+
+		return null;
 	}
+
 }

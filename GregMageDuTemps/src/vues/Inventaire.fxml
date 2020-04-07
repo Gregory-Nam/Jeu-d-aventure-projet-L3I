@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0"
+	prefWidth="758.0" style="-fx-background-color: #c7c7c7;"
+	type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Label layoutX="295.0" layoutY="14.0" text="Inventaire"
+			textFill="WHITE">
+			<font>
+				<Font size="36.0" />
+			</font>
+		</Label>
+		<Pane fx:id="paneHG" layoutX="179.0" layoutY="91.0"
+			prefHeight="200.0" prefWidth="200.0"
+			style="-fx-background-color: grey;">
+			<children>
+				<ImageView fx:id="imgHG" fitHeight="200.0"
+					fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+				<Label fx:id="lblHG" layoutX="16.0" layoutY="178.0"
+					prefHeight="17.0" prefWidth="168.0" text="Vide"
+					textAlignment="CENTER" textFill="WHITE" />
+			</children>
+		</Pane>
+
+		<Pane fx:id="paneHD" layoutX="395.0" layoutY="91.0"
+			prefHeight="200.0" prefWidth="200.0"
+			style="-fx-background-color: grey;">
+			<children>
+				<ImageView fx:id="imgHD" fitHeight="200.0"
+					fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+				<Label fx:id="lblHD" layoutX="18.0" layoutY="178.0"
+					prefHeight="17.0" prefWidth="168.0" text="Vide" textFill="WHITE" />
+			</children>
+		</Pane>
+
+		<Pane id="paneBG" layoutX="179.0" layoutY="305.0"
+			prefHeight="200.0" prefWidth="200.0"
+			style="-fx-background-color: grey;">
+			<children>
+				<ImageView fx:id="imgBG" fitHeight="200.0"
+					fitWidth="200.0" layoutY="1.0" pickOnBounds="true"
+					preserveRatio="true" />
+				<Label fx:id="lblBG" layoutX="18.0" layoutY="178.0"
+					prefHeight="17.0" prefWidth="168.0" text="Vide"
+					textAlignment="CENTER" textFill="WHITE" />
+			</children>
+		</Pane>
+
+		<Pane id="paneBD" layoutX="395.0" layoutY="305.0"
+			prefHeight="200.0" prefWidth="200.0"
+			style="-fx-background-color: grey;">
+			<children>
+				<ImageView fx:id="imgBD" fitHeight="200.0"
+					fitWidth="200.0" layoutX="2.0" pickOnBounds="true"
+					preserveRatio="true" />
+				<Label fx:id="lblBD" layoutX="18.0" layoutY="178.0"
+					prefHeight="17.0" prefWidth="168.0" text="Vide" textFill="WHITE" />
+			</children>
+		</Pane>
+	</children>
+</fx:root>

@@ -2,9 +2,6 @@ package personnages;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import utilitaire.AnalyseFichierEnigmeUtil;
@@ -12,46 +9,67 @@ import utilitaire.AnalyseFichierEnigmeUtil;
 import java.io.File;
 import java.util.HashMap;
 
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Replace;
+
 import application.Jeu;
 import elements.Item;
-import elements.Salle;
-import enumerations.Deplacements;
 import enumerations.NomPNJ;
 import enumerations.TypeDialogue;
+
+/**
+ * Implémentation de PersonnageNonJoueur
+ * 
+ * @author Grégory NAM
+ * @author Hugo CHALIK
+ * @author Luca BEVILACQUA
+ * @author Ahmadou Bamba MBAYE.
+ */
 public class PersonnageNonJoueur extends Personnage {
-	
+
+	/**
+	 * Le nom du PNJ
+	 */
 	private NomPNJ nom;
-	private Item itemADonner;
+
+	/**
+	 * HashMap qui contient le type de dialogue et le dialogue.
+	 */
 	private HashMap<TypeDialogue, String> dialogues;
+
+	/**
+	 * Une propriété booléene qui permet de lier le PNJ avec le PJ.
+	 */
 	private BooleanProperty aRecuUneBonneReponse;
+
+	/**
+	 * L'ImageView du PNJ pour la vue de l'enigme.
+	 */
 	private ImageView spritePourEnigme;
-	
-	
-	public PersonnageNonJoueur(double x, Item i ,File spritePourEnigme, File ... sprites) {
-		super(sprites);
-		
+
+	/**
+	 * Le constructeur de la classe PersonnageNonJoueur.
+	 */
+	public PersonnageNonJoueur(NomPNJ nom, double x, Item i, File spritePourEnigme, File... sprites) {
+		super();
+		super.itemEnPossession = i;
+
 		this.spritePourEnigme = new ImageView(new Image(spritePourEnigme.toURI().toString()));
 		this.aRecuUneBonneReponse = new SimpleBooleanProperty(false);
-		this.nom = NomPNJ.JACQUE;
+		this.nom = nom;
 		this.dialogues = new HashMap<TypeDialogue, String>();
-		this.itemADonner = i;
-		
-		initPersonnage(sprites);
+
+		if (sprites.length > 1)
+			super.initPersonnage(sprites);
+
+		spriteCourant = new ImageView(new Image(sprites[0].toURI().toString()));
+
 		spriteCourant.setX(x);
 		initDialogue();
 	}
 
 	@Override
-	public void initPersonnage(File[] sprites) {
-		super.initPersonnage(sprites);
-		
-		spriteCourant = new ImageView(spritesPersonnageHM.get(Deplacements.BAS).getImage());	
-	}
-	
-	@Override
 	public void seDirigerADroite() {
 		spriteCourant.setX(spriteCourant.getX() - 20);
-		
 	}
 
 	@Override
@@ -59,18 +77,34 @@ public class PersonnageNonJoueur extends Personnage {
 		spriteCourant.setX(spriteCourant.getX() + 20);
 	}
 
+	/**
+	 * Permet d'initialiser la HashMap contenant les dialogues du PNJ.
+	 */
 	private void initDialogue() {
-		String tousLesDialogues = AnalyseFichierEnigmeUtil.rechercheDialogues(nom.toString());
-		dialogues.put(TypeDialogue.BONNE_REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.BONNE_REPONSE));
-		dialogues.put(TypeDialogue.QUESTION, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.QUESTION));
-		dialogues.put(TypeDialogue.MAUVAISE_REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.MAUVAISE_REPONSE));
-		dialogues.put(TypeDialogue.DEJA_REPONDU, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.DEJA_REPONDU));
-		dialogues.put(TypeDialogue.REPONSE, AnalyseFichierEnigmeUtil.initDialogue(tousLesDialogues, TypeDialogue.REPONSE));
+		dialogues.put(TypeDialogue.BONNE_REPONSE,
+				AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.BONNE_REPONSE));
+		dialogues.put(TypeDialogue.QUESTION,
+				AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.QUESTION));
+		dialogues.put(TypeDialogue.MAUVAISE_REPONSE,
+				AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.MAUVAISE_REPONSE));
+		dialogues.put(TypeDialogue.DEJA_REPONDU,
+				AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.DEJA_REPONDU));
+		dialogues.put(TypeDialogue.REPONSE,
+				AnalyseFichierEnigmeUtil.initDialoguesJSON(nom.toString(), TypeDialogue.REPONSE));
 	}
-	
+
+	/**
+	 * Renvoie le nom du PNJ.
+	 * 
+	 * @return le nom du PNJ.
+	 */
+	public NomPNJ getNom() {
+		return nom;
+	}
+
 	@Override
 	public void interagir() {
-		Jeu.lancerEnigme(this);
+		Jeu.getInstanceUnique().lancerEnigme(this);
 	}
 
 	@Override
@@ -82,38 +116,83 @@ public class PersonnageNonJoueur extends Personnage {
 	public double getXMax() {
 		return spriteCourant.getX() + spriteCourant.getImage().getWidth();
 	}
-	
+
+	/**
+	 * Renvoie la question de l'enigme du PNJ.
+	 * 
+	 * @return la question de l'enigme du PNJ.
+	 */
 	public String poseQuestion() {
 		return dialogues.get(TypeDialogue.QUESTION);
 	}
-	
+
+	/**
+	 * Renvoie la réponse é une mauvaise réponse.
+	 * 
+	 * @return la réponse é une mauvaise réponse.
+	 */
 	public String repondAUneMauvaiseReponse() {
 		return dialogues.get(TypeDialogue.MAUVAISE_REPONSE);
 	}
-	
+
+	/**
+	 * Renvoie la réponse é une bonne réponse.
+	 * 
+	 * @return la réponse é une bonne réponse.
+	 */
 	public String repondAUneBonneReponse() {
 		return dialogues.get(TypeDialogue.BONNE_REPONSE);
 	}
-	
+
+	/**
+	 * Renvoie la réponse é une bonne réponse déjé donnée.
+	 * 
+	 * @return la réponse é une bonne réponse déjé donnée.
+	 */
 	public String ditQueTuAsDejaRepondu() {
 		return dialogues.get(TypeDialogue.DEJA_REPONDU);
 	}
-	
+
+	/**
+	 * Renvoie la réponse é l'énigme.
+	 * 
+	 * @return la réponse é l'énigme.
+	 */
 	public String reponse() {
 		return dialogues.get(TypeDialogue.REPONSE);
 	}
-	
+
+	/**
+	 * Renvoie une propriété booléene qui correspond é l'état de la réponse recu.
+	 * 
+	 * @return une propriété booléene qui correspond é l'état de la réponse recu.
+	 */
 	public BooleanProperty getEtatReponseAttendu() {
 		return aRecuUneBonneReponse;
 	}
+
+	/**
+	 * Renvoie l'item en possession.
+	 * 
+	 * @return l'item en possession.
+	 */
 	public Item donnerItem() {
-		return itemADonner;
-		
+		return itemEnPossession;
 	}
-	
+
+	/**
+	 * Renvoie l'ImageView du PNJ pour la vue de l'énigme.
+	 * 
+	 * @return l'ImageView du PNJ pour la vue de l'énigme.
+	 */
 	public ImageView getImagePourEnigme() {
 		return spritePourEnigme;
 	}
+
+	/**
+	 * Permet de mettre la propriété booléenne é vrai si le PNJ a recu une bonne
+	 * réponse du PersonnageJoueur.
+	 */
 	public void aRecuUneBonneReponse() {
 		aRecuUneBonneReponse.setValue(true);
 	}

@@ -3,88 +3,130 @@ package elements;
 import java.io.File;
 import java.util.ArrayList;
 
-import application.Jeu;
 import enumerations.NomSalle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import personnages.PersonnageJoueur;
 
+/**
+ * Implémentation des salles du Jeu. </br>
+ * Une salle est représentée par une ImageView et un nom, elle contient des
+ * interactifs.
+ * 
+ * @author Grégory NAM.
+ * @author Hugo CHALIK.
+ * @author Luca BEVILACQUA.
+ * @author Ahmadou Bamba MBAYE.
+ * @see Interactif
+ */
 public class Salle {
-	
+
+	/**
+	 * Le nom de la salle.
+	 */
 	private final NomSalle nomDeLaSalle;
+
+	/**
+	 * ImageView de la salle.
+	 */
 	private ImageView spriteSalle;
+
+	/**
+	 * Une liste contenant l'ensemble des objets interactifs étant presents dans la
+	 * salle.
+	 */
 	private ArrayList<Interactif> objetsDeLaSalle;
-	private ArrayList<Item> itemsDeposeParPnj;
-	
-	/* CONSTRUCTEUR PAR RECOPIE */
-	public Salle(Salle s) {
-		objetsDeLaSalle = s.objetsDeLaSalle;
-		this.spriteSalle = s.spriteSalle;
-		this.nomDeLaSalle = s.nomDeLaSalle;
-		this.itemsDeposeParPnj = s.itemsDeposeParPnj;
-	}
-	
+
+	/**
+	 * Constructeur de la classe Salle.
+	 * 
+	 * @param cheminImage  Fichier de l'image.
+	 * @param nomDeLaSalle Le nom de la Salle.
+	 */
 	public Salle(File cheminImage, NomSalle nomDeLaSalle) {
+		spriteSalle = new ImageView();
 		objetsDeLaSalle = new ArrayList<Interactif>();
-		itemsDeposeParPnj = new ArrayList<Item>();
 		this.nomDeLaSalle = nomDeLaSalle;
 		initSalle(cheminImage);
 	}
-	
-	private void initSalle(File cheminImage) {
-		spriteSalle = new ImageView();
+
+	/**
+	 * Permet d'appliquer l'image passée en paramétre en tant qu'image de la salle.
+	 * 
+	 * @param cheminImage Fichier de l'image qu'on souhaite utiliser
+	 */
+	public void initSalle(File cheminImage) {
 		Image imgSalle = new Image(cheminImage.toURI().toString());
 		spriteSalle.setImage(imgSalle);
 	}
-	
+
+	/**
+	 * Renvoie l'ImageView de la salle.
+	 * 
+	 * @return l'imageView de la salle
+	 */
 	public ImageView getImageView() {
 		return spriteSalle;
 	}
-	
+
+	/**
+	 * Renvoie le nom de la salle.
+	 * 
+	 * @return le nom de la salle.
+	 */
 	public NomSalle getNomSalle() {
 		return nomDeLaSalle;
 	}
-	
-	public void ajoutInteractif(Interactif ... interactifs) {
-		for(Interactif i : interactifs) {
-			if(objetsDeLaSalle.contains(i)) continue;
-			objetsDeLaSalle.add(i);
+
+	/**
+	 * Permet d'ajouter des objets interactifs dans la salle é condition qu'ils ne
+	 * soient déjé pas présents.
+	 * 
+	 * @param interactifs interactifs que l'on veut ajouter.
+	 */
+	public void ajoutInteractif(Interactif... interactifs) {
+		for (Interactif i : interactifs) {
+			if (!objetsDeLaSalle.contains(i))
+				objetsDeLaSalle.add(i);
 		}
+
 	}
-	
-	public void ajoutItem(Item i) {
-		itemsDeposeParPnj.add(i);
+
+	/**
+	 * Permet de supprimer un objet interactif de la salle.
+	 * 
+	 * @param i interactif que l'on souhaite supprimer.
+	 * @return vrai si l'objet a été supprimé, sinon faux.
+	 */
+	public boolean supprimerInteractif(Interactif i) {
+		return objetsDeLaSalle.remove(i);
 	}
-	
-	public ArrayList<Item> getItems() {
-		return itemsDeposeParPnj;
-	}
-	
-	public void supprimerInteractif(Interactif i) {
-		if(objetsDeLaSalle.contains(i)) objetsDeLaSalle.remove(i);
-	}
-	
-	public void supprimerItem(Item i) {
-		if(itemsDeposeParPnj.contains(i)) itemsDeposeParPnj.remove(i);
-	}
-	
-	// gerer le cas ou il n'y a pas d'objet interactif par une exception ???
-	public Interactif interactifAPosition(double x) {
-		for(Interactif i : objetsDeLaSalle) {
-			System.out.println();
-			if(i.getXMin() <= x && x <= i.getXMax()) {
+
+	/**
+	 * Permet de renvoyer le premier interactif présent entre deux coordonnées.
+	 * 
+	 * @param x1 la premiere coordonnée.
+	 * @param x2 la deuxieme coordonée.
+	 * @return le premier interactif trouvé entre les deux positions en paramétre.
+	 */
+	public Interactif interactifAPosition(double x1, double x2) {
+		for (Interactif i : objetsDeLaSalle) {
+			if (i.equals(PersonnageJoueur.getInstanceUnique()))
+				continue;
+			if (i.getXCentre() <= x2 && i.getXCentre() >= x1) {
 				return i;
 			}
 		}
-		return null;
+		return PersonnageJoueur.getInstanceUnique();
 	}
-	
-	public boolean aDesItems() {
-		return itemsDeposeParPnj.size() == 0 ? false : true;
-	}
-	
+
+	/**
+	 * Renvoie une ArrayList des objets interactifs de la salle.
+	 * 
+	 * @return une ArrayList des objets interactifs de la salle.
+	 */
 	public ArrayList<Interactif> getInteractifs() {
 		return new ArrayList<Interactif>(objetsDeLaSalle);
 	}
 
-	
 }

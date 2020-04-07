@@ -1,32 +1,120 @@
 package elements;
 
 import java.io.File;
-
+import application.Jeu;
 import enumerations.Materiaux;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import personnages.PersonnageJoueur;
 
-public class Item {
+/**
+ * Implémentation des items du jeu.
+ * 
+ * @author Gregory NAM
+ * @author Hugo CHALIK
+ * @author Luca BEVILACQUA
+ * @author Ahmadou Bamba MBAYE
+ */
+public class Item extends Interactif {
+	/**
+	 * Le matériaux de l'item.
+	 */
 
 	private Materiaux materiaux;
+
+	/**
+	 * Le nom de l'Item.
+	 */
+
 	private String nom;
-	private int xPosition;
+
+	/**
+	 * L'image de l'item.
+	 */
 	private ImageView imageViewItem;
-	
-	public Item(File f, int position) {
-		Image i = new Image(f.toURI().toString());
+
+	/*
+	 * L'imageView de l'item pour l'inventaire.
+	 */
+
+	private ImageView imageViewItemPourInventaire;
+
+	/**
+	 * Constructeur d'Item.
+	 * 
+	 * @param image               Fichier de l'image de l'Item dans le jeu.
+	 * @param imagePourInventaire Fichier de l'image pour l'inventaire.
+	 * @param materiaux           Matériaux de l'Item.
+	 * @param position            Position de l'Item.
+	 * @param nom                 Nom de l'Item.
+	 */
+	public Item(File image, File imagePourInventaire, Materiaux materiaux, int position, String nom) {
+		Image i = new Image(image.toURI().toString());
 		imageViewItem = new ImageView(i);
 
-		this.xPosition = position;
-		imageViewItem.setX(xPosition);
+		super.xMin = position;
+		super.xMax = super.xMin + i.getWidth();
+
+		i = new Image(imagePourInventaire.toURI().toString());
+		imageViewItemPourInventaire = new ImageView(i);
+
+		this.materiaux = materiaux;
+		this.nom = nom;
+
+		imageViewItem.setX(xMin);
 	}
-	
+
+	@Override
 	public ImageView getImageView() {
 		return imageViewItem;
 	}
-	
-	public double getXCentre() {
-		return xPosition + imageViewItem.getImage().getWidth() / 2;
+
+	/**
+	 * Renvoie l'ImageView de l'item pour l'inventaire.
+	 * 
+	 * @return l'ImageView de l'item pour l'inventaire.
+	 */
+	public ImageView getImageViewPourInventaire() {
+		return imageViewItemPourInventaire;
 	}
-	
+
+	/**
+	 * Renvoie le nom complet de l'Item (avec son matériaux).
+	 * 
+	 * @return le nom complet de l'Item (avec son matériaux).
+	 */
+	public String getNom() {
+		return nom + " en " + this.materiaux.toString();
+	}
+
+	/**
+	 * Renvoie le materiaux de l'item.
+	 * 
+	 * @return le materieux de l'item.
+	 */
+	public Materiaux getMateriaux() {
+		return this.materiaux;
+	}
+
+	/**
+	 * L'interaction avec un item permet de l'ajouter dans l'inventaire du
+	 * PersonnageJoueur, de la supprimer de la salle et egalement de mettre a jour
+	 * les objets interactifs sur la scene.
+	 */
+	@Override
+	public void interagir() {
+		PersonnageJoueur.getInstanceUnique().prendreItem(this);
+		Jeu.getInstanceUnique().getSalleCourante().supprimerInteractif(this);
+		Jeu.getInstanceUnique().initObjetInteractif();
+	}
+
+	@Override
+	public double getXMin() {
+		return super.xMin;
+	}
+
+	@Override
+	public double getXMax() {
+		return super.xMax;
+	}
 }

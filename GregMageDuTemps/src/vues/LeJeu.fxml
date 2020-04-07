@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane prefHeight="340" prefWidth="1000"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Label alignment="TOP_CENTER" layoutX="1.0" opacity="0.52"
+			prefHeight="340.0" prefWidth="1000.0"
+			style="-fx-background-color: black;" textAlignment="CENTER"
+			textFill="#f20202">
+			<font>
+				<Font size="72.0" />
+			</font>
+		</Label>
+	</children>
+</Pane>

@@ -655,9 +655,9 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 312,
+									"left": 311,
 									"top": 704,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -3510,35 +3510,6 @@
 							}
 						},
 						{
-							"_type": "UMLNoteView",
-							"_id": "AAAAAAFwALwWaMOdaUI=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;13;0",
-							"left": 1072,
-							"top": 888,
-							"width": 153,
-							"height": 49,
-							"text": "Vraiment necessaire de faire une classe ?"
-						},
-						{
-							"_type": "UMLNoteLinkView",
-							"_id": "AAAAAAFwALy98sQVqSw=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;13;0",
-							"head": {
-								"$ref": "AAAAAAFwALwWaMOdaUI="
-							},
-							"tail": {
-								"$ref": "AAAAAAFwALrxi8J1q0w="
-							},
-							"lineStyle": 1,
-							"points": "1032:865;1086:887"
-						},
-						{
 							"_type": "UMLAssociationView",
 							"_id": "AAAAAAFwAMFgAMd9LYI=",
 							"_parent": {
@@ -4345,19 +4316,6 @@
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAFwAMfKV9I0kZI="
 							}
-						},
-						{
-							"_type": "UMLNoteView",
-							"_id": "AAAAAAFwAMmw+dTI86o=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;13;0",
-							"left": 120,
-							"top": 200,
-							"width": 297,
-							"height": 103,
-							"text": "Les classes inventaire et PersonnageJoueur possèdent une instance de leur classe. Design Pattern Singleton pour les deux car nous aurons une seule instance d'inventaire et de PersonnageJoueur"
 						},
 						{
 							"_type": "UMLClassView",
