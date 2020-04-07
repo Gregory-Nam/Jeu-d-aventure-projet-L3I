@@ -193,7 +193,6 @@ public class Jeu {
 		primaryStage.titleProperty().bind(c.getTempsTotalEnStringProperty());
 		rootInventaire.creerListener(greg.getInventaire());
 		afficheMessage(periodeCourante.toString().replace('_', ' '), 2);
-
 	}
 
 	/**
@@ -449,6 +448,8 @@ public class Jeu {
 				/* FINIR JEU */
 				case P:
 					try {
+						greg.reinitialiser();
+						Jeu.getInstanceUnique().lancerJeu();
 						FinisseurDeJeu.finirJeu(scene, sceneEnigme, sceneInventaire, rootEnigme, pnj, salles);
 					} catch (Exception e) {
 						System.exit(0);

@@ -68,7 +68,7 @@ public class FinisseurDeJeu {
 		FinisseurDeJeu.pnjs = pnjs;
 		jeu = Jeu.getInstanceUnique();
 		greg = PersonnageJoueur.getInstanceUnique();
-		PauseTransition transition = new PauseTransition(new Duration(1));
+		PauseTransition transition = new PauseTransition(new Duration(20));
 		itemMisOr1 = false;
 		item2pris = false;
 		salleAvantObjectif = NomSalle.SALLE_2;
